@@ -61,6 +61,15 @@
     methods: {
       loginBtn() {
         //console.log('submit!');
+        if(!this.login.userLoginName) {
+          this.message.warning("请输入账号！");
+          return false;
+        }
+        if(!this.login.userPwd) {
+          this.message.warning("请输入密码！");
+          return false;
+        }
+        this.$router.push('/layout');
       },
       cancelBtn() { }
     },

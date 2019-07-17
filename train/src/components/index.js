@@ -1,5 +1,7 @@
-import HelloWorld from "./HelloWorld";
+import tab from "./tab.vue";
+import searchHeader from "./searchHeader.vue";
 
 export default {
-  HelloWorld
+    tab,
+    searchHeader
 };

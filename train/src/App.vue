@@ -6,10 +6,14 @@
 
 <script>
 
-export default {
-  name: 'app'
-}
+  export default {
+    name: 'app'
+  }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+  #app {
+    width: 100%;
+    height: 100%;
+  }
 </style>

@@ -4,8 +4,10 @@ import router from "./router";
 import components from "./components";
 import store from "./store";
 import "element-ui/lib/theme-chalk/index.css";
+import "./style/reset.css";
+import "./style/global.less";
 import ElementUI from "element-ui";
-import * as common from "./utils/common.js";
+import "./utils/common.js";
 
 Vue.config.productionTip = false;
 //element-ui
