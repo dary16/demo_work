@@ -1,7 +1,7 @@
 <template>
   <div class='layout'>
     <div class="main">
-      <div v-show="tabIndex==0 && showLayout">
+      <div v-show="tabIndex==0">
         <v-search-header></v-search-header>
         <div class="xl-list clearfix">
           <div class="xl-header">
@@ -175,7 +175,7 @@
         this.tabIndex = value;
       },
       doAction() {
-        console.log(this.$router);
+        // console.log(this.$router);
         // this.showLayout = false;
         this.$router.push('/action');
       }
@@ -310,8 +310,5 @@
   }
   .w66 {
     width: 66% !important;
-  }
-  .fr {
-    float: right;
   }
 </style>
