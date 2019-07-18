@@ -7,7 +7,7 @@ import "element-ui/lib/theme-chalk/index.css";
 import "./style/reset.css";
 import "./style/global.less";
 import ElementUI from "element-ui";
-import "./utils/common.js";
+import * as util from "./utils/common.js";
 
 Vue.config.productionTip = false;
 //element-ui
@@ -15,6 +15,8 @@ Vue.use(ElementUI);
 Vue.prototype.notify = ElementUI.Notification;
 Vue.prototype.message = ElementUI.Message;
 Vue.prototype.oMsgBox = ElementUI.MessageBox;
+Vue.prototype.popBox = ElementUI.Popover;
+Vue.prototype.util = util;
 
 // 自定义组件格式，全局可用
 Object.keys(components).forEach(key => {

@@ -59,27 +59,29 @@
                     <span class="value">{{item.teachStyle}}</span>
                   </li>
                 </ul>
-                <div class="more"><img src="../assets/logo.png" alt=""></div>
+                <div class="more">
+                  <i class="el-icon-d-arrow-right"></i>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div v-show="tabIndex == 1">
-        <h2>已实施</h2>
-      </div>
-      <div v-show="tabIndex == 2">
-        <h2>周计划</h2>
-      </div>
-      <div v-show="tabIndex == 3">
-        <h2>退出</h2>
-      </div>
-      <v-tab
-        :list="tabList"
-        @tabIndex="getTabIndex"
-      ></v-tab>
     </div>
+    <div v-show="tabIndex == 1">
+      <h2>已实施</h2>
+    </div>
+    <div v-show="tabIndex == 2">
+      <h2>周计划</h2>
+    </div>
+    <div v-show="tabIndex == 3">
+      <h2>退出</h2>
+    </div>
+    <v-tab
+      :list="tabList"
+      @tabIndex="getTabIndex"
+    ></v-tab>
+  </div>
 </template>
 
 <script>
@@ -177,7 +179,7 @@
       doAction() {
         // console.log(this.$router);
         // this.showLayout = false;
-        this.$router.push('/action');
+        this.$router.push('/info');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -284,6 +286,7 @@
               }
               .more {
                 width: 3rem;
+                font-size: 1rem;
                 img {
                   width: 1rem;
                 }

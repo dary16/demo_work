@@ -1,14 +1,11 @@
 <template>
   <div class='info'>
-    <div class="header">
-      <i class="el-icon-arrow-left"></i>
-      <h3>训练实施信息</h3>
-    </div>
+    <v-info-header
+      v-on:backFn="back"
+      :titleData="title"
+    ></v-info-header>
     <div class="content">
-      <div class="item">
-        <i class="el-icon-s-flag"></i>
-        <span>人员签到</span>
-      </div>
+      <v-list-title :listTilte="listTitle1"></v-list-title>
       <div class="item-info">
         <span class="arrived">实到人员</span>
         <div class="tags">
@@ -23,21 +20,23 @@
         </div>
         <button class="normal-btn fr">设置岗位</button>
       </div>
-      <div class="item">
-        <i class="el-icon-s-flag"></i>
-        <span>训练详细内容</span>
-      </div>
+      <v-list-title :listTilte="listTitle2"></v-list-title>
       <div class="item-info">
         <span class="text">详细内容详细内容啦啦啦啦</span>
-        <button class="normal-btn">完成时间</button>
+        <button
+          class="normal-btn"
+          @click="setTime"
+          v-if="showTime"
+        >完成时间</button>
+        <span v-else>{{nowTime}}</span>
         <div class="fr nicon">
-          <i class="el-icon-menu"></i>
+          <i
+            class="el-icon-menu"
+            @click="errorRecord"
+          ></i>
         </div>
       </div>
-      <div class="item">
-        <i class="el-icon-s-flag"></i>
-        <span>异常说明</span>
-      </div>
+      <v-list-title :listTilte="listTitle3"></v-list-title>
       <div class="item-info">
         <span class="text">操作方式错误，操作方式错误，操作方式错误，操作方式错误，操作方式错误，关键字11212啦啦啦啦</span>
         <span class="time">2019-04-28 08:52</span>
@@ -45,14 +44,17 @@
           <span>张淼</span>
         </div>
       </div>
-      <div class="item">
-        <i class="el-icon-s-flag"></i>
-        <span>训练实施</span>
-      </div>
+      <v-list-title :listTilte="listTitle4"></v-list-title>
     </div>
     <div class="buttons">
-      <button class="normal-btn-lg mr">意见建议</button>
-      <button class="normal-btn-lg mr">数据项记录</button>
+      <button
+        class="normal-btn-lg mr"
+        @click="suggestion"
+      >意见建议</button>
+      <button
+        class="normal-btn-lg mr"
+        @click="recordFn"
+      >数据项记录</button>
     </div>
   </div>
 </template>
@@ -67,6 +69,13 @@
       //这里存放数据
       return {
         showTag: false,
+        showTime: true,
+        nowTime: '',
+        listTitle1: "人员签到",
+        listTitle2: '训练详细内容',
+        listTitle3: '异常说明',
+        listTitle4: '训练实施',
+        title: "训练实施信息",
         tags: [{ name: "张三", id: "001", showTag: false }, { name: "李四", id: "002", showTag: false }, { name: "王五", id: "003", showTag: false }, { name: "张三", id: "004", showTag: false }, { name: "李四", id: "005", showTag: false }, { name: "王五", id: "006", showTag: false }]
       };
     },
@@ -78,6 +87,28 @@
     methods: {
       tagFn(i) {
         this.tags[i].showTag = !this.tags[i].showTag;
+      },
+      //设置时间
+      setTime() {
+        this.showTime = false;
+        let time = this.util.formatDate(new Date().getTime(), 3);
+        this.nowTime = time;
+      },
+      //返回
+      back() {
+        window.history.back();
+      },
+      //意见建议
+      suggestion() {
+        this.$router.push('/suggestion');
+      },
+      //数据项记录
+      recordFn() {
+        this.$router.push('/record');
+      },
+      //异常记录
+      errorRecord() {
+        this.$router.push('/errorRecord');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -94,34 +125,8 @@
 </script>
 <style lang="less" scoped>
   .info {
-    .header {
-      text-align: center;
-      position: relative;
-      height: 2rem;
-      line-height: 2rem;
-      font-size: 1rem;
-      .el-icon-arrow-left {
-        position: absolute;
-        left: 0.3rem;
-        top: 0.6rem;
-      }
-      h3 {
-        font-size: 0.5rem;
-        color: #006699;
-      }
-    }
     .content {
       padding: 0.1rem 0.2rem;
-      .item {
-        font-size: 0.4rem;
-        background: #006699;
-        color: #fff;
-        padding: 0.2rem 0.6rem;
-        span {
-          font-size: 0.35rem;
-          margin-left: 0.1rem;
-        }
-      }
       .item-info {
         padding: 0.2rem 0.3rem;
         border: 1px solid #006699;
@@ -136,12 +141,12 @@
           width: 12rem;
         }
         .arrived {
-          font-size: 0.3rem;
+          font-size: 0.25rem;
           font-weight: bold;
           margin-right: 0.1rem;
         }
         .nicon {
-          font-size: 0.5rem;
+          font-size: 0.4rem;
         }
         .tags {
           display: inline-block;
@@ -156,6 +161,7 @@
     }
     .buttons {
       text-align: center;
+      line-height: 1rem;
     }
   }
 </style>
