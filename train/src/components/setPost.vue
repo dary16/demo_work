@@ -55,14 +55,13 @@
         this.$emit('cancle', false);
       },
       changeFn(v) {
-        console.log(v);
+        // console.log(v);
         let num = v.substr(0, 3);
-        console.log(num, 'num');
         let newArr = [];
 
         if(this.postArr.length > 0) {
           this.postArr.forEach(item => {
-            console.log(num, item);
+            // console.log(num, item);
           })
 
           //       this.postArr.forEach(item => {

@@ -7,6 +7,12 @@ import listTitle from "./common/listTitle.vue";
 import choosePeople from "./common/choosePeople.vue";
 //设置岗位
 import setPost from "./setPost.vue";
+//退出
+import exit from "./exit.vue";
+//未实施列表
+import notAction from "./notAction";
+//已实施列表
+import action from "./action";
 
 export default {
     tab,
@@ -15,5 +21,8 @@ export default {
     popBox,
     listTitle,
     choosePeople,
-    setPost
+    setPost,
+    exit,
+    notAction,
+    action
 };
