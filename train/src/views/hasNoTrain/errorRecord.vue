@@ -11,8 +11,15 @@
           <label>时间：</label>
           <input
             type="text"
-            v-model="errorData.time"
+            v-model="rerorData.time"
           >
+          <!-- <el-date-picker
+            v-model="errorData.time"
+            size="mini"
+            type="datetime"
+            placeholder="选择日期时间"
+          >
+          </el-date-picker> -->
         </div>
         <div class="errorItem">
           <v-list-title :listTilte="listTitle2"></v-list-title>
@@ -80,7 +87,8 @@
         window.history.back();
       },
       saveFn() {
-        console.log(this.errorData);
+        // console.log(this.errorData);
+        this.$router.push('/info');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

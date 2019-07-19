@@ -39,8 +39,7 @@
 </template>
 
 <script>
-  //例如：import 《组件名称》 from '《组件路径》';
-
+  import { mapState, mapMutations } from 'vuex';
   export default {
     //import引入的组件需要注入到对象中才能使用
     components: {},
@@ -54,11 +53,14 @@
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['userInfo'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
+      ...mapMutations(['_userInfo']),
       loginBtn() {
         //console.log('submit!');
         if(!this.login.userLoginName) {
@@ -69,6 +71,8 @@
           this.message.warning("请输入密码！");
           return false;
         }
+        let userInfo = { 'userName': this.login.userLoginName, 'userPwd': this.login.userPwd }
+        this._userInfo(userInfo);
         this.$router.push('/layout');
       },
       cancelBtn() { }

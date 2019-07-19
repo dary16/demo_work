@@ -5,22 +5,23 @@
       <h3 class="popTitle">{{popTitle}}</h3>
       <div class="content">
         <div class="subContent clearfix">
-          <el-checkbox
-            :indeterminate="isIndeterminate"
-            v-model="checkAll"
-            @change="handleCheckAllChange"
-          >全选</el-checkbox>
-          <div style="margin: 10px 0;"></div>
-          <el-checkbox-group
-            v-model="checkPeoples"
-            @change="handleCheckPeoplesChange"
-          >
-            <el-checkbox
-              v-for="city in peoples"
-              :label="city"
-              :key="city"
-            >{{city}}</el-checkbox>
-          </el-checkbox-group>
+          <ul>
+            <li
+              v-for="(item,index) in tags"
+              :key="item.id"
+            >
+              <span>{{item.name}}</span>
+              <el-radio-group
+                v-model="item['radio' + index]"
+                @change="changeFn"
+              >
+                <el-radio :label="item.id+'01'">01</el-radio>
+                <el-radio :label="item.id+'02'">02</el-radio>
+                <el-radio :label="item.id+'03'">03</el-radio>
+              </el-radio-group>
+            </li>
+          </ul>
+
         </div>
         <div class="popBtn">
           <a
@@ -37,35 +38,49 @@
   </div>
 </template>
 <script>
-  const peopleOptions = ['刘鹏', '李伟', '张杰明', '孙俪', '李成斌'];
   export default {
     data() {
       return {
-        selectedOptions: [],
-        checkAll: false,
-        checkPeoples: [],
-        peoples: peopleOptions,
-        isIndeterminate: true
+        postArr: []
       };
     },
-    props: ['popTitle'],
+    props: ['tags', 'popTitle'],
     created() {
     },
     methods: {
       onSubmit() {
-        this.$emit('save', this.checkPeoples);
+        this.$emit('save');
       },
       onCancle() {
         this.$emit('cancle', false);
       },
-      handleCheckAllChange(val) {
-        this.checkPeoples = val ? peopleOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckPeoplesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.peoples.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.peoples.length;
+      changeFn(v) {
+        console.log(v);
+        let num = v.substr(0, 3);
+        console.log(num, 'num');
+        let newArr = [];
+
+        if(this.postArr.length > 0) {
+          this.postArr.forEach(item => {
+            console.log(num, item);
+          })
+
+          //       this.postArr.forEach(item => {
+          //         if(num indexof(item) > -1){
+          //         console.log(0);
+          //       }else {
+          //       console.log(1);
+          //     }
+          //   });
+
+          //   newArr.forEach((item, index) => {
+          //     console.log(item, index);
+          //   });
+        } else {
+          this.postArr.push(v);
+        }
+
+
       }
     }
   };
@@ -118,7 +133,7 @@
               height: 0.45rem;
               line-height: 0.45rem;
               width: 1.8rem;
-              text-align: right;
+              text-align: left;
             }
           }
         }

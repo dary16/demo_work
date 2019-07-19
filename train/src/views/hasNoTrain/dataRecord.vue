@@ -60,6 +60,7 @@
       v-if="isShowPeople"
       v-on:save="savePeopleFn"
       v-on:cancle="cancelPeopleFn"
+      :popTitle="popTitle"
     ></v-choose-people>
   </div>
 </template>
@@ -75,6 +76,7 @@
         isShowBox: false,
         isShowPeople: false,
         nowIndex: -1,
+        popTitle: "选择参训航天员",
         listData: [
           {
             name: "数据项名称",
@@ -163,7 +165,6 @@
       choosePerson(i) {
         this.isShowPeople = true;
         this.nowIndex = i;
-        console.log(this.nowIndex);
       },
       //选人弹窗 确定
       savePeopleFn(val) {

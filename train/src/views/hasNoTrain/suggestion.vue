@@ -67,7 +67,7 @@
     //方法集合
     methods: {
       back() {
-        window.history.back();
+        this.$router.push('/info');
       },
       addSuggestion() {
         this.$router.push('/addSuggestion');
@@ -75,7 +75,9 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      if(this.$route.params.addData) {
+        this.listData.push(this.$route.params.addData);
+      }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

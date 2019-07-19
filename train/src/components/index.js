@@ -5,6 +5,8 @@ import popBox from "./common/popBox.vue";
 import listTitle from "./common/listTitle.vue";
 //选人
 import choosePeople from "./common/choosePeople.vue";
+//设置岗位
+import setPost from "./setPost.vue";
 
 export default {
     tab,
@@ -12,5 +14,6 @@ export default {
     infoHeader,
     popBox,
     listTitle,
-    choosePeople
+    choosePeople,
+    setPost
 };

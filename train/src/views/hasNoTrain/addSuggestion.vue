@@ -11,7 +11,7 @@
           <label>标题：</label>
           <input
             type="text"
-            v-model="errorData.title"
+            v-model="errorData.content"
           >
         </div>
         <div class="errorItem">
@@ -35,7 +35,7 @@
           <label>建议人：</label>
           <input
             type="text"
-            v-model="errorData.person"
+            v-model="errorData.name"
           >
         </div>
         <div class="errorItem bb">
@@ -71,11 +71,11 @@
         listTitle4: "建议人",
         listTitle5: "关键字",
         errorData: {
-          title: '',
+          content: '',
           info: '',
           time: '',
           key: '',
-          person: ''
+          name: ''
         }
       };
     },
@@ -87,10 +87,11 @@
     methods: {
       //返回
       back() {
-        window.history.back();
+        this.$router.push('/suggestion');
       },
       saveFn() {
-        console.log(this.errorData);
+        // console.log(this.errorData);
+        this.$router.push({ name: 'suggestion', params: { addData: this.errorData } });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -127,6 +128,7 @@
             width: 12rem;
             border: 1px solid #a09d9d;
             margin: 0.1rem auto;
+            padding-left: 0.2rem;
           }
         }
       }

@@ -18,11 +18,14 @@
             @click="tagFn(index)"
           >{{item.name}}</el-tag>
         </div>
-        <button class="normal-btn fr">设置岗位</button>
+        <button
+          class="normal-btn fr"
+          @click="setPostFn"
+        >设置岗位</button>
       </div>
       <v-list-title :listTilte="listTitle2"></v-list-title>
       <div class="item-info">
-        <span class="text">详细内容详细内容啦啦啦啦</span>
+        <span class="text">训练实施内容详细训练实施内容啦啦啦啦</span>
         <button
           class="normal-btn"
           @click="setTime"
@@ -45,6 +48,9 @@
         </div>
       </div>
       <v-list-title :listTilte="listTitle4"></v-list-title>
+      <div class="item-info">
+        <span class="text">详细内容详细内容啦啦啦啦</span>
+      </div>
     </div>
     <div class="buttons">
       <button
@@ -56,6 +62,13 @@
         @click="recordFn"
       >数据项记录</button>
     </div>
+    <v-set-post
+      v-if="isShowSet"
+      :tags="tags"
+      v-on:save="saveFn"
+      v-on:cancle="cancelFn"
+      :popTitle="popTitle"
+    ></v-set-post>
   </div>
 </template>
 
@@ -70,13 +83,15 @@
       return {
         showTag: false,
         showTime: true,
+        isShowSet: false,
         nowTime: '',
+        popTitle: "设置岗位",
         listTitle1: "人员签到",
         listTitle2: '训练详细内容',
         listTitle3: '异常说明',
         listTitle4: '训练实施',
         title: "训练实施信息",
-        tags: [{ name: "张三", id: "001", showTag: false }, { name: "李四", id: "002", showTag: false }, { name: "王五", id: "003", showTag: false }, { name: "张三", id: "004", showTag: false }, { name: "李四", id: "005", showTag: false }, { name: "王五", id: "006", showTag: false }]
+        tags: [{ name: "张三", id: "001", showTag: false, num: "11" }, { name: "王四", id: "002", showTag: false }, { name: "王五", id: "003", showTag: false, num: "12" }, { name: "李三", id: "004", showTag: false, num: "13" }, { name: "李东", id: "005", showTag: false, num: "14" }, { name: "张杰", id: "006", showTag: false, num: "15" }]
       };
     },
     //监听属性 类似于data概念
@@ -96,7 +111,7 @@
       },
       //返回
       back() {
-        window.history.back();
+        this.$router.push('/layout');
       },
       //意见建议
       suggestion() {
@@ -109,6 +124,17 @@
       //异常记录
       errorRecord() {
         this.$router.push('/errorRecord');
+      },
+      //设置岗位
+      setPostFn() {
+        this.isShowSet = true;
+      },
+      //保存
+      saveFn() {
+        this.isShowSet = false;
+      },
+      cancelFn() {
+        this.isShowSet = false;
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

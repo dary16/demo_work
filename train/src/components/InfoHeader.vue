@@ -9,7 +9,6 @@
 </template>
 
 <script>
-  //例如：import 《组件名称》 from '《组件路径》';
 
   export default {
     props: ['titleData'],

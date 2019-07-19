@@ -10,36 +10,43 @@ export default new Router({
         },
         {
             path: "/login",
+            name: "login",
             component: () =>
                 import ("./views/login.vue")
         },
         {
             path: "/layout",
+            name: "layout",
             component: () =>
                 import ("./views/layout.vue")
         },
         {
             path: '/info',
+            name: "info",
             component: () =>
                 import ("./views/hasNoTrain/info.vue")
         },
         {
             path: '/suggestion',
+            name: "suggestion",
             component: () =>
                 import ("./views/hasNoTrain/suggestion.vue")
         },
         {
             path: '/errorRecord',
+            name: "errorRecord",
             component: () =>
                 import ("./views/hasNoTrain/errorRecord.vue")
         },
         {
             path: '/record',
+            name: "record",
             component: () =>
                 import ("./views/hasNoTrain/dataRecord.vue")
         },
         {
             path: '/addSuggestion',
+            name: "addSuggestion",
             component: () =>
                 import ("./views/hasNoTrain/addSuggestion.vue")
         }
