@@ -12,7 +12,7 @@
           <input
             type="text"
             placeholder="请输入账号"
-            v-model.trim="login.userLoginName"
+            v-model.trim="login.userName"
           />
         </dd>
         <dd>
@@ -39,31 +39,33 @@
 </template>
 
 <script>
-  import { mapState, mapMutations } from 'vuex';
+  import {
+    getLoc
+  } from '../utils/common.js';
+  import { mapState, mapMutations, mapActions } from 'vuex';
   export default {
-    //import引入的组件需要注入到对象中才能使用
-    components: {},
     data() {
       //这里存放数据
       return {
         login: {
-          userLoginName: "",
+          userName: "",
           userPwd: ""
         }
       };
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userInfo'])
+      ...mapState(['userInfo', 'allData'])
     },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo']),
+      ...mapMutations(['_userInfo', '_allData']),
+      ...mapActions(['_getInfo']),
       loginBtn() {
         //console.log('submit!');
-        if(!this.login.userLoginName) {
+        if(!this.login.userName) {
           this.message.warning("请输入账号！");
           return false;
         }
@@ -71,14 +73,45 @@
           this.message.warning("请输入密码！");
           return false;
         }
-        let userInfo = { 'userName': this.login.userLoginName, 'userPwd': this.login.userPwd }
-        this._userInfo(userInfo);
-        this.$router.push('/layout');
+        const userArr = this.allData.allData.user;
+        let result = userArr.some((item, value) => {
+          return item.userName == this.login.userName && item.userPwd == this.login.userPwd
+        });
+        if(result) {
+          this.message.success('登陆成功！');
+          let userInfo = { 'userName': this.login.userName, 'userPwd': this.login.userPwd }
+          this._userInfo(userInfo);
+          this.$router.push('/layout');
+        } else {
+          this.message.warning('登陆失败！');
+          return false;
+        }
       },
-      cancelBtn() { }
+      cancelBtn() { },
+      //   testBtn() {
+      //     this.$http.get('http://localhost:8080/all.json')
+      //       .then(function(res) {
+      //         console.log(res)
+      //       }
+      //       )
+      //   }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() { },
+    created() {
+      if(getLoc('userInfo')) {
+        this.login = getLoc('userInfo');
+        console.log(this.login);
+      }
+      this._getInfo({
+        method: 'get',
+        api: 'getLogin',
+        callback: res => {
+          console.log(res, 'res');
+          let resData = { 'allData': res };
+          this._allData(resData);
+        }
+      })
+    },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
     updated() { }, //生命周期 - 更新之后

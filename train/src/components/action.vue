@@ -104,12 +104,15 @@
     computed: {
       notNum() {
         this.numLength = 0;
-        this.infoList.forEach(item => {
-          if(!item.upload) {
-            this.numLength++;
-          }
-        })
-        return this.numLength;
+        if(this.infoList.length > 0) {
+          this.infoList.forEach(item => {
+            if(!item.upload) {
+              this.numLength++;
+            }
+          })
+          return this.numLength;
+        }
+
       }
     },
     //监控data中的数据变化

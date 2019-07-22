@@ -24,8 +24,9 @@
 </template>
 
 <script>
-  //例如：import 《组件名称》 from '《组件路径》';
-
+  import {
+    getLoc
+  } from '../utils/common.js';
   export default {
     //import引入的组件需要注入到对象中才能使用
     components: {},
@@ -54,110 +55,8 @@
             src: "../assets/logo.png"
           }
         ],
-        infoList: [
-          {
-            time: "1995.06.30 12:00",
-            studyName: "基础知识训练",
-            studyUnity: "航天基础知识",
-            studyTime: "1小时",
-            zxTime: "40分钟",
-            teachName: "李伟",
-            teachTime: "节次1",
-            learnPeoples: "张三，李四，王五，赵柳，李杰，赵松俭",
-            teachStyle: "理论授课",
-            id: '001'
-          },
-          {
-            time: "1998.04.30 14:00",
-            studyName: "基础知识训练",
-            studyUnity: "航天基础知识",
-            studyTime: "2小时",
-            zxTime: "65分钟",
-            teachName: "李伟",
-            teachTime: "节次2",
-            learnPeoples: "刘亦菲，张三，李四，王五，赵柳，李杰，赵松俭",
-            teachStyle: "理论授课",
-            id: '002'
-          },
-          {
-            time: "1995.06.30 12:00",
-            studyName: "基础知识训练",
-            studyUnity: "航天基础知识",
-            studyTime: "2小时",
-            zxTime: "30分钟",
-            teachName: "李伟",
-            teachTime: "节次3",
-            learnPeoples: "王宝强，张三，李四，王五，赵柳，李杰，赵松俭",
-            teachStyle: "理论授课",
-            id: '003'
-          },
-          {
-            time: "2005.06.30 12:00",
-            studyName: "基础知识训练",
-            studyUnity: "航天基础知识",
-            studyTime: "1.5小时",
-            zxTime: "50分钟",
-            teachName: "李嘉伟",
-            teachTime: "节次5",
-            learnPeoples: "丽丽，张三，李四，王五，赵柳，李杰，赵松俭",
-            teachStyle: "理论授课",
-            id: '004'
-          },
-        ],
-        infoList2: [
-          {
-            time: "1995.06.30 12:00",
-            studyName: "基础知识训练",
-            studyUnity: "航天基础知识",
-            studyTime: "1小时",
-            zxTime: "40分钟",
-            teachName: "李伟",
-            teachTime: "节次1",
-            learnPeoples: "张三，李四，王五，赵柳，李杰，赵松俭",
-            teachStyle: "理论授课",
-            id: '001',
-            upload: false
-          },
-          {
-            time: "1998.04.30 14:00",
-            studyName: "基础知识训练",
-            studyUnity: "航天基础知识",
-            studyTime: "2小时",
-            zxTime: "65分钟",
-            teachName: "李伟",
-            teachTime: "节次2",
-            learnPeoples: "刘亦菲，张三，李四，王五，赵柳，李杰，赵松俭",
-            teachStyle: "理论授课",
-            id: '002',
-            upload: false
-          },
-          {
-            time: "1995.06.30 12:00",
-            studyName: "基础知识训练",
-            studyUnity: "航天基础知识",
-            studyTime: "2小时",
-            zxTime: "30分钟",
-            teachName: "李伟",
-            teachTime: "节次3",
-            learnPeoples: "王宝强，张三，李四，王五，赵柳，李杰，赵松俭",
-            teachStyle: "理论授课",
-            id: '003',
-            upload: false
-          },
-          {
-            time: "2005.06.30 12:00",
-            studyName: "基础知识训练",
-            studyUnity: "航天基础知识",
-            studyTime: "1.5小时",
-            zxTime: "50分钟",
-            teachName: "李嘉伟",
-            teachTime: "节次5",
-            learnPeoples: "丽丽，张三，李四，王五，赵柳，李杰，赵松俭",
-            teachStyle: "理论授课",
-            id: '004',
-            upload: true
-          },
-        ]
+        infoList: [],
+        infoList2: []
       };
     },
     //监听属性 类似于data概念
@@ -172,7 +71,8 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      this.infoList = getLoc('allData').allData.notActionList;
+      this.infoList2 = getLoc('allData').allData.actionList;
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

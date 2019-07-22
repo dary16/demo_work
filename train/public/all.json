@@ -1,0 +1,89 @@
+{
+    "body": {
+        "user": [{
+                "userName": "admin",
+                "userPwd": "123"
+            },
+            {
+                "userName": "dary",
+                "userPwd": "123"
+            }
+        ],
+        "code": 1,
+        "notActionList": [{
+                "time": "1995.06.30 12:00",
+                "studyName": "基础知识训练",
+                "studyUnity": "航天基础知识",
+                "studyTime": "1小时",
+                "zxTime": "40分钟",
+                "teachName": "李伟",
+                "teachTime": "节次1",
+                "learnPeoples": "张三，李四，王五，赵柳，李杰，赵松俭",
+                "teachStyle": "理论授课",
+                "id": "001"
+            },
+            {
+                "time": "1998.04.30 14:00",
+                "studyName": "基础知识训练",
+                "studyUnity": "航天基础知识",
+                "studyTime": "2小时",
+                "zxTime": "65分钟",
+                "teachName": "李伟",
+                "teachTime": "节次2",
+                "learnPeoples": "刘亦菲，张三，李四，王五，赵柳，李杰，赵松俭",
+                "teachStyle": "理论授课",
+                "id": "002"
+            },
+            {
+                "time": "1995.06.30 12:00",
+                "studyName": "基础知识训练",
+                "studyUnity": "航天基础知识",
+                "studyTime": "2小时",
+                "zxTime": "30分钟",
+                "teachName": "李伟",
+                "teachTime": "节次3",
+                "learnPeoples": "王宝强，张三，李四，王五，赵柳，李杰，赵松俭",
+                "teachStyle": "理论授课",
+                "id": "003"
+            }
+        ],
+        "actionList": [{
+            "time": "1998.04.30 14:00",
+            "studyName": "基础知识训练",
+            "studyUnity": "航天基础知识",
+            "studyTime": "2小时",
+            "zxTime": "65分钟",
+            "teachName": "李伟",
+            "teachTime": "节次2",
+            "learnPeoples": "刘亦菲，张三，李四，王五，赵柳",
+            "teachStyle": "理论授课",
+            "id": "011",
+            "upload": false
+        }, {
+            "time": "1998.04.30 14:00",
+            "studyName": "基础知识训练",
+            "studyUnity": "航天基础知识",
+            "studyTime": "2小时",
+            "zxTime": "65分钟",
+            "teachName": "李伟",
+            "teachTime": "节次2",
+            "learnPeoples": "刘亦菲，张三，李四，王五，赵柳，李杰，赵松俭",
+            "teachStyle": "理论授课",
+            "id": "012",
+            "upload": false
+        }, {
+            "time": "1998.04.30 14:00",
+            "studyName": "基础知识训练",
+            "studyUnity": "航天基础知识",
+            "studyTime": "2小时",
+            "zxTime": "65分钟",
+            "teachName": "李伟",
+            "teachTime": "节次2",
+            "learnPeoples": "刘亦菲，张三，李四，李杰，赵松俭",
+            "teachStyle": "理论授课",
+            "id": "013",
+            "upload": true
+        }]
+    },
+    "code": 1
+}

@@ -7,7 +7,11 @@ import "element-ui/lib/theme-chalk/index.css";
 import "./style/reset.css";
 import "./style/global.less";
 import ElementUI from "element-ui";
+import axios from "axios";
 import * as util from "./utils/common.js";
+import {
+    getLoc
+} from './utils/common.js';
 
 Vue.config.productionTip = false;
 //element-ui
@@ -17,6 +21,8 @@ Vue.prototype.message = ElementUI.Message;
 Vue.prototype.oMsgBox = ElementUI.MessageBox;
 Vue.prototype.popBox = ElementUI.Popover;
 Vue.prototype.util = util;
+
+Vue.prototype.$http = axios;
 
 // 自定义组件格式，全局可用
 Object.keys(components).forEach(key => {

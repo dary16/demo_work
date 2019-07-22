@@ -11,7 +11,7 @@
           <label>时间：</label>
           <input
             type="text"
-            v-model="rerorData.time"
+            v-model="errorData.time"
           >
           <!-- <el-date-picker
             v-model="errorData.time"
