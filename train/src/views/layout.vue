@@ -11,7 +11,7 @@
       <v-action :infoList="infoList2"></v-action>
     </div>
     <div v-show="tabIndex == 2">
-      <h2>周计划</h2>
+      <v-week-plan></v-week-plan>
     </div>
     <div v-show="tabIndex == 3">
       <v-exit></v-exit>

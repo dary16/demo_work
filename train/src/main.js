@@ -9,9 +9,7 @@ import "./style/global.less";
 import ElementUI from "element-ui";
 import axios from "axios";
 import * as util from "./utils/common.js";
-import {
-    getLoc
-} from './utils/common.js';
+
 
 Vue.config.productionTip = false;
 //element-ui

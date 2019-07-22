@@ -13,6 +13,8 @@ import exit from "./exit.vue";
 import notAction from "./notAction";
 //已实施列表
 import action from "./action";
+//周计划
+import weekPlan from "./weekPlan";
 
 export default {
     tab,
@@ -24,5 +26,6 @@ export default {
     setPost,
     exit,
     notAction,
-    action
+    action,
+    weekPlan
 };

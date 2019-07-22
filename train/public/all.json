@@ -83,7 +83,171 @@
             "teachStyle": "理论授课",
             "id": "013",
             "upload": true
+        }],
+        "weekplan": [{
+            "id": "1",
+            "label": "周一",
+            "monday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "tuesday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "wednesday": {},
+            "thursday": {},
+            "friday": {},
+            "satusday": {},
+            "sunday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            }
+        }, {
+            "id": "2",
+            "label": "周二",
+            "monday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "tuesday": {
+
+            },
+            "wednesday": {},
+            "thursday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "friday": {},
+            "satusday": {},
+            "sunday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            }
+        }, {
+            "id": "3",
+            "label": "周三",
+            "monday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "tuesday": {
+
+            },
+            "wednesday": {},
+            "thursday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "friday": {},
+            "satusday": {},
+            "sunday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            }
+        }, {
+            "id": "4",
+            "label": "周四",
+            "monday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "tuesday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "wednesday": {},
+            "thursday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "friday": {},
+            "satusday": {},
+            "sunday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            }
+        }, {
+            "id": "5",
+            "label": "周五",
+            "monday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "tuesday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "wednesday": {},
+            "thursday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "friday": {},
+            "satusday": {},
+            "sunday": {}
+        }, {
+            "id": "6",
+            "label": "周六",
+            "monday": {
+
+            },
+            "tuesday": {
+
+            },
+            "wednesday": {},
+            "thursday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "friday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "satusday": {},
+            "sunday": {}
+        }, {
+            "id": "7",
+            "label": "周日",
+            "monday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "tuesday": {
+
+            },
+            "wednesday": {},
+            "thursday": {
+
+            },
+            "friday": {
+                "name": "李芳",
+                "courseName": "科目一",
+                "address": "一号教学楼"
+            },
+            "satusday": {},
+            "sunday": {}
         }]
     },
     "code": 1
+
 }
