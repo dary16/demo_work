@@ -5,6 +5,8 @@
  * @actionListData 已实施数据
  * @notActionListData 未实施数据
  * @trainListData 训练实施数据
+ * @suggestionData 意见建议数据
+ * @weekPlanData 周计划数据
  */
 import {
     getLoc
@@ -14,6 +16,7 @@ export default {
     allData: getLoc('allData') || {},
     actionListData: getLoc('actionListData') || [],
     notActionListData: getLoc('notActionListData') || [],
-    trainListData: getLoc('trainListData') || []
-
+    trainListData: getLoc('trainListData') || [],
+    suggestionData: getLoc('suggestionData') || [],
+    weekPlanData: getLoc('weekPlanData') || []
 }

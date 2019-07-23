@@ -21,5 +21,13 @@ export default {
     _trainListData(state, trainListData) {
         setLoc('trainListData', trainListData);
         state.trainListData = trainListData;
+    },
+    _suggestionData(state, suggestionData) {
+        setLoc('suggestionData', suggestionData);
+        state.suggestionData = suggestionData;
+    },
+    _weekPlanData(state, weekPlanData) {
+        setLoc('weekPlanData', weekPlanData);
+        state.weekPlanData = weekPlanData;
     }
 }

@@ -160,11 +160,11 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      this.timeData = getLoc('weekPlanData');
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {
-      this.timeData = getLoc('allData').allData.weekplan;
+      //   this.timeData = getLoc('allData').allData.weekplan;
     },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发

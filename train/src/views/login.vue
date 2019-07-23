@@ -50,21 +50,23 @@
         login: {
           userName: "",
           userPwd: ""
-        }
+        },
+        initData: {}
       };
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userInfo', 'allData'])
+      ...mapState(['userInfo', 'allData']),
+
     },
     //监控data中的数据变化
-    watch: {},
+    watch: {
+    },
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData', '_actionListData', '_notActionListData', '_trainListData']),
+      ...mapMutations(['_userInfo', '_allData', '_actionListData', '_notActionListData', '_trainListData', '_suggestionData', '_weekPlanData']),
       ...mapActions(['_getInfo']),
       loginBtn() {
-        //console.log('submit!');
         if(!this.login.userName) {
           this.message.warning("请输入账号！");
           return false;
@@ -94,29 +96,62 @@
           api: 'getLogin',
           callback: res => {
             let resData = { 'allData': res };
+            this.initData = res;
             this._allData(resData);
-            this._actionListData(resData.allData.actionList);
-            this._notActionListData(resData.allData.notActionList);
-            this._trainListData(resData.allData.trainList);
+            this.initLocal();
           }
         })
+      },
+      initLocal() {
+        //周计划数据
+        if(getLoc('weekPlanData')) {
+          this._weekPlanData(getLoc('weekPlanData'));
+        } else {
+          this.getWeekPlanData();
+        }
+
+        //训练实施数据
+        if(getLoc('trainListData')) {
+          this._trainListData(getLoc('trainListData'));
+        } else {
+          this.getTrainData();
+        }
+
+        //未参训数据
+        if(getLoc('notActionListData')) {
+          this._notActionListData(getLoc('notActionListData'));
+        } else {
+          this.getNotActionData();
+        }
+
+        //参训数据
+        if(getLoc('actionListData')) {
+          this._actionListData(getLoc('actionListData'));
+        } else {
+          this.getActionData();
+        }
+      },
+      //初始化参训数据
+      getTrainData() {
+        this._trainListData(this.initData.trainList);
+      },
+      //初始化未实施数据
+      getNotActionData() {
+        this._notActionListData(this.initData.notActionList);
+      },
+      //初始化已实施数据
+      getActionData() {
+        this._actionListData(this.initData.actionList);
+      },
+      getWeekPlanData() {
+        // console.log('init3', this.initData.weekPlan);
+        this._weekPlanData(this.initData.weekPlan);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      if(getLoc('trainListData')) {
-        this._trainListData(getLoc('trainListData'));
-      } else {
-        console.log(1);
-        this.getInitData();
-      }
-      if(getLoc('notActionListData')) {
-        this._notActionListData(getLoc('notActionListData'));
-      } else {
-        console.log(2);
-        this.getInitData();
-      }
-
+      this.getInitData();
+      //登录数据
       if(getLoc('userInfo')) {
         this.login = getLoc('userInfo');
       }
