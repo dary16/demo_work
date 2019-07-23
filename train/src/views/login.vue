@@ -61,7 +61,7 @@
     watch: {},
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData']),
+      ...mapMutations(['_userInfo', '_allData', '_actionListData', '_notActionListData', '_trainListData']),
       ...mapActions(['_getInfo']),
       loginBtn() {
         //console.log('submit!');
@@ -88,29 +88,46 @@
         }
       },
       cancelBtn() { },
-      //   testBtn() {
-      //     this.$http.get('http://localhost:8080/all.json')
-      //       .then(function(res) {
-      //         console.log(res)
-      //       }
-      //       )
-      //   }
+      getInitData() {
+        this._getInfo({
+          method: 'get',
+          api: 'getLogin',
+          callback: res => {
+            let resData = { 'allData': res };
+            this._allData(resData);
+            this._actionListData(resData.allData.actionList);
+            this._notActionListData(resData.allData.notActionList);
+            this._trainListData(resData.allData.trainList);
+          }
+        })
+      }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
+      if(getLoc('trainListData')) {
+        this._trainListData(getLoc('trainListData'));
+      } else {
+        console.log(1);
+        this.getInitData();
+      }
+      if(getLoc('notActionListData')) {
+        this._notActionListData(getLoc('notActionListData'));
+      } else {
+        console.log(2);
+        this.getInitData();
+      }
+
       if(getLoc('userInfo')) {
         this.login = getLoc('userInfo');
-        console.log(this.login);
       }
-      this._getInfo({
-        method: 'get',
-        api: 'getLogin',
-        callback: res => {
-          console.log(res, 'res');
-          let resData = { 'allData': res };
-          this._allData(resData);
-        }
-      })
+
+      //   this.$http.get('../../all.json')
+      //     .then(function(res) {
+      //       let resData = { 'allData': res };
+      //       this._allData(resData);
+      //     }
+      //     )
+
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

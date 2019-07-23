@@ -9,5 +9,17 @@ export default {
     _allData(state, allData) {
         setLoc('allData', allData);
         state.allData = allData;
+    },
+    _actionListData(state, actionListData) {
+        setLoc('actionListData', actionListData);
+        state.actionListData = actionListData;
+    },
+    _notActionListData(state, notActionListData) {
+        setLoc('notActionListData', notActionListData);
+        state.notActionListData = notActionListData;
+    },
+    _trainListData(state, trainListData) {
+        setLoc('trainListData', trainListData);
+        state.trainListData = trainListData;
     }
 }

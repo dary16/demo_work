@@ -33,7 +33,7 @@ export default new Router({
                 import ("./views/hasNoTrain/suggestion.vue")
         },
         {
-            path: '/errorRecord',
+            path: '/errorRecord/:index',
             name: "errorRecord",
             component: () =>
                 import ("./views/hasNoTrain/errorRecord.vue")

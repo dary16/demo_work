@@ -28,8 +28,6 @@
     getLoc
   } from '../utils/common.js';
   export default {
-    //import引入的组件需要注入到对象中才能使用
-    components: {},
     data() {
       //这里存放数据
       return {
@@ -71,8 +69,8 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.infoList = getLoc('allData').allData.notActionList;
-      this.infoList2 = getLoc('allData').allData.actionList;
+      this.infoList = getLoc('notActionListData');
+      this.infoList2 = getLoc('actionListData');
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

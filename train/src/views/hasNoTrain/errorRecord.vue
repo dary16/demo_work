@@ -26,7 +26,7 @@
           <label>异常说明：</label>
           <input
             type="text"
-            v-model="errorData.info"
+            v-model="errorData.content"
           >
         </div>
         <div class="errorItem">
@@ -34,7 +34,7 @@
           <label>异常产生对象：</label>
           <input
             type="text"
-            v-model="errorData.object"
+            v-model="errorData.name"
           >
         </div>
         <div class="errorItem bb">
@@ -70,8 +70,8 @@
         listTitle4: "关键字",
         errorData: {
           time: '',
-          info: '',
-          object: '',
+          content: '',
+          name: '',
           key: ''
         }
       };
@@ -87,13 +87,12 @@
         window.history.back();
       },
       saveFn() {
-        // console.log(this.errorData);
-        this.$router.push('/info');
+        this.$router.push({ name: 'info', params: { addData: this.errorData, index: this.$route.params.index } });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      console.log(this.$route.params.index);
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

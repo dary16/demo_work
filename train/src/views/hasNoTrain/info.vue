@@ -23,33 +23,53 @@
           @click="setPostFn"
         >设置岗位</button>
       </div>
-      <v-list-title :listTilte="listTitle2"></v-list-title>
-      <div class="item-info">
-        <span class="text">训练实施内容详细训练实施内容啦啦啦啦</span>
-        <button
-          class="normal-btn"
-          @click="setTime"
-          v-if="showTime"
-        >完成时间</button>
-        <span v-else>{{nowTime}}</span>
-        <div class="fr nicon">
-          <i
-            class="el-icon-menu"
-            @click="errorRecord"
-          ></i>
+      <div class="info-list">
+        <v-list-title :listTilte="listTitle2"></v-list-title>
+        <div
+          class="item-info"
+          v-for="(item,index) in trainList"
+          :key="item.id"
+        >
+          <div class="info-wrap">
+            <span class="text">{{item.content}}</span>
+            <button
+              class="normal-btn"
+              @click="setTime(index)"
+              v-if="item.endTime == ''"
+            >完成时间</button>
+            <span v-else>{{item.endTime}}</span>
+            <div class="fr nicon">
+              <i
+                class="el-icon-circle-plus"
+                @click="errorRecord(index)"
+              ></i>
+            </div>
+          </div>
+
+          <div
+            class="fault-list"
+            v-if="item.faultInfo.length > 0 "
+          >
+            <div class="fault-title"><i class="el-icon-s-flag"></i><span>异常说明</span></div>
+            <div
+              class="fault-info"
+              v-for="item2 in item.faultInfo"
+              :key="item2.id"
+            >
+              <span class="text">{{item2.content}}</span>
+              <span class="time">{{item2.time}}</span>
+              <div class="fr">
+                <span>{{item2.name}}</span>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
-      <v-list-title :listTilte="listTitle3"></v-list-title>
-      <div class="item-info">
-        <span class="text">操作方式错误，操作方式错误，操作方式错误，操作方式错误，操作方式错误，关键字11212啦啦啦啦</span>
-        <span class="time">2019-04-28 08:52</span>
-        <div class="fr">
-          <span>张淼</span>
-        </div>
-      </div>
+
       <v-list-title :listTilte="listTitle4"></v-list-title>
       <div class="item-info">
-        <span class="text">详细内容详细内容啦啦啦啦</span>
+        <span class="text">实施内容实施内容啦啦啦啦</span>
       </div>
     </div>
     <div class="buttons">
@@ -73,8 +93,9 @@
 </template>
 
 <script>
-  //例如：import 《组件名称》 from '《组件路径》';
-
+  import {
+    getLoc, setLoc
+  } from '../../utils/common.js';
   export default {
     //import引入的组件需要注入到对象中才能使用
     components: {},
@@ -82,9 +103,8 @@
       //这里存放数据
       return {
         showTag: false,
-        showTime: true,
         isShowSet: false,
-        nowTime: '',
+        trainList: [],
         popTitle: "设置岗位",
         listTitle1: "人员签到",
         listTitle2: '训练详细内容',
@@ -104,10 +124,11 @@
         this.tags[i].showTag = !this.tags[i].showTag;
       },
       //设置时间
-      setTime() {
-        this.showTime = false;
+      setTime(index) {
         let time = this.util.formatDate(new Date().getTime(), 3);
-        this.nowTime = time;
+        this.trainList[index].endTime = time;
+        setLoc('trainListData', this.trainList);
+        // this._allData(resData);
       },
       //返回
       back() {
@@ -122,8 +143,8 @@
         this.$router.push('/record');
       },
       //异常记录
-      errorRecord() {
-        this.$router.push('/errorRecord');
+      errorRecord(index) {
+        this.$router.push('/errorRecord/' + index);
       },
       //设置岗位
       setPostFn() {
@@ -139,7 +160,12 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      this.trainList = getLoc('trainListData');
+      //   console.log(this.trainList, 'list');
+      if(this.$route.params.addData) {
+        this.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
+        setLoc('trainListData', this.trainList);
+      }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {
@@ -157,6 +183,7 @@
         padding: 0.2rem 0.3rem;
         border: 1px solid #006699;
         min-height: 1rem;
+
         span {
           display: inline-block;
           font-size: 0.25rem;
@@ -171,9 +198,7 @@
           font-weight: bold;
           margin-right: 0.1rem;
         }
-        .nicon {
-          font-size: 0.4rem;
-        }
+
         .tags {
           display: inline-block;
           .peopleTag {
@@ -181,6 +206,44 @@
           }
           .peopleTag.active {
             background: #006699;
+          }
+        }
+      }
+      .info-list {
+        .item-info {
+          padding: 0 !important;
+          .info-wrap {
+            padding: 0.2rem 0.3rem;
+            span {
+              display: inline-block;
+              font-size: 0.25rem;
+            }
+            span.text {
+              height: 0.5rem;
+              line-height: 0.5rem;
+              width: 12rem;
+            }
+            .nicon {
+              font-size: 0.4rem;
+            }
+          }
+          .fault-list {
+            .fault-title {
+              font-size: 0.25rem;
+              height: 0.6rem;
+              line-height: 0.6rem;
+              padding-left: 0.4rem;
+              background: #006699;
+              border-left: 1px solid #006699;
+              border-right: 1px solid #006699;
+              color: #fff;
+              span {
+                margin-left: 0.1rem;
+              }
+            }
+            .fault-info {
+              padding: 0.1rem 0.3rem;
+            }
           }
         }
       }

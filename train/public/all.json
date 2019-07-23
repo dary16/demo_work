@@ -1,5 +1,6 @@
 {
     "body": {
+
         "user": [{
                 "userName": "admin",
                 "userPwd": "123"
@@ -9,7 +10,6 @@
                 "userPwd": "123"
             }
         ],
-        "code": 1,
         "notActionList": [{
                 "time": "1995.06.30 12:00",
                 "studyName": "基础知识训练",
@@ -83,6 +83,27 @@
             "teachStyle": "理论授课",
             "id": "013",
             "upload": true
+        }],
+        "trainList": [{
+            "id": "01",
+            "content": "训练详细内容，详细内容一...",
+            "endTime": "",
+            "faultInfo": [{
+                "id": "001",
+                "content": "异常内容异常内容一",
+                "time": "2019-05-12 08:30",
+                "name": "张三"
+            }, {
+                "id": "002",
+                "content": "异常内容异常内容二",
+                "time": "2019-05-12 08:30",
+                "name": "李四"
+            }]
+        }, {
+            "id": "02",
+            "content": "训练详细内容，详细内容二...",
+            "endTime": "",
+            "faultInfo": []
         }],
         "weekplan": [{
             "id": "1",
@@ -248,6 +269,5 @@
             "sunday": {}
         }]
     },
-    "code": 1
-
+    "code": "1"
 }

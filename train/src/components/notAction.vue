@@ -4,7 +4,10 @@
       <h2>未实施训练</h2>
       <div class="xl-right">
         <span>2019.07.17 11:01</span>
-        <button class="normal-btn">数据下载</button>
+        <button
+          class="normal-btn"
+          @click="uploadData"
+        >数据上传</button>
       </div>
     </div>
     <div class="xl-content">
@@ -65,12 +68,17 @@
 </template>
 
 <script>
-
+  import {
+    getLoc
+  } from '../utils/common.js';
   export default {
     data() {
       //这里存放数据
       return {
-
+        a: {},
+        b: {},
+        c: {},
+        d: {}
       };
     },
     props: ['infoList'],
@@ -85,6 +93,12 @@
         // console.log(this.$router);
         // this.showLayout = false;
         this.$router.push('/info');
+      },
+      uploadData() {
+        this.a = { trainListData: getLoc('trainListData') };
+        this.b = { actionListData: getLoc('actionListData') };
+        this.c = { notActionListData: getLoc('notActionListData') };
+        this.d = Object.assign({}, this.a, this.b, this.c);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

@@ -7,6 +7,9 @@
       @click="tabFn(index)"
       :class="{'active':index == tabNow}"
     >
+      <!-- <div class="tab-icon">
+        <i class=""></i>
+      </div> -->
       <span>{{item.name}}</span>
     </div>
   </div>
