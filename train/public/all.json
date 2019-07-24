@@ -2,12 +2,18 @@
     "body": {
 
         "user": [{
+                "userID": "dsjk122",
+                "personID": "ksdf563",
+                "realName": "管理员",
                 "userName": "admin",
-                "userPwd": "123"
+                "password": "123"
             },
             {
+                "userID": "dsjk456",
+                "personID": "ksdf561",
+                "realName": "代蕊",
                 "userName": "dary",
-                "userPwd": "123"
+                "password": "123"
             }
         ],
         "notActionList": [{
@@ -20,7 +26,28 @@
                 "teachTime": "节次1",
                 "learnPeoples": "张三，李四，王五，赵柳，李杰，赵松俭",
                 "teachStyle": "理论授课",
-                "id": "001"
+                "id": "001",
+                "trainList": [{
+                    "id": "01",
+                    "content": "训练详细内容，详细内容一...",
+                    "endTime": "",
+                    "faultInfo": [{
+                        "id": "001",
+                        "content": "异常内容异常内容一",
+                        "time": "2019-05-12 08:30",
+                        "name": "张三"
+                    }, {
+                        "id": "002",
+                        "content": "异常内容异常内容二",
+                        "time": "2019-05-12 08:30",
+                        "name": "李四"
+                    }]
+                }, {
+                    "id": "02",
+                    "content": "训练详细内容，详细内容二...",
+                    "endTime": "",
+                    "faultInfo": []
+                }]
             },
             {
                 "time": "1998.04.30 14:00",
@@ -32,7 +59,8 @@
                 "teachTime": "节次2",
                 "learnPeoples": "刘亦菲，张三，李四，王五，赵柳，李杰，赵松俭",
                 "teachStyle": "理论授课",
-                "id": "002"
+                "id": "002",
+                "trainList": []
             },
             {
                 "time": "1995.06.30 12:00",
@@ -44,7 +72,8 @@
                 "teachTime": "节次3",
                 "learnPeoples": "王宝强，张三，李四，王五，赵柳，李杰，赵松俭",
                 "teachStyle": "理论授课",
-                "id": "003"
+                "id": "003",
+                "trainList": []
             }
         ],
         "actionList": [{
@@ -83,27 +112,6 @@
             "teachStyle": "理论授课",
             "id": "013",
             "upload": true
-        }],
-        "trainList": [{
-            "id": "01",
-            "content": "训练详细内容，详细内容一...",
-            "endTime": "",
-            "faultInfo": [{
-                "id": "001",
-                "content": "异常内容异常内容一",
-                "time": "2019-05-12 08:30",
-                "name": "张三"
-            }, {
-                "id": "002",
-                "content": "异常内容异常内容二",
-                "time": "2019-05-12 08:30",
-                "name": "李四"
-            }]
-        }, {
-            "id": "02",
-            "content": "训练详细内容，详细内容二...",
-            "endTime": "",
-            "faultInfo": []
         }],
         "suggestionData": [{
             "content": "不忘初心、牢记使命”主题教育启动一个多月后，习近平总书记前往内蒙古自治区考察并指导开展主题教育",

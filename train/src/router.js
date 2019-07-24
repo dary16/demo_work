@@ -27,6 +27,12 @@ export default new Router({
                 import ("./views/hasNoTrain/info.vue")
         },
         {
+            path: '/trainInfo',
+            name: "trainInfo",
+            component: () =>
+                import ("./components/trainInfo.vue")
+        },
+        {
             path: '/suggestion',
             name: "suggestion",
             component: () =>

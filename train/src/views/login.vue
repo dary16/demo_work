@@ -20,7 +20,7 @@
           <input
             type="password"
             placeholder="请输入密码"
-            v-model="login.userPwd"
+            v-model="login.password"
           />
         </dd>
       </dl>
@@ -49,7 +49,7 @@
       return {
         login: {
           userName: "",
-          userPwd: ""
+          password: ""
         },
         initData: {}
       };
@@ -70,19 +70,36 @@
         if(!this.login.userName) {
           this.message.warning("请输入账号！");
           return false;
+        } else {
+          var val = /^[A-Za-z0-9]{0,16}$/;
+          var vaid = val.exec(this.login.userName);
+          if(vaid == null) {
+            this.message.warning("用户名格式不正确！");
+            return false;
+          }
         }
-        if(!this.login.userPwd) {
+        if(!this.login.password) {
           this.message.warning("请输入密码！");
           return false;
+        } else {
+          var val = /^[A-Za-z0-9]{0,16}$/;
+          var vaid = val.exec(this.login.password);
+          if(vaid == null) {
+            this.message.warning("密码格式不正确！");
+            return false;
+          }
         }
+        // console.log(this.login.userName, this.login.password);
         const userArr = this.allData.allData.user;
-        let result = userArr.some((item, value) => {
-          return item.userName == this.login.userName && item.userPwd == this.login.userPwd
+        let result = userArr.filter(item => {
+          if(item.userName == this.login.userName && item.password == this.login.password) {
+            this._userInfo(item);
+            return true;
+          }
         });
         if(result) {
           this.message.success('登陆成功！');
-          let userInfo = { 'userName': this.login.userName, 'userPwd': this.login.userPwd }
-          this._userInfo(userInfo);
+
           this.$router.push('/layout');
         } else {
           this.message.warning('登陆失败！');
@@ -98,7 +115,7 @@
             let resData = { 'allData': res };
             this.initData = res;
             this._allData(resData);
-            this.initLocal();
+            // this.initLocal();
           }
         })
       },

@@ -15,6 +15,10 @@ import notAction from "./notAction";
 import action from "./action";
 //周计划
 import weekPlan from "./weekPlan";
+//训练详情
+import trainInfo from "./trainInfo";
+//详情
+import listInfo from "./common/listInfo.vue";
 
 export default {
     tab,
@@ -27,5 +31,7 @@ export default {
     exit,
     notAction,
     action,
-    weekPlan
+    weekPlan,
+    trainInfo,
+    listInfo
 };

@@ -5,17 +5,18 @@
         <v-search-header></v-search-header>
         <v-not-action v-bind:infoList="infoList"></v-not-action>
       </div>
+      <div v-show="tabIndex == 1">
+        <v-search-header></v-search-header>
+        <v-action :infoList="infoList2"></v-action>
+      </div>
+      <div v-show="tabIndex == 2">
+        <v-week-plan></v-week-plan>
+      </div>
+      <div v-show="tabIndex == 3">
+        <v-exit></v-exit>
+      </div>
     </div>
-    <div v-show="tabIndex == 1">
-      <v-search-header></v-search-header>
-      <v-action :infoList="infoList2"></v-action>
-    </div>
-    <div v-show="tabIndex == 2">
-      <v-week-plan></v-week-plan>
-    </div>
-    <div v-show="tabIndex == 3">
-      <v-exit></v-exit>
-    </div>
+
     <v-tab
       :list="tabList"
       @tabIndex="getTabIndex"
@@ -31,7 +32,6 @@
     data() {
       //这里存放数据
       return {
-        showLayout: true,
         tabIndex: 0,
         tabList: [
           {

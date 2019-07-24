@@ -8,12 +8,16 @@
           class="normal-btn"
           @click="uploadData"
         >数据上传</button>
+        <button
+          class="normal-btn"
+          @click="downloadData"
+        >数据下载</button>
       </div>
     </div>
     <div class="xl-content">
       <div
         class="xl-item"
-        v-for="item in infoList"
+        v-for="(item,index) in infoList"
         :key="item.id"
       >
         <div class="content-header clearfix">
@@ -58,7 +62,10 @@
               <span class="value">{{item.teachStyle}}</span>
             </li>
           </ul>
-          <div class="more">
+          <div
+            class="more"
+            @click="showInfo(index)"
+          >
             <i class="el-icon-d-arrow-right"></i>
           </div>
         </div>
@@ -91,14 +98,21 @@
     methods: {
       doAction() {
         // console.log(this.$router);
-        // this.showLayout = false;
         this.$router.push('/info');
       },
+      //测试数据上传
       uploadData() {
         this.a = { trainListData: getLoc('trainListData') };
         this.b = { actionListData: getLoc('actionListData') };
         this.c = { notActionListData: getLoc('notActionListData') };
         this.d = Object.assign({}, this.a, this.b, this.c);
+      },
+      //数据下载
+      downloadData() {
+        console.log('数据下载...');
+      },
+      showInfo(index) {
+        this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } })
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
