@@ -18,10 +18,6 @@ export default {
         setLoc('notActionListData', notActionListData);
         state.notActionListData = notActionListData;
     },
-    _trainListData(state, trainListData) {
-        setLoc('trainListData', trainListData);
-        state.trainListData = trainListData;
-    },
     _suggestionData(state, suggestionData) {
         setLoc('suggestionData', suggestionData);
         state.suggestionData = suggestionData;
@@ -29,5 +25,8 @@ export default {
     _weekPlanData(state, weekPlanData) {
         setLoc('weekPlanData', weekPlanData);
         state.weekPlanData = weekPlanData;
+    },
+    _nowIndex(state, nowIndex) {
+        state.nowIndex = nowIndex;
     }
 }

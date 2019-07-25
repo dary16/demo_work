@@ -11,7 +11,7 @@
           <label>标题：</label>
           <input
             type="text"
-            v-model="errorData.content"
+            v-model="errorData.commentTitle"
           >
         </div>
         <div class="errorItem">
@@ -19,7 +19,7 @@
           <label>时间：</label>
           <input
             type="text"
-            v-model="errorData.time"
+            v-model="errorData.commentDate"
           >
         </div>
         <div class="errorItem">
@@ -27,7 +27,7 @@
           <label>说明：</label>
           <input
             type="text"
-            v-model="errorData.info"
+            v-model="errorData.commentExplain"
           >
         </div>
         <div class="errorItem">
@@ -35,7 +35,7 @@
           <label>建议人：</label>
           <input
             type="text"
-            v-model="errorData.name"
+            v-model="errorData.commentPersonName"
           >
         </div>
         <div class="errorItem bb">
@@ -43,7 +43,7 @@
           <label>关键字：</label>
           <input
             type="text"
-            v-model="errorData.key"
+            v-model="errorData.keyword"
           >
         </div>
       </div>
@@ -71,11 +71,11 @@
         listTitle4: "建议人",
         listTitle5: "关键字",
         errorData: {
-          content: '',
-          info: '',
-          time: '',
-          key: '',
-          name: ''
+          commentExplain: '',
+          commentTitle: '',
+          commentDate: '',
+          keyword: '',
+          commentPersonName: ''
         }
       };
     },
@@ -87,7 +87,8 @@
     methods: {
       //返回
       back() {
-        this.$router.push('/suggestion');
+        // this.$router.push('/suggestion');
+        this.$router.go(-1);
       },
       saveFn() {
         // console.log(this.errorData);

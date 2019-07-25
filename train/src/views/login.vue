@@ -64,7 +64,7 @@
     },
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData', '_actionListData', '_notActionListData', '_trainListData', '_suggestionData', '_weekPlanData']),
+      ...mapMutations(['_userInfo', '_allData', '_actionListData', '_notActionListData', '_suggestionData', '_weekPlanData']),
       ...mapActions(['_getInfo']),
       loginBtn() {
         if(!this.login.userName) {
@@ -127,13 +127,6 @@
           this.getWeekPlanData();
         }
 
-        //训练实施数据
-        // if(getLoc('trainListData')) {
-        //   this._trainListData(getLoc('trainListData'));
-        // } else {
-        this.getTrainData();
-        // }
-
         //未参训数据
         // if(getLoc('notActionListData')) {
         //   this._notActionListData(getLoc('notActionListData'));
@@ -148,12 +141,9 @@
           this.getActionData();
         }
       },
-      //初始化参训数据
-      getTrainData() {
-        // this._trainListData(this.initData.trainList);
-      },
       //初始化未实施数据
       getNotActionData() {
+        console.log(this.initData.notActionList, 'fff');
         this._notActionListData(this.initData.notActionList);
       },
       //初始化已实施数据

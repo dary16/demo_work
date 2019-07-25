@@ -2,36 +2,48 @@
   <div class='info'>
     <ul>
       <li>
-        <span class="title">科目名称：</span>
-        <span class="text">{{infoList.studyName}}</span>
+        <span class="title">科目单元名称：</span>
+        <span class="text">{{infoList.subjectUnitName}}</span>
       </li>
       <li>
-        <span class="title">课程单元：</span>
-        <span class="text">{{infoList.studyName}}</span>
-      </li>
-      <li>
-        <span class="title">授课学时：</span>
-        <span class="text">{{infoList.studyTime}}</span>
-      </li>
-      <li>
-        <span class="title">组训学时：</span>
-        <span class="text">{{infoList.zxTime}}</span>
-      </li>
-      <li>
-        <span class="title">授课人员：</span>
-        <span class="text">{{infoList.teachName}}</span>
-      </li>
-      <li>
-        <span class="title">授课时间：</span>
-        <span class="text">{{infoList.teachTime}}</span>
-      </li>
-      <li>
-        <span class="title">授课对象：</span>
-        <span class="text">{{infoList.learnPeoples}}</span>
+        <span class="title">课程单元学时：</span>
+        <span class="text">{{infoList.subjectUnitClassHour}}</span>
       </li>
       <li>
         <span class="title">训练方式：</span>
-        <span class="text">{{infoList.teachStyle}}</span>
+        <span class="text">{{infoList.trainWay}}</span>
+      </li>
+      <li>
+        <span class="title">分组方式：</span>
+        <span class="text">{{infoList.groupWay}}</span>
+      </li>
+      <li>
+        <span class="title">分组人数：</span>
+        <span class="text">{{infoList.groupPersonNumber}}</span>
+      </li>
+      <li>
+        <span class="title">着装要求：</span>
+        <span class="text">{{infoList.dressCode}}</span>
+      </li>
+      <li>
+        <span class="title">训练单元类型：</span>
+        <span class="text">{{infoList.subjectUnitType}}</span>
+      </li>
+      <li>
+        <span class="title">上课教员名称：</span>
+        <span class="text">{{infoList.chargeTeacherName}}</span>
+      </li>
+      <li>
+        <span class="title">参加航天员名称：</span>
+        <span class="text">{{infoList.joinAstronautNames}}</span>
+      </li>
+      <li>
+        <span class="title">训练场地：</span>
+        <span class="text">{{infoList.trainAreaName}}</span>
+      </li>
+      <li>
+        <span class="title">训练器材：</span>
+        <span class="text">{{infoList.trainMaterialName}}</span>
       </li>
     </ul>
   </div>

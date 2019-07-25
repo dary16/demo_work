@@ -84,7 +84,7 @@
     methods: {
       //返回
       back() {
-        window.history.back();
+        this.$router.go(-1);
       },
       saveFn() {
         this.$router.push({ name: 'info', params: { addData: this.errorData, index: this.$route.params.index } });

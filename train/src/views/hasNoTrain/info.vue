@@ -35,7 +35,7 @@
             <button
               class="normal-btn"
               @click="setTime(index)"
-              v-if="item.endTime == ''"
+              v-if="item.trainClassHour == ''"
             >完成时间</button>
             <span v-else>{{item.trainClassHour}}</span>
             <div class="fr nicon">
@@ -45,7 +45,6 @@
               ></i>
             </div>
           </div>
-
           <div
             class="fault-list"
             v-if="item.faultInfo.length > 0"
@@ -64,7 +63,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <v-list-title :listTilte="listTitle4"></v-list-title>
@@ -96,6 +94,7 @@
   import {
     getLoc, setLoc
   } from '../../utils/common.js';
+  import { mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -117,7 +116,9 @@
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['nowIndex'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
@@ -128,13 +129,12 @@
       //设置时间
       setTime(index) {
         let time = this.util.formatDate(new Date().getTime(), 3);
-        this.trainList[index].endTime = time;
-        setLoc('trainListData', this.trainList);
+        this.trainList[index].trainClassHour = time;
         // this._allData(resData);
       },
       //返回
       back() {
-        this.$router.push('/layout');
+        this.$router.go(-1);
       },
       //意见建议
       suggestion() {
@@ -154,7 +154,6 @@
       },
       //保存
       saveFn(v) {
-        console.log(v);
         this.tags = v;
         this.isShowSet = false;
       },
@@ -165,18 +164,13 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       if(this.$route.params.trainList) {
-        console.log(this.$route.params.trainList, 'data');
         this.trainList = this.$route.params.trainList;
+      } else {
+        this.trainList = getLoc('notActionListData')[this.nowIndex].trainList;
       }
-      //   if(this.$route.params.addData) {
-      //     this.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
-      // setLoc('trainListData', this.trainList);
-      //   }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }

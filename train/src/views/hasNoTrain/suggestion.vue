@@ -15,11 +15,11 @@
         <ul>
           <li
             v-for="item in listData"
-            :key="item.id"
+            :key="item.trainImplementCommentID"
           >
-            <p>{{item.content}}</p>
-            <span class="name">{{item.name}}</span>
-            <span class="time">{{item.time}}</span>
+            <p>{{item.commentExplain}}</p>
+            <span class="name">{{item.commentPersonName}}</span>
+            <span class="time">{{item.commentDate}}</span>
           </li>
         </ul>
       </div>
@@ -29,41 +29,28 @@
 </template>
 
 <script>
+  import {
+    getLoc
+  } from '../../utils/common.js';
+  import { mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
       return {
         title: "意见建议",
-        listData: [
-          {
-            content: "不忘初心、牢记使命”主题教育启动一个多月后，习近平总书记前往内蒙古自治区考察并指导开展主题教育",
-            name: "张三",
-            time: "2018-06-21 12:22",
-            id: "001"
-          },
-          {
-            content: "就在主题教育启动前的5月20日，总书记前往江西于都重温初心，就开展好主题教育提出要求。",
-            name: "李四",
-            time: "2019-06-21 12:22",
-            id: "002"
-          },
-          {
-            content: "接连两次地方考察，都强调这一主题，可见主题教育在总书记心目中的分量有多重。",
-            name: "李五",
-            time: "2019-06-21 12:22",
-            id: "003"
-          }
-        ]
+        listData: []
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['nowIndex'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
       back() {
-        this.$router.push('/info');
+        this.$router.go(-1);
       },
       addSuggestion() {
         this.$router.push('/addSuggestion');
@@ -72,13 +59,14 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       if(this.$route.params.addData) {
+        this.listData = getLoc('notActionListData')[this.nowIndex].commentData;
         this.listData.push(this.$route.params.addData);
+      } else {
+        this.listData = getLoc('notActionListData')[this.nowIndex].commentData;
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }

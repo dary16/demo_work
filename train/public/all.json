@@ -39,11 +39,47 @@
                 "trainMaterialID": "sds34304",
                 "trainMaterialName": "训练器材名称",
                 "oldArrangeSubjectResultID": "jdsjfkd",
+                "commentData": [{
+                    "trainImplementCommentID": "jfkds32",
+                    "commentTitle": "意见建议标题",
+                    "commentDate": "2018.03.21 15:26",
+                    "commentExplain": "意见建议说明",
+                    "commentPersonID": "jdf823",
+                    "commentPersonName": "建议人名称",
+                    "keyword": "关键字"
+                }, {
+                    "trainImplementCommentID": "jfkdds32",
+                    "commentTitle": "意见建议标题",
+                    "commentDate": "2018.03.11 15:26",
+                    "commentExplain": "意见建议说明",
+                    "commentPersonID": "jdf823d",
+                    "commentPersonName": "建议人名称",
+                    "keyword": "关键字"
+                }],
+                "trainData": [{
+                    "trainImplentDataItemID": "jdsfkd",
+                    "joinAstronautIDs": "jdfjkdfkjj",
+                    "trainImplentID": "ksdsl",
+                    "dataItemName": "数据项名称",
+                    "dataItemDesc": "数据项说明",
+                    "dataItemValue": "数据项值",
+                    "dataItemMeasureValue": "数据项标准值",
+                    "dataItemUnit": "数据单位"
+                }, {
+                    "trainImplentDataItemID": "jdssfkd",
+                    "joinAstronautIDs": "jdfjkdfk7",
+                    "trainImplentID": "ksddsl",
+                    "dataItemName": "数据项名称",
+                    "dataItemDesc": "数据项说明2",
+                    "dataItemValue": "数据项值2",
+                    "dataItemMeasureValue": "数据项标准值",
+                    "dataItemUnit": "数据单位2"
+                }],
                 "trainList": [{
                     "trainContentID": "frdg01",
                     "trainPrepareID": "dskfld",
                     "trainContentName": "训练内容名称",
-                    "trainClassHour": "训练时长",
+                    "trainClassHour": "",
                     "trainContentDesc": "训练详细内容，详细内容一...",
                     "keyword": "关键字",
                     "timeWay": "计时方式",

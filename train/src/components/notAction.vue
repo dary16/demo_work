@@ -78,33 +78,33 @@
   import {
     getLoc
   } from '../utils/common.js';
+  import { mapMutations } from 'vuex';
   export default {
     data() {
       //这里存放数据
       return {
         a: {},
         b: {},
-        c: {},
-        d: {}
+        c: {}
       };
     },
     props: ['infoList'],
     //监听属性 类似于data概念
-    computed: {
-    },
+    computed: {},
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
+      ...mapMutations(['_nowIndex']),
       doAction(index) {
+        this._nowIndex(index);
         this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList } });
       },
       //测试数据上传
       uploadData() {
-        this.a = { trainListData: getLoc('trainListData') };
-        this.b = { actionListData: getLoc('actionListData') };
-        this.c = { notActionListData: getLoc('notActionListData') };
-        this.d = Object.assign({}, this.a, this.b, this.c);
+        this.a = { actionListData: getLoc('actionListData') };
+        this.b = { notActionListData: getLoc('notActionListData') };
+        this.c = Object.assign({}, this.a, this.b);
       },
       //数据下载
       downloadData() {
@@ -115,13 +115,9 @@
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() {
-
-    },
+    created() { },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
@@ -201,7 +197,7 @@
               overflow: hidden;
               white-space: nowrap;
               .name {
-                width: 1.6rem;
+                width: 1.7rem;
                 display: inline-block;
               }
               .value {

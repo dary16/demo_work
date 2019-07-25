@@ -8,16 +8,16 @@
       <div
         class="item"
         v-for="(item,index) in listData"
-        :key="item.id"
+        :key="item.trainImplementDataItemID"
       >
         <dl>
           <dd>
             <label>数据项名称：</label>
-            <span>{{item.name}}</span>
+            <span>{{item.dataItemName}}</span>
           </dd>
           <dd class="icn">
-            <label>参训航天员：</label>
-            <span>{{item.person}}</span>
+            <label>参训航天员ID：</label>
+            <span>{{item.joinAstronautIDs}}</span>
             <span class="iconSize">
               <i
                 class="el-icon-tickets"
@@ -27,19 +27,19 @@
           </dd>
           <dd>
             <label>数据项说明：</label>
-            <span>{{item.explain}}</span>
+            <span>{{item.dataItemDesc}}</span>
           </dd>
           <dd>
             <label>数据项值：</label>
-            <span>{{item.value}}</span>
+            <span>{{item.dataItemValue}}</span>
           </dd>
           <dd>
             <label>数据项标准值：</label>
-            <span>{{item.standardValue}}</span>
+            <span>{{item.dataItemMeasureValue}}</span>
           </dd>
           <dd>
             <label>数据单位：</label>
-            <span>{{item.unity}}</span>
+            <span>{{item.dataItemUnit}}</span>
           </dd>
         </dl>
       </div>
@@ -66,67 +66,51 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+  import {
+    getLoc
+  } from '../../utils/common.js';
   export default {
-    //import引入的组件需要注入到对象中才能使用
-    components: {},
     data() {
       //这里存放数据
       return {
         title: "数据项记录",
         isShowBox: false,
         isShowPeople: false,
-        nowIndex: -1,
         popTitle: "选择参训航天员",
-        listData: [
-          {
-            name: "数据项名称",
-            person: '刘鹏，李伟，张杰明，孙俪，李成斌',
-            explain: '数据项说明',
-            value: '50',
-            standardValue: '80',
-            unity: '米'
-          },
-          {
-            name: "数据项名称",
-            person: '刘鹏，李伟，张杰明，孙俪，李成斌',
-            explain: '数据项说明',
-            value: '52',
-            standardValue: '66',
-            unity: '个'
-          }
-        ],
+        listData: [],
         popData: {
           'titleTotal': '新增',
           'options': [{
             'status': 1,
             'title': '数据项目名称',
             'placeholder': '请输入数据项目名称',
-            'val': 'name'
+            'val': 'dataItemName'
           }, {
             'status': 1,
-            'title': '参训航天员',
-            'placeholder': '请输入参训航天员',
-            'val': 'person'
+            'title': '参训航天员ID',
+            'placeholder': '请输入参训航天员ID',
+            'val': 'joinAstronautIDs'
           }, {
             'status': 1,
             'title': '数据项说明',
             'placeholder': '请输入数据项说明',
-            'val': 'explain'
+            'val': 'dataItemDesc'
           }, {
             'status': 1,
             'title': '数据项值',
             'placeholder': '请输入数据项值',
-            'val': 'value'
+            'val': 'dataItemValue'
           }, {
             'status': 1,
             'title': '数据项标准值',
             'placeholder': '请输入数据项标准值',
-            'val': 'standardValue'
+            'val': 'dataItemMeasureValue'
           }, {
             'status': 2,
             'title': '数据项单位',
             'placeholder': '请选择数据单位',
-            'val': 'unity',
+            'val': 'dataItemUnit',
             'list': [
               {
                 value: '米',
@@ -140,13 +124,15 @@
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['nowIndex'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
       back() {
-        window.history.back();
+        this.$router.go(-1);
       },
       addRole() {
         this.isShowBox = true;
@@ -169,7 +155,7 @@
       //选人弹窗 确定
       savePeopleFn(val) {
         this.isShowPeople = false;
-        this.listData[this.nowIndex].person = val.toString();
+        this.listData = getLoc('notActionListData')[this.nowIndex].trainData;
       },
       //选人弹窗 取消
       cancelPeopleFn(val) {
@@ -178,7 +164,7 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      this.listData = getLoc('notActionListData')[this.nowIndex].trainData;
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {
