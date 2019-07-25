@@ -9,17 +9,17 @@
         <div class="errorItem">
           <v-list-title :listTilte="listTitle1"></v-list-title>
           <label>时间：</label>
-          <input
+          <!-- <input
             type="text"
             v-model="errorData.time"
-          >
-          <!-- <el-date-picker
+          > -->
+          <el-date-picker
             v-model="errorData.time"
             size="mini"
             type="datetime"
             placeholder="选择日期时间"
           >
-          </el-date-picker> -->
+          </el-date-picker>
         </div>
         <div class="errorItem">
           <v-list-title :listTilte="listTitle2"></v-list-title>
@@ -131,5 +131,24 @@
         text-align: center;
       }
     }
+  }
+</style>
+<style>
+  .el-input--small .el-input__inner {
+    height: 26px !important;
+    line-height: 26px !important;
+  }
+  .el-date-picker__header {
+    margin: 5px 12px !important;
+  }
+  .el-picker-panel__content {
+    margin: 5px !important;
+  }
+  .el-date-table td,
+  .el-date-table td div {
+    height: 16px !important;
+  }
+  .el-picker-panel {
+    line-height: 20px !important;
   }
 </style>

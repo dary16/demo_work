@@ -115,7 +115,7 @@
             let resData = { 'allData': res };
             this.initData = res;
             this._allData(resData);
-            // this.initLocal();
+            this.initLocal();
           }
         })
       },
@@ -128,18 +128,18 @@
         }
 
         //训练实施数据
-        if(getLoc('trainListData')) {
-          this._trainListData(getLoc('trainListData'));
-        } else {
-          this.getTrainData();
-        }
+        // if(getLoc('trainListData')) {
+        //   this._trainListData(getLoc('trainListData'));
+        // } else {
+        this.getTrainData();
+        // }
 
         //未参训数据
-        if(getLoc('notActionListData')) {
-          this._notActionListData(getLoc('notActionListData'));
-        } else {
-          this.getNotActionData();
-        }
+        // if(getLoc('notActionListData')) {
+        //   this._notActionListData(getLoc('notActionListData'));
+        // } else {
+        this.getNotActionData();
+        // }
 
         //参训数据
         if(getLoc('actionListData')) {
@@ -150,7 +150,7 @@
       },
       //初始化参训数据
       getTrainData() {
-        this._trainListData(this.initData.trainList);
+        // this._trainListData(this.initData.trainList);
       },
       //初始化未实施数据
       getNotActionData() {

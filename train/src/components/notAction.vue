@@ -18,48 +18,48 @@
       <div
         class="xl-item"
         v-for="(item,index) in infoList"
-        :key="item.id"
+        :key="item.subjectID"
       >
         <div class="content-header clearfix">
-          <span class="time">{{item.time}}</span>
+          <span class="time">{{item.classDate}}</span>
           <button
             class="normal-btn fr"
-            @click="doAction"
+            @click="doAction(index)"
           >训练实施</button>
         </div>
         <div class="content-info">
           <ul class="info-list">
             <li>
               <span class="name">科目名称：</span>
-              <span class="value">{{item.studyName}}</span>
-            </li>
-            <li>
-              <span class="name">课程单元：</span>
-              <span class="value">{{item.studyUnity}}</span>
-            </li>
-            <li>
-              <span class="name">授课学时：</span>
-              <span class="value">{{item.studyTime}}</span>
-            </li>
-            <li>
-              <span class="name">组训学时：</span>
-              <span class="value">{{item.zxTime}}</span>
-            </li>
-            <li>
-              <span class="name">授课人员：</span>
-              <span class="value">{{item.teachName}}</span>
+              <span class="value">{{item.subjectUnitName}}</span>
             </li>
             <li>
               <span class="name">授课时间：</span>
-              <span class="value">{{item.teachTime}}</span>
+              <span class="value">{{item.classDate}}</span>
+            </li>
+            <li>
+              <span class="name">授课学时：</span>
+              <span class="value">{{item.classSection}}</span>
+            </li>
+            <li>
+              <span class="name">着装要求：</span>
+              <span class="value">{{item.dressCode}}</span>
+            </li>
+            <li>
+              <span class="name">授课人员：</span>
+              <span class="value">{{item.chargeTeacherName}}</span>
+            </li>
+            <li>
+              <span class="name">训练器材名称：</span>
+              <span class="value">{{item.trainMaterialName}}</span>
             </li>
             <li class="w66">
               <span class="name">授课对象：</span>
-              <span class="value">{{item.learnPeoples}}</span>
+              <span class="value">{{item.joinAstronautNames}}</span>
             </li>
             <li>
               <span class="name">训练方式：</span>
-              <span class="value">{{item.teachStyle}}</span>
+              <span class="value">{{item.trainWay}}</span>
             </li>
           </ul>
           <div
@@ -96,9 +96,8 @@
     watch: {},
     //方法集合
     methods: {
-      doAction() {
-        // console.log(this.$router);
-        this.$router.push('/info');
+      doAction(index) {
+        this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList } });
       },
       //测试数据上传
       uploadData() {

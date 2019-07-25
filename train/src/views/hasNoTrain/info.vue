@@ -10,13 +10,13 @@
         <span class="arrived">实到人员</span>
         <div class="tags">
           <el-tag
-            :class="{'active':item.showTag}"
+            :class="{'active':item.isSignIn}"
             class="peopleTag"
             size="mini"
             v-for="(item,index) in tags"
-            :key="item.id"
+            :key="item.trainImplementAstronautID"
             @click="tagFn(index)"
-          >{{item.name}}</el-tag>
+          >{{item.trainImplementAstronautName}}<span v-if="item.post !== ''">({{item.post}})</span></el-tag>
         </div>
         <button
           class="normal-btn fr"
@@ -28,16 +28,16 @@
         <div
           class="item-info"
           v-for="(item,index) in trainList"
-          :key="item.id"
+          :key="item.trainContentID"
         >
           <div class="info-wrap">
-            <span class="text">{{item.content}}</span>
+            <span class="text">{{item.trainContentDesc}}</span>
             <button
               class="normal-btn"
               @click="setTime(index)"
               v-if="item.endTime == ''"
             >完成时间</button>
-            <span v-else>{{item.endTime}}</span>
+            <span v-else>{{item.trainClassHour}}</span>
             <div class="fr nicon">
               <i
                 class="el-icon-circle-plus"
@@ -48,7 +48,7 @@
 
           <div
             class="fault-list"
-            v-if="item.faultInfo.length > 0 "
+            v-if="item.faultInfo.length > 0"
           >
             <div class="fault-title"><i class="el-icon-s-flag"></i><span>异常说明</span></div>
             <div
@@ -97,12 +97,10 @@
     getLoc, setLoc
   } from '../../utils/common.js';
   export default {
-    //import引入的组件需要注入到对象中才能使用
-    components: {},
     data() {
       //这里存放数据
       return {
-        showTag: false,
+        isSignIn: false,
         isShowSet: false,
         trainList: [],
         popTitle: "设置岗位",
@@ -111,7 +109,11 @@
         listTitle3: '异常说明',
         listTitle4: '训练实施',
         title: "训练实施信息",
-        tags: [{ name: "张三", id: "001", showTag: false, num: "11" }, { name: "王四", id: "002", showTag: false }, { name: "王五", id: "003", showTag: false, num: "12" }, { name: "李三", id: "004", showTag: false, num: "13" }, { name: "李东", id: "005", showTag: false, num: "14" }, { name: "张杰", id: "006", showTag: false, num: "15" }]
+        tags: [
+          { trainImplementAstronautName: "张三", trainImplementAstronautID: "001", isSignIn: false, post: "01" },
+          { trainImplementAstronautName: "王四", trainImplementAstronautID: "002", isSignIn: false, post: "" },
+          { trainImplementAstronautName: "王五", trainImplementAstronautID: "003", isSignIn: false, post: "02" }
+        ]
       };
     },
     //监听属性 类似于data概念
@@ -121,7 +123,7 @@
     //方法集合
     methods: {
       tagFn(i) {
-        this.tags[i].showTag = !this.tags[i].showTag;
+        this.tags[i].isSignIn = !this.tags[i].isSignIn;
       },
       //设置时间
       setTime(index) {
@@ -151,7 +153,9 @@
         this.isShowSet = true;
       },
       //保存
-      saveFn() {
+      saveFn(v) {
+        console.log(v);
+        this.tags = v;
         this.isShowSet = false;
       },
       cancelFn() {
@@ -160,12 +164,14 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.trainList = getLoc('trainListData');
-      //   console.log(this.trainList, 'list');
-      if(this.$route.params.addData) {
-        this.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
-        setLoc('trainListData', this.trainList);
+      if(this.$route.params.trainList) {
+        console.log(this.$route.params.trainList, 'data');
+        this.trainList = this.$route.params.trainList;
       }
+      //   if(this.$route.params.addData) {
+      //     this.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
+      // setLoc('trainListData', this.trainList);
+      //   }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

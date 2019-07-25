@@ -7,17 +7,17 @@
         <div class="subContent clearfix">
           <ul>
             <li
-              v-for="(item,index) in tags"
-              :key="item.id"
+              v-for="(item,index) in newTags"
+              :key="item.trainImplementAstronautID"
             >
-              <span>{{item.name}}</span>
+              <span>{{item.trainImplementAstronautName}}</span>
               <el-radio-group
-                v-model="item['radio' + index]"
+                v-model="item.post"
                 @change="changeFn"
               >
-                <el-radio :label="item.id+'01'">01</el-radio>
-                <el-radio :label="item.id+'02'">02</el-radio>
-                <el-radio :label="item.id+'03'">03</el-radio>
+                <el-radio :label="'01'">01</el-radio>
+                <el-radio :label="'02'">02</el-radio>
+                <el-radio :label="'03'">03</el-radio>
               </el-radio-group>
             </li>
           </ul>
@@ -41,45 +41,25 @@
   export default {
     data() {
       return {
-        postArr: []
+        newTags: []
       };
     },
     props: ['tags', 'popTitle'],
     created() {
+      this.newTags = JSON.parse(JSON.stringify(this.tags));
+      //   this.newTags.forEach(item => {
+      //     item.post = parseInt(item.post);
+      //   })
     },
     methods: {
       onSubmit() {
-        this.$emit('save');
+        this.$emit('save', this.newTags);
       },
       onCancle() {
         this.$emit('cancle', false);
       },
       changeFn(v) {
-        // console.log(v);
-        let num = v.substr(0, 3);
-        let newArr = [];
-
-        if(this.postArr.length > 0) {
-          this.postArr.forEach(item => {
-            // console.log(num, item);
-          })
-
-          //       this.postArr.forEach(item => {
-          //         if(num indexof(item) > -1){
-          //         console.log(0);
-          //       }else {
-          //       console.log(1);
-          //     }
-          //   });
-
-          //   newArr.forEach((item, index) => {
-          //     console.log(item, index);
-          //   });
-        } else {
-          this.postArr.push(v);
-        }
-
-
+        console.log(v);
       }
     }
   };
