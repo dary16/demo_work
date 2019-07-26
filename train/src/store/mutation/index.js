@@ -10,23 +10,14 @@ export default {
         setLoc('allData', allData);
         state.allData = allData;
     },
-    _actionListData(state, actionListData) {
-        setLoc('actionListData', actionListData);
-        state.actionListData = actionListData;
-    },
-    _notActionListData(state, notActionListData) {
-        setLoc('notActionListData', notActionListData);
-        state.notActionListData = notActionListData;
-    },
-    _suggestionData(state, suggestionData) {
-        setLoc('suggestionData', suggestionData);
-        state.suggestionData = suggestionData;
-    },
     _weekPlanData(state, weekPlanData) {
         setLoc('weekPlanData', weekPlanData);
         state.weekPlanData = weekPlanData;
     },
     _nowIndex(state, nowIndex) {
         state.nowIndex = nowIndex;
+    },
+    _userIndex(state, userIndex) {
+        state.userIndex = userIndex;
     }
 }

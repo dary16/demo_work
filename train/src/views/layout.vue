@@ -28,6 +28,7 @@
   import {
     getLoc
   } from '../utils/common.js';
+  import { mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -58,7 +59,9 @@
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['userIndex'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
@@ -69,8 +72,9 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.infoList = getLoc('notActionListData');
-      this.infoList2 = getLoc('actionListData');
+      //初始化未实施数据
+      this.infoList = getLoc('allData').allData.user[this.userIndex].notActionList;
+      //   this.infoList2 = getLoc('actionListData');
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

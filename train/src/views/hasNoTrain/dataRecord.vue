@@ -125,7 +125,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex'])
+      ...mapState(['nowIndex', 'userIndex'])
     },
     //监控data中的数据变化
     watch: {},
@@ -150,12 +150,12 @@
       //选人
       choosePerson(i) {
         this.isShowPeople = true;
-        this.nowIndex = i;
       },
       //选人弹窗 确定
       savePeopleFn(val) {
         this.isShowPeople = false;
-        this.listData = getLoc('notActionListData')[this.nowIndex].trainData;
+        console.log(val);
+        this.listData = getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].trainData;
       },
       //选人弹窗 取消
       cancelPeopleFn(val) {
@@ -164,7 +164,7 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.listData = getLoc('notActionListData')[this.nowIndex].trainData;
+      this.listData = getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].trainData;
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

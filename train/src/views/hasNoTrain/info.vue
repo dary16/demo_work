@@ -94,7 +94,7 @@
   import {
     getLoc, setLoc
   } from '../../utils/common.js';
-  import { mapState } from 'vuex';
+  import { mapState, mapMutations } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -117,19 +117,22 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex'])
+      ...mapState(['nowIndex', 'userIndex', 'allData'])
     },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
+      ...mapMutations(['_allData']),
       tagFn(i) {
         this.tags[i].isSignIn = !this.tags[i].isSignIn;
       },
       //设置时间
       setTime(index) {
         let time = this.util.formatDate(new Date().getTime(), 3);
-        this.trainList[index].trainClassHour = time;
+        // this.allData.allData.user[this.userIndex].notActionList[this.nowIndex].trainList[index].trainClassHour = "sdkfldsl";
+        getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].trainList[index].trainClassHour = "sdkfldsl";
+        console.log(getLoc('allData'));
         // this._allData(resData);
       },
       //返回
@@ -166,7 +169,7 @@
       if(this.$route.params.trainList) {
         this.trainList = this.$route.params.trainList;
       } else {
-        this.trainList = getLoc('notActionListData')[this.nowIndex].trainList;
+        this.trainList = getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].trainList;
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）

@@ -3,11 +3,7 @@
     <div class="xl-header">
       <h2>未实施训练</h2>
       <div class="xl-right">
-        <span>2019.07.17 11:01</span>
-        <button
-          class="normal-btn"
-          @click="uploadData"
-        >数据上传</button>
+        <span>{{nowTime}}</span>
         <button
           class="normal-btn"
           @click="downloadData"
@@ -79,10 +75,12 @@
     getLoc
   } from '../utils/common.js';
   import { mapMutations } from 'vuex';
+  import { setInterval } from 'timers';
   export default {
     data() {
       //这里存放数据
       return {
+        nowTime: '',
         a: {},
         b: {},
         c: {}
@@ -100,22 +98,23 @@
         this._nowIndex(index);
         this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList } });
       },
-      //测试数据上传
-      uploadData() {
-        this.a = { actionListData: getLoc('actionListData') };
-        this.b = { notActionListData: getLoc('notActionListData') };
-        this.c = Object.assign({}, this.a, this.b);
-      },
       //数据下载
       downloadData() {
         console.log('数据下载...');
       },
       showInfo(index) {
         this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } })
+      },
+      getTime() {
+        setInterval(() => {
+          this.nowTime = this.util.formatDate(new Date().getTime(), 3);
+        }, 1000);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() { },
+    created() {
+      this.getTime();
+    },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
     updated() { }, //生命周期 - 更新之后

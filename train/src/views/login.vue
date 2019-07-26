@@ -56,7 +56,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userInfo', 'allData']),
+      ...mapState(['userInfo', 'allData', 'userIndex']),
 
     },
     //监控data中的数据变化
@@ -64,8 +64,9 @@
     },
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData', '_actionListData', '_notActionListData', '_suggestionData', '_weekPlanData']),
+      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userIndex']),
       ...mapActions(['_getInfo']),
+      //登录确定
       loginBtn() {
         if(!this.login.userName) {
           this.message.warning("请输入账号！");
@@ -89,17 +90,18 @@
             return false;
           }
         }
-        // console.log(this.login.userName, this.login.password);
+        // 获取用户信息，与登录信息进行匹配
         const userArr = this.allData.allData.user;
-        let result = userArr.filter(item => {
+        let result = userArr.filter((item, index) => {
           if(item.userName == this.login.userName && item.password == this.login.password) {
             this._userInfo(item);
+            this._userIndex(index);
             return true;
           }
         });
         if(result) {
           this.message.success('登陆成功！');
-
+          //
           this.$router.push('/layout');
         } else {
           this.message.warning('登陆失败！');
@@ -107,14 +109,17 @@
         }
       },
       cancelBtn() { },
+      //获取初始化数据并保存到本地
       getInitData() {
         this._getInfo({
           method: 'get',
           api: 'getLogin',
           callback: res => {
+            console.log(res, 'res');
             let resData = { 'allData': res };
             this.initData = res;
             this._allData(resData);
+            console.log(this.allData, 'allData');
             this.initLocal();
           }
         })
@@ -131,25 +136,24 @@
         // if(getLoc('notActionListData')) {
         //   this._notActionListData(getLoc('notActionListData'));
         // } else {
-        this.getNotActionData();
+        // this.getNotActionData();
         // }
 
         //参训数据
-        if(getLoc('actionListData')) {
-          this._actionListData(getLoc('actionListData'));
-        } else {
-          this.getActionData();
-        }
+        // if(getLoc('actionListData')) {
+        //   this._actionListData(getLoc('actionListData'));
+        // } else {
+        //   this.getActionData();
+        // }
       },
       //初始化未实施数据
-      getNotActionData() {
-        console.log(this.initData.notActionList, 'fff');
-        this._notActionListData(this.initData.notActionList);
-      },
+      //   getNotActionData() {
+      //     this._notActionListData(this.initData.notActionList);
+      //   },
       //初始化已实施数据
-      getActionData() {
-        this._actionListData(this.initData.actionList);
-      },
+      //   getActionData() {
+      //     this._actionListData(this.initData.actionList);
+      //   },
       getWeekPlanData() {
         // console.log('init3', this.initData.weekPlan);
         this._weekPlanData(this.initData.weekPlan);
@@ -169,7 +173,6 @@
       //       this._allData(resData);
       //     }
       //     )
-
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
