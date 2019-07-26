@@ -26,7 +26,7 @@
 
 <script>
   import {
-    getLoc
+    getLoc, setLoc
   } from '../utils/common.js';
   import { mapState } from 'vuex';
   export default {

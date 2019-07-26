@@ -19,5 +19,8 @@ export default {
     },
     _userIndex(state, userIndex) {
         state.userIndex = userIndex;
+    },
+    _userId(state, userId) {
+        state.userId = userId;
     }
 }

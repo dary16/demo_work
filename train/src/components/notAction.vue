@@ -72,10 +72,9 @@
 
 <script>
   import {
-    getLoc
+    getLoc, setLoc
   } from '../utils/common.js';
-  import { mapMutations } from 'vuex';
-  import { setInterval } from 'timers';
+  import { mapMutations, mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -88,22 +87,27 @@
     },
     props: ['infoList'],
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['userId', 'allData'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
-      ...mapMutations(['_nowIndex']),
+      ...mapMutations(['_nowIndex', '_userId']),
       doAction(index) {
         this._nowIndex(index);
         this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList } });
       },
       //数据下载
       downloadData() {
-        console.log('数据下载...');
+        //以用户id存储用户信息
+        let idsData = getLoc('allData').allData.notActionList;
+        setLoc(this.userId, { "notActionData": getLoc('allData').allData.notActionList });
+        this.infoList = idsData;
       },
       showInfo(index) {
-        this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } })
+        this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } });
       },
       getTime() {
         setInterval(() => {

@@ -40,7 +40,7 @@
 
 <script>
   import {
-    getLoc
+    getLoc, setLoc
   } from '../utils/common.js';
   import { mapState, mapMutations, mapActions } from 'vuex';
   export default {
@@ -57,14 +57,13 @@
     //监听属性 类似于data概念
     computed: {
       ...mapState(['userInfo', 'allData', 'userIndex']),
-
     },
     //监控data中的数据变化
     watch: {
     },
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userIndex']),
+      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userIndex', '_userId']),
       ...mapActions(['_getInfo']),
       //登录确定
       loginBtn() {
@@ -96,12 +95,13 @@
           if(item.userName == this.login.userName && item.password == this.login.password) {
             this._userInfo(item);
             this._userIndex(index);
+            this._userId(item.userID);
+            // setLoc(item.userID, { "notActionData": {} });
             return true;
           }
         });
         if(result) {
           this.message.success('登陆成功！');
-          //
           this.$router.push('/layout');
         } else {
           this.message.warning('登陆失败！');
