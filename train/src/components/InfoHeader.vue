@@ -54,8 +54,8 @@
       top: 0.3rem;
     }
     h3 {
-      font-size: 0.4rem;
-      color: #006699;
+      font-size: 0.28rem;
+      color: #17233b;
     }
   }
 </style>

@@ -108,8 +108,8 @@
       text-align: center;
       position: absolute;
       bottom: 2rem;
-      left: 0.2rem;
-      right: 0.2rem;
+      left: 2.7rem;
+      right: 0rem;
       .exitBtn {
         height: 0.6rem;
         padding: 0.1rem 0.2rem;

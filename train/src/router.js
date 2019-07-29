@@ -17,27 +17,54 @@ export default new Router({
         {
             path: "/layout",
             name: "layout",
+            redirect: "/notAction",
             component: () =>
-                import ("./views/layout.vue")
+                import ("./views/layout.vue"),
+            children: [{
+                path: "/action",
+                name: "action",
+                component: () =>
+                    import ("./views/action.vue")
+            }, {
+                path: "/weekPlan",
+                name: "weekPlan",
+                component: () =>
+                    import ("./views/weekPlan.vue")
+            }, {
+                path: "/exit",
+                name: "exit",
+                component: () =>
+                    import ("./views/exit.vue")
+            }, {
+                path: "/notAction",
+                name: "notAction",
+                component: () =>
+                    import ("./views/notAction.vue")
+            }, {
+                path: "/info",
+                name: "info",
+                component: () =>
+                    import ("./views/hasNoTrain/info.vue")
+            }]
         },
-        {
-            path: '/info',
-            name: "info",
-            component: () =>
-                import ("./views/hasNoTrain/info.vue")
-        },
+        // {
+        //     path: '/info',
+        //     name: "info",
+        //     component: () =>
+        //         import ("./views/hasNoTrain/info.vue")
+        // },
         {
             path: '/trainInfo',
             name: "trainInfo",
             component: () =>
                 import ("./components/trainInfo.vue")
         },
-        {
-            path: '/suggestion',
-            name: "suggestion",
-            component: () =>
-                import ("./views/hasNoTrain/suggestion.vue")
-        },
+        // {
+        //     path: '/suggestion',
+        //     name: "suggestion",
+        //     component: () =>
+        //         import ("./views/hasNoTrain/suggestion.vue")
+        // },
         {
             path: '/errorRecord/:index',
             name: "errorRecord",

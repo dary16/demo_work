@@ -1,26 +1,24 @@
 <template>
   <div class='layout'>
-    <div class="main">
-      <div v-show="tabIndex==0">
-        <v-search-header></v-search-header>
-        <v-not-action v-bind:infoList="infoList"></v-not-action>
+    <v-tab @tabIndex="getTabIndex"></v-tab>
+    <div class="g-main">
+      <!-- <div v-show="tabIndex==1">
+        <v-search-header></v-search-header> -->
+      <!-- <v-not-action v-bind:infoList="infoList"></v-not-action>
       </div>
-      <div v-show="tabIndex == 1">
+      <div v-show="tabIndex == 2">
         <v-search-header></v-search-header>
         <v-action :infoList="infoList2"></v-action>
       </div>
-      <div v-show="tabIndex == 2">
+      <div v-show="tabIndex == 3">
         <v-week-plan></v-week-plan>
       </div>
-      <div v-show="tabIndex == 3">
+      <div v-show="tabIndex == 4">
         <v-exit></v-exit>
-      </div>
+      </div> -->
+      <router-view></router-view>
     </div>
 
-    <v-tab
-      :list="tabList"
-      @tabIndex="getTabIndex"
-    ></v-tab>
   </div>
 </template>
 
@@ -33,27 +31,7 @@
     data() {
       //这里存放数据
       return {
-        tabIndex: 0,
-        tabList: [
-          {
-            name: "未实施",
-            id: '001',
-            src: "../assets/logo.png"
-          },
-          {
-            name: "已实施",
-            id: '002',
-            src: "../assets/logo.png"
-          }, {
-            name: "周计划",
-            id: '003',
-            src: "../assets/logo.png"
-          }, {
-            name: "退出",
-            id: '004',
-            src: "../assets/logo.png"
-          }
-        ],
+        tabIndex: 1,
         infoList: [],
         infoList2: []
       };
@@ -68,12 +46,23 @@
     methods: {
       getTabIndex(value) {
         this.tabIndex = value;
+        console.log(this.tabIndex);
+        if(this.tabIndex == 1) {
+          console.log(this.infoList);
+          this.$router.push('/notAction');
+        } else if(this.tabIndex == 2) {
+          this.$router.push('/action');
+        } else if(this.tabIndex == 3) {
+          this.$router.push('/weekPlan');
+        } else if(this.tabIndex == 4) {
+          this.$router.push('/exit');
+        }
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       //初始化未实施数据
-      this.infoList = getLoc('allData').allData.user[this.userIndex].notActionList;
+      //   this.infoList = getLoc('allData').allData.user[this.userIndex].notActionList;
       //   this.infoList2 = getLoc('actionListData');
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
@@ -86,10 +75,11 @@
 </script>
 <style lang="less" scoped>
   .layout {
-    margin: 0.2rem;
-    width: 98%;
     height: 100%;
-    border: 1px solid #949494;
+    display: flex;
+    .g-main {
+      flex: 1 1 auto;
+    }
   }
   .clearfix:after {
     content: "";

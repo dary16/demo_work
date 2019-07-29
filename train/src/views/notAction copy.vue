@@ -1,146 +1,130 @@
 <template>
   <div class="xl-list clearfix">
     <div class="xl-header">
-      <h2>已实施训练</h2>
-      <span v-if="showNum">(未上传：{{notNum}})</span>
+      <h2>未实施训练</h2>
       <div class="xl-right">
-        <div v-if="notUpload">
-          <span>2019.07.17 11:01</span>
-          <button
-            class="normal-btn"
-            @click="uploadData"
-          >数据上传</button>
-        </div>
-        <div
-          class="fr"
-          v-else
-        >
-          <button class="normal-btn"></button>
-        </div>
+        <span>{{nowTime}}</span>
+        <button
+          class="normal-btn"
+          @click="downloadData"
+        >数据下载</button>
       </div>
     </div>
     <div class="xl-content">
       <div
         class="xl-item"
-        v-for="item in infoList"
-        :key="item.id"
+        v-for="(item,index) in infoList"
+        :key="item.subjectID"
       >
         <div class="content-header clearfix">
-          <span class="time">{{item.time}}</span>
-          <span class="fr">
-            <span v-show="item.upload">已上传</span>
-            <span v-show="chooseLoad">
-              <el-checkbox></el-checkbox>
-            </span>
-          </span>
+          <span class="time">{{item.classDate}}</span>
+          <button
+            class="normal-btn fr"
+            @click="doAction(index)"
+          >训练实施</button>
         </div>
         <div class="content-info">
           <ul class="info-list">
             <li>
               <span class="name">科目名称：</span>
-              <span class="value">{{item.studyName}}</span>
-            </li>
-            <li>
-              <span class="name">课程单元：</span>
-              <span class="value">{{item.studyUnity}}</span>
-            </li>
-            <li>
-              <span class="name">授课学时：</span>
-              <span class="value">{{item.studyTime}}</span>
-            </li>
-            <li>
-              <span class="name">组训学时：</span>
-              <span class="value">{{item.zxTime}}</span>
-            </li>
-            <li>
-              <span class="name">授课人员：</span>
-              <span class="value">{{item.teachName}}</span>
+              <span class="value">{{item.subjectUnitName}}</span>
             </li>
             <li>
               <span class="name">授课时间：</span>
-              <span class="value">{{item.teachTime}}</span>
+              <span class="value">{{item.classDate}}</span>
+            </li>
+            <li>
+              <span class="name">授课学时：</span>
+              <span class="value">{{item.classSection}}</span>
+            </li>
+            <li>
+              <span class="name">着装要求：</span>
+              <span class="value">{{item.dressCode}}</span>
+            </li>
+            <li>
+              <span class="name">授课人员：</span>
+              <span class="value">{{item.chargeTeacherName}}</span>
+            </li>
+            <li>
+              <span class="name">训练器材名称：</span>
+              <span class="value">{{item.trainMaterialName}}</span>
             </li>
             <li class="w66">
               <span class="name">授课对象：</span>
-              <span class="value">{{item.learnPeoples}}</span>
+              <span class="value">{{item.joinAstronautNames}}</span>
             </li>
             <li>
               <span class="name">训练方式：</span>
-              <span class="value">{{item.teachStyle}}</span>
+              <span class="value">{{item.trainWay}}</span>
             </li>
           </ul>
-          <div class="more">
+          <div
+            class="more"
+            @click="showInfo(index)"
+          >
             <i class="el-icon-d-arrow-right"></i>
           </div>
         </div>
-      </div>
-      <div
-        class="uploadBottom"
-        v-if="!notUpload"
-      >
-        <button
-          class="normal-btn"
-          @click="uploadDataFn"
-        >数据上传</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
+  import {
+    getLoc, setLoc
+  } from '../utils/common.js';
+  import { mapMutations, mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
       return {
-        showNum: true,
-        numLength: 0,
-        chooseLoad: false,
-        notUpload: true
+        nowTime: '',
+        a: {},
+        b: {},
+        c: {}
       };
     },
-    props: ['infoList'],
     //监听属性 类似于data概念
     computed: {
-      notNum() {
-        this.numLength = 0;
-        if(this.infoList.length > 0) {
-          this.infoList.forEach(item => {
-            if(!item.upload) {
-              this.numLength++;
-            }
-          })
-          return this.numLength;
-        }
-
-      }
+      ...mapState(['userId', 'allData'])
     },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
-      //数据上传
-      uploadData() {
-        this.infoList = this.infoList.filter(item => {
-          return item.upload != true
-        });
-        this.chooseLoad = true;
-        this.notUpload = false;
-        // console.log(this.infoList);
+      ...mapMutations(['_nowIndex', '_userId']),
+      doAction(index) {
+        this._nowIndex(index);
+        this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList } });
       },
-      uploadDataFn() {
-        this.notUpload = true;
-        this.chooseLoad = false;
+      //数据下载
+      downloadData() {
+        //以用户id存储用户信息
+        let idsData = getLoc('allData').allData.notActionList;
+        setLoc(this.userId, { "notActionData": getLoc('allData').allData.notActionList });
+        this.infoList = idsData;
+      },
+      showInfo(index) {
+        this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } });
+      },
+      getTime() {
+        setInterval(() => {
+          this.nowTime = this.util.formatDate(new Date().getTime(), 3);
+        }, 1000);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      this.getTime();
+      if(this.$route.params.infoList) {
+        this.infoList = this.$route.params.infoList;
+      } else {
+        this.trainList = getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex];
+      }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
@@ -157,14 +141,10 @@
       h2 {
         font-size: 0.3rem;
         color: #006699;
+        width: 3rem;
         height: 0.5rem;
         line-height: 0.5rem;
         margin-left: 0.2rem;
-      }
-      span {
-        height: 0.5rem;
-        line-height: 0.5rem;
-        font-size: 0.24rem;
       }
       .xl-right {
         flex: 1;
@@ -191,7 +171,7 @@
       overflow-y: auto;
       .xl-item {
         .content-header {
-          width: 99.6%;
+          width: 99.5%;
           padding: 0.05rem 0.1rem;
           background: #f2f2f2;
           border-bottom: 1px solid #949494;
@@ -201,14 +181,6 @@
             font-size: 0.25rem;
             float: left;
             margin-left: 0.2rem;
-          }
-          .fr {
-            span {
-              height: 0.5rem;
-              line-height: 0.5rem;
-              font-size: 0.24rem;
-              padding-right: 0.2rem;
-            }
           }
           button {
             margin-right: 0.3rem;
@@ -232,7 +204,7 @@
               overflow: hidden;
               white-space: nowrap;
               .name {
-                width: 1.6rem;
+                width: 1.7rem;
                 display: inline-block;
               }
               .value {
@@ -252,13 +224,6 @@
             }
           }
         }
-      }
-      .uploadBottom {
-        text-align: center;
-        position: absolute;
-        bottom: 1rem;
-        left: 0;
-        right: 0;
       }
     }
   }
