@@ -1,6 +1,6 @@
 <template>
   <div class='item'>
-    <i class="el-icon-s-flag"></i>
+    <i class="circle"></i>
     <span>{{listTilte}}</span>
   </div>
 </template>
@@ -37,10 +37,17 @@
 </script>
 <style lang='less' scoped>
   .item {
-    font-size: 0.3rem;
-    background: #006699;
-    color: #fff;
-    padding: 0.15rem 0.4rem;
+    font-size: 0.2rem;
+    color: #17233b;
+    padding: 0.15rem 0.18rem;
+    border-bottom: 1px solid #e9ecf4;
+    .circle {
+      width: 0.14rem;
+      height: 0.14rem;
+      border-radius: 0.1rem;
+      border: 1px solid #4b7efe;
+      display: inline-block;
+    }
     span {
       font-size: 0.25rem;
       margin-left: 0.1rem;

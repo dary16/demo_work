@@ -63,7 +63,7 @@
     },
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userIndex', '_userId']),
+      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userIndex', '_userId', '_realName']),
       ...mapActions(['_getInfo']),
       //登录确定
       loginBtn() {
@@ -96,6 +96,7 @@
             this._userInfo(item);
             this._userIndex(index);
             this._userId(item.userID);
+            this._realName(item.realName);
             // setLoc(item.userID, { "notActionData": {} });
             return true;
           }

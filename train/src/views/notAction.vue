@@ -90,7 +90,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userId', 'allData'])
+      ...mapState(['userId', 'allData', 'userIndex', 'nowIndex'])
     },
     //监控data中的数据变化
     watch: {},
@@ -124,12 +124,14 @@
       if(this.$route.params.infoList) {
         this.infoList = this.$route.params.infoList;
       } else {
-        // this.infoList = getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex];
+        // this.infoList = getLoc(this.userId).notActionData;
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
-    updated() { }, //生命周期 - 更新之后
+    updated() {
+      console.log('update');
+    }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
 </script>

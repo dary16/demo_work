@@ -46,7 +46,6 @@
     methods: {
       getTabIndex(value) {
         this.tabIndex = value;
-        console.log(this.tabIndex);
         if(this.tabIndex == 1) {
           console.log(this.infoList);
           this.$router.push('/notAction');

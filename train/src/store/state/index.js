@@ -6,6 +6,7 @@
  * @nowIndex 点击未实施/已实施的索引值
  * @userIndex 当前登录用户在所有数据的索引值
  * @userId 当前登录用户ID
+ * @realName 当前登录用户真实姓名
  */
 import {
     getLoc
@@ -16,5 +17,6 @@ export default {
     weekPlanData: getLoc('weekPlanData') || [],
     nowIndex: -1,
     userIndex: 0,
-    userId: ''
+    userId: '',
+    realName: ''
 }

@@ -22,5 +22,8 @@ export default {
     },
     _userId(state, userId) {
         state.userId = userId;
+    },
+    _realName(state, realName) {
+        state.realName = realName;
     }
 }

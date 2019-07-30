@@ -5,11 +5,27 @@
       @click="back"
     ></i>
     <h3>{{titleData}}</h3>
+    <ul>
+      <li>
+        <div class="message">
+          <img src="../assets/header/message.png"/>
+          <i>
+            <img src="../assets/header/dot.png"/>
+          </i>
+        </div>
+      </li>
+      <li>
+        <span>{{realName}}</span>
+      </li>
+      <li>
+        <img src="../assets/header/exit.png" alt="退出">
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-
+  import { mapState } from 'vuex';
   export default {
     props: ['titleData'],
     //import引入的组件需要注入到对象中才能使用
@@ -21,7 +37,9 @@
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['realName'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
@@ -45,9 +63,10 @@
   .header {
     text-align: center;
     position: relative;
-    height: 1rem;
-    line-height: 1rem;
-    font-size: 0.6rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    font-size: 0.28rem;
+    border-bottom: 1px solid #e9ecf4;
     .el-icon-arrow-left {
       position: absolute;
       left: 0.3rem;
@@ -56,6 +75,41 @@
     h3 {
       font-size: 0.28rem;
       color: #17233b;
+    }
+    ul {
+      position: absolute;
+      right: 0.3rem;
+      top: 0rem;
+      li {
+        float: left;
+        .message {
+          width: 0.88rem;
+          position: relative;
+          img {
+            width: 0.23rem;
+          }
+          i {
+            position: absolute;
+            top: -0.08rem;
+            img {
+              width: 0.09rem;
+            }
+          }
+        }
+        &:nth-of-type(2) {
+          width: 2.5rem;
+          span {
+            font-size: 0.18rem;
+            font-weight: bold;
+          }
+        }
+        &:nth-of-type(3) {
+          padding-left: 0.18rem;
+          img {
+            width: 0.24rem;
+          }
+        }
+      }
     }
   }
 </style>
