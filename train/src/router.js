@@ -59,12 +59,12 @@ export default new Router({
             component: () =>
                 import ("./components/trainInfo.vue")
         },
-        // {
-        //     path: '/suggestion',
-        //     name: "suggestion",
-        //     component: () =>
-        //         import ("./views/hasNoTrain/suggestion.vue")
-        // },
+        {
+            path: '/suggestion',
+            name: "suggestion",
+            component: () =>
+                import ("./views/hasNoTrain/suggestion.vue")
+        },
         {
             path: '/errorRecord/:index',
             name: "errorRecord",

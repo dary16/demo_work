@@ -43,7 +43,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userIndex'])
+      ...mapState(['nowIndex', 'userIndex', 'userId'])
     },
     //监控data中的数据变化
     watch: {},
@@ -59,10 +59,11 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       if(this.$route.params.addData) {
-        this.listData = getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].commentData;
+        this.listData = getLoc(this.userId).notActionData[this.nowIndex].commentData;
         this.listData.push(this.$route.params.addData);
       } else {
-        this.listData = getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].commentData;
+        this.listData = getLoc(this.userId).notActionData[this.nowIndex].commentData;
+        // console.log(this.userId, getLoc(this.userId).notActionData[this.nowIndex].commentData);
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）

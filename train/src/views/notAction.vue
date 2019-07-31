@@ -90,7 +90,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userId', 'allData', 'userIndex', 'nowIndex'])
+      ...mapState(['userId', 'allData', 'userIndex', 'nowIndex', 'isLogin'])
     },
     //监控data中的数据变化
     watch: {},
@@ -124,7 +124,10 @@
       if(this.$route.params.infoList) {
         this.infoList = this.$route.params.infoList;
       } else {
-        // this.infoList = getLoc(this.userId).notActionData;
+        //判断是否联网，如果联网，则可下载新数据，没有联网，则用本地的数据
+        // if(this.isLogin) {
+        //   this.infoList = getLoc(this.userId).notActionData;
+        // }
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
@@ -172,7 +175,7 @@
     }
     .xl-content {
       position: absolute;
-      top: 0.7rem;
+      top: 1.4rem;
       bottom: 1rem;
       overflow-y: auto;
       .xl-item {

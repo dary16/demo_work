@@ -10,12 +10,6 @@
         <div class="item-info">
           <div class="item-info-title">
             <span class="arrived">实到人员</span>
-            <!-- <el-button
-              type="primary"
-              plain
-              icon="el-icon-setting"
-              @click="setPostFn"
-            >设置岗位</el-button> -->
             <button
               class="normal-btn-border fr"
               @click="setPostFn"
@@ -80,24 +74,25 @@
               v-for="item2 in item.faultInfo"
               :key="item2.id"
             >
-              <span class="text">{{item2.content}}</span>
-              <span class="time">{{item2.time}}</span>
-              <div class="fr">
-                <span>{{item2.name}}</span>
+              <div class="flex-wrap">
+                <span class="text">{{item2.abnormalExplain}}</span>
+                <span class="time">{{item2.abnormalDate}}</span>
+                <span class="obj">{{item2.abnormalObject}}</span>
               </div>
+              <div class="keyword">异常关键字</div>
             </div>
           </div>
         </div>
       </div>
       <div class="buttons">
-        <el-date-picker
+        <!-- <el-date-picker
           v-model="value1"
           type="datetimerange"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
           :default-time="['12:00:00']"
         >
-        </el-date-picker>
+        </el-date-picker> -->
         <button
           class="normal-btn-border-lg mr"
           @click="suggestion"
@@ -141,12 +136,12 @@
           { trainImplementAstronautName: "张三", trainImplementAstronautID: "001", isSignIn: false, post: "01" },
           { trainImplementAstronautName: "王四", trainImplementAstronautID: "002", isSignIn: false, post: "" },
           { trainImplementAstronautName: "王五", trainImplementAstronautID: "003", isSignIn: false, post: "02" }
-        ]
+        ],
       };
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userIndex', 'allData'])
+      ...mapState(['nowIndex', 'userIndex', 'allData', 'isLogin', 'userId'])
     },
     //监控data中的数据变化
     watch: {},
@@ -198,7 +193,18 @@
       if(this.$route.params.trainList) {
         this.trainList = this.$route.params.trainList;
       } else {
-        // this.trainList = getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].trainList;
+        if(this.isLogin) {
+          if(this.$route.params.addData) {
+            // console.log(this.userId, this.nowIndex, getLoc(this.userId).notActionData[this.nowIndex].trainList[this.$route.params].faultInfo);
+            let oldActionData = getLoc(this.userId).notActionData;
+            oldActionData[this.nowIndex].trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
+            console.log(JSON.parse(JSON.stringify(oldActionData)));
+            setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+            this.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainList;
+          } else {
+            this.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainList;
+          }
+        }
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
@@ -213,15 +219,15 @@
       padding: 0.1rem 0.2rem;
       position: fixed;
       bottom: 0;
-      right: 0;
+      right: 0.52rem;
       top: 0.7rem;
-      left: 2.7rem;
+      left: 3.5rem;
       overflow-y: auto;
       .list-wrap {
         border: 1px solid #e9ecf4;
         margin-bottom: 0.28rem;
         .item-info {
-          padding: 0.05rem 0.35rem 0.35rem 0.35rem;
+          padding: 0.05rem 0.35rem 0rem 0.35rem;
           //   border: 1px solid #006699;
           min-height: 1rem;
           .item-info-title {
@@ -248,8 +254,10 @@
             margin-top: 0.03rem;
           }
           .tags {
-            display: inline-block;
+            height: 0.46rem;
+            line-height: 0.46rem;
             margin-left: 0.16rem;
+            margin-bottom: 0.3rem;
             .peopleTag {
               margin-right: 0.05rem;
             }
@@ -267,7 +275,7 @@
           span.text {
             height: 0.5rem;
             line-height: 0.5rem;
-            width: 8rem;
+            width: 7rem;
           }
           .set-time {
             display: inline-block;
@@ -284,18 +292,36 @@
             line-height: 0.6rem;
             padding-left: 0.15rem;
             color: #e82b34;
-            span {
-            }
           }
           .fault-info {
             padding: 0.1rem 0.3rem;
-            span {
-              font-size: 0.24rem;
+            .flex-wrap {
+              display: flex;
+              span {
+                font-size: 0.24rem;
+                &.text {
+                  height: 0.5rem;
+                  line-height: 0.5rem;
+                  width: 8rem;
+                }
+                &.time {
+                  height: 0.5rem;
+                  line-height: 0.5rem;
+                  width: 3rem;
+                }
+                &.obj {
+                  height: 0.5rem;
+                  line-height: 0.5rem;
+                  flex: 1;
+                  text-align: right;
+                }
+              }
             }
-            span.text {
-              height: 0.5rem;
-              line-height: 0.5rem;
-              width: 8rem;
+            .keyword {
+              color: #808383;
+              font-size: 0.2rem;
+              height: 0.32rem;
+              line-height: 0.32rem;
             }
           }
         }

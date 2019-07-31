@@ -25,5 +25,8 @@ export default {
     },
     _realName(state, realName) {
         state.realName = realName;
+    },
+    _isLogin(state, isLogin) {
+        state.isLogin = isLogin;
     }
 }

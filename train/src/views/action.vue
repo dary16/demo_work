@@ -1,5 +1,6 @@
 <template>
   <div class="xl-list clearfix">
+    <v-info-header :titleData="title"></v-info-header>
     <div class="xl-header">
       <h2>已实施训练</h2>
       <span v-if="showNum">(未上传：{{notNum}})</span>
@@ -88,7 +89,10 @@
 </template>
 
 <script>
-
+  import {
+    getLoc, setLoc
+  } from '../utils/common.js';
+  import { mapMutations, mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -97,11 +101,13 @@
         numLength: 0,
         chooseLoad: false,
         notUpload: true,
-        infoList: []
+        infoList: [],
+        title: "已实施训练"
       };
     },
     //监听属性 类似于data概念
     computed: {
+      ...mapState(['userId', 'allData', 'userIndex', 'nowIndex']),
       notNum() {
         // this.numLength = 0;
         // if(this.infoList.length > 0) {
@@ -119,6 +125,7 @@
     watch: {},
     //方法集合
     methods: {
+      ...mapMutations(['_nowIndex', '_userId']),
       //数据上传
       uploadData() {
         this.infoList = this.infoList.filter(item => {

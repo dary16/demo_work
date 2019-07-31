@@ -9,24 +9,33 @@
         <div class="errorItem">
           <v-list-title :listTilte="listTitle1"></v-list-title>
           <label>时间：</label>
-          <!-- <input
+          <input
             type="text"
-            v-model="errorData.time"
-          > -->
-          <el-date-picker
-            v-model="errorData.time"
-            size="mini"
-            type="datetime"
-            placeholder="选择日期时间"
+            v-model="errorData.abnormalDate"
+            placeholder="点击选择日期"
+            readonly
+            @click="chooseTime"
           >
-          </el-date-picker>
+          <mt-datetime-picker
+            ref="picker"
+            type="datetime"
+            @confirm="handleConfirm"
+            v-model="errorData.time"
+            year-format="{value} 年"
+            month-format="{value} 月"
+            date-format="{value} 日"
+            hour-format="{value} 时"
+            minute-format="{value} 分"
+            :endDate="new Date()"
+          >
+          </mt-datetime-picker>
         </div>
         <div class="errorItem">
           <v-list-title :listTilte="listTitle2"></v-list-title>
           <label>异常说明：</label>
           <input
             type="text"
-            v-model="errorData.content"
+            v-model="errorData.abnormalExplain"
           >
         </div>
         <div class="errorItem">
@@ -34,7 +43,7 @@
           <label>异常产生对象：</label>
           <input
             type="text"
-            v-model="errorData.name"
+            v-model="errorData.abnormalObject"
           >
         </div>
         <div class="errorItem bb">
@@ -42,7 +51,7 @@
           <label>关键字：</label>
           <input
             type="text"
-            v-model="errorData.key"
+            v-model="errorData.keyword"
           >
         </div>
       </div>
@@ -53,6 +62,7 @@
         >保存</button>
       </div>
     </div>
+
   </div>
 
 </template>
@@ -69,11 +79,13 @@
         listTitle3: "异常产生对象",
         listTitle4: "关键字",
         errorData: {
-          time: '',
-          content: '',
-          name: '',
-          key: ''
-        }
+          abnormalDate: '',
+          abnormalExplain: '',
+          abnormalObject: '',
+          keyword: ''
+        },
+        year: '',
+        isClicked: false
       };
     },
     //监听属性 类似于data概念
@@ -88,6 +100,12 @@
       },
       saveFn() {
         this.$router.push({ name: 'info', params: { addData: this.errorData, index: this.$route.params.index } });
+      },
+      chooseTime() {
+        this.$refs.picker.open();
+      },
+      handleConfirm(value) {
+        this.errorData.abnormalDate = this.util.formatDateMin(value);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

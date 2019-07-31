@@ -7,6 +7,7 @@
  * @userIndex 当前登录用户在所有数据的索引值
  * @userId 当前登录用户ID
  * @realName 当前登录用户真实姓名
+ * @isLogin 判断是否已登录
  */
 import {
     getLoc
@@ -18,5 +19,6 @@ export default {
     nowIndex: -1,
     userIndex: 0,
     userId: '',
-    realName: ''
+    realName: '',
+    isLogin: false
 }

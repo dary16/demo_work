@@ -87,15 +87,12 @@
                     "isRetrain": "是否复训",
                     "sortNO": "排序号",
                     "faultInfo": [{
-                        "id": "001",
-                        "content": "异常内容异常内容一",
-                        "time": "2019-05-12 08:30",
-                        "name": "张三"
-                    }, {
-                        "id": "002",
-                        "content": "异常内容异常内容二",
-                        "time": "2019-05-12 08:30",
-                        "name": "李四"
+                        "trainImplementConteAbnormalID": "001",
+                        "trainImplementContentID": "ksdl",
+                        "abnormalExplain": "异常说明内容异常内容一",
+                        "abnormalDate": "2019-05-12 08:30",
+                        "abnormalObject": "异常产生对象",
+                        "keyword": "关键字"
                     }]
                 }, {
                     "trainContentID": "frsdfdg01",

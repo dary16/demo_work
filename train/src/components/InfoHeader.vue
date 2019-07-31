@@ -67,10 +67,12 @@
     line-height: 0.7rem;
     font-size: 0.28rem;
     border-bottom: 1px solid #e9ecf4;
+    background: #fff;
+    margin-left: 0.05rem;
     .el-icon-arrow-left {
       position: absolute;
       left: 0.3rem;
-      top: 0.3rem;
+      top: 0.2rem;
     }
     h3 {
       font-size: 0.28rem;
