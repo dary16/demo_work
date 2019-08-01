@@ -46,14 +46,13 @@
     },
     props: ['tags', 'popTitle'],
     created() {
+      console.log(this.tags, 'post');
       this.newTags = JSON.parse(JSON.stringify(this.tags));
-      //   this.newTags.forEach(item => {
-      //     item.post = parseInt(item.post);
-      //   })
     },
     methods: {
       onSubmit() {
         this.$emit('save', this.newTags);
+        this.newTags = [];
       },
       onCancle() {
         this.$emit('cancle', false);
@@ -61,7 +60,10 @@
       changeFn(v) {
         console.log(v);
       }
-    }
+    },
+    activated() {
+      this.newTags = JSON.parse(JSON.stringify(this.tags));
+    }, //如果页面有keep-alive缓存功能，这个函数会触发
   };
 </script>
 <style lang="less" scoped>

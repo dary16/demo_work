@@ -1,24 +1,99 @@
 <template>
-  <div>
-    <keep-alive>
-      <v-imple-info
-        :infoData="infoData"
-        v-on:setPostFn="setPostFn"
-        v-on:errorRecord="errorRecord"
-        v-on:recordFn="recordFn"
-        v-on:suggestion="suggestion"
-        v-on:back="back"
-      ></v-imple-info>
-    </keep-alive>
-    <keep-alive>
-      <v-set-post
-        v-if="isShowSet"
-        :tags="infoData.tags"
-        v-on:save="saveFn"
-        v-on:cancle="cancelFn"
-        :popTitle="popTitle"
-      ></v-set-post>
-    </keep-alive>
+  <div class='info'>
+    <v-info-header
+      v-on:backFn="back"
+      :titleData="infoChildData.title"
+    ></v-info-header>
+    <div class="content">
+      <div class="list-wrap">
+        <v-list-title :listTilte="infoChildData.listTitle1"></v-list-title>
+        <div class="item-info">
+          <div class="item-info-title">
+            <span class="arrived">实到人员</span>
+            <button
+              class="normal-btn-border fr"
+              @click="setPostFn"
+            ><i class="el-icon-setting"></i>
+              设置岗位</button>
+          </div>
+          <div class="tags">
+            <el-tag
+              :class="{'active':item.isSignIn}"
+              class="peopleTag"
+              size="mini"
+              v-for="(item,index) in infoChildData.tags"
+              :key="item.trainImplementAstronautID"
+              @click="tagFn(index)"
+            >{{item.trainImplementAstronautName}}<span v-if="item.post !== ''">({{item.post}})</span></el-tag>
+          </div>
+        </div>
+      </div>
+      <div class="list-wrap">
+        <v-list-title :listTilte="infoChildData.listTitle2"></v-list-title>
+        <div
+          class="item-info"
+          v-for="(item,index) in infoChildData.trainList"
+          :key="item.trainContentID"
+        >
+          <div class="info-wrap">
+            <span class="text">{{item.trainContentDesc}}</span>
+            <div class="set-time">
+              <button
+                v-if="item.trainContentStartDate == ''"
+                class="btn-set-time start-time"
+              >开始时间</button>
+              <span v-else>{{item.trainContentStartDate}}</span>
+              <button
+                v-if="item.trainContentEndDate == ''"
+                class="btn-set-time"
+              >结束时间</button>
+              <span v-else>{{item.trainContentEndDate}}</span>
+            </div>
+            <!-- <button
+              class="btn-set-time"
+              @click="setTime(index)"
+              v-if="item.trainClassHour == ''"
+            >完成时间</button>
+            <span v-else>{{item.trainClassHour}}</span> -->
+
+            <div class="fr nicon">
+              <button
+                class="btn-normal"
+                @click="errorRecord(index)"
+              >添加异常</button>
+            </div>
+          </div>
+          <div
+            class="fault-list"
+            v-if="item.faultInfo.length > 0"
+          >
+            <div class="fault-title"><span>异常说明</span></div>
+            <div
+              class="fault-info"
+              v-for="item2 in item.faultInfo"
+              :key="item2.id"
+            >
+              <div class="flex-wrap">
+                <span class="text">{{item2.abnormalExplain}}</span>
+                <span class="time">{{item2.abnormalDate}}</span>
+                <span class="obj">{{item2.abnormalObject}}</span>
+              </div>
+              <div class="keyword">异常关键字</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button
+          class="normal-btn-border-lg mr"
+          @click="suggestion"
+        >意见建议</button>
+        <button
+          class="normal-btn-lg mr"
+          @click="recordFn"
+        >数据项记录</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,35 +101,23 @@
   import {
     getLoc, setLoc
   } from '../../utils/common.js';
-  import { mapState, mapMutations } from 'vuex';
+  import { mapMutations } from 'vuex';
   export default {
     data() {
       //这里存放数据
       return {
-        infoData: {
-          isSignIn: false,
-          value1: '',
-          trainList: [],
-          listTitle1: "普通训练任务",
-          listTitle2: '训练详细内容',
-          listTitle3: '异常说明',
-          title: "训练实施信息",
-          index: '',
-          tags: [],
-        },
-        isShowSet: false,
-        popTitle: "设置岗位",
+        infoChildData: {}
       };
     },
+    props: ['infoData'],
     //监听属性 类似于data概念
-    computed: {
-      ...mapState(['nowIndex', 'userIndex', 'allData', 'isLogin', 'userId'])
-    },
+    computed: {},
     //监控data中的数据变化
     watch: {
       infoData: {
         handler(newValue, oldValue) {
-          console.log(newValue, 'jjj');
+          console.log(newValue, 'kkk');
+          this.infoChildData = JSON.parse(JSON.stringify(newValue));
         },
         deep: true
       }
@@ -63,11 +126,11 @@
     methods: {
       ...mapMutations(['_allData']),
       tagFn(i) {
-        this.tags[i].isSignIn = !this.tags[i].isSignIn;
+        this.infoChildData.tags[i].isSignIn = !this.infoChildData.tags[i].isSignIn;
       },
       //设置时间
       setTime(index) {
-        let time = this.util.formatDate(new Date().getTime(), 3);
+        // let time = this.util.formatDate(new Date().getTime(), 3);
         // this.allData.allData.user[this.userIndex].notActionList[this.nowIndex].trainList[index].trainClassHour = "sdkfldsl";
         // getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].trainList[index].trainClassHour = "sdkfldsl";
         // console.log(getLoc('allData'));
@@ -75,71 +138,39 @@
       },
       //返回
       back() {
-        this.$router.go(-1);
+        this.$emit('back');
       },
       //意见建议
       suggestion() {
-        this.$router.push('/suggestion');
+        this.$emit('suggestion');
       },
       //数据项记录
       recordFn() {
-        this.$router.push('/record');
+        this.$emit('recordFn');
       },
       //异常记录
       errorRecord(index) {
-        this.$router.push('/errorRecord/' + index);
+        this.$emit('errorRecord', index);
       },
       //设置岗位
       setPostFn() {
-        this.isShowSet = true;
-        console.log(this.infoData, 'data');
-      },
-      //保存
-      saveFn(v) {
-        let oldActionData = getLoc(this.userId).notActionData;
-        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples.length;
-        //数组的替换
-        oldActionData[this.nowIndex].trainImpleData.peoples.splice(0, arrLen, ...v);
-        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
-
-        console.log(getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples, oldActionData[this.nowIndex].trainImpleData.peoples[0], 'v');
-        this.infoData.tags = v;
-        this.isShowSet = false;
-      },
-      cancelFn() {
-        this.isShowSet = false;
+        this.$emit('setPostFn');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      if(this.$route.params.trainList) {
-        this.infoData.trainList = this.$route.params.trainList;
-        this.infoData.index = this.$route.params.index;
-      } else {
-        if(this.isLogin) {
-          //判断是否有新添加数据
-          if(this.$route.params.addData) {
-            //获取本地未实施数据
-            let oldActionData = getLoc(this.userId).notActionData;
-            //将新添加数据push到oldActionData内
-            oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
-            //将数据存储到本地
-            setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
-            this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
-          } else {
-            this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
-          }
-          this.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
-          this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
-          this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
-          //   console.log(this.tags, 'gg');
-        }
-      }
+      this.infoChildData = JSON.parse(JSON.stringify(this.infoData));
+      console.log(this.infoData, this.infoChildData, 888);
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
-    updated() { }, //生命周期 - 更新之后
-    activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
+    updated() {
+      console.log('update');
+      //   this.infoChildData = JSON.parse(JSON.stringify(this.infoData));
+    }, //生命周期 - 更新之后
+    activated() {
+      console.log('actived');
+    }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
 </script>
 <style lang="less" scoped>

@@ -1,0 +1,146 @@
+<template>
+  <div class="content">
+    <div
+      class="item"
+      v-for="(item,index) in listChildData"
+      :key="item.trainImplementDataItemID"
+    >
+      <dl>
+        <dd>
+          <label>数据项名称：</label>
+          <span>{{item.dataItemName}}</span>
+        </dd>
+        <dd class="icn">
+          <label>参训航天员：</label>
+          <span>{{item.joinAstronautNames}}</span>
+          <span class="iconSize">
+            <i
+              class="el-icon-tickets"
+              @click="choosePerson(index)"
+            ></i>
+          </span>
+        </dd>
+        <dd>
+          <label>数据项说明：</label>
+          <span>{{item.dataItemDesc}}</span>
+        </dd>
+        <dd>
+          <label>数据项值：</label>
+          <span>{{item.dataItemValue}}</span>
+        </dd>
+        <dd>
+          <label>数据项标准值：</label>
+          <span>{{item.dataItemMeasureValue}}</span>
+        </dd>
+        <dd>
+          <label>数据单位：</label>
+          <span>{{item.dataItemUnit}}</span>
+        </dd>
+      </dl>
+    </div>
+    <div class="addRecord">
+      <button
+        class="normal-btn"
+        @click="addRole"
+      >新增一行</button>
+    </div>
+  </div>
+</template>
+
+<script>
+  import { mapState } from 'vuex';
+  export default {
+    data() {
+      //这里存放数据
+      return {
+        title: "数据项记录",
+        isShowBox: false,
+        isShowPeople: false,
+        popTitle: "选择参训航天员",
+        listChildData: [],
+      };
+    },
+    props: ['listData'],
+    //监听属性 类似于data概念
+    computed: {
+      ...mapState(['nowIndex', 'userIndex', 'userId'])
+    },
+    //监控data中的数据变化
+    watch: {},
+    //方法集合
+    methods: {
+      addRole() {
+        this.$emit('addRole');
+      },
+      //保存
+      saveFn(val) {
+        this.isShowBox = false;
+        // console.log(val);
+        this.listData.push(val);
+      },
+      //取消
+      cancleFn(val) {
+        this.isShowBox = val;
+      },
+      //选人
+      choosePerson(i) {
+        this.$emit('choosePerson', i);
+      },
+      //选人弹窗 确定
+      savePeopleFn(val) {
+        this.isShowPeople = false;
+        console.log(val);
+        this.listData = getLoc(this.userId).notActionData[this.nowIndex].trainData;
+      },
+      //选人弹窗 取消
+      cancelPeopleFn(val) {
+        this.isShowPeople = false;
+      }
+    },
+    //生命周期 - 创建完成（可以访问当前this实例）
+    created() {
+      this.listChildData = JSON.parse(JSON.stringify(this.listData));
+    },
+    //生命周期 - 挂载完成（可以访问DOM元素）
+    mounted() {
+
+    },
+    updated() { }, //生命周期 - 更新之后
+    activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
+  }
+</script>
+<style lang="less" scoped>
+  .content {
+    margin: 0.1rem 0.2rem;
+    overflow-y: auto;
+    .item {
+      padding: 0.2rem 0.4rem;
+      border: 1px solid #006699;
+      margin-bottom: 0.2rem;
+      dl {
+        font-size: 0.26rem;
+        dd {
+          height: 0.4rem;
+          line-height: 0.4rem;
+          label {
+            width: 3rem;
+            display: inline-block;
+          }
+          .iconSize {
+            font-size: 0.4rem;
+            position: absolute;
+            right: 0.2rem;
+          }
+          span {
+          }
+        }
+        dd.icn {
+          position: relative;
+        }
+      }
+    }
+    .addRecord {
+      text-align: center;
+    }
+  }
+</style>

@@ -8,9 +8,9 @@
     <ul>
       <li>
         <div class="message">
-          <img src="../assets/header/message.png"/>
+          <img src="../../assets/header/message.png"/>
           <i>
-            <img src="../assets/header/dot.png"/>
+            <img src="../../assets/header/dot.png"/>
           </i>
         </div>
       </li>
@@ -18,7 +18,7 @@
         <span>{{realName}}</span>
       </li>
       <li>
-        <img src="../assets/header/exit.png" alt="退出">
+        <img src="../../assets/header/exit.png" alt="退出">
       </li>
     </ul>
   </div>
@@ -26,6 +26,9 @@
 
 <script>
   import { mapState } from 'vuex';
+  import {
+    getLoc
+  } from '../../utils/common.js';
   export default {
     props: ['titleData'],
     //import引入的组件需要注入到对象中才能使用
@@ -33,12 +36,12 @@
     data() {
       //这里存放数据
       return {
-
+        realName: ''
       };
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['realName'])
+      //   ...mapState(['realName'])
     },
     //监控data中的数据变化
     watch: {},
@@ -50,6 +53,7 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
+      this.realName = getLoc('userInfo').realName;
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

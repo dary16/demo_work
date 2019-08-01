@@ -40,11 +40,11 @@
                 "oldArrangeSubjectResultID": "jdsjfkd",
                 "commentData": [{
                     "trainImplementCommentID": "jfkds32",
-                    "commentTitle": "意见建议标题",
+                    "commentTitle": "意见建议标题111",
                     "commentDate": "2018.03.21 15:26",
                     "commentExplain": "意见建议说明",
                     "commentPersonID": "jdf823",
-                    "commentPersonName": "建议人名称",
+                    "commentPersonName": "建议人名称111",
                     "keyword": "关键字"
                 }, {
                     "trainImplementCommentID": "jfkdds32",
@@ -52,12 +52,13 @@
                     "commentDate": "2018.03.11 15:26",
                     "commentExplain": "意见建议说明",
                     "commentPersonID": "jdf823d",
-                    "commentPersonName": "建议人名称",
+                    "commentPersonName": "建议人名称112",
                     "keyword": "关键字"
                 }],
                 "trainData": [{
                     "trainImplentDataItemID": "jdsfkd",
                     "joinAstronautIDs": "jdfjkdfkjj",
+                    "joinAstronautNames": "张三，李四，王五，赵柳，李杰，赵松俭",
                     "trainImplentID": "ksdsl",
                     "dataItemName": "数据项名称",
                     "dataItemDesc": "数据项说明",
@@ -67,6 +68,7 @@
                 }, {
                     "trainImplentDataItemID": "jdssfkd",
                     "joinAstronautIDs": "jdfjkdfk7",
+                    "joinAstronautNames": "张三，李四，王五，赵柳",
                     "trainImplentID": "ksddsl",
                     "dataItemName": "数据项名称",
                     "dataItemDesc": "数据项说明2",
@@ -74,40 +76,61 @@
                     "dataItemMeasureValue": "数据项标准值",
                     "dataItemUnit": "数据单位2"
                 }],
-                "trainList": [{
-                    "trainContentID": "frdg01",
-                    "trainPrepareID": "dskfld",
-                    "trainContentName": "训练内容名称",
-                    "trainClassHour": "",
-                    "trainContentStartDate": "2019-07-28 14:21",
-                    "trainContentEndDate": "2019-07-28 14:21",
-                    "trainContentDesc": "训练详细内容，详细内容一...",
-                    "keyword": "关键字",
-                    "timeWay": "计时方式",
-                    "isRetrain": "是否复训",
-                    "sortNO": "排序号",
-                    "faultInfo": [{
-                        "trainImplementConteAbnormalID": "001",
-                        "trainImplementContentID": "ksdl",
-                        "abnormalExplain": "异常说明内容异常内容一",
-                        "abnormalDate": "2019-05-12 08:30",
-                        "abnormalObject": "异常产生对象",
-                        "keyword": "关键字"
+                "trainImpleData": {
+                    "peoples": [{
+                            "trainImplementAstronautName": "张三",
+                            "trainImplementAstronautID": "001",
+                            "isSignIn": false,
+                            "post": "01"
+                        },
+                        {
+                            "trainImplementAstronautName": "王四",
+                            "trainImplementAstronautID": "002",
+                            "isSignIn": false,
+                            "post": ""
+                        },
+                        {
+                            "trainImplementAstronautName": "王五",
+                            "trainImplementAstronautID": "003",
+                            "isSignIn": false,
+                            "post": "02"
+                        }
+                    ],
+                    "trainList": [{
+                        "trainContentID": "frdg01",
+                        "trainPrepareID": "dskfld",
+                        "trainContentName": "训练内容名称",
+                        "trainClassHour": "",
+                        "trainContentStartDate": "2019-07-28 14:21",
+                        "trainContentEndDate": "2019-07-28 14:21",
+                        "trainContentDesc": "训练详细内容，详细内容一...",
+                        "keyword": "关键字",
+                        "timeWay": "计时方式",
+                        "isRetrain": "是否复训",
+                        "sortNO": "排序号",
+                        "faultInfo": [{
+                            "trainImplementConteAbnormalID": "001",
+                            "trainImplementContentID": "ksdl",
+                            "abnormalExplain": "异常说明内容异常内容一",
+                            "abnormalDate": "2019-05-12 08:30",
+                            "abnormalObject": "异常产生对象",
+                            "keyword": "关键字"
+                        }]
+                    }, {
+                        "trainContentID": "frsdfdg01",
+                        "trainPrepareID": "dsrfkfld",
+                        "trainContentName": "训练内容名称",
+                        "trainClassHour": "训练时长1",
+                        "trainContentStartDate": "2019-07-28 14:21",
+                        "trainContentEndDate": "2019-07-28 14:21",
+                        "trainContentDesc": "训练详细内容，详细内容二...",
+                        "keyword": "关键字",
+                        "timeWay": "计时方式",
+                        "isRetrain": "是否复训",
+                        "sortNO": "排序号",
+                        "faultInfo": []
                     }]
-                }, {
-                    "trainContentID": "frsdfdg01",
-                    "trainPrepareID": "dsrfkfld",
-                    "trainContentName": "训练内容名称",
-                    "trainClassHour": "训练时长1",
-                    "trainContentStartDate": "2019-07-28 14:21",
-                    "trainContentEndDate": "2019-07-28 14:21",
-                    "trainContentDesc": "训练详细内容，详细内容二...",
-                    "keyword": "关键字",
-                    "timeWay": "计时方式",
-                    "isRetrain": "是否复训",
-                    "sortNO": "排序号",
-                    "faultInfo": []
-                }]
+                }
             },
             {
                 "subjectID": "kmd001",
@@ -132,6 +155,23 @@
                 "trainMaterialID": "sds343r04",
                 "trainMaterialName": "训练器材名称",
                 "oldArrangeSubjectResultID": "jdrtsjfkd",
+                "commentData": [{
+                    "trainImplementCommentID": "jfkds32",
+                    "commentTitle": "意见建议标题222",
+                    "commentDate": "2018.03.21 15:26",
+                    "commentExplain": "意见建议说明",
+                    "commentPersonID": "jdf823",
+                    "commentPersonName": "建议人名称222",
+                    "keyword": "关键字"
+                }, {
+                    "trainImplementCommentID": "jfkdds32",
+                    "commentTitle": "意见建议标题",
+                    "commentDate": "2018.03.11 15:26",
+                    "commentExplain": "意见建议说明",
+                    "commentPersonID": "jdf823d",
+                    "commentPersonName": "建议人名称223",
+                    "keyword": "关键字"
+                }],
                 "trainList": []
             }
         ],

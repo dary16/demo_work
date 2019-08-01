@@ -48,7 +48,7 @@
         this.tabIndex = value;
         if(this.tabIndex == 1) {
           console.log(this.infoList);
-          this.$router.push('/notAction');
+          this.$router.push('/notTrain');
         } else if(this.tabIndex == 2) {
           this.$router.push('/action');
         } else if(this.tabIndex == 3) {

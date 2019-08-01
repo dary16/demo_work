@@ -4,52 +4,11 @@
       v-on:backFn="back"
       :titleData="title"
     ></v-info-header>
-    <div class="content">
-      <div
-        class="item"
-        v-for="(item,index) in listData"
-        :key="item.trainImplementDataItemID"
-      >
-        <dl>
-          <dd>
-            <label>数据项名称：</label>
-            <span>{{item.dataItemName}}</span>
-          </dd>
-          <dd class="icn">
-            <label>参训航天员ID：</label>
-            <span>{{item.joinAstronautIDs}}</span>
-            <span class="iconSize">
-              <i
-                class="el-icon-tickets"
-                @click="choosePerson(index)"
-              ></i>
-            </span>
-          </dd>
-          <dd>
-            <label>数据项说明：</label>
-            <span>{{item.dataItemDesc}}</span>
-          </dd>
-          <dd>
-            <label>数据项值：</label>
-            <span>{{item.dataItemValue}}</span>
-          </dd>
-          <dd>
-            <label>数据项标准值：</label>
-            <span>{{item.dataItemMeasureValue}}</span>
-          </dd>
-          <dd>
-            <label>数据单位：</label>
-            <span>{{item.dataItemUnit}}</span>
-          </dd>
-        </dl>
-      </div>
-      <div class="addRecord">
-        <button
-          class="normal-btn"
-          @click="addRole"
-        >新增一行</button>
-      </div>
-    </div>
+    <v-data-record
+      :listData="listData"
+      v-on:addRole="addRole"
+      v-on:choosePerson="choosePerson"
+    ></v-data-record>
     <v-pop-box
       v-if="isShowBox"
       :popData="popData"
@@ -164,13 +123,11 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      console.log(this.userId, this.nowIndex);
       this.listData = getLoc(this.userId).notActionData[this.nowIndex].trainData;
+      //   console.log(this.listData, 'data');
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
@@ -179,11 +136,6 @@
   .record {
     .content {
       margin: 0.1rem 0.2rem;
-      position: absolute;
-      top: 1rem;
-      right: 0;
-      left: 0;
-      bottom: 0;
       overflow-y: auto;
       .item {
         padding: 0.2rem 0.4rem;
