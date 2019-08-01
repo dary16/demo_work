@@ -36,7 +36,7 @@
     data() {
       //这里存放数据
       return {
-        realName: ''
+        realName: ''//用户真实名称
       };
     },
     //监听属性 类似于data概念

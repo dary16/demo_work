@@ -54,10 +54,9 @@
       //这里存放数据
       return {
         title: "数据项记录",
-        isShowBox: false,
-        isShowPeople: false,
         popTitle: "选择参训航天员",
-        listChildData: [],
+        listChildData: [],//从父组件传过来的页面初始化值
+        chooseIndex: '-1'//选择航天员时的index
       };
     },
     props: ['listData'],
@@ -66,35 +65,24 @@
       ...mapState(['nowIndex', 'userIndex', 'userId'])
     },
     //监控data中的数据变化
-    watch: {},
+    watch: {
+      listData: {
+        handler(newValue, oldValue) {
+          //选人后将数据更新
+          this.listChildData[this.chooseIndex].joinAstronautNames = JSON.parse(JSON.stringify(newValue[this.chooseIndex].joinAstronautNames)).join('，');
+        },
+        deep: true
+      }
+    },
     //方法集合
     methods: {
       addRole() {
         this.$emit('addRole');
       },
-      //保存
-      saveFn(val) {
-        this.isShowBox = false;
-        // console.log(val);
-        this.listData.push(val);
-      },
-      //取消
-      cancleFn(val) {
-        this.isShowBox = val;
-      },
       //选人
       choosePerson(i) {
         this.$emit('choosePerson', i);
-      },
-      //选人弹窗 确定
-      savePeopleFn(val) {
-        this.isShowPeople = false;
-        console.log(val);
-        this.listData = getLoc(this.userId).notActionData[this.nowIndex].trainData;
-      },
-      //选人弹窗 取消
-      cancelPeopleFn(val) {
-        this.isShowPeople = false;
+        this.chooseIndex = i;
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -105,8 +93,12 @@
     mounted() {
 
     },
-    updated() { }, //生命周期 - 更新之后
-    activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
+    updated() {
+      console.log('update');
+    }, //生命周期 - 更新之后
+    activated() {
+      console.log('actived');
+    }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
 </script>
 <style lang="less" scoped>

@@ -41,12 +41,11 @@
   export default {
     data() {
       return {
-        newTags: []
+        newTags: []//存储从父组件传过来的值
       };
     },
     props: ['tags', 'popTitle'],
     created() {
-      console.log(this.tags, 'post');
       this.newTags = JSON.parse(JSON.stringify(this.tags));
     },
     methods: {

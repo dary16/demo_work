@@ -69,17 +69,7 @@
   export default {
     data() {
       return {
-        popReq: {},
-        loading: false,
-        optionsShow: [],
-        treeData: [],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        },
-        selectedOptions: [],
-        userRank: '',
-        tagIndex: -1
+        popReq: {},//弹窗的数据
       };
     },
     props: ['popData', 'formData'],

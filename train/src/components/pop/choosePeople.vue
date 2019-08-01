@@ -16,10 +16,10 @@
             @change="handleCheckPeoplesChange"
           >
             <el-checkbox
-              v-for="city in peoples"
-              :label="city"
-              :key="city"
-            >{{city}}</el-checkbox>
+              v-for="item in peoples"
+              :label="item"
+              :key="item"
+            >{{item}}</el-checkbox>
           </el-checkbox-group>
         </div>
         <div class="popBtn">
@@ -41,11 +41,10 @@
   export default {
     data() {
       return {
-        selectedOptions: [],
-        checkAll: false,
-        checkPeoples: [],
-        peoples: peopleOptions,
-        isIndeterminate: true
+        checkAll: false,//控制全选
+        checkPeoples: [],//所选人
+        peoples: peopleOptions,//后期需要动态计算
+        isIndeterminate: true//设置 indeterminate 状态，只负责样式控制
       };
     },
     props: ['popTitle'],

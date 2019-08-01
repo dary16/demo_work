@@ -4,11 +4,13 @@
       v-on:backFn="back"
       :titleData="title"
     ></v-info-header>
-    <v-data-record
-      :listData="listData"
-      v-on:addRole="addRole"
-      v-on:choosePerson="choosePerson"
-    ></v-data-record>
+    <keep-alive>
+      <v-data-record
+        :listData="listData"
+        v-on:addRole="addRole"
+        v-on:choosePerson="choosePerson"
+      ></v-data-record>
+    </keep-alive>
     <v-pop-box
       v-if="isShowBox"
       :popData="popData"
@@ -38,6 +40,7 @@
         isShowPeople: false,
         popTitle: "选择参训航天员",
         listData: [],
+        changeIndex: '-1',
         popData: {
           'titleTotal': '新增',
           'options': [{
@@ -87,7 +90,14 @@
       ...mapState(['nowIndex', 'userIndex', 'userId'])
     },
     //监控data中的数据变化
-    watch: {},
+    watch: {
+      listData: {
+        handler(newValue, oldValue) {
+          console.log(newValue, 'kkk');
+        },
+        deep: true
+      }
+    },
     //方法集合
     methods: {
       back() {
@@ -109,12 +119,14 @@
       //选人
       choosePerson(i) {
         this.isShowPeople = true;
+        this.changeIndex = i;
       },
       //选人弹窗 确定
       savePeopleFn(val) {
         this.isShowPeople = false;
         console.log(val);
         this.listData = getLoc(this.userId).notActionData[this.nowIndex].trainData;
+        this.listData[this.changeIndex].joinAstronautNames = val;
       },
       //选人弹窗 取消
       cancelPeopleFn(val) {

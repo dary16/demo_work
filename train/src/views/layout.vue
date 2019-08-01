@@ -32,8 +32,8 @@
       //这里存放数据
       return {
         tabIndex: 1,
-        infoList: [],
-        infoList2: []
+        infoList: [],//未实施数据
+        infoList2: []//已实施数据
       };
     },
     //监听属性 类似于data概念
@@ -47,7 +47,6 @@
       getTabIndex(value) {
         this.tabIndex = value;
         if(this.tabIndex == 1) {
-          console.log(this.infoList);
           this.$router.push('/notTrain');
         } else if(this.tabIndex == 2) {
           this.$router.push('/action');

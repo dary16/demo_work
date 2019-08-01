@@ -51,7 +51,7 @@
           userName: "",
           password: ""
         },
-        initData: {}
+        initData: {}//初始化数据
       };
     },
     //监听属性 类似于data概念

@@ -102,7 +102,6 @@
         oldActionData[this.nowIndex].trainImpleData.peoples.splice(0, arrLen, ...v);
         setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
 
-        console.log(getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples, oldActionData[this.nowIndex].trainImpleData.peoples[0], 'v');
         this.infoData.tags = v;
         this.isShowSet = false;
       },

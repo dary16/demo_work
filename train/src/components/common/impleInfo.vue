@@ -106,7 +106,7 @@
     data() {
       //这里存放数据
       return {
-        infoChildData: {}
+        infoChildData: {}//存储父组件传来的infoData
       };
     },
     props: ['infoData'],
@@ -116,7 +116,6 @@
     watch: {
       infoData: {
         handler(newValue, oldValue) {
-          console.log(newValue, 'kkk');
           this.infoChildData = JSON.parse(JSON.stringify(newValue));
         },
         deep: true
@@ -160,7 +159,6 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       this.infoChildData = JSON.parse(JSON.stringify(this.infoData));
-      console.log(this.infoData, this.infoChildData, 888);
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
