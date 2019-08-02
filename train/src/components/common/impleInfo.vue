@@ -101,7 +101,7 @@
   import {
     getLoc, setLoc
   } from '../../utils/common.js';
-  import { mapMutations } from 'vuex';
+  import { mapMutations, mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -111,7 +111,9 @@
     },
     props: ['infoData'],
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['userId', 'nowIndex'])
+    },
     //监控data中的数据变化
     watch: {
       infoData: {
@@ -125,7 +127,16 @@
     methods: {
       ...mapMutations(['_allData']),
       tagFn(i) {
+        //改变签到状态
         this.infoChildData.tags[i].isSignIn = !this.infoChildData.tags[i].isSignIn;
+
+        let oldActionData = getLoc(this.userId).notActionData;
+        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples.length;
+        //数组的替换
+        oldActionData[this.nowIndex].trainImpleData.peoples.splice(0, arrLen, ...this.infoChildData.tags);
+        //更新本地数据存储
+        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+
       },
       //设置时间
       setTime(index) {
@@ -164,7 +175,6 @@
     mounted() { },
     updated() {
       console.log('update');
-      //   this.infoChildData = JSON.parse(JSON.stringify(this.infoData));
     }, //生命周期 - 更新之后
     activated() {
       console.log('actived');

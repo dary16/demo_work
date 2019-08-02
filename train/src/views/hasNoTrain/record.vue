@@ -29,7 +29,7 @@
 <script>
   import { mapState } from 'vuex';
   import {
-    getLoc
+    getLoc, setLoc
   } from '../../utils/common.js';
   export default {
     data() {
@@ -50,9 +50,9 @@
             'val': 'dataItemName'
           }, {
             'status': 1,
-            'title': '参训航天员ID',
-            'placeholder': '请输入参训航天员ID',
-            'val': 'joinAstronautIDs'
+            'title': '参训航天员名称',
+            'placeholder': '请输入参训航天员',
+            'val': 'joinAstronautNames'
           }, {
             'status': 1,
             'title': '数据项说明',
@@ -93,7 +93,12 @@
     watch: {
       listData: {
         handler(newValue, oldValue) {
-          console.log(newValue, 'kkk');
+          let oldActionData = getLoc(this.userId).notActionData;
+          let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainData.length;
+          //数组的替换
+          oldActionData[this.nowIndex].trainData.splice(0, arrLen, ...newValue);
+          //更新本地数据存储
+          setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
         },
         deep: true
       }
@@ -109,7 +114,7 @@
       //保存
       saveFn(val) {
         this.isShowBox = false;
-        // console.log(val);
+        console.log(val);
         this.listData.push(val);
       },
       //取消
@@ -124,9 +129,8 @@
       //选人弹窗 确定
       savePeopleFn(val) {
         this.isShowPeople = false;
-        console.log(val);
         this.listData = getLoc(this.userId).notActionData[this.nowIndex].trainData;
-        this.listData[this.changeIndex].joinAstronautNames = val;
+        this.listData[this.changeIndex].joinAstronautNames = val.toString();
       },
       //选人弹窗 取消
       cancelPeopleFn(val) {
@@ -149,6 +153,11 @@
     .content {
       margin: 0.1rem 0.2rem;
       overflow-y: auto;
+      position: fixed;
+      bottom: 0;
+      right: 0.52rem;
+      top: 0.7rem;
+      left: 3.5rem;
       .item {
         padding: 0.2rem 0.4rem;
         border: 1px solid #006699;

@@ -54,7 +54,7 @@
     watch: {
       infoData: {
         handler(newValue, oldValue) {
-          console.log(newValue, 'jjj');
+
         },
         deep: true
       }

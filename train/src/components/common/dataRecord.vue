@@ -56,7 +56,8 @@
         title: "数据项记录",
         popTitle: "选择参训航天员",
         listChildData: [],//从父组件传过来的页面初始化值
-        chooseIndex: '-1'//选择航天员时的index
+        chooseIndex: '-1',//选择航天员时的index
+        flag: 0//判断是选人还是新添加
       };
     },
     props: ['listData'],
@@ -69,7 +70,15 @@
       listData: {
         handler(newValue, oldValue) {
           //选人后将数据更新
-          this.listChildData[this.chooseIndex].joinAstronautNames = JSON.parse(JSON.stringify(newValue[this.chooseIndex].joinAstronautNames)).join('，');
+          if(this.flag == 1) {
+            this.listChildData[this.chooseIndex].joinAstronautNames = JSON.parse(JSON.stringify(newValue[this.chooseIndex].joinAstronautNames));
+            console.log('选人');
+          } else {
+            console.log(this.flag);
+            this.listChildData.splice(0, this.listChildData.length, ...newValue);
+            // this.listChildData.push(newValue);
+          }
+
         },
         deep: true
       }
@@ -78,9 +87,11 @@
     methods: {
       addRole() {
         this.$emit('addRole');
+        this.flag = 2;
       },
       //选人
       choosePerson(i) {
+        this.flag = 1;
         this.$emit('choosePerson', i);
         this.chooseIndex = i;
       }
@@ -94,7 +105,8 @@
 
     },
     updated() {
-      console.log('update');
+      console.log('update', this.listChildData, this.listData);
+
     }, //生命周期 - 更新之后
     activated() {
       console.log('actived');

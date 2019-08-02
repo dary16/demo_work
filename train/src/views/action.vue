@@ -109,6 +109,7 @@
     computed: {
       ...mapState(['userId', 'allData', 'userIndex', 'nowIndex']),
       notNum() {
+        return this.infoList.filter(v => !item.upload).length;
         // this.numLength = 0;
         // if(this.infoList.length > 0) {
         //   this.infoList.forEach(item => {

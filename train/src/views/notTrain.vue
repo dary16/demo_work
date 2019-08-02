@@ -73,7 +73,7 @@
       } else {
         //判断是否联网，如果联网，则可下载新数据，没有联网，则用本地的数据
         if(this.isLogin) {
-          this.infoList = getLoc(this.userId).notActionData;
+          //   this.infoList = getLoc(this.userId).notActionData;
         }
       }
     },

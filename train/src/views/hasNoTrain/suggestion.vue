@@ -30,7 +30,7 @@
 
 <script>
   import {
-    getLoc
+    getLoc, setLoc
   } from '../../utils/common.js';
   import { mapState } from 'vuex';
   export default {
@@ -58,9 +58,13 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
+      let oldActionData = getLoc(this.userId).notActionData;
       if(this.$route.params.addData) {
         this.listData = getLoc(this.userId).notActionData[this.nowIndex].commentData;
         this.listData.push(this.$route.params.addData);
+        oldActionData[this.nowIndex].commentData.push(this.$route.params.addData);
+        //更新本地缓存
+        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
       } else {
         this.listData = getLoc(this.userId).notActionData[this.nowIndex].commentData;
         // console.log(this.userId, getLoc(this.userId).notActionData[this.nowIndex].commentData);
