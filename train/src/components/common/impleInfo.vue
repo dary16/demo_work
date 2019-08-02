@@ -136,7 +136,7 @@
         oldActionData[this.nowIndex].trainImpleData.peoples.splice(0, arrLen, ...this.infoChildData.tags);
         //更新本地数据存储
         setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
-
+        this.$emit('updateFn');
       },
       //设置时间
       setTime(index) {
@@ -174,10 +174,10 @@
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
     updated() {
-      console.log('update');
+      //   console.log('update');
     }, //生命周期 - 更新之后
     activated() {
-      console.log('actived');
+      //   console.log('actived');
     }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
 </script>
@@ -228,9 +228,13 @@
             margin-bottom: 0.3rem;
             .peopleTag {
               margin-right: 0.05rem;
+              background: none;
+              border: 1px solid #eaedf4;
+              color: #4c4f56;
             }
             .peopleTag.active {
-              background: #006699;
+              //   background: #006699;
+              border-color: #2fcc9b;
             }
           }
         }

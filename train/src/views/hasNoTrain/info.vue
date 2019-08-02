@@ -8,6 +8,7 @@
         v-on:recordFn="recordFn"
         v-on:suggestion="suggestion"
         v-on:back="back"
+        v-on:updateFn="updateFn"
       ></v-imple-info>
     </keep-alive>
     <keep-alive>
@@ -51,14 +52,7 @@
       ...mapState(['nowIndex', 'userIndex', 'allData', 'isLogin', 'userId'])
     },
     //监控data中的数据变化
-    watch: {
-      infoData: {
-        handler(newValue, oldValue) {
-
-        },
-        deep: true
-      }
-    },
+    watch: {},
     //方法集合
     methods: {
       ...mapMutations(['_allData']),
@@ -92,7 +86,6 @@
       //设置岗位
       setPostFn() {
         this.isShowSet = true;
-        console.log(this.infoData, 'data');
       },
       //保存
       saveFn(v) {
@@ -100,13 +93,17 @@
         let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples.length;
         //数组的替换
         oldActionData[this.nowIndex].trainImpleData.peoples.splice(0, arrLen, ...v);
-        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        // setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
 
         this.infoData.tags = v;
         this.isShowSet = false;
       },
       cancelFn() {
         this.isShowSet = false;
+      },
+      //更新数据
+      updateFn() {
+        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -137,8 +134,12 @@
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
-    updated() { }, //生命周期 - 更新之后
-    activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
+    updated() {
+      //   console.log('info update');
+    }, //生命周期 - 更新之后
+    activated() {
+      //   console.log('info active');
+    }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
 </script>
 <style lang="less" scoped>

@@ -48,10 +48,10 @@
     created() {
       this.newTags = JSON.parse(JSON.stringify(this.tags));
     },
+    watch: {},
     methods: {
       onSubmit() {
         this.$emit('save', this.newTags);
-        this.newTags = [];
       },
       onCancle() {
         this.$emit('cancle', false);

@@ -79,6 +79,12 @@
 <style lang="less" scoped>
   .content {
     margin: 0.1rem 0.2rem;
+    overflow-y: auto;
+    position: fixed;
+    bottom: 0;
+    right: 0.52rem;
+    top: 0.7rem;
+    left: 3.5rem;
     .s-title {
       margin-right: 0.2rem;
       margin-top: 0.1rem;
