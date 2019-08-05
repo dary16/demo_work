@@ -17,7 +17,7 @@
       <li>
         <span>{{realName}}</span>
       </li>
-      <li>
+      <li @click="logout">
         <img src="../../assets/header/exit.png" alt="退出">
       </li>
     </ul>
@@ -49,6 +49,17 @@
     methods: {
       back() {
         this.$emit("backFn");
+      },
+      logout() {
+        this.oMsgBox('是否确认退出?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$router.push('./login');
+        }).catch(() => {
+          return false;
+        });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

@@ -90,11 +90,10 @@
       //保存
       saveFn(v) {
         let oldActionData = getLoc(this.userId).notActionData;
-        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples.length;
+        let arrLen = oldActionData[this.nowIndex].trainImpleData.peoples.length;
         //数组的替换
         oldActionData[this.nowIndex].trainImpleData.peoples.splice(0, arrLen, ...v);
-        // setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
-
+        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
         this.infoData.tags = v;
         this.isShowSet = false;
       },
@@ -111,6 +110,7 @@
       if(this.$route.params.trainList) {
         this.infoData.trainList = this.$route.params.trainList;
         this.infoData.index = this.$route.params.index;
+        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
       } else {
         if(this.isLogin) {
           //判断是否有新添加数据
@@ -121,15 +121,14 @@
             oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
             //将数据存储到本地
             setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
-            this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
+            this.infoData.trainList = oldActionData[this.nowIndex].trainImpleData.trainList;
           } else {
             this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
           }
-          this.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
-          this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
-          this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
-          //   console.log(this.tags, 'gg');
         }
+        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
+        this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
+        console.log(this.infoData.tags, this.infoData.trainList, 'hh');
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）

@@ -1,5 +1,6 @@
 <template>
   <div class='week-plan'>
+    <v-info-header :titleData="title"></v-info-header>
     <div class="content">
       <header>
         <el-select
@@ -20,7 +21,7 @@
         :data="timeData"
         highlight-current-row
         border
-        height="270"
+        height="350"
         @current-change="handleCurrentChange"
         style="width: 100%"
       >
@@ -127,6 +128,7 @@
     data() {
       //这里存放数据
       return {
+        title: '周计划',
         weekDay: '',
         options: [{
           value: '1',

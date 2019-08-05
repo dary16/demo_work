@@ -2,20 +2,6 @@
   <div class='layout'>
     <v-tab @tabIndex="getTabIndex"></v-tab>
     <div class="g-main">
-      <!-- <div v-show="tabIndex==1">
-        <v-search-header></v-search-header> -->
-      <!-- <v-not-action v-bind:infoList="infoList"></v-not-action>
-      </div>
-      <div v-show="tabIndex == 2">
-        <v-search-header></v-search-header>
-        <v-action :infoList="infoList2"></v-action>
-      </div>
-      <div v-show="tabIndex == 3">
-        <v-week-plan></v-week-plan>
-      </div>
-      <div v-show="tabIndex == 4">
-        <v-exit></v-exit>
-      </div> -->
       <router-view></router-view>
     </div>
 
@@ -38,7 +24,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userIndex'])
+      ...mapState(['userIndex', 'userId'])
     },
     //监控data中的数据变化
     watch: {},
@@ -49,7 +35,7 @@
         if(this.tabIndex == 1) {
           this.$router.push('/notTrain');
         } else if(this.tabIndex == 2) {
-          this.$router.push('/action');
+          this.$router.push('/train');
         } else if(this.tabIndex == 3) {
           this.$router.push('/weekPlan');
         } else if(this.tabIndex == 4) {
@@ -58,11 +44,7 @@
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() {
-      //初始化未实施数据
-      //   this.infoList = getLoc('allData').allData.user[this.userIndex].notActionList;
-      //   this.infoList2 = getLoc('actionListData');
-    },
+    created() { },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {
 

@@ -6,7 +6,7 @@
       <span v-if="showNum">(未上传：{{notNum}})</span>
       <div class="xl-right">
         <div v-if="notUpload">
-          <span>2019.07.17 11:01</span>
+          <span>{{nowTime}}</span>
           <button
             class="normal-btn"
             @click="uploadData"
@@ -16,65 +16,15 @@
           class="fr"
           v-else
         >
-          <button class="normal-btn"></button>
+          <button class="normal-btn">全选</button>
         </div>
       </div>
     </div>
     <div class="xl-content">
-      <div
-        class="xl-item"
-        v-for="item in infoList"
-        :key="item.id"
-      >
-        <div class="content-header clearfix">
-          <span class="time">{{item.time}}</span>
-          <span class="fr">
-            <span v-show="item.upload">已上传</span>
-            <span v-show="chooseLoad">
-              <el-checkbox></el-checkbox>
-            </span>
-          </span>
-        </div>
-        <div class="content-info">
-          <ul class="info-list">
-            <li>
-              <span class="name">科目名称：</span>
-              <span class="value">{{item.studyName}}</span>
-            </li>
-            <li>
-              <span class="name">课程单元：</span>
-              <span class="value">{{item.studyUnity}}</span>
-            </li>
-            <li>
-              <span class="name">授课学时：</span>
-              <span class="value">{{item.studyTime}}</span>
-            </li>
-            <li>
-              <span class="name">组训学时：</span>
-              <span class="value">{{item.zxTime}}</span>
-            </li>
-            <li>
-              <span class="name">授课人员：</span>
-              <span class="value">{{item.teachName}}</span>
-            </li>
-            <li>
-              <span class="name">授课时间：</span>
-              <span class="value">{{item.teachTime}}</span>
-            </li>
-            <li class="w66">
-              <span class="name">授课对象：</span>
-              <span class="value">{{item.learnPeoples}}</span>
-            </li>
-            <li>
-              <span class="name">训练方式：</span>
-              <span class="value">{{item.teachStyle}}</span>
-            </li>
-          </ul>
-          <div class="more">
-            <i class="el-icon-d-arrow-right"></i>
-          </div>
-        </div>
-      </div>
+      <v-list-item
+        :infoList="infoList"
+        :chooseLoad="chooseLoad"
+      ></v-list-item>
       <div
         class="uploadBottom"
         v-if="!notUpload"
@@ -82,7 +32,7 @@
         <button
           class="normal-btn"
           @click="uploadDataFn"
-        >数据上传</button>
+        >上传数据</button>
       </div>
     </div>
   </div>
@@ -102,24 +52,15 @@
         chooseLoad: false,
         notUpload: true,
         infoList: [],
-        title: "已实施训练"
+        title: "已实施训练",
+        nowTime: ''
       };
     },
     //监听属性 类似于data概念
     computed: {
       ...mapState(['userId', 'allData', 'userIndex', 'nowIndex']),
       notNum() {
-        return this.infoList.filter(v => !item.upload).length;
-        // this.numLength = 0;
-        // if(this.infoList.length > 0) {
-        //   this.infoList.forEach(item => {
-        //     if(!item.upload) {
-        //       this.numLength++;
-        //     }
-        //   })
-        //   return this.numLength;
-        // }
-
+        return this.infoList.filter(item => !item.upload).length;
       }
     },
     //监控data中的数据变化
@@ -136,19 +77,25 @@
         this.notUpload = false;
         // console.log(this.infoList);
       },
+      //上传选中的数据
       uploadDataFn() {
         this.notUpload = true;
         this.chooseLoad = false;
+      },
+      getTime() {
+        setInterval(() => {
+          this.nowTime = this.util.formatDate(new Date().getTime(), 3);
+        }, 1000);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      //过滤未实施的数据
+      //   this.infoList = getLoc(this.userId).notActionData.filter(item => item.trainOrNot);
+      //   this.getTime();
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
@@ -192,11 +139,6 @@
       }
     }
     .xl-content {
-      width: 98%;
-      position: absolute;
-      top: 2.1rem;
-      bottom: 1rem;
-      overflow-y: auto;
       .xl-item {
         .content-header {
           width: 99.6%;
@@ -210,14 +152,7 @@
             float: left;
             margin-left: 0.2rem;
           }
-          .fr {
-            span {
-              height: 0.5rem;
-              line-height: 0.5rem;
-              font-size: 0.24rem;
-              padding-right: 0.2rem;
-            }
-          }
+
           button {
             margin-right: 0.3rem;
           }

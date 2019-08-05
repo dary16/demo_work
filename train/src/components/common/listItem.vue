@@ -10,7 +10,14 @@
         <button
           class="normal-btn fr"
           @click="doAction(index)"
+          v-if="!item.trainOrNot"
         >训练实施</button>
+        <span class="fr">
+          <span v-if="item.upload && item.trainOrNot">已上传</span>
+          <span v-if="chooseLoad">
+            <el-checkbox></el-checkbox>
+          </span>
+        </span>
       </div>
       <div class="content-info">
         <ul class="info-list">
@@ -66,7 +73,7 @@
 
       };
     },
-    props: ['infoList'],
+    props: ['infoList', 'chooseLoad'],
     //监听属性 类似于data概念
     computed: {},
     //监控data中的数据变化
@@ -96,7 +103,7 @@
   .xl-content {
     position: absolute;
     top: 1.4rem;
-    bottom: 1rem;
+    bottom: 0rem;
     overflow-y: auto;
     .xl-item {
       .content-header {
@@ -110,6 +117,14 @@
           font-size: 0.25rem;
           float: left;
           margin-left: 0.2rem;
+        }
+        .fr {
+          span {
+            height: 0.5rem;
+            line-height: 0.5rem;
+            font-size: 0.24rem;
+            padding-right: 0.2rem;
+          }
         }
         button {
           margin-right: 0.3rem;

@@ -1,69 +1,71 @@
 <template>
-  <div class="popCover">
-    <div class="mask"></div>
-    <div class="popContent">
-      <h3 class="popTitle"></h3>
-      <div class="content">
-        <div class="subContent clearfix">
-          <ul
-            v-for="(item,index) in popData.options"
-            :key="index"
-          >
-            <li
-              v-if="item.status == 1"
-              class="popBox"
+  <transition name="pop">
+    <div class="popCover">
+      <div class="mask"></div>
+      <div class="popContent">
+        <h3 class="popTitle"></h3>
+        <div class="content">
+          <div class="subContent clearfix">
+            <ul
+              v-for="(item,index) in popData.options"
+              :key="index"
             >
-              <span>{{item.title}}：</span>
-              <el-input
-                v-model.trim="popReq[item.val]"
-                size="mini"
-                v-bind:placeholder="item.placeholder"
-                :disabled="item.disabled"
-                :suffix-icon="item.star"
-              >
-                <i
-                  v-if="item.visible"
-                  class="el-icon-star-off el-input__icon"
-                  slot="suffix"
-                ></i>
-                <i
-                  v-if="item.editable"
-                  class="el-icon-edit el-input__icon"
-                  slot="suffix"
-                ></i>
-              </el-input>
-            </li>
-            <li v-if="item.status == 2">
-              <span>{{item.title}}：</span>
-              <el-select
+              <li
+                v-if="item.status == 1"
                 class="popBox"
-                v-model="popReq[item.val]"
-                v-bind:placeholder="item.placeholder"
-                size="mini"
               >
-                <el-option
-                  v-for="itemSel in item.list"
-                  :key="itemSel.value"
-                  :label="itemSel.label"
-                  :value="itemSel.value"
-                ></el-option>
-              </el-select>
-            </li>
-          </ul>
-        </div>
-        <div class="popBtn">
-          <a
-            href="javascript:;"
-            v-on:click="onSubmit"
-          >确定</a>
-          <a
-            href="javascript:;"
-            v-on:click="onCancle"
-          >取消</a>
+                <span>{{item.title}}：</span>
+                <el-input
+                  v-model.trim="popReq[item.val]"
+                  size="mini"
+                  v-bind:placeholder="item.placeholder"
+                  :disabled="item.disabled"
+                  :suffix-icon="item.star"
+                >
+                  <i
+                    v-if="item.visible"
+                    class="el-icon-star-off el-input__icon"
+                    slot="suffix"
+                  ></i>
+                  <i
+                    v-if="item.editable"
+                    class="el-icon-edit el-input__icon"
+                    slot="suffix"
+                  ></i>
+                </el-input>
+              </li>
+              <li v-if="item.status == 2">
+                <span>{{item.title}}：</span>
+                <el-select
+                  class="popBox"
+                  v-model="popReq[item.val]"
+                  v-bind:placeholder="item.placeholder"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="itemSel in item.list"
+                    :key="itemSel.value"
+                    :label="itemSel.label"
+                    :value="itemSel.value"
+                  ></el-option>
+                </el-select>
+              </li>
+            </ul>
+          </div>
+          <div class="popBtn">
+            <a
+              href="javascript:;"
+              v-on:click="onSubmit"
+            >确定</a>
+            <a
+              href="javascript:;"
+              v-on:click="onCancle"
+            >取消</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 <script>
   export default {

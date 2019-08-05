@@ -10,11 +10,19 @@ import ElementUI from "element-ui";
 import axios from "axios";
 import * as util from "./utils/common.js";
 import 'mint-ui/lib/style.css';
+//测试数据
+// import testData from '../public/all.json';
 import {
     DatetimePicker
 } from 'mint-ui';
 
+// console.log(testData, 'test');
+//testData开始
+// let resData = { 'allData': testData };
+//         this.initData = res;
+//         this._allData(resData);
 
+//testData结束
 Vue.config.productionTip = false;
 //element-ui
 Vue.use(ElementUI);

@@ -24,7 +24,12 @@
         </ul>
       </div>
     </div>
-
+    <v-pop-box
+      v-if="isShowBox"
+      :popData="popData"
+      v-on:save="saveFn"
+      v-on:cancle="cancleFn"
+    ></v-pop-box>
   </div>
 </template>
 
@@ -38,7 +43,37 @@
       //这里存放数据
       return {
         title: "意见建议",
-        listData: []
+        listData: [],
+        isShowBox: false,
+        popData: {
+          'titleTotal': '新增',
+          'options': [{
+            'status': 1,
+            'title': '标题',
+            'placeholder': '请输入标题',
+            'val': 'commentTitle'
+          }, {
+            'status': 1,
+            'title': '时间',
+            'placeholder': '请输入时间',
+            'val': 'commentDate'
+          }, {
+            'status': 1,
+            'title': '说明',
+            'placeholder': '请输入说明',
+            'val': 'commentExplain'
+          }, {
+            'status': 1,
+            'title': '建议人',
+            'placeholder': '请输入建议人',
+            'val': 'commentPersonName'
+          }, {
+            'status': 1,
+            'title': '关键字',
+            'placeholder': '请输入关键字',
+            'val': 'keyword'
+          }]
+        }
       };
     },
     //监听属性 类似于data概念
@@ -46,15 +81,36 @@
       ...mapState(['nowIndex', 'userIndex', 'userId'])
     },
     //监控data中的数据变化
-    watch: {},
+    watch: {
+      listData: {
+        handler(newValue, oldValue) {
+          let oldActionData = getLoc(this.userId).notActionData;
+          let arrLen = getLoc(this.userId).notActionData[this.nowIndex].commentData.length;
+          //数组的替换
+          oldActionData[this.nowIndex].commentData.splice(0, arrLen, ...newValue);
+          //更新本地数据存储
+          setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        },
+        deep: true
+      }
+    },
     //方法集合
     methods: {
       back() {
         this.$router.go(-1);
       },
       addSuggestion() {
-        this.$router.push('/addSuggestion');
-      }
+        this.isShowBox = true;
+      },
+      //保存
+      saveFn(val) {
+        this.isShowBox = false;
+        this.listData.push(val);
+      },
+      //取消
+      cancleFn(val) {
+        this.isShowBox = val;
+      },
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {

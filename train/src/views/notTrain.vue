@@ -54,7 +54,7 @@
         //以用户id存储用户信息
         let idsData = getLoc('allData').allData.notActionList;
         setLoc(this.userId, { "notActionData": getLoc('allData').allData.notActionList });
-        this.infoList = idsData;
+        this.infoList = idsData.filter(item => !item.trainOrNot);
       },
       showInfo(index) {
         this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } });
@@ -73,7 +73,7 @@
       } else {
         //判断是否联网，如果联网，则可下载新数据，没有联网，则用本地的数据
         if(this.isLogin) {
-          this.infoList = getLoc(this.userId).notActionData;
+          this.infoList = getLoc(this.userId).notActionData.filter(item => !item.trainOrNot);
         }
       }
     },

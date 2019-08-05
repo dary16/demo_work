@@ -39,7 +39,7 @@
               v-model="errorData.commentPersonName"
             >
           </div>
-          <div class="errorItem bb">
+          <div class="errorItem">
             <v-list-title :listTilte="listTitle5"></v-list-title>
             <label>关键字：</label>
             <input
@@ -92,7 +92,6 @@
         this.$router.go(-1);
       },
       saveFn() {
-        // console.log(this.errorData);
         this.$router.push({ name: 'suggestion', params: { addData: this.errorData } });
       }
     },
@@ -115,8 +114,6 @@
       .errorList {
         margin-bottom: 0.5rem;
         .errorItem {
-          border-left: 1px solid #006699;
-          border-right: 1px solid #006699;
           label {
             display: inline-block;
             width: 3rem;

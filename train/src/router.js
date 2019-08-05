@@ -21,10 +21,10 @@ export default new Router({
             component: () =>
                 import ("./views/layout.vue"),
             children: [{
-                    path: "/action",
-                    name: "action",
+                    path: "/train",
+                    name: "train",
                     component: () =>
-                        import ("./views/action.vue")
+                        import ("./views/train.vue")
                 }, {
                     path: "/weekPlan",
                     name: "weekPlan",
