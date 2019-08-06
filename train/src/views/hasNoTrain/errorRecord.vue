@@ -12,18 +12,15 @@
           <input
             type="text"
             v-model="errorData.abnormalDate"
-            placeholder="点击选择日期"
+            placeholder="点击选择时间"
             readonly
             @click="chooseTime"
           >
           <mt-datetime-picker
             ref="picker"
-            type="datetime"
+            type="time"
             @confirm="handleConfirm"
             v-model="errorData.time"
-            year-format="{value} 年"
-            month-format="{value} 月"
-            date-format="{value} 日"
             hour-format="{value} 时"
             minute-format="{value} 分"
             :endDate="new Date()"
@@ -105,7 +102,7 @@
         this.$refs.picker.open();
       },
       handleConfirm(value) {
-        this.errorData.abnormalDate = this.util.formatDateMin(value);
+        this.errorData.abnormalDate = value;
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

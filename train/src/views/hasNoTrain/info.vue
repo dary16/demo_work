@@ -9,6 +9,7 @@
         v-on:suggestion="suggestion"
         v-on:back="back"
         v-on:updateFn="updateFn"
+        v-on:updateTimeFn="updateTimeFn"
       ></v-imple-info>
     </keep-alive>
     <keep-alive>
@@ -90,9 +91,9 @@
       //保存
       saveFn(v) {
         let oldActionData = getLoc(this.userId).notActionData;
-        let arrLen = oldActionData[this.nowIndex].trainImpleData.peoples.length;
+        let arrLen = oldActionData[this.nowIndex].joinAstronautNames.length;
         //数组的替换
-        oldActionData[this.nowIndex].trainImpleData.peoples.splice(0, arrLen, ...v);
+        oldActionData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...v);
         setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
         this.infoData.tags = v;
         this.isShowSet = false;
@@ -102,7 +103,11 @@
       },
       //更新数据
       updateFn() {
-        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
+        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames;
+      },
+      //更新时间数据
+      updateTimeFn() {
+        // this.infoData = getLoc(this.userId).notActionData[this.nowIndex];
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -110,7 +115,7 @@
       if(this.$route.params.trainList) {
         this.infoData.trainList = this.$route.params.trainList;
         this.infoData.index = this.$route.params.index;
-        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
+        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames;
       } else {
         if(this.isLogin) {
           //判断是否有新添加数据
@@ -126,10 +131,10 @@
             this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
           }
         }
-        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples;
+        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames;
         this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
-        console.log(this.infoData.tags, this.infoData.trainList, 'hh');
       }
+
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

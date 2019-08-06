@@ -15,7 +15,7 @@
           <span>{{item.joinAstronautNames}}</span>
           <span class="iconSize">
             <i
-              class="el-icon-tickets"
+              class="el-icon-s-check"
               @click="choosePerson(index)"
             ></i>
           </span>
@@ -72,9 +72,7 @@
           //选人后将数据更新
           if(this.flag == 1) {
             this.listChildData[this.chooseIndex].joinAstronautNames = JSON.parse(JSON.stringify(newValue[this.chooseIndex].joinAstronautNames));
-            console.log('选人');
           } else {
-            console.log(this.flag);
             this.listChildData.splice(0, this.listChildData.length, ...newValue);
             // this.listChildData.push(newValue);
           }

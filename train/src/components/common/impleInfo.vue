@@ -8,15 +8,8 @@
       <div class="list-wrap">
         <v-list-title :listTilte="infoChildData.listTitle1"></v-list-title>
         <div class="item-info">
-          <div class="item-info-title">
-            <span class="arrived">实到人员</span>
-            <button
-              class="normal-btn-border fr"
-              @click="setPostFn"
-            ><i class="el-icon-setting"></i>
-              设置岗位</button>
-          </div>
           <div class="tags">
+            <span class="arrived">实到人员：</span>
             <el-tag
               :class="{'active':item.isSignIn}"
               class="peopleTag"
@@ -26,10 +19,16 @@
               @click="tagFn(index)"
             >{{item.trainImplementAstronautName}}<span v-if="item.post !== ''">({{item.post}})</span></el-tag>
           </div>
+          <button
+            class="normal-btn-border fr tag-btn"
+            @click="setPostFn"
+          ><i class="el-icon-setting"></i>
+            设置岗位</button>
         </div>
       </div>
       <div class="list-wrap">
         <v-list-title :listTilte="infoChildData.listTitle2"></v-list-title>
+
         <div
           class="item-info"
           v-for="(item,index) in infoChildData.trainList"
@@ -41,20 +40,27 @@
               <button
                 v-if="item.trainContentStartDate == ''"
                 class="btn-set-time start-time"
+                @click="chooseStartTime(index)"
               >开始时间</button>
-              <span v-else>{{item.trainContentStartDate}}</span>
+              <span v-else>{{item.trainContentStartDate}}
+                <i
+                  class="el-icon-edit"
+                  @click="chooseStartTime(index)"
+                ></i>
+              </span>
+
               <button
                 v-if="item.trainContentEndDate == ''"
                 class="btn-set-time"
+                @click="chooseEndTime(index)"
               >结束时间</button>
-              <span v-else>{{item.trainContentEndDate}}</span>
+              <span v-else>{{item.trainContentEndDate}}
+                <i
+                  class="el-icon-edit"
+                  @click="chooseEndTime(index)"
+                ></i>
+              </span>
             </div>
-            <!-- <button
-              class="btn-set-time"
-              @click="setTime(index)"
-              v-if="item.trainClassHour == ''"
-            >完成时间</button>
-            <span v-else>{{item.trainClassHour}}</span> -->
 
             <div class="fr nicon">
               <button
@@ -67,6 +73,7 @@
             class="fault-list"
             v-if="item.faultInfo.length > 0"
           >
+
             <div class="fault-title"><span>异常说明</span></div>
             <div
               class="fault-info"
@@ -92,6 +99,21 @@
           class="normal-btn-lg mr"
           @click="recordFn"
         >数据项记录</button>
+
+        <mt-datetime-picker
+          ref="picker"
+          type="datetime"
+          @confirm="handleConfirm"
+          @cancel="cancelFn"
+          v-model="test"
+          year-format="{value} 年"
+          month-format="{value} 月"
+          date-format="{value} 日"
+          hour-format="{value} 时"
+          minute-format="{value} 分"
+          :endDate="new Date()"
+        >
+        </mt-datetime-picker>
       </div>
     </div>
   </div>
@@ -102,11 +124,18 @@
     getLoc, setLoc
   } from '../../utils/common.js';
   import { mapMutations, mapState } from 'vuex';
+
   export default {
     data() {
       //这里存放数据
       return {
-        infoChildData: {}//存储父组件传来的infoData
+        infoChildData: {},//存储父组件传来的infoData
+        test: '',
+        time: {
+          index: '',
+          type: ''
+        },
+        nowTime: ''
       };
     },
     props: ['infoData'],
@@ -129,11 +158,10 @@
       tagFn(i) {
         //改变签到状态
         this.infoChildData.tags[i].isSignIn = !this.infoChildData.tags[i].isSignIn;
-
         let oldActionData = getLoc(this.userId).notActionData;
-        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.peoples.length;
+        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames.length;
         //数组的替换
-        oldActionData[this.nowIndex].trainImpleData.peoples.splice(0, arrLen, ...this.infoChildData.tags);
+        oldActionData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...this.infoChildData.tags);
         //更新本地数据存储
         setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
         this.$emit('updateFn');
@@ -165,6 +193,55 @@
       //设置岗位
       setPostFn() {
         this.$emit('setPostFn');
+      },
+      chooseStartTime(i) {
+        this.nowTime = this.util.formatDate(new Date().getTime(), 7);
+        console.log(this.nowTime);
+        this.infoChildData.trainList[i].trainContentStartDate = this.nowTime;
+        let oldActionData = getLoc(this.userId).notActionData;
+        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList.length;
+        //数组的替换
+        oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
+        //更新本地数据存储
+        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        this.$emit('updateTimeFn');
+      },
+      chooseEndTime(i) {
+        this.nowTime = this.util.formatDate(new Date().getTime(), 7);
+        this.infoChildData.trainList[i].trainContentEndDate = this.nowTime;
+        let oldActionData = getLoc(this.userId).notActionData;
+        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList.length;
+        //数组的替换
+        oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
+        //更新本地数据存储
+        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        this.$emit('updateTimeFn');
+      },
+      handleConfirm(value) {
+        //时间转换
+        this.test = this.util.formatDateMin(value).slice(0, 16);
+        let oldActionData = getLoc(this.userId).notActionData;
+        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList.length;
+
+        //判断 开始时间
+        if(this.time.type == 'start') {
+          this.infoChildData.trainList[this.time.index].trainContentStartDate = this.test;
+          //数组的替换
+          //   oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, this.infoChildData.trainList);
+          //   //更新本地数据存储
+          //   setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        } else {
+          //需要判断开始时间必须小于结束时间
+          this.infoChildData.trainList[this.time.index].trainContentEndDate = this.test;
+          //数组的替换
+          //   oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, this.infoChildData.trainList);
+          //   //更新本地数据存储
+          //   setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        }
+      },
+      cancelFn() {
+        this.time.index = '';
+        this.time.type = '';
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -196,36 +273,29 @@
         margin-bottom: 0.28rem;
         .item-info {
           padding: 0.05rem 0.35rem 0rem 0.35rem;
-          //   border: 1px solid #006699;
-          min-height: 1rem;
-          .item-info-title {
-            height: 0.8rem;
-            line-height: 0.8rem;
-            position: relative;
-            padding-left: 0.15rem;
-            button {
-              position: absolute;
-              right: 0;
-              margin: 0.2rem 0;
-            }
-            .arrived {
-              font-size: 0.25rem;
-              font-weight: bold;
-              margin-right: 0.1rem;
-            }
-          }
-          span {
-            display: inline-block;
-            font-size: 0.25rem;
-          }
-          .nicon {
-            margin-top: 0.03rem;
+          position: relative;
+          .tag-btn {
+            position: absolute;
+            right: 0.1rem;
+            top: 0.1rem;
           }
           .tags {
             height: 0.46rem;
             line-height: 0.46rem;
             margin-left: 0.16rem;
             margin-bottom: 0.3rem;
+            .arrived {
+              font-size: 0.25rem;
+              font-weight: bold;
+              margin-right: 0.1rem;
+            }
+            span {
+              display: inline-block;
+              font-size: 0.25rem;
+            }
+            .nicon {
+              margin-top: 0.03rem;
+            }
             .peopleTag {
               margin-right: 0.05rem;
               background: none;
@@ -251,6 +321,9 @@
           }
           .set-time {
             display: inline-block;
+            .btn-set-time {
+              margin-right: 0.5rem;
+            }
             span {
               display: inline-block;
               margin-right: 0.4rem;

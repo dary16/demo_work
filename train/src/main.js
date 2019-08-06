@@ -15,14 +15,10 @@ import 'mint-ui/lib/style.css';
 import {
     DatetimePicker
 } from 'mint-ui';
+import Calendar from 'vue-mobile-calendar';
 
-// console.log(testData, 'test');
-//testData开始
-// let resData = { 'allData': testData };
-//         this.initData = res;
-//         this._allData(resData);
+Vue.use(Calendar);
 
-//testData结束
 Vue.config.productionTip = false;
 //element-ui
 Vue.use(ElementUI);

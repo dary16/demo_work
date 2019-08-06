@@ -6,7 +6,20 @@
       :key="item.subjectID"
     >
       <div class="content-header clearfix">
-        <span class="time">{{item.classDate}}</span>
+        <ul class="header-wrap">
+          <li class="time">
+            <span class="name">授课时间：</span>
+            <span class="value">{{item.classDate}}</span>
+          </li>
+          <li class="other">
+            <span class="name">训练地点：</span>
+            <span class="value">{{item.trainAreaName}}</span>
+          </li>
+          <li class="other">
+            <span class="name">授课人员：</span>
+            <span class="value">{{item.chargeTeacherName}}</span>
+          </li>
+        </ul>
         <button
           class="normal-btn fr"
           @click="doAction(index)"
@@ -26,20 +39,20 @@
             <span class="value">{{item.subjectUnitName}}</span>
           </li>
           <li>
-            <span class="name">授课时间：</span>
-            <span class="value">{{item.classDate}}</span>
+            <span class="name">节次：</span>
+            <span class="value">{{item.classSection}}</span>
           </li>
           <li>
-            <span class="name">授课学时：</span>
-            <span class="value">{{item.classSection}}</span>
+            <span class="name">分组人数：</span>
+            <span class="value">{{item.groupPersonNumber}}</span>
           </li>
           <li>
             <span class="name">着装要求：</span>
             <span class="value">{{item.dressCode}}</span>
           </li>
           <li>
-            <span class="name">授课人员：</span>
-            <span class="value">{{item.chargeTeacherName}}</span>
+            <span class="name">授课学时：</span>
+            <span class="value">{{item.subjectUnitClassHour}}</span>
           </li>
           <li>
             <span class="name">训练器材名称：</span>
@@ -47,7 +60,10 @@
           </li>
           <li class="w66">
             <span class="name">授课对象：</span>
-            <span class="value">{{item.joinAstronautNames}}</span>
+            <span
+              class="value"
+              v-for="item2 in item.joinAstronautNames"
+            >{{item2.trainImplementAstronautName.concat('，')}}</span>
           </li>
           <li>
             <span class="name">训练方式：</span>
@@ -111,12 +127,25 @@
         padding: 0.05rem 0.1rem;
         background: #f2f2f2;
         border-bottom: 1px solid #949494;
-        .time {
+        display: flex;
+        .header-wrap {
           height: 0.5rem;
           line-height: 0.5rem;
           font-size: 0.25rem;
-          float: left;
           margin-left: 0.2rem;
+          width: 81.5%;
+          display: flex;
+          li {
+            float: left;
+            margin-right: 0.3rem;
+            .name {
+              width: 1.7rem;
+              display: inline-block;
+            }
+          }
+          &.other {
+            flex: 1;
+          }
         }
         .fr {
           span {
@@ -127,16 +156,16 @@
           }
         }
         button {
-          margin-right: 0.3rem;
+          margin-right: 0.2rem;
         }
       }
       .content-info {
-        padding: 0.2rem;
+        padding: 0.1rem;
         display: flex;
         border-bottom: 1px solid #949494;
         .info-list {
-          margin-left: 0.1rem;
-          flex: 1;
+          margin-left: 0.2rem;
+          width: 85%;
           li {
             width: 33%;
             text-align: left;

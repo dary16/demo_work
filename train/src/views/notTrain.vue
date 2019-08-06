@@ -41,7 +41,13 @@
       ...mapState(['userId', 'allData', 'userIndex', 'nowIndex', 'isLogin'])
     },
     //监控data中的数据变化
-    watch: {},
+    watch: {
+      trainList: {
+        handler(newValue, oldValue) {
+          console.log(newValue, oldValue, 'watch');
+        }
+      }
+    },
     //方法集合
     methods: {
       ...mapMutations(['_nowIndex', '_userId']),
@@ -54,26 +60,21 @@
         //以用户id存储用户信息
         let idsData = getLoc('allData').allData.notActionList;
         setLoc(this.userId, { "notActionData": getLoc('allData').allData.notActionList });
-        this.infoList = idsData.filter(item => !item.trainOrNot);
+        this.nowTime = this.util.formatDate(new Date().getTime(), 3);
+        this.infoList = idsData;
       },
       showInfo(index) {
         this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } });
-      },
-      getTime() {
-        // setInterval(() => {
-        //   this.nowTime = this.util.formatDate(new Date().getTime(), 3);
-        // }, 1000);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.getTime();
       if(this.$route.params.infoList) {
         this.infoList = this.$route.params.infoList;
       } else {
         //判断是否联网，如果联网，则可下载新数据，没有联网，则用本地的数据
         if(this.isLogin) {
-          this.infoList = getLoc(this.userId).notActionData.filter(item => !item.trainOrNot);
+          this.infoList = getLoc(this.userId).notActionData;
         }
       }
     },

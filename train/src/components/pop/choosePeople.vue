@@ -37,18 +37,26 @@
   </div>
 </template>
 <script>
-  const peopleOptions = ['刘鹏', '李伟', '张杰明', '孙俪', '李成斌'];
+  import { mapState } from 'vuex';
+  import { getLoc } from '../../utils/common.js';
   export default {
     data() {
       return {
         checkAll: false,//控制全选
         checkPeoples: [],//所选人
-        peoples: peopleOptions,//后期需要动态计算
+        peoples: [],//后期需要动态计算
         isIndeterminate: true//设置 indeterminate 状态，只负责样式控制
       };
     },
     props: ['popTitle'],
+    computed: {
+      ...mapState(['userId', 'nowIndex'])
+    },
     created() {
+      let names = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames;
+      names.forEach(name => {
+        this.peoples.push(name.trainImplementAstronautName);
+      });
     },
     methods: {
       onSubmit() {

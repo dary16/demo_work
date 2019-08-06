@@ -33,7 +33,7 @@
         class="grey"
         type="button"
         @click="cancelBtn"
-      >取消</button>
+      >退出</button>
     </div>
   </div>
 </template>
@@ -102,11 +102,15 @@
             return true;
           }
         });
-        if(result) {
-          this.message.success('登陆成功！');
+        if(result.length > 0) {
           this.$router.push('/layout');
         } else {
-          this.message.warning('登陆失败！');
+          //   this.message.warning('登陆失败！');
+          this.$message({
+            message: '登陆失败',
+            type: 'warning',
+            offset: '500'
+          })
           return false;
         }
       },

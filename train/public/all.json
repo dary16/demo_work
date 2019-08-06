@@ -16,11 +16,9 @@
             }
         ],
         "notActionList": [{
-                "upload": false,
-                "trainOrNot": true,
                 "subjectID": "km001",
                 "subjectUnitID": "kmu001",
-                "classDate": "1995.06.30 13:00",
+                "classDate": "1995年06月30日 13:00至15:00",
                 "subjectUnitName": "航天基础知识1111",
                 "subjectUnitClassHour": "1小时",
                 "groupWay": "集体",
@@ -33,7 +31,25 @@
                 "auxiliaryLecturerID": "dsks55",
                 "auxiliaryLecturerName": "辅讲教员名称",
                 "joinAstronautIDs": "sdjfdks0r04954",
-                "joinAstronautNames": "张三，李四，王五，赵柳",
+                "joinAstronautNames": [{
+                        "trainImplementAstronautName": "张三",
+                        "trainImplementAstronautID": "001",
+                        "isSignIn": false,
+                        "post": "01"
+                    },
+                    {
+                        "trainImplementAstronautName": "王四",
+                        "trainImplementAstronautID": "002",
+                        "isSignIn": false,
+                        "post": ""
+                    },
+                    {
+                        "trainImplementAstronautName": "王五",
+                        "trainImplementAstronautID": "003",
+                        "isSignIn": false,
+                        "post": "02"
+                    }
+                ],
                 "trainWay": "理论授课",
                 "trainAreaID": "ksd04354",
                 "trainAreaName": "训练场地名称",
@@ -79,32 +95,13 @@
                     "dataItemUnit": "数据单位2"
                 }],
                 "trainImpleData": {
-                    "peoples": [{
-                            "trainImplementAstronautName": "张三",
-                            "trainImplementAstronautID": "001",
-                            "isSignIn": false,
-                            "post": "01"
-                        },
-                        {
-                            "trainImplementAstronautName": "王四",
-                            "trainImplementAstronautID": "002",
-                            "isSignIn": false,
-                            "post": ""
-                        },
-                        {
-                            "trainImplementAstronautName": "王五",
-                            "trainImplementAstronautID": "003",
-                            "isSignIn": false,
-                            "post": "02"
-                        }
-                    ],
                     "trainList": [{
                         "trainContentID": "frdg01",
                         "trainPrepareID": "dskfld",
                         "trainContentName": "训练内容名称",
                         "trainClassHour": "",
-                        "trainContentStartDate": "2019-07-28 14:21",
-                        "trainContentEndDate": "2019-07-28 14:21",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
                         "trainContentDesc": "训练详细内容，详细内容一...",
                         "keyword": "关键字",
                         "timeWay": "计时方式",
@@ -123,8 +120,8 @@
                         "trainPrepareID": "dsrfkfld",
                         "trainContentName": "训练内容名称",
                         "trainClassHour": "训练时长1",
-                        "trainContentStartDate": "2019-07-28 14:21",
-                        "trainContentEndDate": "2019-07-28 14:21",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
                         "trainContentDesc": "训练详细内容，详细内容二...",
                         "keyword": "关键字",
                         "timeWay": "计时方式",
@@ -135,11 +132,9 @@
                 }
             },
             {
-                "upload": false,
-                "trainOrNot": false,
                 "subjectID": "kmaSd001",
                 "subjectUnitID": "kmASDrtu001",
-                "classDate": "1996.06.30 12:00",
+                "classDate": "2018年06月30日 13:00至15:00",
                 "subjectUnitName": "航天基础知识",
                 "subjectUnitClassHour": "2小时",
                 "groupWay": "集体",
@@ -152,7 +147,25 @@
                 "auxiliaryLecturerID": "dssfdkrrs55",
                 "auxiliaryLecturerName": "辅讲教员名称",
                 "joinAstronautIDs": "sdjfdks0sdfrtrer04954",
-                "joinAstronautNames": "张三，李四，王五",
+                "joinAstronautNames": [{
+                        "trainImplementAstronautName": "张三231",
+                        "trainImplementAstronautID": "001",
+                        "isSignIn": false,
+                        "post": "01"
+                    },
+                    {
+                        "trainImplementAstronautName": "王四23",
+                        "trainImplementAstronautID": "002",
+                        "isSignIn": false,
+                        "post": ""
+                    },
+                    {
+                        "trainImplementAstronautName": "王五1",
+                        "trainImplementAstronautID": "003",
+                        "isSignIn": false,
+                        "post": "02"
+                    }
+                ],
                 "trainWay": "理论授课",
                 "trainAreaID": "ksdfsd04354",
                 "trainAreaName": "训练场地名称",
@@ -198,32 +211,13 @@
                     "dataItemUnit": "数据单位2"
                 }],
                 "trainImpleData": {
-                    "peoples": [{
-                            "trainImplementAstronautName": "张三",
-                            "trainImplementAstronautID": "001",
-                            "isSignIn": false,
-                            "post": "01"
-                        },
-                        {
-                            "trainImplementAstronautName": "王四",
-                            "trainImplementAstronautID": "002",
-                            "isSignIn": false,
-                            "post": ""
-                        },
-                        {
-                            "trainImplementAstronautName": "王五",
-                            "trainImplementAstronautID": "003",
-                            "isSignIn": false,
-                            "post": "02"
-                        }
-                    ],
                     "trainList": [{
                         "trainContentID": "frdag01",
                         "trainPrepareID": "dskafld",
                         "trainContentName": "训练内容名称",
                         "trainClassHour": "",
-                        "trainContentStartDate": "2019-07-28 14:21",
-                        "trainContentEndDate": "2019-07-28 14:21",
+                        "trainContentStartDate": "18:00",
+                        "trainContentEndDate": "20:00",
                         "trainContentDesc": "训练详细内容，详细内容一...",
                         "keyword": "关键字",
                         "timeWay": "计时方式",
@@ -242,8 +236,8 @@
                         "trainPrepareID": "dsrafkfld",
                         "trainContentName": "训练内容名称",
                         "trainClassHour": "训练时长1",
-                        "trainContentStartDate": "2019-07-28 14:21",
-                        "trainContentEndDate": "2019-07-28 14:21",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
                         "trainContentDesc": "训练详细内容，详细内容二...",
                         "keyword": "关键字",
                         "timeWay": "计时方式",
@@ -251,195 +245,7 @@
                         "sortNO": "排序号",
                         "faultInfo": []
                     }]
-                },
-                "trainList": [{
-                    "trainContentID": "frdsweg01",
-                    "trainPrepareID": "dskwdsfefld",
-                    "trainContentName": "训练内容名称已实施",
-                    "trainClassHour": "",
-                    "trainContentStartDate": "2019-07-28 14:21",
-                    "trainContentEndDate": "2019-07-28 14:21",
-                    "trainContentDesc": "训练详细内容，详细内容一...",
-                    "keyword": "关键字",
-                    "timeWay": "计时方式",
-                    "isRetrain": "是否复训",
-                    "sortNO": "排序号",
-                    "faultInfo": [{
-                        "trainImplementConteAbnormalID": "df001",
-                        "trainImplementContentID": "ksdfsdl",
-                        "abnormalExplain": "异常说明内容异常内容一",
-                        "abnormalDate": "2019-05-12 08:30",
-                        "abnormalObject": "异常产生对象",
-                        "keyword": "关键字"
-                    }]
-                }, {
-                    "trainContentID": "frsdfsdfdg01",
-                    "trainPrepareID": "dsrfdfkfld",
-                    "trainContentName": "训练内容名称",
-                    "trainClassHour": "训练时长1",
-                    "trainContentStartDate": "2019-07-28 14:21",
-                    "trainContentEndDate": "2019-07-28 14:21",
-                    "trainContentDesc": "训练详细内容，详细内容二...",
-                    "keyword": "关键字",
-                    "timeWay": "计时方式",
-                    "isRetrain": "是否复训",
-                    "sortNO": "排序号",
-                    "faultInfo": []
-                }]
-            },
-            {
-                "upload": true,
-                "trainOrNot": true,
-                "subjectID": "kmdd001",
-                "subjectUnitID": "kmrtu001",
-                "classDate": "1995.06.30 12:00",
-                "subjectUnitName": "航天基础知识",
-                "subjectUnitClassHour": "2小时",
-                "groupWay": "集体",
-                "groupPersonNumber": "分组人数",
-                "dressCode": "着装要求",
-                "subjectUnitType": "任务计划",
-                "chargeTeacherID": "skdek009",
-                "chargeTeacherName": "李tr伟",
-                "classSection": "节次1",
-                "auxiliaryLecturerID": "dskrrs55",
-                "auxiliaryLecturerName": "辅讲教员名称",
-                "joinAstronautIDs": "sdjfdks0rtrer04954",
-                "joinAstronautNames": "张三，李四，赵柳，李杰，赵松",
-                "trainWay": "理论授课",
-                "trainAreaID": "ksd04354",
-                "trainAreaName": "训练场地名称",
-                "trainMaterialID": "sds343r04",
-                "trainMaterialName": "训练器材名称",
-                "oldArrangeSubjectResultID": "jdrtsjfkd",
-                "commentData": [{
-                    "trainImplementCommentID": "jfkds32",
-                    "commentTitle": "意见建议标题222",
-                    "commentDate": "2018.03.21 15:26",
-                    "commentExplain": "意见建议说明",
-                    "commentPersonID": "jdf823",
-                    "commentPersonName": "建议人名称222",
-                    "keyword": "关键字"
-                }, {
-                    "trainImplementCommentID": "jfkdds32",
-                    "commentTitle": "意见建议标题",
-                    "commentDate": "2018.03.11 15:26",
-                    "commentExplain": "意见建议说明",
-                    "commentPersonID": "jdf823d",
-                    "commentPersonName": "建议人名称223",
-                    "keyword": "关键字"
-                }],
-                "trainList": [{
-                    "trainContentID": "frdweg01",
-                    "trainPrepareID": "dskwefld",
-                    "trainContentName": "训练内容名称已实施",
-                    "trainClassHour": "",
-                    "trainContentStartDate": "2019-07-28 14:21",
-                    "trainContentEndDate": "2019-07-28 14:21",
-                    "trainContentDesc": "训练详细内容，详细内容一...",
-                    "keyword": "关键字",
-                    "timeWay": "计时方式",
-                    "isRetrain": "是否复训",
-                    "sortNO": "排序号",
-                    "faultInfo": [{
-                        "trainImplementConteAbnormalID": "001",
-                        "trainImplementContentID": "ksdl",
-                        "abnormalExplain": "异常说明内容异常内容一",
-                        "abnormalDate": "2019-05-12 08:30",
-                        "abnormalObject": "异常产生对象",
-                        "keyword": "关键字"
-                    }]
-                }, {
-                    "trainContentID": "frsdfdg01",
-                    "trainPrepareID": "dsrfkfld",
-                    "trainContentName": "训练内容名称",
-                    "trainClassHour": "训练时长1",
-                    "trainContentStartDate": "2019-07-28 14:21",
-                    "trainContentEndDate": "2019-07-28 14:21",
-                    "trainContentDesc": "训练详细内容，详细内容二...",
-                    "keyword": "关键字",
-                    "timeWay": "计时方式",
-                    "isRetrain": "是否复训",
-                    "sortNO": "排序号",
-                    "faultInfo": []
-                }]
-            },
-            {
-                "upload": true,
-                "trainOrNot": false,
-                "subjectID": "ksmd001",
-                "subjectUnitID": "ksmrtu001",
-                "classDate": "2019.06.30 12:00",
-                "subjectUnitName": "航天基础知识",
-                "subjectUnitClassHour": "2小时",
-                "groupWay": "集体",
-                "groupPersonNumber": "分组人数",
-                "dressCode": "着装要求",
-                "subjectUnitType": "任务计划",
-                "chargeTeacherID": "skdsek009",
-                "chargeTeacherName": "李tr伟",
-                "classSection": "节次1",
-                "auxiliaryLecturerID": "dsksrrs55",
-                "auxiliaryLecturerName": "辅讲教员名称",
-                "joinAstronautIDs": "sdjdsfdks0rtrer04954",
-                "joinAstronautNames": "李四，王五，赵柳，李杰，赵松俭",
-                "trainWay": "理论授课",
-                "trainAreaID": "kssdd04354",
-                "trainAreaName": "训练场地名称",
-                "trainMaterialID": "sddfs343r04",
-                "trainMaterialName": "训练器材名称",
-                "oldArrangeSubjectResultID": "jdrtdfsjfkd",
-                "commentData": [{
-                    "trainImplementCommentID": "jfdfkds32",
-                    "commentTitle": "意见建议标题222",
-                    "commentDate": "2018.03.21 15:26",
-                    "commentExplain": "意见建议说明",
-                    "commentPersonID": "jdasf823",
-                    "commentPersonName": "建议人名称222",
-                    "keyword": "关键字"
-                }, {
-                    "trainImplementCommentID": "jfksddds32",
-                    "commentTitle": "意见建议标题",
-                    "commentDate": "2018.03.11 15:26",
-                    "commentExplain": "意见建议说明",
-                    "commentPersonID": "jdfsd823d",
-                    "commentPersonName": "建议人名称223",
-                    "keyword": "关键字"
-                }],
-                "trainList": [{
-                    "trainContentID": "frdwesdg01",
-                    "trainPrepareID": "dssdkwefld",
-                    "trainContentName": "训练内容名称已实施",
-                    "trainClassHour": "",
-                    "trainContentStartDate": "2019-07-28 14:21",
-                    "trainContentEndDate": "2019-07-28 14:21",
-                    "trainContentDesc": "训练详细内容，详细内容一...",
-                    "keyword": "关键字",
-                    "timeWay": "计时方式",
-                    "isRetrain": "是否复训",
-                    "sortNO": "排序号",
-                    "faultInfo": [{
-                        "trainImplementConteAbnormalID": "0sd01",
-                        "trainImplementContentID": "ksdsfdl",
-                        "abnormalExplain": "异常说明内容异常内容一",
-                        "abnormalDate": "2019-05-12 08:30",
-                        "abnormalObject": "异常产生对象",
-                        "keyword": "关键字"
-                    }]
-                }, {
-                    "trainContentID": "frssddfdg01",
-                    "trainPrepareID": "dsrfdfkfld",
-                    "trainContentName": "训练内容名称",
-                    "trainClassHour": "训练时长1",
-                    "trainContentStartDate": "2019-07-28 14:21",
-                    "trainContentEndDate": "2019-07-28 14:21",
-                    "trainContentDesc": "训练详细内容，详细内容二...",
-                    "keyword": "关键字",
-                    "timeWay": "计时方式",
-                    "isRetrain": "是否复训",
-                    "sortNO": "排序号",
-                    "faultInfo": []
-                }]
+                }
             }
         ],
         "weekPlan": [{
