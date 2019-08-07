@@ -63,7 +63,7 @@
     props: ['listData'],
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userIndex', 'userId'])
+      ...mapState(['nowIndex'])
     },
     //监控data中的数据变化
     watch: {
@@ -132,8 +132,6 @@
             font-size: 0.4rem;
             position: absolute;
             right: 0.2rem;
-          }
-          span {
           }
         }
         dd.icn {

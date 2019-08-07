@@ -78,18 +78,18 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userIndex', 'userId'])
+      ...mapState(['nowIndex', 'userInfo'])
     },
     //监控data中的数据变化
     watch: {
       listData: {
         handler(newValue, oldValue) {
-          let oldActionData = getLoc(this.userId).notActionData;
-          let arrLen = getLoc(this.userId).notActionData[this.nowIndex].commentData.length;
+          let oldActionData = getLoc(this.userInfo.userID).notActionData;
+          let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData.length;
           //数组的替换
           oldActionData[this.nowIndex].commentData.splice(0, arrLen, ...newValue);
           //更新本地数据存储
-          setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
         },
         deep: true
       }
@@ -114,16 +114,15 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      let oldActionData = getLoc(this.userId).notActionData;
+      let oldActionData = getLoc(this.userInfo.userID).notActionData;
       if(this.$route.params.addData) {
-        this.listData = getLoc(this.userId).notActionData[this.nowIndex].commentData;
+        this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
         this.listData.push(this.$route.params.addData);
         oldActionData[this.nowIndex].commentData.push(this.$route.params.addData);
         //更新本地缓存
-        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
       } else {
-        this.listData = getLoc(this.userId).notActionData[this.nowIndex].commentData;
-        // console.log(this.userId, getLoc(this.userId).notActionData[this.nowIndex].commentData);
+        this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）

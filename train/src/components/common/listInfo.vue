@@ -35,7 +35,7 @@
       </li>
       <li>
         <span class="title">参加航天员名称：</span>
-        <span class="text">{{infoList.joinAstronautNames}}</span>
+        <span class="text">{{names}}</span>
       </li>
       <li>
         <span class="title">训练场地：</span>
@@ -55,7 +55,7 @@
     data() {
       //这里存放数据
       return {
-
+        names: ''
       };
     },
     props: ['infoList'],
@@ -69,7 +69,11 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-
+      let arr = [];
+      this.infoList.joinAstronautNames.forEach(item => {
+        arr.push(item.trainImplementAstronautName);
+      });
+      this.names = arr.toString();
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

@@ -50,10 +50,10 @@
     },
     props: ['popTitle'],
     computed: {
-      ...mapState(['userId', 'nowIndex'])
+      ...mapState(['userInfo', 'nowIndex'])
     },
     created() {
-      let names = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames;
+      let names = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
       names.forEach(name => {
         this.peoples.push(name.trainImplementAstronautName);
       });

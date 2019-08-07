@@ -38,7 +38,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userId', 'allData', 'userIndex', 'nowIndex', 'isLogin'])
+      ...mapState(['allData', 'nowIndex', 'userInfo'])
     },
     //监控data中的数据变化
     watch: {
@@ -50,7 +50,7 @@
     },
     //方法集合
     methods: {
-      ...mapMutations(['_nowIndex', '_userId']),
+      ...mapMutations(['_nowIndex', '_userInfo']),
       doAction(index) {
         this._nowIndex(index);
         this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList, index: index } });
@@ -59,24 +59,21 @@
       downloadData() {
         //以用户id存储用户信息
         let idsData = getLoc('allData').allData.notActionList;
-        setLoc(this.userId, { "notActionData": getLoc('allData').allData.notActionList });
+
         this.nowTime = this.util.formatDate(new Date().getTime(), 3);
+        //保存下载时间到localstorage
+        setLoc(getLoc('userInfo').userID, { "notActionData": getLoc('allData').allData.notActionList, "loadTime": this.nowTime });
         this.infoList = idsData;
       },
       showInfo(index) {
+        this._nowIndex(index);
         this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      if(this.$route.params.infoList) {
-        this.infoList = this.$route.params.infoList;
-      } else {
-        //判断是否联网，如果联网，则可下载新数据，没有联网，则用本地的数据
-        if(this.isLogin) {
-          this.infoList = getLoc(this.userId).notActionData;
-        }
-      }
+      this.infoList = getLoc(this.userInfo.userID).notActionData || [];
+      this.nowTime = getLoc(this.userInfo.userID).loadTime || '';
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

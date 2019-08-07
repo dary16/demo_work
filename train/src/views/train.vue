@@ -24,6 +24,7 @@
       <v-list-item
         :infoList="infoList"
         :chooseLoad="chooseLoad"
+        v-on:showInfo="showInfo"
       ></v-list-item>
       <div
         class="uploadBottom"
@@ -58,7 +59,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userId', 'allData', 'userIndex', 'nowIndex']),
+      ...mapState(['userInfo', 'allData', 'nowIndex']),
       notNum() {
         return this.infoList.filter(item => !item.upload).length;
       }
@@ -67,7 +68,7 @@
     watch: {},
     //方法集合
     methods: {
-      ...mapMutations(['_nowIndex', '_userId']),
+      ...mapMutations(['_nowIndex', '_userInfo']),
       //数据上传
       uploadData() {
         this.infoList = this.infoList.filter(item => {
@@ -86,13 +87,18 @@
         setInterval(() => {
           this.nowTime = this.util.formatDate(new Date().getTime(), 3);
         }, 1000);
+      },
+      //详情
+      showInfo(v) {
+        console.log(v);
+        this._nowIndex(v);
+        this.$router.push('/trainInfoList');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      //过滤未实施的数据
-      //   this.infoList = getLoc(this.userId).notActionData.filter(item => item.trainOrNot);
-      //   this.getTime();
+      //获取数据
+      this.infoList = getLoc(this.userInfo.personID).trainListData || [];
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

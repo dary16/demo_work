@@ -24,7 +24,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userIndex', 'userId'])
+      ...mapState(['userInfo'])
     },
     //监控data中的数据变化
     watch: {},
@@ -44,7 +44,10 @@
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() { },
+    created() {
+      let trainListInit = getLoc(this.userInfo.personID).trainListData || [];
+      setLoc(getLoc('userInfo').personID, { "trainListData": trainListInit })
+    },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {
 

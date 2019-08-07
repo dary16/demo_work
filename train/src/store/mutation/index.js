@@ -16,17 +16,5 @@ export default {
     },
     _nowIndex(state, nowIndex) {
         state.nowIndex = nowIndex;
-    },
-    _userIndex(state, userIndex) {
-        state.userIndex = userIndex;
-    },
-    _userId(state, userId) {
-        state.userId = userId;
-    },
-    _realName(state, realName) {
-        state.realName = realName;
-    },
-    _isLogin(state, isLogin) {
-        state.isLogin = isLogin;
     }
 }

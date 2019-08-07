@@ -16,8 +16,11 @@ export default new Router({
         },
         {
             path: "/layout",
-            name: "layout",
             redirect: "/notTrain",
+        },
+        {
+            path: "/layout",
+            name: "layout",
             component: () =>
                 import ("./views/layout.vue"),
             children: [{
@@ -25,7 +28,14 @@ export default new Router({
                     name: "train",
                     component: () =>
                         import ("./views/train.vue")
-                }, {
+                },
+                {
+                    name: "trainInfoList",
+                    path: "/trainInfoList",
+                    component: () =>
+                        import ("./views/trainInfoList.vue")
+                },
+                {
                     path: "/weekPlan",
                     name: "weekPlan",
                     component: () =>
@@ -76,7 +86,6 @@ export default new Router({
                         import ("./views/hasNoTrain/addSuggestion.vue")
                 }
             ]
-        },
-
+        }
     ]
 });

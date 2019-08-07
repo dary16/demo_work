@@ -56,14 +56,14 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userInfo', 'allData', 'userIndex']),
+      ...mapState(['allData', 'userInfo']),
     },
     //监控data中的数据变化
     watch: {
     },
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userIndex', '_userId', '_realName', '_isLogin']),
+      ...mapMutations(['_userInfo', '_allData', '_weekPlanData']),
       ...mapActions(['_getInfo']),
       //登录确定
       loginBtn() {
@@ -93,12 +93,8 @@
         const userArr = this.allData.allData.user;
         let result = userArr.filter((item, index) => {
           if(item.userName == this.login.userName && item.password == this.login.password) {
+            //保存当前登录人信息
             this._userInfo(item);
-            this._userIndex(index);
-            this._userId(item.userID);
-            this._realName(item.realName);
-            this._isLogin(true);
-            // setLoc(item.userID, { "notActionData": {} });
             return true;
           }
         });
@@ -121,7 +117,6 @@
           method: 'get',
           api: 'getLogin',
           callback: res => {
-            console.log(res, 'res');
             let resData = { 'allData': res };
             this.initData = res;
             this._allData(resData);

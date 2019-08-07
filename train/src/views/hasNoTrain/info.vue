@@ -10,6 +10,7 @@
         v-on:back="back"
         v-on:updateFn="updateFn"
         v-on:updateTimeFn="updateTimeFn"
+        v-on:doneFn="doneFn"
       ></v-imple-info>
     </keep-alive>
     <keep-alive>
@@ -50,7 +51,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userIndex', 'allData', 'isLogin', 'userId'])
+      ...mapState(['nowIndex', 'allData', 'userInfo'])
     },
     //监控data中的数据变化
     watch: {},
@@ -63,10 +64,6 @@
       //设置时间
       setTime(index) {
         let time = this.util.formatDate(new Date().getTime(), 3);
-        // this.allData.allData.user[this.userIndex].notActionList[this.nowIndex].trainList[index].trainClassHour = "sdkfldsl";
-        // getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].trainList[index].trainClassHour = "sdkfldsl";
-        // console.log(getLoc('allData'));
-        // this._allData(resData);
       },
       //返回
       back() {
@@ -90,11 +87,11 @@
       },
       //保存
       saveFn(v) {
-        let oldActionData = getLoc(this.userId).notActionData;
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
         let arrLen = oldActionData[this.nowIndex].joinAstronautNames.length;
         //数组的替换
         oldActionData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...v);
-        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
         this.infoData.tags = v;
         this.isShowSet = false;
       },
@@ -103,11 +100,14 @@
       },
       //更新数据
       updateFn() {
-        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames;
+        this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
       },
       //更新时间数据
       updateTimeFn() {
-        // this.infoData = getLoc(this.userId).notActionData[this.nowIndex];
+      },
+      //完成
+      doneFn() {
+        console.log('done');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -115,24 +115,21 @@
       if(this.$route.params.trainList) {
         this.infoData.trainList = this.$route.params.trainList;
         this.infoData.index = this.$route.params.index;
-        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames;
+        this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
       } else {
-        if(this.isLogin) {
-          //判断是否有新添加数据
-          if(this.$route.params.addData) {
-            //获取本地未实施数据
-            let oldActionData = getLoc(this.userId).notActionData;
-            //将新添加数据push到oldActionData内
-            oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
-            //将数据存储到本地
-            setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
-            this.infoData.trainList = oldActionData[this.nowIndex].trainImpleData.trainList;
-          } else {
-            this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
-          }
+        //判断是否有新添加数据
+        if(this.$route.params.addData) {
+          //获取本地未实施数据
+          let oldActionData = getLoc(this.userInfo.userID).notActionData;
+          //将新添加数据push到oldActionData内
+          oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
+          //将数据存储到本地
+          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          this.infoData.trainList = oldActionData[this.nowIndex].trainImpleData.trainList;
+        } else {
+          this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
+          this.infoData.trainList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList;
         }
-        this.infoData.tags = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames;
-        this.infoData.trainList = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList;
       }
 
     },

@@ -16,6 +16,7 @@
             }
         ],
         "notActionList": [{
+                "trainOrNot": false,
                 "subjectID": "km001",
                 "subjectUnitID": "kmu001",
                 "classDate": "1995年06月30日 13:00至15:00",
@@ -132,6 +133,7 @@
                 }
             },
             {
+                "trainOrNot": false,
                 "subjectID": "kmaSd001",
                 "subjectUnitID": "kmASDrtu001",
                 "classDate": "2018年06月30日 13:00至15:00",
@@ -175,7 +177,7 @@
                 "commentData": [{
                     "trainImplementCommentID": "jfsdfkds32",
                     "commentTitle": "意见建议标题222",
-                    "commentDate": "2018.03.21 15:26",
+                    "commentDate": "15:26",
                     "commentExplain": "意见建议说明",
                     "commentPersonID": "jdf8sfd23",
                     "commentPersonName": "建议人名称222",
@@ -183,7 +185,7 @@
                 }, {
                     "trainImplementCommentID": "jfkfddds32",
                     "commentTitle": "意见建议标题",
-                    "commentDate": "2018.03.11 15:26",
+                    "commentDate": "15:26",
                     "commentExplain": "意见建议说明",
                     "commentPersonID": "jdsdff823d",
                     "commentPersonName": "建议人名称223",
@@ -227,7 +229,7 @@
                             "trainImplementConteAbnormalID": "0a01",
                             "trainImplementContentID": "kssdl",
                             "abnormalExplain": "异常说明内容异常内容一",
-                            "abnormalDate": "2019-05-12 08:30",
+                            "abnormalDate": "08:30",
                             "abnormalObject": "异常产生对象",
                             "keyword": "关键字"
                         }]

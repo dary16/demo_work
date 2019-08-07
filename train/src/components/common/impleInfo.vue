@@ -99,6 +99,10 @@
           class="normal-btn-lg mr"
           @click="recordFn"
         >数据项记录</button>
+        <button
+          class="normal-btn-lg"
+          @click="doneFn"
+        >完成</button>
 
         <mt-datetime-picker
           ref="picker"
@@ -141,7 +145,7 @@
     props: ['infoData'],
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userId', 'nowIndex'])
+      ...mapState(['userInfo', 'nowIndex'])
     },
     //监控data中的数据变化
     watch: {
@@ -152,27 +156,22 @@
         deep: true
       }
     },
-    //方法集合
     methods: {
       ...mapMutations(['_allData']),
       tagFn(i) {
         //改变签到状态
         this.infoChildData.tags[i].isSignIn = !this.infoChildData.tags[i].isSignIn;
-        let oldActionData = getLoc(this.userId).notActionData;
-        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].joinAstronautNames.length;
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames.length;
         //数组的替换
         oldActionData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...this.infoChildData.tags);
         //更新本地数据存储
-        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
         this.$emit('updateFn');
       },
       //设置时间
       setTime(index) {
         // let time = this.util.formatDate(new Date().getTime(), 3);
-        // this.allData.allData.user[this.userIndex].notActionList[this.nowIndex].trainList[index].trainClassHour = "sdkfldsl";
-        // getLoc('allData').allData.user[this.userIndex].notActionList[this.nowIndex].trainList[index].trainClassHour = "sdkfldsl";
-        // console.log(getLoc('allData'));
-        // this._allData(resData);
       },
       //返回
       back() {
@@ -194,54 +193,62 @@
       setPostFn() {
         this.$emit('setPostFn');
       },
+      //开始时间
       chooseStartTime(i) {
-        this.nowTime = this.util.formatDate(new Date().getTime(), 7);
-        console.log(this.nowTime);
+        this.nowTime = this.util.formatDate(new Date().getTime());
         this.infoChildData.trainList[i].trainContentStartDate = this.nowTime;
-        let oldActionData = getLoc(this.userId).notActionData;
-        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList.length;
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList.length;
         //数组的替换
         oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
         //更新本地数据存储
-        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
         this.$emit('updateTimeFn');
       },
+      //结束时间
       chooseEndTime(i) {
-        this.nowTime = this.util.formatDate(new Date().getTime(), 7);
+        this.nowTime = this.util.formatDate(new Date().getTime());
         this.infoChildData.trainList[i].trainContentEndDate = this.nowTime;
-        let oldActionData = getLoc(this.userId).notActionData;
-        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList.length;
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList.length;
         //数组的替换
         oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
         //更新本地数据存储
-        setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+        setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
         this.$emit('updateTimeFn');
       },
       handleConfirm(value) {
         //时间转换
         this.test = this.util.formatDateMin(value).slice(0, 16);
-        let oldActionData = getLoc(this.userId).notActionData;
-        let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainImpleData.trainList.length;
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList.length;
 
-        //判断 开始时间
         if(this.time.type == 'start') {
           this.infoChildData.trainList[this.time.index].trainContentStartDate = this.test;
-          //数组的替换
-          //   oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, this.infoChildData.trainList);
-          //   //更新本地数据存储
-          //   setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
         } else {
-          //需要判断开始时间必须小于结束时间
           this.infoChildData.trainList[this.time.index].trainContentEndDate = this.test;
-          //数组的替换
-          //   oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, this.infoChildData.trainList);
-          //   //更新本地数据存储
-          //   setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
         }
       },
       cancelFn() {
         this.time.index = '';
         this.time.type = '';
+      },
+      doneFn() {
+        //未实施数据
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        //获取已实施数据
+        let trainData = getLoc(this.userInfo.personID).trainListData;
+        //更改未实施数据的实施状态
+        oldActionData[this.nowIndex].trainOrNot = true;
+        //向已实施数据里面添加数据
+        trainData.push(oldActionData[this.nowIndex]);
+        //将已实施数据更新到缓存
+        setLoc(getLoc('userInfo').personID, { "trainListData": trainData });
+        //在未实施数据里删除已实施数据
+        oldActionData.splice(this.nowIndex, 1);
+        //更新未实施数据
+        setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+        this.$emit('doneFn');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

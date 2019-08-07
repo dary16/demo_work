@@ -87,18 +87,18 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userIndex', 'userId'])
+      ...mapState(['nowIndex', 'userInfo'])
     },
     //监控data中的数据变化
     watch: {
       listData: {
         handler(newValue, oldValue) {
-          let oldActionData = getLoc(this.userId).notActionData;
-          let arrLen = getLoc(this.userId).notActionData[this.nowIndex].trainData.length;
+          let oldActionData = getLoc(this.userInfo.userID).notActionData;
+          let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainData.length;
           //数组的替换
           oldActionData[this.nowIndex].trainData.splice(0, arrLen, ...newValue);
           //更新本地数据存储
-          setLoc(this.userId, { "notActionData": JSON.parse(JSON.stringify(oldActionData)) });
+          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
         },
         deep: true
       }
@@ -129,7 +129,7 @@
       //选人弹窗 确定
       savePeopleFn(val) {
         this.isShowPeople = false;
-        this.listData = getLoc(this.userId).notActionData[this.nowIndex].trainData;
+        this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainData;
         this.listData[this.changeIndex].joinAstronautNames = val.toString();
       },
       //选人弹窗 取消
@@ -139,7 +139,7 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.listData = getLoc(this.userId).notActionData[this.nowIndex].trainData;
+      this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainData;
       //   console.log(this.listData, 'data');
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
@@ -175,8 +175,6 @@
               font-size: 0.4rem;
               position: absolute;
               right: 0.2rem;
-            }
-            span {
             }
           }
           dd.icn {
