@@ -17,7 +17,9 @@
               v-for="(item,index) in infoChildData.tags"
               :key="item.trainImplementAstronautID"
               @click="tagFn(index)"
-            >{{item.trainImplementAstronautName}}<span v-if="item.post !== ''">({{item.post}})</span></el-tag>
+            >{{item.trainImplementAstronautName}}
+              <span v-if="item.post !== ''">({{item.post}})</span>
+            </el-tag>
           </div>
           <button
             class="normal-btn-border fr tag-btn"
@@ -28,7 +30,6 @@
       </div>
       <div class="list-wrap">
         <v-list-title :listTilte="infoChildData.listTitle2"></v-list-title>
-
         <div
           class="item-info"
           v-for="(item,index) in infoChildData.trainList"
@@ -73,7 +74,6 @@
             class="fault-list"
             v-if="item.faultInfo.length > 0"
           >
-
             <div class="fault-title"><span>异常说明</span></div>
             <div
               class="fault-info"
@@ -236,14 +236,23 @@
       doneFn() {
         //未实施数据
         let oldActionData = getLoc(this.userInfo.userID).notActionData;
-        //获取已实施数据
-        let trainData = getLoc(this.userInfo.personID).trainListData;
+
         //更改未实施数据的实施状态
         oldActionData[this.nowIndex].trainOrNot = true;
-        //向已实施数据里面添加数据
-        trainData.push(oldActionData[this.nowIndex]);
-        //将已实施数据更新到缓存
-        setLoc(getLoc('userInfo').personID, { "trainListData": trainData });
+        //判断已实施里面是否有数据
+        if(getLoc(this.userInfo.personID)) {
+          //获取已实施数据
+          let trainData = getLoc(this.userInfo.personID).trainListData;
+          //向已实施数据里面添加数据
+          trainData.push(oldActionData[this.nowIndex]);
+          //将已实施数据更新到缓存
+          setLoc(getLoc('userInfo').personID, { "trainListData": trainData });
+        } else {
+          //第一次将数据存到已实施里
+          let arr = [];
+          arr.push(oldActionData[this.nowIndex]);
+          setLoc(getLoc('userInfo').personID, { "trainListData": arr });
+        }
         //在未实施数据里删除已实施数据
         oldActionData.splice(this.nowIndex, 1);
         //更新未实施数据

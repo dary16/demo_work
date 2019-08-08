@@ -28,7 +28,13 @@
         <span class="fr">
           <span v-if="item.upload && item.trainOrNot">已上传</span>
           <span v-if="chooseLoad">
-            <el-checkbox></el-checkbox>
+            <!-- <el-checkbox :label="item.chargeTeacherID"></el-checkbox> -->
+            <input
+              type="checkbox"
+              name="checkBoxs"
+              v-model="item.isChecked"
+              @change="changeFn(item,index)"
+            >
           </span>
         </span>
       </div>
@@ -101,16 +107,24 @@
       },
       showInfo(val) {
         this.$emit("showInfo", val);
+      },
+      changeFn(v, i) {
+        //改变选中状态
+        let changeV = JSON.parse(JSON.stringify(v));
+        changeV.isChecked = v.isChecked;
+        //根据选中状态改变数据
+        for(let i = 0; i < this.infoList.length; i++) {
+          if(this.infoList[i].chargeTeacherID === changeV.chargeTeacherID) {
+            this.infoList[i] = changeV;
+          }
+          this.$emit('changeFn', this.infoList);
+        }
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() {
-
-    },
+    created() { },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }

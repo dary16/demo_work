@@ -151,10 +151,6 @@
       //   getNotActionData() {
       //     this._notActionListData(this.initData.notActionList);
       //   },
-      //初始化已实施数据
-      //   getActionData() {
-      //     this._actionListData(this.initData.actionList);
-      //   },
       getWeekPlanData() {
         // console.log('init3', this.initData.weekPlan);
         this._weekPlanData(this.initData.weekPlan);

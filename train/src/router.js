@@ -46,6 +46,11 @@ export default new Router({
                     component: () =>
                         import ("./views/exit.vue")
                 }, {
+                    path: "/test",
+                    name: "test",
+                    component: () =>
+                        import ("./views/test.vue")
+                }, {
                     path: "/notTrain",
                     name: "notTrain",
                     component: () =>

@@ -23,7 +23,7 @@
   import {
     getLoc, setLoc
   } from '../utils/common.js';
-  import { mapMutations, mapState } from 'vuex';
+  import { mapMutations, mapState, mapActions } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -51,19 +51,24 @@
     //方法集合
     methods: {
       ...mapMutations(['_nowIndex', '_userInfo']),
+      ...mapActions(['_getInfo']),
       doAction(index) {
         this._nowIndex(index);
         this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList, index: index } });
       },
       //数据下载
       downloadData() {
-        //以用户id存储用户信息
-        let idsData = getLoc('allData').allData.notActionList;
-
+        //后期要改，直接取未实施数据
         this.nowTime = this.util.formatDate(new Date().getTime(), 3);
-        //保存下载时间到localstorage
-        setLoc(getLoc('userInfo').userID, { "notActionData": getLoc('allData').allData.notActionList, "loadTime": this.nowTime });
-        this.infoList = idsData;
+        this._getInfo({
+          method: 'get',
+          api: 'getLogin',
+          callback: res => {
+            //保存下载时间到localstorage
+            setLoc(getLoc('userInfo').userID, { "notActionData": res.notActionList, "loadTime": this.nowTime });
+            this.infoList = res.notActionList;
+          }
+        })
       },
       showInfo(index) {
         this._nowIndex(index);

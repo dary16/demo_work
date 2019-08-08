@@ -16,7 +16,9 @@
             }
         ],
         "notActionList": [{
+                "upload": false,
                 "trainOrNot": false,
+                "isChecked": false,
                 "subjectID": "km001",
                 "subjectUnitID": "kmu001",
                 "classDate": "1995年06月30日 13:00至15:00",
@@ -133,7 +135,9 @@
                 }
             },
             {
+                "upload": false,
                 "trainOrNot": false,
+                "isChecked": false,
                 "subjectID": "kmaSd001",
                 "subjectUnitID": "kmASDrtu001",
                 "classDate": "2018年06月30日 13:00至15:00",

@@ -93,6 +93,7 @@
         oldActionData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...v);
         setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
         this.infoData.tags = v;
+        this.infoData.trainList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList;
         this.isShowSet = false;
       },
       cancelFn() {
@@ -101,17 +102,19 @@
       //更新数据
       updateFn() {
         this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
+        this.infoData.trainList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList;
       },
       //更新时间数据
       updateTimeFn() {
       },
       //完成
       doneFn() {
-        console.log('done');
+        this.$router.go(-1);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
+      console.log('create');
       if(this.$route.params.trainList) {
         this.infoData.trainList = this.$route.params.trainList;
         this.infoData.index = this.$route.params.index;

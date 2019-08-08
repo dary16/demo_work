@@ -16,7 +16,13 @@
           class="fr"
           v-else
         >
-          <button class="normal-btn">全选</button>
+          <input
+            type="button"
+            class="normal-btn"
+            id="checkAll"
+            @click="chooseAllFn()"
+            value="全选"
+          >
         </div>
       </div>
     </div>
@@ -25,6 +31,7 @@
         :infoList="infoList"
         :chooseLoad="chooseLoad"
         v-on:showInfo="showInfo"
+        v-on:changeFn="changeFn"
       ></v-list-item>
       <div
         class="uploadBottom"
@@ -44,6 +51,7 @@
     getLoc, setLoc
   } from '../utils/common.js';
   import { mapMutations, mapState } from 'vuex';
+  import { setTimeout } from 'timers';
   export default {
     data() {
       //这里存放数据
@@ -54,12 +62,16 @@
         notUpload: true,
         infoList: [],
         title: "已实施训练",
-        nowTime: ''
+        nowTime: '',
+        checkAll: false,
+        newInfoList: [],//暂存复选框改变时数据
+        uploadList: []
       };
     },
     //监听属性 类似于data概念
     computed: {
       ...mapState(['userInfo', 'allData', 'nowIndex']),
+      //未上传数量
       notNum() {
         return this.infoList.filter(item => !item.upload).length;
       }
@@ -80,8 +92,33 @@
       },
       //上传选中的数据
       uploadDataFn() {
+        //过滤isChecked属性值为true的数据
         this.notUpload = true;
         this.chooseLoad = false;
+
+        this.uploadList = this.newInfoList.filter(item => {
+          return item.isChecked == true && item.upload == false
+        });
+        //定时器模拟数据上传成功
+        setTimeout(() => {
+          //待优化：取未上传的数据还是所有的数据，暂时取所有的数据，
+          //可以把未上传的和已上传的分开，最后存时再合并
+          let data = getLoc(this.userInfo.personID).trainListData;
+          data.forEach(item => {
+            this.uploadList.forEach(item2 => {
+              //判断在已上传数组中的数据
+              //上传成功后需要将已上传的项的upload值改为true
+              if(item.auxiliaryLecturerID === item2.auxiliaryLecturerID) {
+                console.log(item.auxiliaryLecturerID);
+                item.upload = true;
+              }
+            })
+          });
+          console.log(data);//状态改后的数据
+          setLoc(getLoc('userInfo').personID, { "trainListData": data });
+          this.infoList = JSON.parse(JSON.stringify(data));
+        }, 3000)
+        console.log(this.uploadList, this.infoList, '要上传的数据');
       },
       getTime() {
         setInterval(() => {
@@ -93,6 +130,21 @@
         console.log(v);
         this._nowIndex(v);
         this.$router.push('/trainInfoList');
+      },
+      //全选
+      chooseAllFn() {
+        //改变所有数据中isChecked值为true
+        let notUploadData = this.infoList.filter(item => !item.upload);
+        notUploadData.forEach(item => {
+          item.isChecked = true && item.upload !== true;
+        });
+        this.infoList.splice(0, notUploadData.length, ...notUploadData);
+        this.newInfoList = JSON.parse(JSON.stringify(this.infoList));
+      },
+      //复选框状态改变时infoList值需要更新
+      changeFn(v) {
+        console.log(v);
+        this.newInfoList = JSON.parse(JSON.stringify(v));
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
