@@ -19,6 +19,8 @@ import dataRecord from "./common/dataRecord.vue";
 import listInfoItem from "./common/listInfoItem.vue";
 //人员签到
 import tags from "./common/tag.vue";
+//训练详细内容
+import trainInfoContent from "./common/trainInfoContent.vue";
 
 export default {
     tab,
@@ -33,5 +35,6 @@ export default {
     impleInfo,
     dataRecord,
     listInfoItem,
-    tags
+    tags,
+    trainInfoContent
 };

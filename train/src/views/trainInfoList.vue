@@ -4,10 +4,14 @@
       v-on:backFn="back"
       :titleData="title"
     ></v-info-header>
-    <v-list-title :listTilte="title1"></v-list-title>
+    <v-list-title>训练准备信息</v-list-title>
     <v-list-info-item :infoList="infoList"></v-list-info-item>
-    <v-list-title :listTilte="title2"></v-list-title>
+    <v-list-title>人员签到</v-list-title>
     <v-tags :tags="tags"></v-tags>
+    <v-train-info-content
+      :content="content"
+      :show="show"
+    ></v-train-info-content>
   </div>
 </template>
 
@@ -19,10 +23,10 @@
       //这里存放数据
       return {
         title: "训练信息查看",
-        title1: "训练准备信息",
-        title2: "人员签到",
         infoList: [],
-        tags: []
+        tags: [],
+        content: [],
+        show: 1//区别是已实施还是未实施的详情
       };
     },
     //监听属性 类似于data概念
@@ -44,6 +48,7 @@
       this.tags = tagsInit.filter(item => {
         return item.isSignIn == true
       });
+      this.content = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList;
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

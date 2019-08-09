@@ -6,7 +6,7 @@
     ></v-info-header>
     <div class="content">
       <div class="list-wrap">
-        <v-list-title :listTilte="infoChildData.listTitle1"></v-list-title>
+        <v-list-title>普通训练任务</v-list-title>
         <div class="item-info">
           <div class="tags">
             <span class="arrived">实到人员：</span>
@@ -28,7 +28,7 @@
             设置岗位</button>
         </div>
       </div>
-      <div class="list-wrap">
+      <!-- <div class="list-wrap">
         <v-list-title :listTilte="infoChildData.listTitle2"></v-list-title>
         <div
           class="item-info"
@@ -89,7 +89,14 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+      <v-train-info-content
+        :content="infoChildData.trainList"
+        :show="show"
+        v-on:chooseStartTime="chooseStartTime"
+        v-on:chooseEndTime="chooseEndTime"
+        v-on:errorRecord="errorRecord"
+      ></v-train-info-content>
       <div class="buttons">
         <button
           class="normal-btn-border-lg mr"
@@ -139,7 +146,8 @@
           index: '',
           type: ''
         },
-        nowTime: ''
+        nowTime: '',
+        show: 0
       };
     },
     props: ['infoData'],

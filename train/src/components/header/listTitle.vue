@@ -1,14 +1,16 @@
 <template>
   <div class='item'>
     <i class="circle"></i>
-    <span>{{listTilte}}</span>
+    <span>
+      <slot></slot>
+    </span>
   </div>
 </template>
 
 <script>
 
   export default {
-    props: ['listTilte'],
+    // props: ['listTilte'],
     data() {
       //这里存放数据
       return {

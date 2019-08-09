@@ -7,7 +7,7 @@
     <div class="content">
       <div class="errorList">
         <div class="errorItem">
-          <v-list-title :listTilte="listTitle1"></v-list-title>
+          <v-list-title>异常产生时间</v-list-title>
           <label>时间：</label>
           <input
             type="text"
@@ -28,7 +28,7 @@
           </mt-datetime-picker>
         </div>
         <div class="errorItem">
-          <v-list-title :listTilte="listTitle2"></v-list-title>
+          <v-list-title>异常说明</v-list-title>
           <label>异常说明：</label>
           <input
             type="text"
@@ -36,7 +36,7 @@
           >
         </div>
         <div class="errorItem">
-          <v-list-title :listTilte="listTitle3"></v-list-title>
+          <v-list-title>异常产生对象</v-list-title>
           <label>异常产生对象：</label>
           <input
             type="text"
@@ -44,7 +44,7 @@
           >
         </div>
         <div class="errorItem bb">
-          <v-list-title :listTilte="listTitle4"></v-list-title>
+          <v-list-title>关键字</v-list-title>
           <label>关键字：</label>
           <input
             type="text"
@@ -71,10 +71,6 @@
       //这里存放数据
       return {
         title: "训练异常点记录",
-        listTitle1: "异常产生时间",
-        listTitle2: "异常说明",
-        listTitle3: "异常产生对象",
-        listTitle4: "关键字",
         errorData: {
           abnormalDate: '',
           abnormalExplain: '',

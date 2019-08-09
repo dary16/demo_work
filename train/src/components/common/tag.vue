@@ -11,17 +11,16 @@
         <span v-if="item.post !== ''">({{item.post}})</span>
       </el-tag>
     </div>
-    <span>签到时间：2019-08-12 08:00</span>
+    <span>签到时间：{{signTime}}</span>
   </div>
 </template>
 
 <script>
-
   export default {
     data() {
       //这里存放数据
       return {
-
+        signTime: "2019-08-12 08:00"
       };
     },
     props: ['tags'],
@@ -30,17 +29,11 @@
     //监控data中的数据变化
     watch: {},
     //方法集合
-    methods: {
-
-    },
+    methods: {},
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() {
-
-    },
+    created() { },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }

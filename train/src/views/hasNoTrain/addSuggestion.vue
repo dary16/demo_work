@@ -8,7 +8,7 @@
       <div class="content">
         <div class="errorList">
           <div class="errorItem">
-            <v-list-title :listTilte="listTitle1"></v-list-title>
+            <v-list-title>标题</v-list-title>
             <label>标题：</label>
             <input
               type="text"
@@ -16,7 +16,7 @@
             >
           </div>
           <div class="errorItem">
-            <v-list-title :listTilte="listTitle2"></v-list-title>
+            <v-list-title>时间</v-list-title>
             <label>时间：</label>
             <input
               type="text"
@@ -24,7 +24,7 @@
             >
           </div>
           <div class="errorItem">
-            <v-list-title :listTilte="listTitle3"></v-list-title>
+            <v-list-title>说明</v-list-title>
             <label>说明：</label>
             <input
               type="text"
@@ -32,7 +32,7 @@
             >
           </div>
           <div class="errorItem">
-            <v-list-title :listTilte="listTitle4"></v-list-title>
+            <v-list-title>建议人</v-list-title>
             <label>建议人：</label>
             <input
               type="text"
@@ -40,7 +40,7 @@
             >
           </div>
           <div class="errorItem">
-            <v-list-title :listTilte="listTitle5"></v-list-title>
+            <v-list-title>关键字</v-list-title>
             <label>关键字：</label>
             <input
               type="text"
@@ -66,11 +66,6 @@
       //这里存放数据
       return {
         title: "添加意见建议",
-        listTitle1: "意见建议标题",
-        listTitle2: "意见建议时间",
-        listTitle3: "意见建议说明",
-        listTitle4: "建议人",
-        listTitle5: "关键字",
         errorData: {
           commentExplain: '',
           commentTitle: '',
