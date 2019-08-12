@@ -29,9 +29,6 @@
       //这里存放数据
       return {
         nowTime: '',
-        a: {},
-        b: {},
-        c: {},
         infoList: [],
         title: "未实施训练"
       };
@@ -64,6 +61,7 @@
           method: 'get',
           api: 'getLogin',
           callback: res => {
+              console.log(res);
             //保存下载时间到localstorage
             setLoc(getLoc('userInfo').userID, { "notActionData": res.notActionList, "loadTime": this.nowTime });
             this.infoList = res.notActionList;

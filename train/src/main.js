@@ -26,6 +26,7 @@ Vue.prototype.notify = ElementUI.Notification;
 Vue.prototype.message = ElementUI.Message;
 Vue.prototype.oMsgBox = ElementUI.MessageBox;
 Vue.prototype.popBox = ElementUI.Popover;
+Vue.prototype.loading = ElementUI.loading;
 Vue.prototype.util = util;
 
 Vue.prototype.$http = axios;

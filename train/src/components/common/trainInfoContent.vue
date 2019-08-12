@@ -21,7 +21,26 @@
         class="info-wrap"
       >
         <span class="text">{{item.trainContentDesc}}</span>
-        <div class="set-time">
+        <div
+          class="set-time"
+          v-if="item.timeWay == '时间点'"
+        >
+          <button
+            v-if="item.trainContentEndDate == ''"
+            class="btn-set-time start-time"
+            @click="chooseEndTime(index)"
+          >完成时间</button>
+          <span v-else>{{item.trainContentEndDate}}
+            <i
+              class="el-icon-edit"
+              @click="chooseEndTime(index)"
+            ></i>
+          </span>
+        </div>
+        <div
+          class="set-time"
+          v-else
+        >
           <button
             v-if="item.trainContentStartDate == ''"
             class="btn-set-time start-time"
@@ -86,7 +105,7 @@
       return {
       };
     },
-    props: ['content', 'show'],
+    props: ['content', 'show', 'way'],
     //监听属性 类似于data概念
     computed: {},
     //监控data中的数据变化

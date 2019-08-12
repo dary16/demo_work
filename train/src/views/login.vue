@@ -98,7 +98,15 @@
             return true;
           }
         });
+        //loading加载
+        const loading = this.$loading({
+          lock: true,
+          text: '正在拼命加载中...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
         if(result.length > 0) {
+          loading.close();
           this.$router.push('/layout');
         } else {
           //   this.message.warning('登陆失败！');

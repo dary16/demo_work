@@ -23,6 +23,12 @@
             @click="chooseAllFn()"
             value="全选"
           >
+          <input
+            type="button"
+            class="normal-btn"
+            @click="cancelFn()"
+            value="取消"
+          >
         </div>
       </div>
     </div>
@@ -95,7 +101,6 @@
         //过滤isChecked属性值为true的数据
         this.notUpload = true;
         this.chooseLoad = false;
-
         this.uploadList = this.newInfoList.filter(item => {
           return item.isChecked == true && item.upload == false
         });
@@ -120,14 +125,8 @@
         }, 3000)
         console.log(this.uploadList, this.infoList, '要上传的数据');
       },
-      getTime() {
-        setInterval(() => {
-          this.nowTime = this.util.formatDate(new Date().getTime(), 3);
-        }, 1000);
-      },
       //详情
       showInfo(v) {
-        console.log(v);
         this._nowIndex(v);
         this.$router.push('/trainInfoList');
       },
@@ -143,8 +142,14 @@
       },
       //复选框状态改变时infoList值需要更新
       changeFn(v) {
-        console.log(v);
         this.newInfoList = JSON.parse(JSON.stringify(v));
+      },
+      //取消
+      cancelFn() {
+        //取消所选数据
+        this.infoList = getLoc(this.userInfo.personID).trainListData || [];
+        this.chooseLoad = false;
+        this.notUpload = true;
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

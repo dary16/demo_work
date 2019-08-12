@@ -107,7 +107,7 @@
                         "trainContentEndDate": "",
                         "trainContentDesc": "训练详细内容，详细内容一...",
                         "keyword": "关键字",
-                        "timeWay": "计时方式",
+                        "timeWay": "时间点",
                         "isRetrain": "是否复训",
                         "sortNO": "排序号",
                         "faultInfo": [{
@@ -127,8 +127,8 @@
                         "trainContentEndDate": "",
                         "trainContentDesc": "训练详细内容，详细内容二...",
                         "keyword": "关键字",
-                        "timeWay": "计时方式",
-                        "isRetrain": "是否复训",
+                        "timeWay": "时间段",
+                        "isRetrain": "否",
                         "sortNO": "排序号",
                         "faultInfo": []
                     }]
@@ -172,7 +172,7 @@
                         "post": "02"
                     }
                 ],
-                "trainWay": "理论授课",
+                "trainWay": "操作训练",
                 "trainAreaID": "ksdfsd04354",
                 "trainAreaName": "训练场地名称",
                 "trainMaterialID": "sds3dsf43r04",
@@ -226,8 +226,8 @@
                         "trainContentEndDate": "20:00",
                         "trainContentDesc": "训练详细内容，详细内容一...",
                         "keyword": "关键字",
-                        "timeWay": "计时方式",
-                        "isRetrain": "是否复训",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
                         "sortNO": "排序号",
                         "faultInfo": [{
                             "trainImplementConteAbnormalID": "0a01",

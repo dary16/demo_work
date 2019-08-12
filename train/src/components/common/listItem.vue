@@ -2,7 +2,7 @@
   <div class="xl-content">
     <div
       class="xl-item"
-      v-for="(item,index) in infoList"
+      v-for="(item,index) in newData"
       :key="item.subjectID"
     >
       <div class="content-header clearfix">
@@ -66,10 +66,7 @@
           </li>
           <li class="w66">
             <span class="name">授课对象：</span>
-            <span
-              class="value"
-              v-for="item2 in item.joinAstronautNames"
-            >{{item2.trainImplementAstronautName.concat('，')}}</span>
+            <span class="value">{{item.joinAstronautNames}}</span>
           </li>
           <li>
             <span class="name">训练方式：</span>
@@ -92,7 +89,7 @@
     data() {
       //这里存放数据
       return {
-
+        newData: []
       };
     },
     props: ['infoList', 'chooseLoad'],
@@ -122,7 +119,17 @@
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() { },
+    created() {
+      //授课对象数据类型进行转换
+      this.newData = JSON.parse(JSON.stringify(this.infoList));
+      this.newData.forEach(item => {
+        let arr = [];
+        item.joinAstronautNames.forEach(item2 => {
+          arr.push(item2.trainImplementAstronautName);
+        });
+        item.joinAstronautNames = arr.join('，');
+      })
+    },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
     updated() { }, //生命周期 - 更新之后

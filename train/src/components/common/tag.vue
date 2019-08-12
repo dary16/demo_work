@@ -42,8 +42,7 @@
   .tags {
     height: 0.46rem;
     line-height: 0.46rem;
-    margin-left: 0.16rem;
-    margin-bottom: 0.3rem;
+    margin: 0.2rem;
     display: flex;
     span {
       font-size: 0.25rem;
