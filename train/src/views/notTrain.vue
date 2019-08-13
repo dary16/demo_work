@@ -5,9 +5,11 @@
       <div class="xl-right">
         <span class="fr">{{nowTime}}</span>
         <button
-          class="normal-btn"
+          class="normal-btn-border-lg fr btn-dowmload"
           @click="downloadData"
-        >数据下载</button>
+        >
+          <i class="el-icon-download"></i>
+          数据下载</button>
       </div>
     </div>
     <v-list-item
@@ -109,7 +111,9 @@
         span {
           float: right;
         }
-
+        .btn-dowmload {
+          margin: 0.24rem;
+        }
         span {
           height: 1rem;
           line-height: 1rem;
