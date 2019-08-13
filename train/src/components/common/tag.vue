@@ -1,6 +1,6 @@
 <template>
   <div class="tags">
-    <span class="arrived">实到人员：</span>
+    <div class="arrived">实到人员：</div>
     <div class="tag-wrap">
       <el-tag
         class="peopleTag active"

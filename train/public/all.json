@@ -41,14 +41,32 @@
                         "post": "01"
                     },
                     {
-                        "trainImplementAstronautName": "王四",
+                        "trainImplementAstronautName": "王二",
                         "trainImplementAstronautID": "002",
                         "isSignIn": false,
                         "post": ""
                     },
                     {
-                        "trainImplementAstronautName": "王五",
+                        "trainImplementAstronautName": "王三",
                         "trainImplementAstronautID": "003",
+                        "isSignIn": false,
+                        "post": "02"
+                    },
+                    {
+                        "trainImplementAstronautName": "王四",
+                        "trainImplementAstronautID": "004",
+                        "isSignIn": false,
+                        "post": ""
+                    },
+                    {
+                        "trainImplementAstronautName": "王五",
+                        "trainImplementAstronautID": "005",
+                        "isSignIn": false,
+                        "post": "02"
+                    },
+                    {
+                        "trainImplementAstronautName": "王六",
+                        "trainImplementAstronautID": "006",
                         "isSignIn": false,
                         "post": "02"
                     }

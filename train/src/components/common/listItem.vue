@@ -116,30 +116,36 @@
           }
           this.$emit('changeFn', this.infoList);
         }
+      },
+      //数据类型转换
+      changType() {
+        this.newData = JSON.parse(JSON.stringify(this.infoList));
+        this.newData.forEach(item => {
+          let arr = [];
+          item.joinAstronautNames.forEach(item2 => {
+            arr.push(item2.trainImplementAstronautName);
+          });
+          item.joinAstronautNames = arr.join('，');
+        })
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       //授课对象数据类型进行转换
-      this.newData = JSON.parse(JSON.stringify(this.infoList));
-      this.newData.forEach(item => {
-        let arr = [];
-        item.joinAstronautNames.forEach(item2 => {
-          arr.push(item2.trainImplementAstronautName);
-        });
-        item.joinAstronautNames = arr.join('，');
-      })
+      this.changType();
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
-    updated() { }, //生命周期 - 更新之后
+    updated() {
+      this.changType();
+    }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
 </script>
 <style lang='less' scoped>
   .xl-content {
     position: absolute;
-    top: 1.4rem;
+    top: 1.7rem;
     bottom: 0rem;
     overflow-y: auto;
     .xl-item {

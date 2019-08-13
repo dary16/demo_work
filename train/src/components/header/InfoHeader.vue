@@ -6,20 +6,20 @@
     ></i>
     <h3>{{titleData}}</h3>
     <ul>
-      <li>
+      <!-- <li>
         <div class="message">
           <img src="../../assets/header/message.png"/>
           <i>
             <img src="../../assets/header/dot.png"/>
           </i>
         </div>
-      </li>
+      </li> -->
       <li>
         <span>{{realName}}</span>
       </li>
-      <li @click="logout">
+      <!-- <li @click="logout">
         <img src="../../assets/header/exit.png" alt="退出">
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>
@@ -73,6 +73,7 @@
   }
 </script>
 <style lang="less" scoped>
+  @import "../../style/global.less";
   .header {
     text-align: center;
     position: relative;
@@ -97,6 +98,12 @@
       top: 0rem;
       li {
         float: left;
+        width: 1.77rem;
+        border-left: 1px solid @c-border;
+        span {
+          font-size: 0.18rem;
+          font-weight: bold;
+        }
         .message {
           width: 0.88rem;
           position: relative;

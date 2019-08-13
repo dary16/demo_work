@@ -41,10 +41,7 @@
           </li>
           <li class="w66">
             <span class="name">授课对象：</span>
-            <span
-              class="value"
-              v-for="item in infoList.joinAstronautNames"
-            >{{item.trainImplementAstronautName.concat('，')}}</span>
+            <span class="value">{{names}}</span>
           </li>
           <li>
             <span class="name">训练方式：</span>
@@ -61,7 +58,7 @@
     data() {
       //这里存放数据
       return {
-
+        names: ''
       };
     },
     props: ['infoList', 'chooseLoad'],
@@ -80,7 +77,13 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      //   console.log(this.infoList);
+      if(this.infoList) {
+        let arr = [];
+        this.infoList.joinAstronautNames.forEach(item2 => {
+          arr.push(item2.trainImplementAstronautName);
+        });
+        this.names = arr.join('，');
+      }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {

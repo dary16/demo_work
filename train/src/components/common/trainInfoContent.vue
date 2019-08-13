@@ -1,98 +1,110 @@
 <template>
   <div class="list-wrap">
     <v-list-title>训练详细内容</v-list-title>
+
     <div
       class="item-info"
       v-for="(item,index) in content"
       :key="item.trainContentID"
     >
-      <div
-        v-if="show == 1"
-        class="info-wrap"
-      >
-        <span class="text">{{item.trainContentDesc}}</span>
-        <div class="set-time">
-          <span>{{item.trainContentStartDate}}</span>
-          <span>{{item.trainContentEndDate}}</span>
-        </div>
-      </div>
-      <div
-        v-else
-        class="info-wrap"
-      >
-        <span class="text">{{item.trainContentDesc}}</span>
-        <div
-          class="set-time"
-          v-if="item.timeWay == '时间点'"
-        >
-          <button
-            v-if="item.trainContentEndDate == ''"
-            class="btn-set-time start-time"
-            @click="chooseEndTime(index)"
-          >完成时间</button>
-          <span v-else>{{item.trainContentEndDate}}
-            <i
-              class="el-icon-edit"
-              @click="chooseEndTime(index)"
-            ></i>
-          </span>
-        </div>
-        <div
-          class="set-time"
-          v-else
-        >
-          <button
-            v-if="item.trainContentStartDate == ''"
-            class="btn-set-time start-time"
-            @click="chooseStartTime(index)"
-          >开始时间</button>
-          <span v-else>{{item.trainContentStartDate}}
-            <i
-              class="el-icon-edit"
-              @click="chooseStartTime(index)"
-            ></i>
-          </span>
+      <el-collapse accordion>
+        <el-collapse-item>
+          <template slot="title">
+            <div class="title-info">
+              <i class="header-icon el-icon-caret-right"></i>
+              <span>{{item.trainContentName}}</span>
+            </div>
+            <div class="time">
+              <div
+                v-if="show == 1"
+                class="info-wrap"
+              >
+                <span class="text">{{item.trainContentDesc}}</span>
+                <div class="set-time">
+                  <span>{{item.trainContentStartDate}}</span>
+                  <span>{{item.trainContentEndDate}}</span>
+                </div>
+              </div>
+              <div
+                v-else
+                class="info-wrap"
+              >
+                <div
+                  class="set-time"
+                  v-if="item.timeWay == '时间点'"
+                >
+                  <button
+                    class="btn-set-time start-time"
+                    @click="chooseEndTime(index)"
+                  >完成时间</button>
+                  <span>{{item.trainContentEndDate}}
+                    <i
+                      class="el-icon-edit"
+                      @click="chooseEndTime(index)"
+                      v-show="item.trainContentEndDate !== ''"
+                    ></i>
+                  </span>
+                </div>
+                <div
+                  class="set-time"
+                  v-else
+                >
+                  <button
+                    class="btn-set-time start-time"
+                    @click="chooseStartTime(index)"
+                  >开始时间</button>
+                  <span>{{item.trainContentStartDate}}
+                    <i
+                      class="el-icon-edit"
+                      v-show="item.trainContentStartDate !== ''"
+                      @click="chooseStartTime(index)"
+                    ></i>
+                  </span>
 
-          <button
-            v-if="item.trainContentEndDate == ''"
-            class="btn-set-time"
-            @click="chooseEndTime(index)"
-          >结束时间</button>
-          <span v-else>{{item.trainContentEndDate}}
-            <i
-              class="el-icon-edit"
-              @click="chooseEndTime(index)"
-            ></i>
-          </span>
-        </div>
+                  <button
+                    class="btn-set-time"
+                    @click="chooseEndTime(index)"
+                  >结束时间</button>
+                  <span>{{item.trainContentEndDate}}
+                    <i
+                      class="el-icon-edit"
+                      @click="chooseEndTime(index)"
+                      v-show="item.trainContentEndDate !== ''"
+                    ></i>
+                  </span>
+                </div>
 
-        <div class="fr nicon">
-          <button
-            class="btn-normal"
-            @click="errorRecord(index)"
-          >添加异常</button>
-        </div>
-      </div>
-      <div
-        class="fault-list"
-        v-if="item.faultInfo.length > 0"
-      >
-        <div class="fault-title">
-          <span>异常说明</span>
-        </div>
-        <div
-          class="fault-info"
-          v-for="item2 in item.faultInfo"
-          :key="item2.id"
-        >
-          <div class="flex-wrap">
-            <span class="text">{{item2.abnormalExplain}}</span>
-            <span class="time">{{item2.abnormalDate}}</span>
-            <span class="obj">{{item2.abnormalObject}}</span>
+                <div class="fr nicon">
+                  <button
+                    class="normal-no-border"
+                    @click="errorRecord(index)"
+                  ><i class="error-icon el-icon-circle-plus"></i>添加异常</button>
+                </div>
+              </div>
+            </div>
+          </template>
+          <div>
+            <div class="content">{{item.trainContentDesc}}</div>
+            <div
+              class="fault-list"
+              v-if="item.faultInfo.length > 0"
+              v-for="item2 in item.faultInfo"
+              :key="item2.id"
+            >
+              <el-collapse accordion>
+                <el-collapse-item>
+                  <template slot="title">
+                    <i class="error-icon el-icon-warning"></i>
+                    <span class="fault-title">{{item2.abnormalObject}}在{{item2.abnormalDate}}发生了异常</span>
+                  </template>
+                  <div class="fault-info">{{item2.abnormalExplain}}</div>
+                </el-collapse-item>
+              </el-collapse>
+            </div>
+
           </div>
-          <div class="keyword">异常关键字</div>
-        </div>
-      </div>
+        </el-collapse-item>
+      </el-collapse>
     </div>
   </div>
 </template>
@@ -105,7 +117,7 @@
       return {
       };
     },
-    props: ['content', 'show', 'way'],
+    props: ['content', 'show'],
     //监听属性 类似于data概念
     computed: {},
     //监控data中的数据变化
@@ -141,6 +153,19 @@
     .item-info {
       padding: 0.05rem 0.35rem 0rem 0.35rem;
       position: relative;
+      .title-info {
+        font-size: 0.22rem;
+        height: 0.7rem;
+        line-height: 0.7rem;
+        width: 7.7rem;
+      }
+      .error-icon {
+        margin-right: 0.1rem;
+      }
+      .content {
+        font-size: 0.2rem;
+        padding-left: 0.23rem;
+      }
       .tag-btn {
         position: absolute;
         right: 0.1rem;
@@ -159,9 +184,6 @@
         span {
           display: inline-block;
           font-size: 0.25rem;
-        }
-        .nicon {
-          margin-top: 0.03rem;
         }
         .peopleTag {
           margin-right: 0.05rem;
@@ -188,8 +210,9 @@
       }
       .set-time {
         display: inline-block;
+        width: 6rem;
         .btn-set-time {
-          margin-right: 0.5rem;
+          margin-right: 0.25rem;
         }
         span {
           display: inline-block;
@@ -198,37 +221,20 @@
       }
     }
     .fault-list {
+      padding-left: 0.26rem;
       .fault-title {
         font-size: 0.2rem;
         height: 0.6rem;
         line-height: 0.6rem;
         padding-left: 0.15rem;
-        color: #e82b34;
+      }
+      .error-icon {
+        color: #ed5353;
       }
       .fault-info {
         padding: 0.1rem 0.3rem;
-        .flex-wrap {
-          display: flex;
-          span {
-            font-size: 0.24rem;
-            &.text {
-              height: 0.5rem;
-              line-height: 0.5rem;
-              width: 8rem;
-            }
-            &.time {
-              height: 0.5rem;
-              line-height: 0.5rem;
-              width: 3rem;
-            }
-            &.obj {
-              height: 0.5rem;
-              line-height: 0.5rem;
-              flex: 1;
-              text-align: right;
-            }
-          }
-        }
+        font-size: 0.2rem;
+        color: #808383;
         .keyword {
           color: #808383;
           font-size: 0.2rem;
@@ -237,5 +243,22 @@
         }
       }
     }
+  }
+</style>
+<style lang="less">
+  .item-info .el-collapse-item__header {
+    height: 0.7rem;
+    line-height: 0.7rem;
+    border-bottom: none !important;
+  }
+  .item-info .el-collapse-item__content {
+    padding-bottom: 0 !important;
+  }
+  .item-info .el-collapse-item__wrap {
+    border-bottom: none !important;
+  }
+  .item-info .el-collapse {
+    border-top: none !important;
+    border-bottom: none !important;
   }
 </style>

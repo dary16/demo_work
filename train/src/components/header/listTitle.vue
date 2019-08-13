@@ -1,7 +1,7 @@
 <template>
   <div class='item'>
-    <i class="circle"></i>
-    <span>
+    <span class="line"></span>
+    <span class="title">
       <slot></slot>
     </span>
   </div>
@@ -38,21 +38,25 @@
   }
 </script>
 <style lang='less' scoped>
+  @import "../../style/global.less";
   .item {
     font-size: 0.2rem;
     color: #17233b;
-    padding: 0.15rem 0.18rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
     border-bottom: 1px solid #e9ecf4;
-    .circle {
-      width: 0.14rem;
-      height: 0.14rem;
-      border-radius: 0.1rem;
-      border: 1px solid #4b7efe;
-      display: inline-block;
+    padding-left: 0.2rem;
+    .line {
+      width: 0.07rem;
+      height: 0.25rem;
+      float: left;
+      background: url("../../assets/line.png");
+      background-size: 100% 100%;
+      margin: 0.15rem 0.16rem 0.15rem 0;
     }
-    span {
-      font-size: 0.25rem;
-      margin-left: 0.1rem;
+    .title {
+      font-size: 0.2rem;
+      display: inline-block;
     }
   }
 </style>

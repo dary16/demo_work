@@ -2,9 +2,8 @@
   <div class="xl-list clearfix">
     <v-info-header :titleData="title"></v-info-header>
     <div class="xl-header">
-      <h2>未实施训练</h2>
       <div class="xl-right">
-        <span>{{nowTime}}</span>
+        <span class="fr">{{nowTime}}</span>
         <button
           class="normal-btn"
           @click="downloadData"
@@ -30,7 +29,7 @@
       return {
         nowTime: '',
         infoList: [],
-        title: "未实施训练"
+        title: "待实施训练"
       };
     },
     //监听属性 类似于data概念
@@ -61,7 +60,7 @@
           method: 'get',
           api: 'getLogin',
           callback: res => {
-              console.log(res);
+            console.log(res);
             //保存下载时间到localstorage
             setLoc(getLoc('userInfo').userID, { "notActionData": res.notActionList, "loadTime": this.nowTime });
             this.infoList = res.notActionList;
@@ -94,8 +93,8 @@
       border-bottom: 1px solid #949494;
       display: flex;
       background: #f2f2f2;
-      height: 0.7rem;
-      line-height: 0.7rem;
+      height: 1rem;
+      line-height: 1rem;
       h2 {
         font-size: 0.3rem;
         color: #006699;
@@ -112,8 +111,8 @@
         }
 
         span {
-          height: 0.5rem;
-          line-height: 0.5rem;
+          height: 1rem;
+          line-height: 1rem;
           font-size: 0.25rem;
           margin-left: 0.2rem;
           margin-right: 0.3rem;

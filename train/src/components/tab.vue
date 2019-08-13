@@ -3,47 +3,39 @@
     <div class="tab-header">
       <img src="../assets/logo.png"/>
     </div>
-      <div
-        class="tabItem"
-        @click="tabFn(1)"
-      >
-        <span :class="indexed == 1 ? 'active' :''">
+      <div class="tab-content">
+        <div
+          class="tabItem"
+          @click="tabFn(1)"
+          :class="indexed == 1 ? 'active' :''"
+        >
           <img v-if="indexed == 1" src="../assets/menu/bar1-b.png"/>
           <img v-else src="../assets/menu/bar1-a.png"/>
-          未实施
-        </span>
       </div>
-      <div
-        class="tabItem"
-        @click="tabFn(2)"
-      >
-        <span :class="indexed == 2 ? 'active' :''">
-          <img v-if="indexed == 2" src="../assets/menu/bar2-b.png"/>
-          <img v-else src="../assets/menu/bar2-a.png"/>
-          已实施
-        </span>
+          <div
+            class="tabItem"
+            @click="tabFn(2)"
+            :class="indexed == 2 ? 'active' :''"
+          >
+            <img v-if="indexed == 2" src="../assets/menu/bar2-b.png"/>
+            <img v-else src="../assets/menu/bar2-a.png"/>
       </div>
-      <div
-        class="tabItem"
-        @click="tabFn(3)"
-      >
-        <span :class="indexed == 3 ? 'active' :''">
-          <img v-if="indexed == 3" src="../assets/menu/bar3-b.png"/>
-          <img v-else src="../assets/menu/bar3-a.png"/>
-          周计划
-        </span>
-      </div>
-      <div
-        class="tabItem"
-        @click="tabFn(4)"
-      >
-        <span :class="indexed == 4 ? 'active' :''">
-          <img v-if="indexed == 4" src="../assets/menu/bar4-b.png"/>
-          <img v-else src="../assets/menu/bar4-a.png"/>
-          退出
-        </span>
-      </div>
-    </div>
+            <div
+              class="tabItem"
+              @click="tabFn(3)"
+              :class="indexed == 3 ? 'active' :''"
+            >
+              <img v-if="indexed == 3" src="../assets/menu/bar3-b.png"/>
+              <img v-else src="../assets/menu/bar3-a.png"/>
+        </div>
+              <div
+                class="tabItem"
+                @click="logout"
+              >
+                <img src="../assets/menu/bar4-b.png"/>
+            </div>
+              </div>
+            </div>
 </template>
 
 <script>
@@ -63,6 +55,17 @@
       tabFn(index) {
         this.indexed = index;
         this.$emit("tabIndex", this.indexed);
+      },
+      logout() {
+        this.oMsgBox('是否确认退出?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$router.push('./login');
+        }).catch(() => {
+          return false;
+        });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -75,44 +78,45 @@
 </script>
 <style lang="less" scoped>
   .tab {
-    width: 2.7rem;
+    width: 1.2rem;
     flex-direction: column;
     flex: 0 0 auto;
     box-shadow: 0px 3px 38px 0px rgba(39, 55, 84, 0.19);
+    position: relative;
     .tab-header {
       height: 0.7rem;
       line-height: 0.7rem;
-      margin: 0 0.38rem;
+      margin: 0.2rem 0.28rem;
       img {
-        width: 1.54rem;
+        width: 0.58rem;
       }
     }
-    .tabItem {
-      flex: 1;
-      height: 1.4rem;
-      line-height: 1.4rem;
-      span {
+    .tab-content {
+      margin-top: 1rem;
+      .tabItem {
+        flex: 1;
+        height: 1.2rem;
+        line-height: 1.2rem;
         text-align: center;
-        display: inline-block;
-        width: 1.96rem;
-        font-size: 0.24rem;
-        height: 0.76rem;
-        // background: #f0f1f4;
-        margin: 0.32rem auto;
-        line-height: 0.76rem;
-        padding: 0 0.3rem;
-        text-align: left;
         img {
-          margin-right: 0.2rem;
-          vertical-align: text-top;
-          width: 0.35rem;
-          height: 0.35rem;
+          vertical-align: middle;
+          width: 0.4rem;
+          height: 0.4rem;
+        }
+        span.active {
+          background: #f0f1f4;
+          font-weight: bold;
+          border-right: 6px solid #4c84ff;
+        }
+        &:last-child {
+          position: absolute;
+          bottom: 0.28rem;
+          left: 0.42rem;
         }
       }
-      span.active {
-        background: #f0f1f4;
-        font-weight: bold;
+      .tabItem.active {
         border-right: 6px solid #4c84ff;
+        background: #f0f1f4;
       }
     }
   }
