@@ -78,5 +78,6 @@
   .test {
     margin: 1rem auto;
     font-size: 0.5rem;
+    background: #fff;
   }
 </style>
