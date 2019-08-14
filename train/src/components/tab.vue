@@ -32,7 +32,7 @@
                 class="tabItem"
                 @click="logout"
               >
-                <img src="../assets/menu/bar4-b.png"/>
+                <img src="../assets/menu/exit.png"/>
             </div>
               </div>
             </div>

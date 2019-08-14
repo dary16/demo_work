@@ -38,101 +38,43 @@
           <div class="peoples">
             <div class="p-left">
               <h3>主教员</h3>
-              <el-select
-                size="mini"
-                v-model="value"
-                placeholder="请选择"
-              >
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+              <div class="select-wrap">
+                <el-select
+                  size="mini"
+                  v-model="value"
+                  placeholder="请选择"
                 >
-                </el-option>
-              </el-select>
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
             </div>
             <div class="p-right">
               <h3>辅助教员</h3>
-              <el-select
-                size="mini"
-                v-model="test"
-                placeholder="请选择"
-              >
-                <el-option
-                  v-for="item in options1"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+              <div class="select-wrap">
+                <el-select
+                  size="mini"
+                  v-model="test"
+                  placeholder="请选择"
                 >
-                </el-option>
-              </el-select>
+                  <el-option
+                    v-for="item in options1"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div class="list-wrap">
-        <v-list-title :listTilte="infoChildData.listTitle2"></v-list-title>
-        <div
-          class="item-info"
-          v-for="(item,index) in infoChildData.trainList"
-          :key="item.trainContentID"
-        >
-          <div class="info-wrap">
-            <span class="text">{{item.trainContentDesc}}</span>
-            <div class="set-time">
-              <button
-                v-if="item.trainContentStartDate == ''"
-                class="btn-set-time start-time"
-                @click="chooseStartTime(index)"
-              >开始时间</button>
-              <span v-else>{{item.trainContentStartDate}}
-                <i
-                  class="el-icon-edit"
-                  @click="chooseStartTime(index)"
-                ></i>
-              </span>
-
-              <button
-                v-if="item.trainContentEndDate == ''"
-                class="btn-set-time"
-                @click="chooseEndTime(index)"
-              >结束时间</button>
-              <span v-else>{{item.trainContentEndDate}}
-                <i
-                  class="el-icon-edit"
-                  @click="chooseEndTime(index)"
-                ></i>
-              </span>
-            </div>
-
-            <div class="fr nicon">
-              <button
-                class="btn-normal"
-                @click="errorRecord(index)"
-              >添加异常</button>
-            </div>
-          </div>
-          <div
-            class="fault-list"
-            v-if="item.faultInfo.length > 0"
-          >
-            <div class="fault-title"><span>异常说明</span></div>
-            <div
-              class="fault-info"
-              v-for="item2 in item.faultInfo"
-              :key="item2.id"
-            >
-              <div class="flex-wrap">
-                <span class="text">{{item2.abnormalExplain}}</span>
-                <span class="time">{{item2.abnormalDate}}</span>
-                <span class="obj">{{item2.abnormalObject}}</span>
-              </div>
-              <div class="keyword">异常关键字</div>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <v-train-info-content
         :content="infoChildData.trainList"
         :show="show"
@@ -383,6 +325,9 @@
             width: 4.9rem;
             display: flex;
             padding: 0.26rem 0 0.34rem 0;
+            .select-wrap {
+              margin: 0 0.2rem;
+            }
             .p-left {
               flex: 1;
               h3 {
