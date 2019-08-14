@@ -8,23 +8,31 @@
       <div class="content-header clearfix">
         <ul class="header-wrap">
           <li class="time">
-            <span class="name">授课时间：</span>
             <span class="value">{{item.classDate}}</span>
           </li>
           <li class="other">
-            <span class="name">训练地点：</span>
-            <span class="value">{{item.trainAreaName}}</span>
+            <span class="value">{{item.classSection}}</span>
           </li>
           <li class="other">
-            <span class="name">授课人员：</span>
             <span class="value">{{item.chargeTeacherName}}</span>
+          </li>
+          <li>
+            <span class="value">{{item.trainAreaName}}</span>
           </li>
         </ul>
         <button
-          class="normal-btn fr"
+          class="normal-no-border fr"
           @click="doAction(index)"
           v-if="!item.trainOrNot"
-        >训练实施</button>
+        >
+          <i class="el-icon-s-flag"></i>
+          训练实施</button>
+        <div
+          class="more"
+          @click="showInfo(index)"
+        >
+          <i class="el-icon-arrow-right"></i>
+        </div>
         <span class="fr">
           <span v-if="item.upload && item.trainOrNot">已上传</span>
           <span v-if="chooseLoad">
@@ -45,14 +53,6 @@
             <span class="value">{{item.subjectUnitName}}</span>
           </li>
           <li>
-            <span class="name">节次：</span>
-            <span class="value">{{item.classSection}}</span>
-          </li>
-          <li>
-            <span class="name">分组人数：</span>
-            <span class="value">{{item.groupPersonNumber}}</span>
-          </li>
-          <li>
             <span class="name">着装要求：</span>
             <span class="value">{{item.dressCode}}</span>
           </li>
@@ -61,24 +61,11 @@
             <span class="value">{{item.subjectUnitClassHour}}</span>
           </li>
           <li>
-            <span class="name">训练器材名称：</span>
-            <span class="value">{{item.trainMaterialName}}</span>
-          </li>
-          <li class="w66">
-            <span class="name">授课对象：</span>
-            <span class="value">{{item.joinAstronautNames}}</span>
-          </li>
-          <li>
-            <span class="name">训练方式：</span>
-            <span class="value">{{item.trainWay}}</span>
+            <span class="name">教学目标：</span>
+            <div class="more-content">{{item.teachObjective}}
+            </div>
           </li>
         </ul>
-        <div
-          class="more"
-          @click="showInfo(index)"
-        >
-          <i class="el-icon-d-arrow-right"></i>
-        </div>
       </div>
     </div>
   </div>
@@ -144,9 +131,11 @@
 </script>
 <style lang='less' scoped>
   .xl-content {
-    position: absolute;
+    position: fixed;
     top: 1.7rem;
     bottom: 0rem;
+    left: 1.2rem;
+    right: 0;
     overflow-y: auto;
     .xl-item {
       .content-header {
@@ -174,6 +163,11 @@
             flex: 1;
           }
         }
+        .more {
+          width: 1rem;
+          font-size: 0.3rem;
+          padding: 0 0.4rem;
+        }
         .fr {
           span {
             height: 0.5rem;
@@ -192,12 +186,11 @@
         border-bottom: 1px solid #949494;
         .info-list {
           margin-left: 0.2rem;
-          width: 85%;
+          width: 100%;
           li {
             width: 33%;
             text-align: left;
             float: left;
-            height: 0.5rem;
             line-height: 0.5rem;
             font-size: 0.25rem;
             text-overflow: ellipsis;
@@ -214,13 +207,17 @@
               // text-emphasis: none;
               // white-space: nowrap;
             }
+            &:last-child {
+              width: 100%;
+              .name {
+                float: left;
+              }
+            }
           }
-        }
-        .more {
-          width: 3rem;
-          font-size: 1rem;
-          img {
-            width: 1rem;
+          .more-content {
+            width: 85%;
+            display: inline-block;
+            white-space: normal;
           }
         }
       }

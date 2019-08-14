@@ -62,7 +62,7 @@
           method: 'get',
           api: 'getLogin',
           callback: res => {
-            console.log(res);
+            console.log(res, res);
             //保存下载时间到localstorage
             setLoc(getLoc('userInfo').userID, { "notActionData": res.notActionList, "loadTime": this.nowTime });
             this.infoList = res.notActionList;
@@ -82,7 +82,7 @@
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
     updated() {
-      console.log('update');
+      console.log('update', this.infoList);
     }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }

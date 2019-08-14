@@ -1,24 +1,38 @@
 <template>
   <div class='test'>
-    <ol>
-      <li>
-        <span><input
-            type="checkbox"
-            v-model="selectAll"
-          ></th></span>
-        <span align="left">全选</span>
-      </li>
-      <li v-for="answer in answers">
-        <span>
-          <input
-            type="checkbox"
-            v-model="selected"
-            :value="answer.id"
-          >
-        </span>
-        <span>{{ answer.name }}</span>
-      </li>
-    </ol>
+    <el-table
+      :data="tableData"
+      :span-method="objectSpanMethod"
+      border
+      style="width: 100%; margin-top: 20px"
+    >
+      <el-table-column
+        prop="id"
+        label="ID"
+        width="180"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="subjectName"
+        label="科目名称"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="address"
+        label="地址"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="num"
+        label="节次"
+      >
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -28,39 +42,62 @@
     data() {
       //这里存放数据
       return {
-        answers: [
-          { "id": 1, "name": "A" },
-          { "id": 2, "name": "B" },
-          { "id": 3, "name": "C" },
-          { "id": 4, "name": "D" }
-        ],
-        selected: []
+        tableData: [{
+          id: '12987122',
+          name: '王小虎',
+          subjectName: '科目三',
+          address: '三号楼A座1105',
+          num: 2
+        }, {
+          id: '12987123',
+          name: '王小虎',
+          subjectName: '科目三',
+          address: '三号楼A座1105',
+          num: 2
+        }, {
+          id: '12987124',
+          name: '王小虎',
+          subjectName: '科目三',
+          address: '三号楼',
+          num: 1
+        }, {
+          id: '12987125',
+          name: '王小虎',
+          subjectName: '科目三',
+          address: '三号楼A座1105',
+          num: 2
+        }, {
+          id: '12987126',
+          name: '王小虎',
+          subjectName: '科目三',
+          address: '三号楼',
+          num: 1
+        }]
       };
     },
     //监听属性 类似于data概念
     computed: {
-      selectAll: {
-        get: function() {
-          return this.answers ? this.selected.length == this.answers.length : false;
-        },
-        set: function(value) {
-          var selected = [];
 
-          if(value) {
-            this.answers.forEach(function(user) {
-              selected.push(user.id);
-            });
-          }
-
-          this.selected = selected;
-        }
-      }
     },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
-
+      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        if(columnIndex === 0) {
+          if(rowIndex % 2 === 0) {
+            return {
+              rowspan: 2,
+              colspan: 1
+            };
+          } else {
+            return {
+              rowspan: 0,
+              colspan: 0
+            };
+          }
+        }
+      }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
