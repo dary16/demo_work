@@ -54,11 +54,13 @@
   }
 </script>
 <style lang="less" scoped>
+  @import "../style/global.less";
   .layout {
     height: 100%;
     display: flex;
     .g-main {
       flex: 1 1 auto;
+      background: @c-bg;
     }
   }
   .clearfix:after {

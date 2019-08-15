@@ -44,6 +44,8 @@
           title: "训练实施信息",
           index: '',
           tags: [],
+          teachList: [],
+          helpTeachList: []
         },
         isShowSet: false,
         popTitle: "设置岗位",
@@ -114,27 +116,21 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      console.log('create');
-      if(this.$route.params.trainList) {
-        this.infoData.trainList = this.$route.params.trainList;
-        this.infoData.index = this.$route.params.index;
-        this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
+      //判断是否有新添加数据
+      if(this.$route.params.addData) {
+        //获取本地未实施数据
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        //将新添加数据push到oldActionData内
+        oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
+        //将数据存储到本地
+        setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+        this.infoData.trainList = oldActionData[this.nowIndex].trainImpleData.trainList;
       } else {
-        //判断是否有新添加数据
-        if(this.$route.params.addData) {
-          //获取本地未实施数据
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          //将新添加数据push到oldActionData内
-          oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
-          //将数据存储到本地
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
-          this.infoData.trainList = oldActionData[this.nowIndex].trainImpleData.trainList;
-        } else {
-          this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
-          this.infoData.trainList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList;
-        }
+        this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
+        this.infoData.trainList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList;
+        this.infoData.teachList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].teachList;
+        this.infoData.helpTeachList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].helpTeachList;
       }
-
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

@@ -2,12 +2,16 @@
   <div class="xl-content">
     <div
       class="xl-item"
-      v-for="(item,index) in newData"
+      v-for="(item,index) in infoList"
       :key="item.subjectID"
     >
       <div class="content-header clearfix">
+
         <ul class="header-wrap">
-          <li class="time">
+          <li class="right">
+            <i class="header-icon el-icon-caret-right"></i>
+          </li>
+          <li class="other">
             <span class="value">{{item.classDate}}</span>
           </li>
           <li class="other">
@@ -16,7 +20,7 @@
           <li class="other">
             <span class="value">{{item.chargeTeacherName}}</span>
           </li>
-          <li>
+          <li class="other">
             <span class="value">{{item.trainAreaName}}</span>
           </li>
         </ul>
@@ -25,26 +29,27 @@
           @click="doAction(index)"
           v-if="!item.trainOrNot"
         >
-          <i class="el-icon-s-flag"></i>
+          <!-- <i class="el-icon-s-flag"></i> -->
+          <img class="flag" src="../../assets/flag.png"/>
           训练实施</button>
-        <div
-          class="more"
-          @click="showInfo(index)"
-        >
-          <i class="el-icon-arrow-right"></i>
-        </div>
-        <span class="fr">
-          <span v-if="item.upload && item.trainOrNot">已上传</span>
-          <span v-if="chooseLoad">
-            <!-- <el-checkbox :label="item.chargeTeacherID"></el-checkbox> -->
-            <input
-              type="checkbox"
-              name="checkBoxs"
-              v-model="item.isChecked"
-              @change="changeFn(item,index)"
-            >
+          <div
+            class="more"
+            @click="showInfo(index)"
+          >
+            <i class="el-icon-arrow-right"></i>
+          </div>
+          <span class="fr">
+            <span v-if="item.upload && item.trainOrNot">已上传</span>
+            <span v-if="chooseLoad">
+              <!-- <el-checkbox :label="item.chargeTeacherID"></el-checkbox> -->
+              <input
+                type="checkbox"
+                name="checkBoxs"
+                v-model="item.isChecked"
+                @change="changeFn(item,index)"
+              >
+            </span>
           </span>
-        </span>
       </div>
       <div class="content-info">
         <ul class="info-list">
@@ -60,10 +65,9 @@
             <span class="name">授课学时：</span>
             <span class="value">{{item.subjectUnitClassHour}}</span>
           </li>
-          <li>
+          <li class="target">
             <span class="name">教学目标：</span>
-            <div class="more-content">{{item.teachObjective}}
-            </div>
+            <div class="more-content">{{item.teachObjective}}</div>
           </li>
         </ul>
       </div>
@@ -76,14 +80,20 @@
     data() {
       //这里存放数据
       return {
-        newData: []
+        newData: []//暂时不用
       };
     },
     props: ['infoList', 'chooseLoad'],
     //监听属性 类似于data概念
     computed: {},
     //监控data中的数据变化
-    watch: {},
+    watch: {
+      infoList: {
+        handler(newValue, oldValue) {
+          console.log(newValue, oldValue, 'watch66');
+        }
+      }
+    },
     //方法集合
     methods: {
       doAction(val) {
@@ -106,6 +116,7 @@
       },
       //数据类型转换
       changType() {
+        //转换格式
         this.newData = JSON.parse(JSON.stringify(this.infoList));
         this.newData.forEach(item => {
           let arr = [];
@@ -119,54 +130,57 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       //授课对象数据类型进行转换
-      this.changType();
+      //   this.changType();
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
     updated() {
-      this.changType();
+      //   this.changType();
     }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
 </script>
 <style lang='less' scoped>
+  @import "../../style/global.less";
   .xl-content {
     position: fixed;
     top: 1.7rem;
     bottom: 0rem;
-    left: 1.2rem;
-    right: 0;
+    left: 1.9rem;
+    right: 0.74rem;
     overflow-y: auto;
     .xl-item {
+      border: 1px solid @c-border;
+      background: #fff;
       .content-header {
-        width: 99.5%;
+        width: 100%;
         padding: 0.05rem 0.1rem;
-        background: #f2f2f2;
-        border-bottom: 1px solid #949494;
+        border-bottom: 1px solid @c-border;
         display: flex;
         .header-wrap {
-          height: 0.5rem;
-          line-height: 0.5rem;
-          font-size: 0.25rem;
+          height: 0.6rem;
+          line-height: 0.6rem;
+          font-size: 0.22rem;
           margin-left: 0.2rem;
-          width: 81.5%;
+          width: 84%;
           display: flex;
           li {
             float: left;
             margin-right: 0.3rem;
-            .name {
-              width: 1.7rem;
-              display: inline-block;
+            &.other {
+              width: 2rem;
             }
-          }
-          &.other {
-            flex: 1;
+            &:first-child {
+              margin-right: 0.1rem;
+            }
           }
         }
         .more {
           width: 1rem;
           font-size: 0.3rem;
           padding: 0 0.4rem;
+          height: 0.6rem;
+          line-height: 0.6rem;
         }
         .fr {
           span {
@@ -178,27 +192,32 @@
         }
         button {
           margin-right: 0.2rem;
+          height: 0.6rem;
         }
+      }
+      .flag {
+        width: 0.2rem;
       }
       .content-info {
         padding: 0.1rem;
         display: flex;
-        border-bottom: 1px solid #949494;
         .info-list {
           margin-left: 0.2rem;
           width: 100%;
+          padding-bottom: 0.1rem;
           li {
             width: 33%;
             text-align: left;
             float: left;
             line-height: 0.5rem;
-            font-size: 0.25rem;
+            font-size: 0.2rem;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
             .name {
-              width: 1.7rem;
+              width: 1rem;
               display: inline-block;
+              color: #808383;
             }
             .value {
               display: inline-block;
@@ -212,6 +231,9 @@
               .name {
                 float: left;
               }
+            }
+            &.target {
+              line-height: 0.4rem;
             }
           }
           .more-content {

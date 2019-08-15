@@ -41,14 +41,14 @@
               <div class="select-wrap">
                 <el-select
                   size="mini"
-                  v-model="value"
+                  v-model="firstName"
                   placeholder="请选择"
                 >
                   <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
+                    v-for="item in infoChildData.teachList"
+                    :key="item.chargeTeacherID"
+                    :label="item.chargeTeacherName"
+                    :value="item.chargeTeacherName"
                   >
                   </el-option>
                 </el-select>
@@ -59,14 +59,14 @@
               <div class="select-wrap">
                 <el-select
                   size="mini"
-                  v-model="test"
+                  v-model="helpName"
                   placeholder="请选择"
                 >
                   <el-option
-                    v-for="item in options1"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
+                    v-for="item in infoChildData.helpTeachList"
+                    :key="item.chargeTeacherID"
+                    :label="item.chargeTeacherName"
+                    :value="item.chargeTeacherName"
                   >
                   </el-option>
                 </el-select>
@@ -114,15 +114,8 @@
         },
         nowTime: '',
         show: 0,
-        options: [{
-          value: '张黄金',
-          label: '张黄金'
-        }],
-        options1: [{
-          value: '王然',
-          label: '王然'
-        }],
-        value: ''
+        firstName: '',
+        helpName: ''
       };
     },
     props: ['infoData'],
@@ -246,11 +239,12 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       this.infoChildData = JSON.parse(JSON.stringify(this.infoData));
+      this.firstName = this.infoChildData.teachList[0].chargeTeacherName || '';
+      this.helpName = this.infoChildData.helpTeachList[0].chargeTeacherName || '';
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
     updated() {
-      //   console.log('update');
     }, //生命周期 - 更新之后
     activated() {
       //   console.log('actived');
@@ -268,6 +262,7 @@
       top: 0.7rem;
       left: 1.2rem;
       overflow-y: auto;
+      background: #f5f6fa;
       .button-finish {
         height: 1rem;
         line-height: 1rem;
@@ -276,15 +271,17 @@
         }
       }
       .list-wrap {
-        border: 1px solid #e9ecf4;
+        border: 1px solid @c-border;
         margin-bottom: 0.3rem;
+        background: #fff;
+        // padding-bottom: 0.1rem;
         .item-info {
           //   padding: 0.05rem 0.35rem 0rem 0.35rem;
           display: flex;
           .tags-wrap {
             flex: 1;
             border-right: 1px solid @c-border;
-            padding: 0.26rem 0 0.34rem 0.2rem;
+            padding: 0.26rem 0 0.24rem 0.2rem;
             .arrived {
               font-size: 0.2rem;
               font-weight: bold;
@@ -324,7 +321,7 @@
           .peoples {
             width: 4.9rem;
             display: flex;
-            padding: 0.26rem 0 0.34rem 0;
+            padding: 0.26rem 0 0.24rem 0;
             .select-wrap {
               margin: 0 0.2rem;
             }
@@ -418,11 +415,30 @@
             }
           }
         }
+        &:last-child {
+          color: #f00 !important;
+        }
       }
     }
     .buttons {
       text-align: right;
       line-height: 1rem;
     }
+  }
+</style>
+<style>
+  .select-wrap .el-input--mini .el-input__inner {
+    height: 0.36rem !important;
+    line-height: 0.36rem !important;
+  }
+  .select-wrap .el-select-dropdown__list {
+    padding: 0 !important;
+  }
+  .el-select-dropdown__item {
+    height: 0.36rem !important;
+    line-height: 0.36rem !important;
+  }
+  .el-popper[x-placement^="bottom"] {
+    margin-top: 0 !important;
   }
 </style>

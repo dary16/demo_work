@@ -3,13 +3,14 @@
     <v-info-header :titleData="title"></v-info-header>
     <div class="xl-header">
       <div class="xl-right">
-        <span class="fr">{{nowTime}}</span>
         <button
           class="normal-btn-border-lg fr btn-dowmload"
           @click="downloadData"
         >
           <i class="el-icon-download"></i>
           数据下载</button>
+        <span class="fr">{{nowTime}}</span>
+
       </div>
     </div>
     <v-list-item
@@ -52,7 +53,8 @@
       ...mapActions(['_getInfo']),
       doAction(index) {
         this._nowIndex(index);
-        this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList, index: index } });
+        // this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList, index: index } });
+        this.$router.push('./info');
       },
       //数据下载
       downloadData() {
@@ -88,13 +90,12 @@
   }
 </script>
 <style lang='less' scoped>
+  @import "../style/global.less";
   .xl-list {
     .xl-header {
       width: 100%;
-      padding: 0.05rem 0.1rem;
-      border-bottom: 1px solid #949494;
+      padding: 0.05rem 0.74rem;
       display: flex;
-      background: #f2f2f2;
       height: 1rem;
       line-height: 1rem;
       h2 {
@@ -112,15 +113,16 @@
           float: right;
         }
         .btn-dowmload {
-          margin: 0.24rem;
+          margin: 0.24rem 0rem;
         }
         span {
           height: 1rem;
           line-height: 1rem;
-          font-size: 0.25rem;
+          font-size: 0.2rem;
           margin-left: 0.2rem;
           margin-right: 0.3rem;
           display: inline-block;
+          color: #808383;
         }
       }
     }

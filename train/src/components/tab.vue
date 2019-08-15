@@ -83,6 +83,7 @@
     flex: 0 0 auto;
     box-shadow: 0px 3px 38px 0px rgba(39, 55, 84, 0.19);
     position: relative;
+    z-index: 9;
     .tab-header {
       height: 0.7rem;
       line-height: 0.7rem;

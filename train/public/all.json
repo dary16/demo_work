@@ -34,6 +34,20 @@
                 "teachObjective": "1.知识与技能，掌握一元二次方程的根与系数的关系，并会初步应用；2.过程与方法，引导学生在已有的一元二次方程根与系数管理；",
                 "auxiliaryLecturerID": "dsks55",
                 "auxiliaryLecturerName": "辅讲教员名称",
+                "teachList": [{
+                    "chargeTeacherID": "4566",
+                    "chargeTeacherName": "程哲"
+                }, {
+                    "chargeTeacherID": "4556",
+                    "chargeTeacherName": "宋宋"
+                }],
+                "helpTeachList": [{
+                    "chargeTeacherID": "456656",
+                    "chargeTeacherName": "张一飞"
+                }, {
+                    "chargeTeacherID": "4556sdf",
+                    "chargeTeacherName": "沈从文"
+                }],
                 "joinAstronautIDs": "sdjfdks0r04954",
                 "joinAstronautNames": [{
                         "trainImplementAstronautName": "张三",
@@ -172,6 +186,20 @@
                 "teachObjective": "1.知识与技能，掌握一元二次方程的根与系数的关系，并会初步应用；2.过程与方法，引导学生在已有的一元二次方程根与系数管理；3.二次方程的根与系数的关系，并会初步应用，过程与方法，引导学生在已有的一元二次方程根与系",
                 "auxiliaryLecturerID": "dssfdkrrs55",
                 "auxiliaryLecturerName": "辅讲教员名称",
+                "teachList": [{
+                    "chargeTeacherID": "4234566",
+                    "chargeTeacherName": "沈婉君"
+                }, {
+                    "chargeTeacherID": "45534546",
+                    "chargeTeacherName": "宋宋"
+                }],
+                "helpTeachList": [{
+                    "chargeTeacherID": "44556656",
+                    "chargeTeacherName": "姚万青"
+                }, {
+                    "chargeTeacherID": "4554356sdf",
+                    "chargeTeacherName": "沈从文"
+                }],
                 "joinAstronautIDs": "sdjfdks0sdfrtrer04954",
                 "joinAstronautNames": [{
                         "trainImplementAstronautName": "张三231",

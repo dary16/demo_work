@@ -51,19 +51,19 @@
                 >
                   <button
                     class="btn-set-time start-time"
-                    @click="chooseStartTime(index)"
+                    @click.stop="chooseStartTime(index)"
                   >开始时间</button>
                   <span>{{item.trainContentStartDate}}
                     <i
                       class="el-icon-edit"
                       v-show="item.trainContentStartDate !== ''"
-                      @click="chooseStartTime(index)"
+                      @click.stop="chooseStartTime(index)"
                     ></i>
                   </span>
 
                   <button
                     class="btn-set-time"
-                    @click="chooseEndTime(index)"
+                    @click.stop="chooseEndTime(index)"
                   >结束时间</button>
                   <span>{{item.trainContentEndDate}}
                     <i
@@ -77,13 +77,13 @@
                 <div class="fr nicon">
                   <button
                     class="normal-no-border"
-                    @click="errorRecord(index)"
+                    @click.stop="errorRecord(index)"
                   ><i class="error-icon el-icon-circle-plus"></i>添加异常</button>
                 </div>
               </div>
             </div>
           </template>
-          <div>
+          <div class="error-list">
             <div class="content">{{item.trainContentDesc}}</div>
             <div
               class="fault-list"
@@ -94,7 +94,8 @@
               <el-collapse accordion>
                 <el-collapse-item>
                   <template slot="title">
-                    <i class="error-icon el-icon-warning"></i>
+                    <!-- <i class="error-icon el-icon-warning"></i> -->
+                    <img src="../../assets/warn.png" class="error-icon"/>
                     <span class="fault-title">{{item2.abnormalObject}}在{{item2.abnormalDate}}发生了异常</span>
                   </template>
                   <div class="fault-info">{{item2.abnormalExplain}}</div>
@@ -147,24 +148,30 @@
   }
 </script>
 <style lang='less' scoped>
+  @import "../../style/global.less";
   .list-wrap {
-    border: 1px solid #e9ecf4;
-    margin-bottom: 0.28rem;
     .item-info {
-      padding: 0.05rem 0.35rem 0rem 0.35rem;
+      //   padding: 0.05rem 0.35rem 0rem 0.35rem;
       position: relative;
       .title-info {
         font-size: 0.22rem;
         height: 0.7rem;
         line-height: 0.7rem;
         width: 7.7rem;
+        padding-left: 0.35rem;
       }
       .error-icon {
-        margin-right: 0.1rem;
+        width: 0.2rem;
+      }
+      .error-list {
+        padding-left: 0.3rem;
       }
       .content {
         font-size: 0.2rem;
         padding-left: 0.23rem;
+        line-height: 0.5rem;
+        white-space: normal;
+        border-bottom: 1px solid @c-border;
       }
       .tag-btn {
         position: absolute;
@@ -249,16 +256,19 @@
   .item-info .el-collapse-item__header {
     height: 0.7rem;
     line-height: 0.7rem;
-    border-bottom: none !important;
+    // border-bottom: none !important;
+  }
+  .item-info .el-collapse-item__header.is-active {
+    border-bottom-color: #e9ecf4 !important;
   }
   .item-info .el-collapse-item__content {
     padding-bottom: 0 !important;
   }
-  .item-info .el-collapse-item__wrap {
-    border-bottom: none !important;
+  .item-info .el-collapse-item__wrap:last-child {
+    // border-bottom-color: #f00 !important;
   }
   .item-info .el-collapse {
-    border-top: none !important;
-    border-bottom: none !important;
+    // border-top: none !important;
+    // border-bottom: none !important;
   }
 </style>
