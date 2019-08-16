@@ -2,21 +2,21 @@
 <template>
   <div class="g-login">
     <div class="g-login-view login">
-      <h2 class="title">系统登录</h2>
+      <h2 class="title"></h2>
       <dl
         class="content"
         @keyup.enter="loginBtn"
       >
         <dd>
-          <label>账号：</label>
+          <!-- <label>账号：</label> -->
           <input
             type="text"
-            placeholder="请输入账号"
+            placeholder="用户名"
             v-model.trim="login.userName"
           />
         </dd>
         <dd>
-          <label>密码：</label>
+          <!-- <label>密码：</label> -->
           <input
             type="password"
             placeholder="请输入密码"
@@ -29,11 +29,6 @@
         type="button"
         @click="loginBtn"
       >登录</button>
-      <button
-        class="grey"
-        type="button"
-        @click="cancelBtn"
-      >退出</button>
     </div>
   </div>
 </template>
@@ -118,7 +113,6 @@
           return false;
         }
       },
-      cancelBtn() { },
       //获取初始化数据并保存到本地
       getInitData() {
         this._getInfo({
@@ -190,33 +184,35 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #e6e6e6;
+    background: url("../assets/login_bg.png");
+    background-size: 100% 100%;
 
     &-view {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
+      bottom: 15%;
       margin: auto;
-      box-shadow: 0px 0px 10px #999;
+      //   box-shadow: 0px 0px 10px #999;
     }
   }
   .login {
     width: 5rem;
     height: 3.6rem;
     border-radius: 0.06rem;
-    background-color: rgba(50, 50, 50, 0.7);
+    // background-color: rgba(50, 50, 50, 0.7);
     padding: 0.35rem 0.48rem;
     .title {
-      color: #fee;
-      font-size: 0.16rem;
-      font-weight: normal;
-      margin: 0 0 0.3rem;
-      border-bottom: 1px solid #eee;
+      background: url("../assets/login_logo.png");
+      width: 2.7rem;
+      height: 0.7rem;
+      background-size: 100% 100%;
       padding-bottom: 0.2rem;
+      margin: 0 0.7rem 0.6rem 0.5rem;
     }
     .content {
+      margin-bottom: 0.4rem;
       dd {
         margin-bottom: 0.2rem;
         margin-inline-start: 0;
@@ -226,7 +222,7 @@
           color: #fff;
           display: inline-block;
           width: 0.46rem;
-          line-height: 0.42rem;
+          line-height: 0.54rem;
         }
         .select {
           width: 100%;
@@ -238,22 +234,22 @@
         height: 0.42rem;
         color: #888;
         /*background-color: #f4f4f4;*/
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: f8f9fb;
         padding: 0 0.2rem;
         box-sizing: border-box;
         border-radius: 0.04rem;
         border: 1px solid #ddd;
-        font-size: 0.14rem;
+        font-size: 0.2rem;
         flex: 1;
       }
     }
     button.btn {
       width: 100%;
       border: none;
-      font-size: 0.16rem;
-      height: 0.42rem;
-      color: #000;
-      background-color: #006699;
+      font-size: 0.24rem;
+      height: 0.54rem;
+      color: #fff;
+      background-color: #6baffc;
       letter-spacing: 0.05rem;
       /*border: 1px solid #eee;*/
       border-radius: 0.04rem;
