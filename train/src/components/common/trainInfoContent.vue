@@ -19,10 +19,25 @@
                 v-if="show == 1"
                 class="info-wrap"
               >
-                <span class="text">{{item.trainContentDesc}}</span>
-                <div class="set-time">
-                  <span>{{item.trainContentStartDate}}</span>
-                  <span>{{item.trainContentEndDate}}</span>
+                <div
+                  class="set-time"
+                  v-if="item.timeWay == '时间点'"
+                >
+                  <button class="btn-set-time start-time">完成时间</button>
+                  <span>{{item.trainContentEndDate}}
+                  </span>
+                </div>
+                <div
+                  class="set-time"
+                  v-else
+                >
+                  <button class="btn-set-time start-time">开始时间</button>
+                  <span>{{item.trainContentStartDate}}
+                  </span>
+
+                  <button class="btn-set-time">结束时间</button>
+                  <span>{{item.trainContentEndDate}}
+                  </span>
                 </div>
               </div>
               <div
@@ -153,6 +168,7 @@
     .item-info {
       //   padding: 0.05rem 0.35rem 0rem 0.35rem;
       position: relative;
+      //   border: 1px solid @c-border;
       .title-info {
         font-size: 0.22rem;
         height: 0.7rem;
@@ -171,7 +187,7 @@
         padding-left: 0.23rem;
         line-height: 0.5rem;
         white-space: normal;
-        border-bottom: 1px solid @c-border;
+        // border-bottom: 1px solid @c-border;
       }
       .tag-btn {
         position: absolute;
@@ -199,13 +215,13 @@
           color: #4c4f56;
         }
         .peopleTag.active {
-          //   background: #006699;
-          border-color: #2fcc9b;
+          border-color: #b6eddc;
+          background: #eefbf7;
         }
       }
     }
     .info-wrap {
-      padding: 0.25rem 0 0.25rem 0.15rem;
+      //   padding: 0.25rem 0 0.25rem 0.15rem;
       span {
         display: inline-block;
         font-size: 0.24rem;
@@ -229,6 +245,9 @@
     }
     .fault-list {
       padding-left: 0.26rem;
+      margin-bottom: 0.1rem;
+      margin-top: 0.1rem;
+      border-bottom: 1px solid transparent;
       .fault-title {
         font-size: 0.2rem;
         height: 0.6rem;
@@ -264,11 +283,7 @@
   .item-info .el-collapse-item__content {
     padding-bottom: 0 !important;
   }
-  .item-info .el-collapse-item__wrap:last-child {
-    // border-bottom-color: #f00 !important;
-  }
-  .item-info .el-collapse {
-    // border-top: none !important;
-    // border-bottom: none !important;
+  .item-info .el-collapse-item__arrow.el-icon-arrow-right {
+    margin-right: 0.5rem !important;
   }
 </style>

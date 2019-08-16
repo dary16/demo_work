@@ -2,6 +2,8 @@ import tab from "./tab.vue";
 import searchHeader from "./header/searchHeader.vue";
 import infoHeader from "./header/InfoHeader.vue";
 import popBox from "./pop/popBox.vue";
+//没有返回的header
+import header from "./header/header.vue";
 import listTitle from "./header/listTitle.vue";
 //选人
 import choosePeople from "./pop/choosePeople.vue";
@@ -21,12 +23,21 @@ import listInfoItem from "./common/listInfoItem.vue";
 import tags from "./common/tag.vue";
 //训练详细内容
 import trainInfoContent from "./common/trainInfoContent.vue";
+//训练详情 训练基本信息
+import listItemInfo from "./common/listItemInfo.vue";
+//签到人员详情
+import tagInfo from "./common/tagInfo.vue";
+//训练内容详情列表
+import itemBlock from "./common/itemBlock.vue";
+//测试合并单元格
+import strengthStatistics from "./strengthStatistics.vue";
 
 export default {
     tab,
     searchHeader,
     infoHeader,
     popBox,
+    header,
     listTitle,
     choosePeople,
     setPost,
@@ -36,5 +47,9 @@ export default {
     dataRecord,
     listInfoItem,
     tags,
-    trainInfoContent
+    trainInfoContent,
+    listItemInfo,
+    tagInfo,
+    itemBlock,
+    strengthStatistics
 };

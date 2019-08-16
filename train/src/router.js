@@ -59,36 +59,42 @@ export default new Router({
                     path: "/info",
                     name: "info",
                     component: () =>
-                        import ("./views/hasNoTrain/info.vue")
+                        import ("./views/common/info.vue")
                 }, {
                     path: '/trainInfo',
                     name: "trainInfo",
                     component: () =>
-                        import ("./views/hasNoTrain/trainInfo.vue")
+                        import ("./views/common/trainInfo.vue")
+                },
+                {
+                    path: '/trainInfoNot',
+                    name: "trainInfoNot",
+                    component: () =>
+                        import ("./views/common/trainInfoNot.vue")
                 },
                 {
                     path: '/suggestion',
                     name: "suggestion",
                     component: () =>
-                        import ("./views/hasNoTrain/suggestion.vue")
+                        import ("./views/common/suggestion.vue")
                 },
                 {
                     path: '/record',
                     name: "record",
                     component: () =>
-                        import ("./views/hasNoTrain/record.vue")
+                        import ("./views/common/record.vue")
                 },
                 {
                     path: '/errorRecord/:index',
                     name: "errorRecord",
                     component: () =>
-                        import ("./views/hasNoTrain/errorRecord.vue")
+                        import ("./views/common/errorRecord.vue")
                 },
                 {
                     path: '/addSuggestion',
                     name: "addSuggestion",
                     component: () =>
-                        import ("./views/hasNoTrain/addSuggestion.vue")
+                        import ("./views/common/addSuggestion.vue")
                 }
             ]
         }

@@ -4,10 +4,7 @@
       <div class="wrap">
         <div class="popHeader">
           <h3>实力统计</h3>
-          <i
-            class="el-icon-close"
-            v-on:click="closeFn"
-          ></i>
+          <i class="el-icon-close" v-on:click="closeFn"></i>
         </div>
         <div class="contentList">
           <ul class="title">
@@ -49,29 +46,16 @@
             </li>
           </ul>
           <div class="tableSelf">
-            <div
-              v-for="item in instanceCountArr"
-              class="clearfix rowSelf"
-            >
+            <div v-for="item in instanceCountArr" class="clearfix rowSelf">
               <!--连队-->
-              <div
-                class="colSelf width-10"
-                v-if="item.maxLength!=0"
-                v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}"
-              >{{item.ordName}}</div>
-              <div
-                class="colSelf width-10"
-                v-else
-              >{{item.ordName}}</div>
+              <div class="colSelf width-10" v-if="item.maxLength!=0" v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.ordName}}</div>
+              <div class="colSelf width-10" v-else>{{item.ordName}}</div>
               <div class="colSelf">
                 <dl class="sortCol">
                   <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.personNum}}</dt>
                   <dd>
                     <ul>
-                      <li
-                        v-for="subItem in item.psersonList"
-                        v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.psersonList.length-1))/item.psersonList.length)+'px'}"
-                      >
+                      <li v-for="subItem in item.psersonList" v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.psersonList.length-1))/item.psersonList.length)+'px'}">
                         <span>{{subItem.user_rank}}</span>
                         <span>{{subItem.user_num}}</span>
                       </li>
@@ -84,10 +68,7 @@
                   <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.leaderNum}}</dt>
                   <dd>
                     <ul>
-                      <li
-                        v-for="subItem in item.leaderList"
-                        v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.leaderList.length-1))/item.leaderList.length)+'px'}"
-                      >
+                      <li v-for="subItem in item.leaderList" v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.leaderList.length-1))/item.leaderList.length)+'px'}">
                         <span>{{subItem.user_rank}}</span>
                         <span>{{subItem.user_num}}</span>
                       </li>
@@ -101,10 +82,7 @@
                   <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.soldierNum}}</dt>
                   <dd>
                     <ul>
-                      <li
-                        v-for="subItem in item.soldierList"
-                        v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.soldierList.length-1))/item.soldierList.length)+'px'}"
-                      >
+                      <li v-for="subItem in item.soldierList" v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.soldierList.length-1))/item.soldierList.length)+'px'}">
                         <span>{{subItem.user_rank}}</span>
                         <span>{{subItem.user_num}}</span>
                       </li>
@@ -117,10 +95,7 @@
                   <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.carNum}}</dt>
                   <dd>
                     <ul>
-                      <li
-                        v-for="subItem in item.carList"
-                        v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.carList.length-1))/item.carList.length)+'px'}"
-                      >
+                      <li v-for="subItem in item.carList" v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.carList.length-1))/item.carList.length)+'px'}">
                         <span>{{subItem.carType}}</span>
                         <span>{{subItem.count}}</span>
                       </li>
@@ -128,18 +103,12 @@
                   </dd>
                 </dl>
               </div>
-              <div
-                class="colSelf"
-                style="border-right:none;"
-              >
+              <div class="colSelf" style="border-right:none;">
                 <dl class="sortCol">
                   <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.materialNum}}</dt>
                   <dd>
                     <ul>
-                      <li
-                        v-for="subItem in item.materialList"
-                        v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.materialList.length-1))/item.materialList.length)+'px'}"
-                      >
+                      <li v-for="subItem in item.materialList" v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.materialList.length-1))/item.materialList.length)+'px'}">
                         <span>{{subItem.equipType}}</span>
                         <span>{{subItem.count}}</span>
                       </li>
@@ -160,9 +129,7 @@
   export default {
     data() {
       return {
-        instanceCountArr: [
-          { psersonList: [], leaderList: [], soldierList: [], carList: [], materialList: [] }
-        ],
+        instanceCountArr: [],
         maxLength: 0,
         defaultHeight: 30
       };
@@ -175,26 +142,26 @@
       ...mapActions(['_getInfo']),
       //获取实力统计列表
       getInstanceCountFn() {
-        // this._getInfo({
-        //   ops: {},
-        //   api: 'getInstanceCount',
-        //   callback: res => {
-        //     res.forEach(item => {
-        //       //人员
-        //       var a = item.psersonList.length;
-        //       //领导
-        //       var b = item.leaderList.length;
-        //       //战士
-        //       var c = item.soldierList.length;
-        //       //车辆
-        //       var d = item.carList.length;
-        //       //装备
-        //       var e = item.materialList.length;
-        //       item.maxLength = Math.max(a, b, c, d, e);
-        //     })
-        //     this.instanceCountArr = res;
-        //   }
-        // });
+        this._getInfo({
+          ops: {},
+          api: 'getInstanceCount',
+          callback: res => {
+            res.forEach(item => {
+              //人员
+              var a = item.psersonList.length;
+              //领导
+              var b = item.leaderList.length;
+              //战士
+              var c = item.soldierList.length;
+              //车辆
+              var d = item.carList.length;
+              //装备
+              var e = item.materialList.length;
+              item.maxLength = Math.max(a, b, c, d, e);
+            })
+            this.instanceCountArr = res;
+          }
+        });
       },
       //关闭
       closeFn() {

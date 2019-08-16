@@ -6,7 +6,6 @@
       :key="item.subjectID"
     >
       <div class="content-header clearfix">
-
         <ul class="header-wrap">
           <li class="right">
             <i class="header-icon el-icon-caret-right"></i>

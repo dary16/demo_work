@@ -179,8 +179,8 @@
           color: #4c4f56;
         }
         .peopleTag.active {
-          //   background: #006699;
-          border-color: #2fcc9b;
+          border-color: #b6eddc;
+          background: #eefbf7;
         }
       }
     }

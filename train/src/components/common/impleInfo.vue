@@ -3,6 +3,7 @@
     <v-info-header
       v-on:backFn="back"
       :titleData="infoChildData.title"
+      :show="show"
     ></v-info-header>
 
     <div class="content">
@@ -115,7 +116,8 @@
         nowTime: '',
         show: 0,
         firstName: '',
-        helpName: ''
+        helpName: '',
+        show: 0
       };
     },
     props: ['infoData'],
@@ -278,6 +280,7 @@
         .item-info {
           //   padding: 0.05rem 0.35rem 0rem 0.35rem;
           display: flex;
+          border-top: 1px solid @c-border;
           .tags-wrap {
             flex: 1;
             border-right: 1px solid @c-border;
@@ -313,8 +316,8 @@
                 line-height: 0.36rem;
               }
               .peopleTag.active {
-                //   background: #006699;
-                border-color: #2fcc9b;
+                border-color: #b6eddc;
+                background: #eefbf7;
               }
             }
           }
@@ -323,7 +326,7 @@
             display: flex;
             padding: 0.26rem 0 0.24rem 0;
             .select-wrap {
-              margin: 0 0.2rem;
+              margin: 0 0.5rem;
             }
             .p-left {
               flex: 1;
@@ -430,6 +433,7 @@
   .select-wrap .el-input--mini .el-input__inner {
     height: 0.36rem !important;
     line-height: 0.36rem !important;
+    font-size: 0.18rem !important;
   }
   .select-wrap .el-select-dropdown__list {
     padding: 0 !important;
@@ -440,5 +444,17 @@
   }
   .el-popper[x-placement^="bottom"] {
     margin-top: 0 !important;
+  }
+  .el-select-dropdown__item {
+    font-size: 0.18rem !important;
+  }
+  .el-input--mini .el-input__icon {
+    line-height: 0.36rem !important;
+  }
+  .el-select .el-input__inner {
+    padding-right: 0.3rem !important;
+  }
+  .el-select .el-input .el-select__caret {
+    font-size: 0.14rem !important;
   }
 </style>

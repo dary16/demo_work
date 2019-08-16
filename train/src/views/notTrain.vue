@@ -1,6 +1,6 @@
 <template>
   <div class="xl-list clearfix">
-    <v-info-header :titleData="title"></v-info-header>
+    <v-header :titleData="title"></v-header>
     <div class="xl-header">
       <div class="xl-right">
         <button
@@ -10,7 +10,6 @@
           <i class="el-icon-download"></i>
           数据下载</button>
         <span class="fr">{{nowTime}}</span>
-
       </div>
     </div>
     <v-list-item
@@ -32,7 +31,8 @@
       return {
         nowTime: '',
         infoList: [],
-        title: "待实施训练"
+        title: "待实施训练",
+        show: false
       };
     },
     //监听属性 类似于data概念
@@ -73,7 +73,7 @@
       },
       showInfo(index) {
         this._nowIndex(index);
-        this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } });
+        this.$router.push({ name: 'trainInfoNot', params: { infoList: this.infoList[index] } });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

@@ -1,6 +1,6 @@
 <template>
   <div class='week-plan'>
-    <v-info-header :titleData="title"></v-info-header>
+    <v-header :titleData="title"></v-header>
     <div class="content">
       <header>
         <el-select

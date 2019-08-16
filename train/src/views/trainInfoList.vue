@@ -4,14 +4,32 @@
       v-on:backFn="back"
       :titleData="title"
     ></v-info-header>
-    <v-list-title>训练准备信息</v-list-title>
-    <v-list-info-item :infoList="infoList"></v-list-info-item>
-    <v-list-title>人员签到</v-list-title>
-    <v-tags :tags="tags"></v-tags>
-    <v-train-info-content
-      :content="content"
-      :show="show"
-    ></v-train-info-content>
+    <div class="content">
+      <v-list-title>训练准备信息</v-list-title>
+      <v-list-item-info :infoList="infoList"></v-list-item-info>
+      <v-list-title>人员签到</v-list-title>
+      <v-tag-info
+        :tags="infoList.joinAstronautNames"
+        :title="tagTitle"
+        :chargeTeacherName="infoList.chargeTeacherName"
+        :auxiliaryLecturerName="infoList.auxiliaryLecturerName"
+      ></v-tag-info>
+      <v-train-info-content
+        :content="content"
+        :show="show"
+      ></v-train-info-content>
+      <div class="buttons">
+        <button
+          class="normal-btn-border-lg mr"
+          @click="suggestion"
+        >意见建议</button>
+        <button
+          class="normal-btn-border-lg mr"
+          @click="recordFn"
+        >数据项记录</button>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -23,8 +41,8 @@
       //这里存放数据
       return {
         title: "训练信息查看",
+        tagTitle: "实到人员",
         infoList: [],
-        tags: [],
         content: [],
         show: 1//区别是已实施还是未实施的详情
       };
@@ -39,6 +57,12 @@
     methods: {
       back() {
         this.$router.go(-1);
+      },
+      suggestion() {
+        console.log('意见建议');
+      },
+      recordFn() {
+        console.log('数据项');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -59,4 +83,18 @@
   }
 </script>
 <style lang='less' scoped>
+  .train {
+    .content {
+      position: fixed;
+      top: 0.92rem;
+      bottom: 0rem;
+      left: 1.9rem;
+      right: 0.74rem;
+      overflow-y: auto;
+    }
+    .buttons {
+      text-align: right;
+      line-height: 1rem;
+    }
+  }
 </style>

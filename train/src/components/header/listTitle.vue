@@ -44,7 +44,7 @@
     color: #17233b;
     height: 0.6rem;
     line-height: 0.6rem;
-    border-bottom: 1px solid @c-border;
+    // border-bottom: 1px solid @c-border;
     padding-left: 0.2rem;
     .line {
       width: 0.07rem;

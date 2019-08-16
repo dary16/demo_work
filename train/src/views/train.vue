@@ -1,14 +1,12 @@
 <template>
   <div class="xl-list clearfix">
-    <v-info-header :titleData="title"></v-info-header>
+    <v-header :titleData="title"></v-header>
     <div class="xl-header">
-      <h2>已实施训练</h2>
-      <span v-if="showNum">(未上传：{{notNum}})</span>
       <div class="xl-right">
         <div v-if="notUpload">
-          <span>{{nowTime}}</span>
+          <span v-if="showNum">(未上传：{{notNum}})</span>
           <button
-            class="normal-btn"
+            class="normal-btn-border-lg fr"
             @click="uploadData"
           >数据上传</button>
         </div>
@@ -71,7 +69,8 @@
         nowTime: '',
         checkAll: false,
         newInfoList: [],//暂存复选框改变时数据
-        uploadList: []
+        uploadList: [],
+        show: 1
       };
     },
     //监听属性 类似于data概念
@@ -168,10 +167,7 @@
     .xl-header {
       width: 100%;
       padding: 0.05rem 0.1rem;
-      border-top: 1px solid #949494;
-      border-bottom: 1px solid #949494;
       display: flex;
-      background: #f2f2f2;
       h2 {
         font-size: 0.3rem;
         color: #006699;
@@ -186,6 +182,7 @@
       }
       .xl-right {
         flex: 1;
+        margin-top: 0.18rem;
         .normal-btn,
         span {
           float: right;

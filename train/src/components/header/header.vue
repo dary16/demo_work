@@ -1,9 +1,5 @@
 <template>
   <div class="header">
-    <i
-      class="el-icon-arrow-left"
-      @click="back"
-    ></i>
     <h3>{{titleData}}</h3>
     <ul>
       <li>
@@ -33,25 +29,10 @@
     watch: {},
     //方法集合
     methods: {
-      back() {
-        this.$emit("backFn");
-      },
-      logout() {
-        this.oMsgBox('是否确认退出?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$router.push('./login');
-        }).catch(() => {
-          return false;
-        });
-      }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       this.realName = getLoc('userInfo').realName;
-      console.log(this.show);
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {
