@@ -5,7 +5,10 @@
       v-for="(item,index) in infoList"
       :key="item.subjectID"
     >
-      <div class="content-header clearfix">
+      <div
+        class="content-header clearfix"
+        @click="showInfo(index)"
+      >
         <ul class="header-wrap">
           <li class="right">
             <i class="header-icon el-icon-caret-right"></i>
@@ -31,10 +34,7 @@
           <!-- <i class="el-icon-s-flag"></i> -->
           <img class="flag" src="../../assets/flag.png"/>
           训练实施</button>
-          <div
-            class="more"
-            @click="showInfo(index)"
-          >
+          <div class="more">
             <i class="el-icon-arrow-right"></i>
           </div>
           <span class="fr">

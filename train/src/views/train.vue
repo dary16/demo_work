@@ -4,10 +4,11 @@
     <div class="xl-header">
       <div class="xl-right">
         <div v-if="notUpload">
-          <span v-if="showNum">(未上传：{{notNum}})</span>
+          <span v-show="notNum !== 0">(未上传：{{notNum}})</span>
           <button
             class="normal-btn-border-lg fr"
             @click="uploadData"
+            v-show="notNum !== 0"
           >数据上传</button>
         </div>
         <div
@@ -60,7 +61,6 @@
     data() {
       //这里存放数据
       return {
-        showNum: true,
         numLength: 0,
         chooseLoad: false,
         notUpload: true,
@@ -107,7 +107,7 @@
         setTimeout(() => {
           //待优化：取未上传的数据还是所有的数据，暂时取所有的数据，
           //可以把未上传的和已上传的分开，最后存时再合并
-          let data = getLoc(this.userInfo.personID).trainListData;
+          let data = getLoc(this.userInfo.personID).trainListData || [];
           data.forEach(item => {
             this.uploadList.forEach(item2 => {
               //判断在已上传数组中的数据
@@ -183,9 +183,11 @@
       .xl-right {
         flex: 1;
         margin-top: 0.18rem;
+        margin-right: 0.74rem;
         .normal-btn,
         span {
           float: right;
+          margin-right: 0.1rem;
         }
 
         span {

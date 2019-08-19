@@ -16,5 +16,9 @@ export default {
     },
     _nowIndex(state, nowIndex) {
         state.nowIndex = nowIndex;
-    }
+    },
+    _userData(state, userData) {
+        setLoc('userData', userData);
+        state.userData = userData;
+    },
 }

@@ -19,7 +19,6 @@
       //这里存放数据
       return {
         realName: '',//用户真实名称
-        show: true
       };
     },
     props: ['titleData'],

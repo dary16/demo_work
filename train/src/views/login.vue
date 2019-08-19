@@ -19,7 +19,7 @@
           <!-- <label>密码：</label> -->
           <input
             type="password"
-            placeholder="请输入密码"
+            placeholder="密码"
             v-model="login.password"
           />
         </dd>
@@ -30,6 +30,10 @@
         @click="loginBtn"
       >登录</button>
     </div>
+    <div
+      class="g-login-wrap"
+      v-show="getData"
+    ></div>
   </div>
 </template>
 
@@ -46,19 +50,20 @@
           userName: "",
           password: ""
         },
-        initData: {}//初始化数据
+        initData: {},//初始化数据
+        getData: true
       };
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['allData', 'userInfo']),
+      ...mapState(['allData', 'userInfo', 'userData']),
     },
     //监控data中的数据变化
     watch: {
     },
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData', '_weekPlanData']),
+      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userData']),
       ...mapActions(['_getInfo']),
       //登录确定
       loginBtn() {
@@ -85,7 +90,7 @@
           }
         }
         // 获取用户信息，与登录信息进行匹配
-        const userArr = this.allData.allData.user;
+        const userArr = this.userData;
         let result = userArr.filter((item, index) => {
           if(item.userName == this.login.userName && item.password == this.login.password) {
             //保存当前登录人信息
@@ -122,7 +127,9 @@
             let resData = { 'allData': res };
             this.initData = res;
             this._allData(resData);
-            console.log(this.allData, 'allData');
+            console.log(this.allData.allData.user, 'allData');
+            this._userData(this.allData.allData.user);
+            this.getData = false;
             this.initLocal();
           }
         })
@@ -135,26 +142,12 @@
           this.getWeekPlanData();
         }
 
-        //未参训数据
-        // if(getLoc('notActionListData')) {
-        //   this._notActionListData(getLoc('notActionListData'));
-        // } else {
-        // this.getNotActionData();
-        // }
-
-        //参训数据
-        // if(getLoc('actionListData')) {
-        //   this._actionListData(getLoc('actionListData'));
-        // } else {
-        //   this.getActionData();
-        // }
       },
       //初始化未实施数据
       //   getNotActionData() {
       //     this._notActionListData(this.initData.notActionList);
       //   },
       getWeekPlanData() {
-        // console.log('init3', this.initData.weekPlan);
         this._weekPlanData(this.initData.weekPlan);
       }
     },
@@ -195,6 +188,17 @@
       bottom: 15%;
       margin: auto;
       //   box-shadow: 0px 0px 10px #999;
+    }
+    &-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      z-index: 99;
+      background: url("../assets/wrap_login.jpg");
+      background-size: 100% 100%;
     }
   }
   .login {

@@ -23,7 +23,6 @@
       //这里存放数据
       return {
         realName: '',//用户真实名称
-        show: true
       };
     },
     props: ['titleData'],
@@ -51,12 +50,9 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       this.realName = getLoc('userInfo').realName;
-      console.log(this.show);
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }

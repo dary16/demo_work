@@ -97,6 +97,16 @@ export default new Router({
                         import ("./views/common/addSuggestion.vue")
                 }
             ]
+        },
+        {
+            name: '404',
+            path: '/404',
+            component: () =>
+                import ('./views/notFound')
+        },
+        {
+            path: '*',
+            redirect: '/404'
         }
     ]
 });

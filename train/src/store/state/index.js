@@ -4,6 +4,7 @@
  * @allData 总数据
  * @weekPlanData 周计划数据
  * @nowIndex 点击未实施/已实施的索引值
+ * @userData 用户数据
  */
 import {
     getLoc
@@ -12,5 +13,6 @@ export default {
     userInfo: getLoc('userInfo') || {},
     allData: getLoc('allData') || {},
     weekPlanData: getLoc('weekPlanData') || [],
-    nowIndex: -1
+    nowIndex: -1,
+    userData: getLoc('userData') || []
 }

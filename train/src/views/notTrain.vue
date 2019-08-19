@@ -31,8 +31,7 @@
       return {
         nowTime: '',
         infoList: [],
-        title: "待实施训练",
-        show: false
+        title: "待实施训练"
       };
     },
     //监听属性 类似于data概念
@@ -78,8 +77,13 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.infoList = getLoc(this.userInfo.userID).notActionData || [];
-      this.nowTime = getLoc(this.userInfo.userID).loadTime || '';
+      if(getLoc(this.userInfo.userID) === null) {
+        this.infoList = [];
+        this.nowTime = '';
+      } else {
+        this.infoList = getLoc(this.userInfo.userID).notActionData;
+        this.nowTime = getLoc(this.userInfo.userID).loadTime;
+      };
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
