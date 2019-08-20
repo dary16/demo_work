@@ -3,13 +3,13 @@
     <v-header :titleData="title"></v-header>
     <div class="xl-header">
       <div class="xl-right">
-        <span class="fr">{{nowTime}}</span>
         <button
           class="normal-btn-border-lg fr btn-dowmload"
           @click="downloadData"
         >
           <i class="el-icon-download"></i>
           数据下载</button>
+        <span class="fr">{{nowTime}}</span>
       </div>
     </div>
     <v-list-item

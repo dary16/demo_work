@@ -13,7 +13,7 @@
           <li class="right">
             <i class="header-icon el-icon-caret-right"></i>
           </li>
-          <li class="other">
+          <li class="time">
             <span class="value">{{item.classDate}}</span>
           </li>
           <li class="other">
@@ -166,6 +166,9 @@
           li {
             float: left;
             margin-right: 0.3rem;
+            &.time {
+              width: 4rem;
+            }
             &.other {
               width: 2rem;
             }

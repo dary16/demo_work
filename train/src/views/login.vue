@@ -32,7 +32,7 @@
     </div>
     <div
       class="g-login-wrap"
-      v-show="getData"
+      v-show="showWelcome"
     ></div>
   </div>
 </template>
@@ -42,6 +42,7 @@
     getLoc, setLoc
   } from '../utils/common.js';
   import { mapState, mapMutations, mapActions } from 'vuex';
+  import { setTimeout } from 'timers';
   export default {
     data() {
       //这里存放数据
@@ -51,7 +52,7 @@
           password: ""
         },
         initData: {},//初始化数据
-        getData: true
+        showWelcome: true
       };
     },
     //监听属性 类似于data概念
@@ -131,7 +132,6 @@
             this._allData(resData);
             console.log(this.allData.allData.user, 'allData');
             this._userData(this.allData.allData.user);
-            this.getData = false;
             this.initLocal();
           }
         })
@@ -155,11 +155,20 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.getInitData();
-      //登录数据
-      if(getLoc('userInfo')) {
-        this.login = getLoc('userInfo');
-      }
+      //模拟下载用户数据，后期改
+      setTimeout(() => {
+        this.showWelcome = false;
+        this.getInitData();
+        //登录数据
+        if(getLoc('userInfo')) {
+          this.login = getLoc('userInfo');
+        }
+      }, 1000)
+      //   this.getInitData();
+      //   //登录数据
+      //   if(getLoc('userInfo')) {
+      //     this.login = getLoc('userInfo');
+      //   }
 
       //   this.$http.get('../../all.json')
       //     .then(function(res) {
@@ -238,8 +247,6 @@
         width: 100%;
         border: none;
         height: 0.42rem;
-        color: #888;
-        /*background-color: #f4f4f4;*/
         background-color: f8f9fb;
         padding: 0 0.2rem;
         box-sizing: border-box;
