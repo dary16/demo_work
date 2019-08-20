@@ -91,30 +91,32 @@
         }
         // 获取用户信息，与登录信息进行匹配
         const userArr = this.userData;
+        let loading;
         let result = userArr.filter((item, index) => {
           if(item.userName == this.login.userName && item.password == this.login.password) {
+            //loading加载
+            loading = this.$loading({
+              lock: true,
+              text: '正在拼命加载中...',
+              spinner: 'el-icon-loading',
+              background: 'rgba(0, 0, 0, 0.7)'
+            });
             //保存当前登录人信息
             this._userInfo(item);
             return true;
           }
         });
-        //loading加载
-        const loading = this.$loading({
-          lock: true,
-          text: '正在拼命加载中...',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)'
-        });
+
         if(result.length > 0) {
           loading.close();
           this.$router.push('/layout');
         } else {
-          //   this.message.warning('登陆失败！');
           this.$message({
-            message: '登陆失败',
-            type: 'warning',
-            offset: '500'
-          })
+            message: '登陆失败,用户名或密码错误！',
+            type: 'error',
+            offset: '100',
+            center: true
+          });
           return false;
         }
       },
@@ -185,7 +187,7 @@
       top: 0;
       left: 0;
       right: 0;
-      bottom: 15%;
+      bottom: 20%;
       margin: auto;
       //   box-shadow: 0px 0px 10px #999;
     }

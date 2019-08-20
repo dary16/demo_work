@@ -7,8 +7,11 @@
       v-for="(item,index) in content"
       :key="item.trainContentID"
     >
-      <el-collapse accordion>
-        <el-collapse-item>
+      <el-collapse
+        accordion
+        v-model="activeName"
+      >
+        <el-collapse-item :name="index">
           <template slot="title">
             <div class="title-info">
               <i class="header-icon el-icon-caret-right"></i>
@@ -103,11 +106,14 @@
             <div
               class="fault-list"
               v-if="item.faultInfo.length > 0"
-              v-for="item2 in item.faultInfo"
+              v-for="(item2,index2) in item.faultInfo"
               :key="item2.id"
             >
-              <el-collapse accordion>
-                <el-collapse-item>
+              <el-collapse
+                accordion
+                :v-model="errorActive"
+              >
+                <el-collapse-item :name="index2">
                   <template slot="title">
                     <!-- <i class="error-icon el-icon-warning"></i> -->
                     <img src="../../assets/warn.png" class="error-icon"/>
@@ -131,6 +137,8 @@
     data() {
       //这里存放数据
       return {
+        activeName: 0,
+        errorActive: 0
       };
     },
     props: ['content', 'show'],

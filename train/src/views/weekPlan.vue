@@ -21,7 +21,6 @@
         :data="timeData"
         highlight-current-row
         border
-        height="350"
         @current-change="handleCurrentChange"
         style="width: 100%"
       >
