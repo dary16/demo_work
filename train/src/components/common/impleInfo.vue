@@ -44,6 +44,7 @@
                   size="mini"
                   v-model="firstName"
                   placeholder="请选择"
+                  @change="changName"
                 >
                   <el-option
                     v-for="item in infoChildData.teachList"
@@ -62,6 +63,7 @@
                   size="mini"
                   v-model="helpName"
                   placeholder="请选择"
+                  @change="changHelpName"
                 >
                   <el-option
                     v-for="item in infoChildData.helpTeachList"
@@ -236,6 +238,20 @@
         //更新未实施数据
         setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
         this.$emit('doneFn');
+      },
+      //辅助教员
+      changHelpName(v) {
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        oldActionData[this.nowIndex].auxiliaryLecturerName = v;
+        //更新未实施数据
+        setLoc(getLoc('userInfo').userID, { "notActionData": oldActionData, "loadTime": getLoc(this.userInfo.userID).loadTime });
+      },
+      //主教员
+      changName(v) {
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        oldActionData[this.nowIndex].chargeTeacherName = v;
+        //更新未实施数据
+        setLoc(getLoc('userInfo').userID, { "notActionData": oldActionData, "loadTime": getLoc(this.userInfo.userID).loadTime });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

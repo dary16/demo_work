@@ -84,12 +84,14 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
+      console.log(getLoc(this.userInfo.userID));
       if(getLoc(this.userInfo.userID) === null) {
         this.infoList = [];
         this.nowTime = '';
       } else {
         this.infoList = getLoc(this.userInfo.userID).notActionData;
         this.nowTime = getLoc(this.userInfo.userID).loadTime;
+        console.log(this.infoList, this.nowTime);
       };
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
