@@ -34,21 +34,29 @@
           <!-- <i class="el-icon-s-flag"></i> -->
           <img class="flag" src="../../assets/flag.png"/>
           训练实施</button>
-          <div class="more">
-            <i class="el-icon-arrow-right"></i>
-          </div>
-          <span class="fr">
-            <span v-if="item.upload && item.trainOrNot">已上传</span>
-            <span v-if="chooseLoad">
-              <!-- <el-checkbox :label="item.chargeTeacherID"></el-checkbox> -->
-              <input
-                type="checkbox"
-                name="checkBoxs"
-                v-model="item.isChecked"
-                @change="changeFn(item,index)"
-              >
+          <button
+            class="normal-no-border fr"
+            @click="doEdit(index)"
+            v-else
+          >
+            <!-- <i class="el-icon-s-flag"></i> -->
+            <img class="flag" src="../../assets/flag.png"/>
+          训练修改</button>
+            <div class="more">
+              <i class="el-icon-arrow-right"></i>
+            </div>
+            <span class="fr">
+              <span v-if="item.upload && item.trainOrNot">已上传</span>
+              <span v-if="chooseLoad">
+                <!-- <el-checkbox :label="item.chargeTeacherID"></el-checkbox> -->
+                <input
+                  type="checkbox"
+                  name="checkBoxs"
+                  v-model="item.isChecked"
+                  @change="changeFn(item,index)"
+                >
+              </span>
             </span>
-          </span>
       </div>
       <div class="content-info">
         <ul class="info-list">
@@ -97,6 +105,9 @@
     methods: {
       doAction(val) {
         this.$emit("doAction", val);
+      },
+      doEdit(val) {
+        this.$emit("doEdit", val);
       },
       showInfo(val) {
         this.$emit("showInfo", val);

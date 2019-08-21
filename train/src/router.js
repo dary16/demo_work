@@ -61,6 +61,11 @@ export default new Router({
                     component: () =>
                         import ("./views/common/info.vue")
                 }, {
+                    path: "/editInfo",
+                    name: "editInfo",
+                    component: () =>
+                        import ("./views/common/editInfo.vue")
+                }, {
                     path: '/trainInfo',
                     name: "trainInfo",
                     component: () =>
