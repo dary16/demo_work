@@ -135,6 +135,16 @@
             this.initLocal();
           }
         })
+        // this.$http.get('../../all.json')
+        //   .then((res) => {
+        //     let resData = { 'allData': res };
+        //     this.initData = res;
+        //     this._allData(resData.allData.body);
+        //     console.log(resData.allData.body, 'allData');
+        //     this._userData(resData.allData.body.user);
+        //     this.initLocal();
+        //   }
+        //   )
       },
       initLocal() {
         //周计划数据

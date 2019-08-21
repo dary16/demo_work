@@ -7,13 +7,10 @@
       v-for="(item,index) in content"
       :key="item.trainContentID"
     >
-      <el-collapse
-        accordion
-        v-model="activeName"
-      >
+      <el-collapse v-model="activeName">
         <el-collapse-item :name="index">
           <template slot="title">
-            <div @click="test">
+            <div @click="stopPrep">
               <div class="title-info">
                 <i class="header-icon el-icon-caret-right"></i>
                 <span>{{item.trainContentName}}</span>
@@ -124,7 +121,7 @@
               <el-collapse :v-model="errorActive">
                 <el-collapse-item :name="index2">
                   <template slot="title">
-                    <div @click="test">
+                    <div @click="stopPrep">
                       <img src="../../assets/warn.png" class="error-icon"/>
                       <span class="fault-title">{{item2.abnormalObject}}在{{item2.abnormalDate}}发生了异常</span>
                     </div>
@@ -167,19 +164,15 @@
       errorRecord(i) {
         this.$emit('errorRecord', i)
       },
-      test(e) {
+      stopPrep(e) {
         e.stopPropagation();
         return false;
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() {
-
-    },
+    created() { },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }

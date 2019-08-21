@@ -59,6 +59,13 @@
       downloadData() {
         //后期要改，直接取未实施数据
         this.nowTime = this.util.formatDate(new Date().getTime(), 3);
+        // this.$http.get('../../all.json')
+        //   .then((res) => {
+        //     console.log(res.body.notActionList);
+        //     setLoc(getLoc('userInfo').userID, { "notActionData": res.body.notActionList, "loadTime": this.nowTime });
+        //     this.infoList = res.body.notActionList;
+        //   }
+        //   )
         this._getInfo({
           method: 'get',
           api: 'getLogin',
