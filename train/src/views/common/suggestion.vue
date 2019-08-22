@@ -78,18 +78,28 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userInfo'])
+      ...mapState(['nowIndex', 'userInfo', 'tabIndex'])
     },
     //监控data中的数据变化
     watch: {
       listData: {
         handler(newValue, oldValue) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData.length;
-          //数组的替换
-          oldActionData[this.nowIndex].commentData.splice(0, arrLen, ...newValue);
-          //更新本地数据存储
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          if(this.tabIndex === 1) {
+            let oldActionData = getLoc(this.userInfo.userID).notActionData;
+            let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData.length;
+            //数组的替换
+            oldActionData[this.nowIndex].commentData.splice(0, arrLen, ...newValue);
+            //更新本地数据存储
+            setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          } else if(this.tabIndex === 2) {
+            let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+            let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].commentData.length;
+            //数组的替换
+            oldTrainData[this.nowIndex].commentData.splice(0, arrLen, ...newValue);
+            //更新本地数据存储
+            setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          }
+
         },
         deep: true
       }
@@ -114,16 +124,30 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      let oldActionData = getLoc(this.userInfo.userID).notActionData;
-      if(this.$route.params.addData) {
-        this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
-        this.listData.push(this.$route.params.addData);
-        oldActionData[this.nowIndex].commentData.push(this.$route.params.addData);
-        //更新本地缓存
-        setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
-      } else {
-        this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
+      if(this.tabIndex === 1) {
+        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        if(this.$route.params.addData) {
+          this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
+          this.listData.push(this.$route.params.addData);
+          oldActionData[this.nowIndex].commentData.push(this.$route.params.addData);
+          //更新本地缓存
+          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+        } else {
+          this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
+        }
+      } else if(this.tabIndex === 2) {
+        let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+        if(this.$route.params.addData) {
+          this.listData = getLoc(this.userInfo.personID).trainListData[this.nowIndex].commentData;
+          this.listData.push(this.$route.params.addData);
+          oldTrainData[this.nowIndex].commentData.push(this.$route.params.addData);
+          //更新本地缓存
+          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+        } else {
+          this.listData = getLoc(this.userInfo.personID).trainListData[this.nowIndex].commentData;
+        }
       }
+
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

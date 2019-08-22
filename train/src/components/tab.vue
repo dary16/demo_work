@@ -39,6 +39,7 @@
 </template>
 
 <script>
+  import { mapMutations, mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -47,12 +48,20 @@
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['tabIndex'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
     methods: {
+      ...mapMutations(['_tabIndex']),
       tabFn(index) {
+        if(index === 1) {
+          this._tabIndex(1);
+        } else if(index === 2) {
+          this._tabIndex(2);
+        }
         this.indexed = index;
         this.$emit("tabIndex", this.indexed);
       },

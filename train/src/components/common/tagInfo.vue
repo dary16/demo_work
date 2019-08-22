@@ -9,7 +9,6 @@
           size="mini"
           v-for="(item,index) in tags"
           :key="item.trainImplementAstronautID"
-          @click="tagFn(index)"
         >{{item.trainImplementAstronautName}}
           <span v-if="item.post !== ''">({{item.post}})</span>
         </el-tag>

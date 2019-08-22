@@ -59,10 +59,10 @@
         this.$router.go(-1);
       },
       suggestion() {
-        console.log('意见建议');
+        this.$router.push('/editSuggestion');
       },
       recordFn() {
-        console.log('数据项');
+        this.$router.push('/editRecord');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

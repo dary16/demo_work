@@ -123,6 +123,7 @@
       },
       //获取初始化数据并保存到本地
       getInitData() {
+
         this._getInfo({
           method: 'get',
           api: 'getLogin',
@@ -135,6 +136,8 @@
             this.initLocal();
           }
         })
+
+
         // this.$http.get('../../all.json')
         //   .then((res) => {
         //     let resData = { 'allData': res };

@@ -21,4 +21,7 @@ export default {
         setLoc('userData', userData);
         state.userData = userData;
     },
+    _tabIndex(state, tabIndex) {
+        state.tabIndex = tabIndex;
+    },
 }

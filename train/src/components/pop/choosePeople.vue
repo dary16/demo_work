@@ -50,13 +50,21 @@
     },
     props: ['popTitle'],
     computed: {
-      ...mapState(['userInfo', 'nowIndex'])
+      ...mapState(['userInfo', 'nowIndex', 'tabIndex'])
     },
     created() {
-      let names = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
-      names.forEach(name => {
-        this.peoples.push(name.trainImplementAstronautName);
-      });
+      if(this.tabIndex === 1) {
+        let names = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
+        names.forEach(name => {
+          this.peoples.push(name.trainImplementAstronautName);
+        });
+      } else if(this.tabIndex === 2) {
+        let names = getLoc(this.userInfo.personID).trainListData[this.nowIndex].joinAstronautNames;
+        names.forEach(name => {
+          this.peoples.push(name.trainImplementAstronautName);
+        });
+      }
+
     },
     methods: {
       onSubmit() {
@@ -66,6 +74,7 @@
         this.$emit('cancle', false);
       },
       handleCheckAllChange(val) {
+        var peopleOptions = this.peoples;
         this.checkPeoples = val ? peopleOptions : [];
         this.isIndeterminate = false;
       },

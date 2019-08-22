@@ -103,7 +103,7 @@
   import {
     getLoc, setLoc
   } from '../../utils/common.js';
-  import { mapMutations, mapState } from 'vuex';
+  import { mapState } from 'vuex';
 
   export default {
     data() {
@@ -125,7 +125,7 @@
     props: ['infoData'],
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userInfo', 'nowIndex', 'tabIndex'])
+      ...mapState(['userInfo', 'nowIndex'])
     },
     //监控data中的数据变化
     watch: {
@@ -137,32 +137,16 @@
       }
     },
     methods: {
-      ...mapMutations(['_allData']),
       tagFn(i) {
+        //改变签到状态
         this.infoChildData.tags[i].isSignIn = !this.infoChildData.tags[i].isSignIn;
-        if(this.tabIndex === 1) {
-          //改变签到状态
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          let arrLen = oldActionData[this.nowIndex].joinAstronautNames.length;
-          //数组的替换
-          oldActionData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...this.infoChildData.tags);
-          //更新本地数据存储
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
-          this.$emit('updateFn');
-        } else if(this.tabIndex === 2) {
-          //改变签到状态
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          let arrLen = oldTrainData[this.nowIndex].joinAstronautNames.length;
-          //数组的替换
-          oldTrainData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...this.infoChildData.tags);
-          //更新本地数据存储
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
-        }
-
-      },
-      //设置时间
-      setTime(index) {
-        // let time = this.util.formatDate(new Date().getTime(), 3);
+        let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+        let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].joinAstronautNames.length;
+        //数组的替换
+        oldTrainData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...this.infoChildData.tags);
+        //更新本地数据存储
+        setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+        this.$emit('updateFn');
       },
       //返回
       back() {
@@ -188,42 +172,36 @@
       chooseStartTime(i) {
         this.nowTime = this.util.formatDate(new Date().getTime(), 7);
         this.infoChildData.trainList[i].trainContentStartDate = this.nowTime;
-        if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList.length;
-          //数组的替换
-          oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
-          //更新本地数据存储
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
-
-        } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList.length;
-          //数组的替换
-          oldTrainData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
-          //更新本地数据存储
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
-        }
+        let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+        let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList.length;
+        //数组的替换
+        oldTrainData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
+        //更新本地数据存储
+        setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+        this.$emit('updateTimeFn');
       },
       //结束时间
       chooseEndTime(i) {
         this.nowTime = this.util.formatDate(new Date().getTime(), 7);
         this.infoChildData.trainList[i].trainContentEndDate = this.nowTime;
-        if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList.length;
-          //数组的替换
-          oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
-          //更新本地数据存储
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+        let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+        let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList.length;
+        //数组的替换
+        oldTrainData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
+        //更新本地数据存储
+        setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+        this.$emit('updateTimeFn');
+      },
+      handleConfirm(value) {
+        //时间转换
+        this.test = this.util.formatDateMin(value).slice(0, 16);
+        let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+        let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList.length;
 
-        } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList.length;
-          //数组的替换
-          oldTrainData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
-          //更新本地数据存储
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+        if(this.time.type == 'start') {
+          this.infoChildData.trainList[this.time.index].trainContentStartDate = this.test;
+        } else {
+          this.infoChildData.trainList[this.time.index].trainContentEndDate = this.test;
         }
       },
       cancelFn() {
@@ -231,64 +209,21 @@
         this.time.type = '';
       },
       doneFn() {
-        if(this.tabIndex === 1) {
-          //未实施数据
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-
-          //更改未实施数据的实施状态
-          oldActionData[this.nowIndex].trainOrNot = true;
-          //判断已实施里面是否有数据
-          if(getLoc(this.userInfo.personID)) {
-            //获取已实施数据
-            let trainData = getLoc(this.userInfo.personID).trainListData;
-            //向已实施数据里面添加数据
-            trainData.push(oldActionData[this.nowIndex]);
-            //将已实施数据更新到缓存
-            setLoc(getLoc('userInfo').personID, { "trainListData": trainData });
-          } else {
-            //第一次将数据存到已实施里
-            let arr = [];
-            arr.push(oldActionData[this.nowIndex]);
-            setLoc(getLoc('userInfo').personID, { "trainListData": arr });
-          }
-          //在未实施数据里删除已实施数据
-          oldActionData.splice(this.nowIndex, 1);
-          //更新未实施数据
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
-          this.$emit('doneFn');
-        } else if(this.tabIndex === 2) {
-          this.$router.push('./train');
-        }
-
+        this.$router.push('/train');
       },
       //辅助教员
       changHelpName(v) {
-        if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          oldActionData[this.nowIndex].auxiliaryLecturerName = v;
-          //更新未实施数据
-          setLoc(getLoc('userInfo').userID, { "notActionData": oldActionData, "loadTime": getLoc(this.userInfo.userID).loadTime });
-        } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          oldTrainData[this.nowIndex].auxiliaryLecturerName = v;
-          //更新未实施数据
-          setLoc(getLoc('userInfo').personID, { "trainListData": oldTrainData });
-        }
+        let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+        oldTrainData[this.nowIndex].auxiliaryLecturerName = v;
+        //更新未实施数据
+        setLoc(getLoc('userInfo').personID, { "trainListData": oldTrainData });
       },
       //主教员
       changName(v) {
-        if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          oldActionData[this.nowIndex].chargeTeacherName = v;
-          //更新未实施数据
-          setLoc(getLoc('userInfo').userID, { "notActionData": oldActionData, "loadTime": getLoc(this.userInfo.userID).loadTime });
-        } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          oldTrainData[this.nowIndex].chargeTeacherName = v;
-          //更新未实施数据
-          setLoc(getLoc('userInfo').personID, { "trainListData": oldTrainData });
-        }
-
+        let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+        oldTrainData[this.nowIndex].chargeTeacherName = v;
+        //更新未实施数据
+        setLoc(getLoc('userInfo').personID, { "trainListData": oldTrainData });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -299,8 +234,7 @@
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
-    updated() {
-    }, //生命周期 - 更新之后
+    updated() { }, //生命周期 - 更新之后
     activated() {
       //   console.log('actived');
     }, //如果页面有keep-alive缓存功能，这个函数会触发

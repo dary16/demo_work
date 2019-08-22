@@ -37,6 +37,7 @@
         :chooseLoad="chooseLoad"
         v-on:showInfo="showInfo"
         v-on:changeFn="changeFn"
+        v-on:doEdit="doEdit"
       ></v-list-item>
       <div
         class="uploadBottom"
@@ -127,7 +128,8 @@
       //详情
       showInfo(v) {
         this._nowIndex(v);
-        this.$router.push('/trainInfoList');
+        // this.$router.push('/trainInfoList');
+        this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[v] } });
       },
       //全选
       chooseAllFn() {
@@ -149,6 +151,10 @@
         this.infoList = getLoc(this.userInfo.personID).trainListData || [];
         this.chooseLoad = false;
         this.notUpload = true;
+      },
+      doEdit(index) {
+        this._nowIndex(index);
+        this.$router.push('./info');
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

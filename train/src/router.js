@@ -60,22 +60,12 @@ export default new Router({
                     name: "info",
                     component: () =>
                         import ("./views/common/info.vue")
-                }, {
-                    path: "/editInfo",
-                    name: "editInfo",
-                    component: () =>
-                        import ("./views/common/editInfo.vue")
-                }, {
+                },
+                {
                     path: '/trainInfo',
                     name: "trainInfo",
                     component: () =>
                         import ("./views/common/trainInfo.vue")
-                },
-                {
-                    path: '/trainInfoNot',
-                    name: "trainInfoNot",
-                    component: () =>
-                        import ("./views/common/trainInfoNot.vue")
                 },
                 {
                     path: '/suggestion',

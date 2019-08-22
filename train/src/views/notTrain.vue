@@ -79,7 +79,7 @@
       },
       showInfo(index) {
         this._nowIndex(index);
-        this.$router.push({ name: 'trainInfoNot', params: { infoList: this.infoList[index] } });
+        this.$router.push({ name: 'trainInfo', params: { infoList: this.infoList[index] } });
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
