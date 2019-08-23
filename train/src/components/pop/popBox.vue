@@ -50,6 +50,19 @@
                   ></el-option>
                 </el-select>
               </li>
+              <li v-if="item.status == 3">
+                <span>{{item.title}}：</span>
+                <el-input
+                  v-model.trim="popReq[item.val]"
+                  size="mini"
+                  v-bind:placeholder="item.placeholder"
+                  :disabled="item.disabled"
+                  :suffix-icon="item.star"
+                  @focus="test"
+                >
+                </el-input>
+
+              </li>
             </ul>
           </div>
           <div class="popBtn">
@@ -64,6 +77,16 @@
           </div>
         </div>
       </div>
+      <mt-datetime-picker
+        ref="picker"
+        type="time"
+        @confirm="handleConfirm"
+        v-model="popReq.commentDate"
+        hour-format="{value} 时"
+        minute-format="{value} 分"
+        :endDate="new Date()"
+      >
+      </mt-datetime-picker>
     </div>
   </transition>
 </template>
@@ -92,6 +115,12 @@
       },
       beforeFileUpload() {
 
+      },
+      test() {
+        this.$refs.picker.open();
+      },
+      handleConfirm(value) {
+        this.popReq.commentDate = value;
       }
     }
   };

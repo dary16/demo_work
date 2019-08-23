@@ -53,7 +53,7 @@
             'placeholder': '请输入标题',
             'val': 'commentTitle'
           }, {
-            'status': 1,
+            'status': 3,
             'title': '时间',
             'placeholder': '请输入时间',
             'val': 'commentDate'

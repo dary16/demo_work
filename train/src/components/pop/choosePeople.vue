@@ -42,7 +42,7 @@
   export default {
     data() {
       return {
-        checkAll: false,//控制全选
+        checkAll: [],//控制全选
         checkPeoples: [],//所选人
         peoples: [],//后期需要动态计算
         isIndeterminate: true//设置 indeterminate 状态，只负责样式控制
@@ -79,6 +79,7 @@
         this.isIndeterminate = false;
       },
       handleCheckPeoplesChange(value) {
+        console.log(value);
         let checkedCount = value.length;
         this.checkAll = checkedCount === this.peoples.length;
         this.isIndeterminate = checkedCount > 0 && checkedCount < this.peoples.length;
