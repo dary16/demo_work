@@ -51,6 +51,11 @@ export default new Router({
                     component: () =>
                         import ("./views/test.vue")
                 }, {
+                    path: "/websocket",
+                    name: "websocket",
+                    component: () =>
+                        import ("./views/websocket.vue")
+                }, {
                     path: "/notTrain",
                     name: "notTrain",
                     component: () =>
