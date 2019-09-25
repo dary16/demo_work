@@ -15,6 +15,8 @@ import listInfo from "./common/listInfo.vue";
 import listItem from "./common/listItem.vue";
 //训练实施信息
 import impleInfo from "./common/impleInfo.vue";
+//训练实施信息(已实施)
+import impleInfoEdit from "./common/impleInfoEdit.vue";
 //数据项记录
 import dataRecord from "./common/dataRecord.vue";
 //已实训详情
@@ -29,8 +31,6 @@ import listItemInfo from "./common/listItemInfo.vue";
 import tagInfo from "./common/tagInfo.vue";
 //训练内容详情列表
 import itemBlock from "./common/itemBlock.vue";
-//测试合并单元格
-import strengthStatistics from "./strengthStatistics.vue";
 
 export default {
     tab,
@@ -44,12 +44,12 @@ export default {
     listInfo,
     listItem,
     impleInfo,
+    impleInfoEdit,
     dataRecord,
     listInfoItem,
     tags,
     trainInfoContent,
     listItemInfo,
     tagInfo,
-    itemBlock,
-    strengthStatistics
+    itemBlock
 };

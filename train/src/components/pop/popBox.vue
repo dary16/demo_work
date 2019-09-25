@@ -1,9 +1,9 @@
 <template>
-  <transition name="pop">
+  <transition name="el-zoom-in-top">
     <div class="popCover">
       <div class="mask"></div>
       <div class="popContent">
-        <h3 class="popTitle"></h3>
+        <h3 class="popTitle">{{popData.titleTotal}}</h3>
         <div class="content">
           <div class="subContent clearfix">
             <ul
@@ -14,11 +14,12 @@
                 v-if="item.status == 1"
                 class="popBox"
               >
-                <span>{{item.title}}：</span>
+                <span><i v-if="item.check">*</i>{{item.title}}：</span>
                 <el-input
                   v-model.trim="popReq[item.val]"
                   size="mini"
                   v-bind:placeholder="item.placeholder"
+                  maxlength="20"
                   :disabled="item.disabled"
                   :suffix-icon="item.star"
                 >
@@ -35,7 +36,7 @@
                 </el-input>
               </li>
               <li v-if="item.status == 2">
-                <span>{{item.title}}：</span>
+                <span><i v-if="item.check">*</i>{{item.title}}：</span>
                 <el-select
                   class="popBox"
                   v-model="popReq[item.val]"
@@ -50,21 +51,35 @@
                   ></el-option>
                 </el-select>
               </li>
-              <li v-if="item.status == 3">
+              <li
+                v-if="item.status == 3"
+                class="popBox"
+              >
                 <span>{{item.title}}：</span>
                 <el-input
-                  v-model.trim="popReq[item.val]"
+                  readonly
+                  maxlength="20"
                   size="mini"
-                  v-bind:placeholder="item.placeholder"
-                  :disabled="item.disabled"
-                  :suffix-icon="item.star"
-                  @focus="test"
+                  :placeholder="item.placeholder"
+                  v-model="popReq[item.val]"
+                  @focus="chooseTime"
                 >
-                </el-input>
 
+                </el-input>
               </li>
             </ul>
           </div>
+          <mt-datetime-picker
+            ref="picker"
+            type="datetime"
+            year-format="{value} 年"
+            month-format="{value} 月"
+            date-format="{value} 日"
+            @confirm="handleConfirm"
+            v-model="test"
+            :endDate="new Date()"
+          >
+          </mt-datetime-picker>
           <div class="popBtn">
             <a
               href="javascript:;"
@@ -77,24 +92,19 @@
           </div>
         </div>
       </div>
-      <mt-datetime-picker
-        ref="picker"
-        type="time"
-        @confirm="handleConfirm"
-        v-model="popReq.commentDate"
-        hour-format="{value} 时"
-        minute-format="{value} 分"
-        :endDate="new Date()"
-      >
-      </mt-datetime-picker>
+
     </div>
   </transition>
 </template>
 <script>
+  import Vue from "vue";
+
+  import { formatDate, formatDateMin } from '../../utils/common';
   export default {
     data() {
       return {
         popReq: {},//弹窗的数据
+        test: ''
       };
     },
     props: ['popData', 'formData'],
@@ -110,19 +120,14 @@
       btnsFn(val) {
         this.$emit('getBtnFn', val);
       },
-      createFn() {
-
-      },
-      beforeFileUpload() {
-
-      },
-      test() {
+      chooseTime() {
         this.$refs.picker.open();
       },
       handleConfirm(value) {
-        this.popReq.commentDate = value;
+        this.popReq.abnormalDate = formatDateMin(value);
+        this.test = formatDateMin(value);
       }
-    }
+    },
   };
 </script>
 <style lang="less" scoped>
@@ -149,13 +154,14 @@
     border-radius: 0.08rem;
     overflow: hidden;
     h3 {
-      height: 0.4rem;
+      height: 0.6rem;
       line-height: 0.4rem;
       background: #2f4553;
+      text-align: center;
       color: #fff;
-      font-size: 0.2rem;
+      font-size: 0.3rem;
       text-indent: 0.02rem;
-      font-weight: normal;
+      font-weight: 600;
     }
     .content {
       padding: 0.05rem 0;
@@ -163,7 +169,8 @@
       .subContent {
         ul {
           li {
-            padding-left: 0.05rem;
+            height: 0.7rem;
+            padding-left: 0.08rem;
             color: #2f4553;
             margin-bottom: 0.05rem;
             overflow: hidden;
@@ -172,8 +179,14 @@
               font-size: 0.23rem;
               height: 0.45rem;
               line-height: 0.45rem;
-              width: 1.8rem;
+              width: 1.9rem;
               text-align: right;
+              i {
+                font-style: normal;
+                padding-right: 2px;
+                vertical-align: middle;
+                color: #f00;
+              }
             }
           }
         }
@@ -205,14 +218,14 @@
 
   // // 分割线
   .el-input--mini {
-    width: 4rem;
+    width: 3.8rem;
     background: #fff;
     border-radius: 0.05rem;
     height: 0.3rem;
     line-height: 0.3rem;
   }
   .el-select--mini {
-    width: 4rem;
+    width: 3.8rem;
     background: #fff;
     border-radius: 0.05rem;
     height: 0.22rem;

@@ -43,6 +43,7 @@
                 <el-select
                   size="mini"
                   v-model="firstName"
+                  multiple
                   placeholder="请选择"
                   @change="changName"
                 >
@@ -62,6 +63,7 @@
                 <el-select
                   size="mini"
                   v-model="helpName"
+                  multiple
                   placeholder="请选择"
                   @change="changHelpName"
                 >
@@ -96,6 +98,13 @@
         >数据项记录</button>
       </div>
     </div>
+    <v-pop-box
+      v-if="isShowBox"
+      :popData="popData"
+      v-on:save="savePopFn"
+      v-on:cancle="cancleFn"
+    >
+    </v-pop-box>
   </div>
 </template>
 
@@ -110,53 +119,85 @@
       //这里存放数据
       return {
         infoChildData: {},//存储父组件传来的infoData
-        test: '',
+        faultIndex: 0,
         time: {
           index: '',
           type: ''
         },
         nowTime: '',
         show: 0,
-        firstName: '',
-        helpName: '',
-        show: 0
+        firstName: [],
+        helpName: [],
+        show: 0,
+        isShowBox: false,
+        popData: {
+          'titleTotal': '新增',
+          'options': [{
+            'status': 3,
+            'title': '时间',
+            'placeholder': '点击选择时间',
+            'val': 'abnormalDate'
+          }, {
+            'status': 1,
+            'title': '异常说明',
+            'placeholder': '请输入异常说明',
+            'val': 'abnormalExplain'
+          }, {
+            'status': 1,
+            'title': '异常产生对象',
+            'placeholder': '请输入异常产生对象',
+            'val': 'abnormalObject'
+          }, {
+            'status': 1,
+            'title': '关键字',
+            'placeholder': '请输入关键字',
+            'val': 'keyword'
+          }]
+        }
       };
     },
     props: ['infoData'],
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userInfo', 'nowIndex', 'tabIndex'])
+      ...mapState(['userInfo', 'nowIndex', 'tabIndex', 'userName'])
     },
     //监控data中的数据变化
     watch: {
-      infoData: {
-        handler(newValue, oldValue) {
-          this.infoChildData = JSON.parse(JSON.stringify(newValue));
-        },
-        deep: true
-      }
+      // infoData: {
+      //   handler(newValue, oldValue) {
+      //     this.infoChildData = JSON.parse(JSON.stringify(newValue));
+      //   },
+      //   deep: true
+      // }
     },
     methods: {
       ...mapMutations(['_allData']),
       tagFn(i) {
-        this.infoChildData.tags[i].isSignIn = !this.infoChildData.tags[i].isSignIn;
+        //判断是否有签到字段，有有改变，没有就添加
+        if(this.infoChildData.tags[i].hasOwnProperty('isSignIn')) {
+          this.infoChildData.tags[i].isSignIn = !this.infoChildData.tags[i].isSignIn;
+        } else {
+          this.infoChildData.tags[i].isSignIn = true;
+        }
+
         if(this.tabIndex === 1) {
           //改变签到状态
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
+          let oldActionData = getLoc(this.userName + '_n').notActionList;
           let arrLen = oldActionData[this.nowIndex].joinAstronautNames.length;
           //数组的替换
           oldActionData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...this.infoChildData.tags);
           //更新本地数据存储
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          setLoc(this.userName + '_n', { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
+
           this.$emit('updateFn');
         } else if(this.tabIndex === 2) {
           //改变签到状态
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+          let oldTrainData = getLoc(this.userName + '_y').trainListData;
           let arrLen = oldTrainData[this.nowIndex].joinAstronautNames.length;
           //数组的替换
           oldTrainData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...this.infoChildData.tags);
           //更新本地数据存储
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         }
 
       },
@@ -178,7 +219,8 @@
       },
       //异常记录
       errorRecord(index) {
-        this.$emit('errorRecord', index);
+        this.faultIndex = index;
+        this.isShowBox = true;
       },
       //设置岗位
       setPostFn() {
@@ -189,20 +231,20 @@
         this.nowTime = this.util.formatDate(new Date().getTime(), 7);
         this.infoChildData.trainList[i].trainContentStartDate = this.nowTime;
         if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList.length;
+          let oldActionData = getLoc(this.userName + '_n').notActionList;;
+          let arrLen = oldActionData[this.nowIndex].trainImpleData.trainList.length;
           //数组的替换
           oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
           //更新本地数据存储
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          setLoc(this.userName + '_n', { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
 
         } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList.length;
+          let oldTrainData = getLoc(this.userName + '_n').trainListData;
+          let arrLen = oldTrainData[this.nowIndex].trainImpleData.trainList.length;
           //数组的替换
           oldTrainData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
           //更新本地数据存储
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         }
       },
       //结束时间
@@ -210,20 +252,20 @@
         this.nowTime = this.util.formatDate(new Date().getTime(), 7);
         this.infoChildData.trainList[i].trainContentEndDate = this.nowTime;
         if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList.length;
+          let oldActionData = getLoc(this.userName + '_n').notActionList;
+          let arrLen = oldActionData[this.nowIndex].trainImpleData.trainList.length;
           //数组的替换
           oldActionData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
           //更新本地数据存储
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          setLoc(this.userName + '_n', { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
 
         } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList.length;
+          let oldTrainData = getLoc(this.userName + '_y').trainListData;
+          let arrLen = oldTrainData[this.nowIndex].trainImpleData.trainList.length;
           //数组的替换
           oldTrainData[this.nowIndex].trainImpleData.trainList.splice(0, arrLen, ...this.infoChildData.trainList);
           //更新本地数据存储
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         }
       },
       cancelFn() {
@@ -233,69 +275,107 @@
       doneFn() {
         if(this.tabIndex === 1) {
           //未实施数据
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
+          let oldActionData = getLoc(this.userName + '_n').notActionList;
 
           //更改未实施数据的实施状态
           oldActionData[this.nowIndex].trainOrNot = true;
           //判断已实施里面是否有数据
-          if(getLoc(this.userInfo.personID)) {
+          if(getLoc(this.userName + '_y')) {
             //获取已实施数据
-            let trainData = getLoc(this.userInfo.personID).trainListData;
+            let trainData = getLoc(this.userName + '_y').trainListData;
             //向已实施数据里面添加数据
             trainData.push(oldActionData[this.nowIndex]);
             //将已实施数据更新到缓存
-            setLoc(getLoc('userInfo').personID, { "trainListData": trainData });
+            setLoc(this.userName + '_y', { "trainListData": trainData });
           } else {
             //第一次将数据存到已实施里
             let arr = [];
             arr.push(oldActionData[this.nowIndex]);
-            setLoc(getLoc('userInfo').personID, { "trainListData": arr });
+            setLoc(this.userName + '_y', { "trainListData": arr });
           }
           //在未实施数据里删除已实施数据
           oldActionData.splice(this.nowIndex, 1);
           //更新未实施数据
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          setLoc(this.userName + '_n', { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
           this.$emit('doneFn');
         } else if(this.tabIndex === 2) {
           this.$router.push('./train');
         }
-
       },
       //辅助教员
       changHelpName(v) {
         if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          oldActionData[this.nowIndex].auxiliaryLecturerName = v;
+          let oldActionData = getLoc(this.userName + '_n').notActionList;
+
+          oldActionData[this.nowIndex].auxiliaryLecturerName = v.toString();
           //更新未实施数据
-          setLoc(getLoc('userInfo').userID, { "notActionData": oldActionData, "loadTime": getLoc(this.userInfo.userID).loadTime });
+          setLoc(this.userName + '_n', { "notActionList": oldActionData });
+
         } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          oldTrainData[this.nowIndex].auxiliaryLecturerName = v;
+          let oldTrainData = getLoc(this.userInfo.username + '_y').trainListData;
+          oldTrainData[this.nowIndex].auxiliaryLecturerName = v.toString;
           //更新未实施数据
-          setLoc(getLoc('userInfo').personID, { "trainListData": oldTrainData });
+          setLoc(getLoc(this.userName + '_y'), { "trainListData": oldTrainData });
         }
       },
       //主教员
       changName(v) {
         if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          oldActionData[this.nowIndex].chargeTeacherName = v;
+          let oldActionData = getLoc(this.userName + '_n').notActionList;
+          oldActionData[this.nowIndex].chargeTeacherName = v.toString();
           //更新未实施数据
-          setLoc(getLoc('userInfo').userID, { "notActionData": oldActionData, "loadTime": getLoc(this.userInfo.userID).loadTime });
+          setLoc(this.userName + '_n', { "notActionList": oldActionData });
         } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          oldTrainData[this.nowIndex].chargeTeacherName = v;
-          //更新未实施数据
-          setLoc(getLoc('userInfo').personID, { "trainListData": oldTrainData });
+          let oldTrainData = getLoc(this.userInfo.username + '_y').trainListData;
+          oldTrainData[this.nowIndex].chargeTeacherName = v.toString();
+          //更新已实施数据
+          setLoc(getLoc(this.userInfo.username + '_y'), { "trainListData": oldTrainData });
         }
 
-      }
+      },
+      //保存
+      savePopFn(val) {
+        this.isShowBox = false;
+        if(!val.abnormalDate) {
+          this.message.warning("请选择异常时间");
+          return false;
+        }
+        if(!val.abnormalExplain) {
+          this.message.warning("请输入异常说明");
+          return false;
+        }
+        if(!val.abnormalObject) {
+          this.message.warning("请输入异常产生对象");
+          return false;
+        }
+        if(this.tabIndex === 1) {
+          let oldActionData = getLoc(this.userName + '_n').notActionList;
+          //获取未实施对应异常列表数据
+          oldActionData[this.nowIndex].trainImpleData.trainList[this.faultIndex].faultInfo.push(val);
+          console.log(getLoc(this.userInfo.username + '_n'));
+          setLoc(this.userName + '_n', { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
+          //更新数据
+          this.infoChildData.trainList = getLoc(this.userInfo.username + '_n').notActionList[this.nowIndex].trainImpleData.trainList;
+        } else if(this.tabIndex === 2) {
+          let trainData = getLoc(this.userName + '_y').trainListData;
+          //获取已实施对应异常列表数据
+          let trainList = trainData[this.nowIndex].trainImpleData.trainList[this.faultIndex].faultInfo;
+          trainList.push(this.errorData);
+          setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(trainData)) });
+        }
+      },
+      //取消
+      cancleFn(val) {
+        this.isShowBox = val;
+      },
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       this.infoChildData = JSON.parse(JSON.stringify(this.infoData));
-      this.firstName = this.infoChildData.teachList[0].chargeTeacherName || '';
-      this.helpName = this.infoChildData.helpTeachList[0].chargeTeacherName || '';
+      if(this.infoChildData.chargeTeacherName) {
+        this.firstName = this.infoChildData.chargeTeacherName.toString().split(',');
+        this.helpName = this.infoChildData.auxiliaryLecturerName.toString().split(',');
+      }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

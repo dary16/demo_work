@@ -2,7 +2,7 @@
  * @Author: dairui 
  * @Date: 2019-08-19 11:18:38 
  * @Last Modified by: dairui
- * @Last Modified time: 2019-08-26 11:53:19
+ * @Last Modified time: 2019-09-03 16:31:24
  */
 
 <template>
@@ -23,16 +23,28 @@
     },
     props: [],
     created() {
-      this.initWebSocket();
+      //   this.initWebSocket();
+      this.init();
     },
     methods: {
+      init() {
+        const wsuri = 'ws://127.0.0.1:8090/';
+        ws.onopen = function() {
+          connection.innerHTML = '服务器正常<br/>'
+        }
+        ws.onmessage = function(e) {
+          var _str = e.data;
+          var data = JSON.parse(_str.toString('utf-8'));
+          console.log(data);
+        }
+      },
       //初始化websocket
       initWebSocket() {
         if(typeof (WebSocket) === "undefined") {
           alert("浏览器不支持websocket")
           return false
         }
-        const wsuri = 'ws://127.0.0.1:8090/';
+        const wsuri = 'ws://192.168.200.199:80/';
         this.websock = new WebSocket(wsuri);
         this.websock.onopen = this.websocketonopen;
         this.websock.onmessage = this.websocketonmessage;
@@ -55,7 +67,7 @@
       //连接建立失败重连
       websocketonerror(e) {
         console.log(`连接失败的信息：`, e);
-        this.initWebSocket();
+        // this.initWebSocket();
       },
       //关闭连接
       websocketclose(e) {

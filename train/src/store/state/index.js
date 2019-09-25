@@ -6,6 +6,7 @@
  * @nowIndex 点击未实施/已实施的索引值
  * @userData 用户数据
  * @tabIndex 存储已实施或未实施
+ * @userName 当前登录人
  */
 import {
     getLoc
@@ -16,5 +17,6 @@ export default {
     weekPlanData: getLoc('weekPlanData') || [],
     nowIndex: -1,
     userData: getLoc('userData') || [],
-    tabIndex: 1
+    tabIndex: 1,
+    userName: getLoc('userName') || {},
 }

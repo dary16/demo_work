@@ -4,11 +4,9 @@
       <v-imple-info
         :infoData="infoData"
         v-on:setPostFn="setPostFn"
-        v-on:errorRecord="errorRecord"
         v-on:recordFn="recordFn"
         v-on:suggestion="suggestion"
         v-on:back="back"
-        v-on:updateFn="updateFn"
         v-on:doneFn="doneFn"
       ></v-imple-info>
     </keep-alive>
@@ -21,6 +19,7 @@
         :popTitle="popTitle"
       ></v-set-post>
     </keep-alive>
+
   </div>
 </template>
 
@@ -37,22 +36,21 @@
           isSignIn: false,
           value1: '',
           trainList: [],
-          listTitle1: "普通训练任务",
-          listTitle2: '训练详细内容',
-          listTitle3: '异常说明',
-          title: "训练实施信息",
           index: '',
           tags: [],
           teachList: [],
-          helpTeachList: []
+          helpTeachList: [],
+          chargeTeacherName: '',
+          auxiliaryLecturerName: '',
         },
         isShowSet: false,
         popTitle: "设置岗位",
+        test: '',
       };
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'allData', 'userInfo', 'tabIndex'])
+      ...mapState(['nowIndex', 'userName', 'userInfo', 'tabIndex'])
     },
     //监控data中的数据变化
     watch: {},
@@ -78,10 +76,6 @@
       recordFn() {
         this.$router.push('/record');
       },
-      //异常记录
-      errorRecord(index) {
-        this.$router.push('/errorRecord/' + index);
-      },
       //设置岗位
       setPostFn() {
         this.isShowSet = true;
@@ -89,39 +83,28 @@
       //保存
       saveFn(v) {
         if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
+          let oldActionData = getLoc(this.userName + '_n').notActionList;
           let arrLen = oldActionData[this.nowIndex].joinAstronautNames.length;
           //数组的替换
           oldActionData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...v);
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          setLoc((this.userName + '_n'), { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
           this.infoData.tags = v;
-          this.infoData.trainList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList;
+          this.infoData.trainList = getLoc(this.userName + '_n').notActionList[this.nowIndex].trainImpleData.trainList;
           this.isShowSet = false;
         } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+          let oldTrainData = getLoc(this.userInfo.username + '_y').trainListData;
           let arrLen = oldTrainData[this.nowIndex].joinAstronautNames.length;
           //数组的替换
           oldTrainData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...v);
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          setLoc(getLoc(this.userInfo.username + '_y'), { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
           this.infoData.tags = v;
-          this.infoData.trainList = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList;
+          this.infoData.trainList = getLoc(this.userInfo.username + '_y').trainListData[this.nowIndex].trainImpleData.trainList;
           this.isShowSet = false;
         }
 
       },
       cancelFn() {
         this.isShowSet = false;
-      },
-      //更新数据
-      updateFn() {
-        if(this.tabIndex === 1) {
-          this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
-          this.infoData.trainList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList;
-        } else if(this.tabIndex === 2) {
-          this.infoData.tags = getLoc(this.userInfo.personID).trainListData[this.nowIndex].joinAstronautNames;
-          this.infoData.trainList = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList;
-        }
-
       },
       //完成
       doneFn() {
@@ -130,30 +113,28 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
+      let notList = getLoc(this.userName + '_n');
+      let list = getLoc(this.userName + '_y')
+
       //判断是已实施还是未实施
       if(this.tabIndex === 1) {
-        if(this.$route.params.addData) {
-          //获取本地未实施数据
-          let oldActionData = getLoc(this.userInfo.userID).notActionData;
-          //将新添加数据push到oldActionData内
-          oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo.push(this.$route.params.addData);
-          //将数据存储到本地
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
-          this.infoData.trainList = oldActionData[this.nowIndex].trainImpleData.trainList;
-        } else {
-          this.infoData.tags = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
-          this.infoData.trainList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainImpleData.trainList;
-          this.infoData.teachList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].teachList;
-          this.infoData.helpTeachList = getLoc(this.userInfo.userID).notActionData[this.nowIndex].helpTeachList;
-        }
+        let oldActionData = notList.notActionList[this.nowIndex];
+        this.infoData.tags = oldActionData.joinAstronautNames;
+        this.infoData.trainList = oldActionData.trainImpleData.trainList;
+        this.infoData.teachList = oldActionData.teachList;
+        this.infoData.helpTeachList = oldActionData.helpTeachList;
+        this.infoData.chargeTeacherName = oldActionData.chargeTeacherName;
+        this.infoData.auxiliaryLecturerName = oldActionData.auxiliaryLecturerName;
       } else if(this.tabIndex === 2) {
-        this.infoData.tags = getLoc(this.userInfo.personID).trainListData[this.nowIndex].joinAstronautNames;
-        this.infoData.trainList = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainImpleData.trainList;
-        this.infoData.teachList = getLoc(this.userInfo.personID).trainListData[this.nowIndex].teachList;
-        this.infoData.helpTeachList = getLoc(this.userInfo.personID).trainListData[this.nowIndex].helpTeachList;
+        //已实施
+        let trainData = list.trainListData[this.nowIndex];
+        this.infoData.tags = trainData.joinAstronautNames;
+        this.infoData.trainList = trainData.trainImpleData.trainList;
+        this.infoData.teachList = trainData.teachList;
+        this.infoData.helpTeachList = trainData.helpTeachList;
+        this.infoData.chargeTeacherName = trainData.chargeTeacherName;
+        this.infoData.auxiliaryLecturerName = trainData.auxiliaryLecturerName;
       }
-      //判断是否有新添加数据
-
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

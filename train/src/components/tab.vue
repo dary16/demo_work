@@ -61,6 +61,8 @@
           this._tabIndex(1);
         } else if(index === 2) {
           this._tabIndex(2);
+        } else if(index === 3) {
+          this._tabIndex(3);
         }
         this.indexed = index;
         this.$emit("tabIndex", this.indexed);

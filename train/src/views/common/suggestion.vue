@@ -27,15 +27,29 @@
     <v-pop-box
       v-if="isShowBox"
       :popData="popData"
+      :dateTime='dateTime'
       v-on:save="saveFn"
       v-on:cancle="cancleFn"
+      v-on:open="openFn"
     ></v-pop-box>
+    <mt-datetime-picker
+      ref="picker"
+      type="datetime"
+      @confirm="handleConfirm"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      hour-format="{value} 时"
+      minute-format="{value} 分"
+      :endDate="new Date()"
+    >
+    </mt-datetime-picker>
   </div>
 </template>
 
 <script>
   import {
-    getLoc, setLoc
+    getLoc, setLoc ,formatDateMin
   } from '../../utils/common.js';
   import { mapState } from 'vuex';
   export default {
@@ -43,8 +57,10 @@
       //这里存放数据
       return {
         title: "意见建议",
+        dateval: '',
         listData: [],
         isShowBox: false,
+        dateTime: '',
         popData: {
           'titleTotal': '新增',
           'options': [{
@@ -55,8 +71,8 @@
           }, {
             'status': 3,
             'title': '时间',
-            'placeholder': '请输入时间',
-            'val': 'commentDate'
+            'placeholder': '请选择时间',
+            'val': formatDateMin(new Date(),'yyyy-MM-dd hh:mm')
           }, {
             'status': 1,
             'title': '说明',
@@ -78,7 +94,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userInfo', 'tabIndex'])
+      ...mapState(['nowIndex', 'userInfo', 'tabIndex']),
     },
     //监控data中的数据变化
     watch: {
@@ -114,12 +130,49 @@
       },
       //保存
       saveFn(val) {
-        this.isShowBox = false;
-        this.listData.push(val);
+        val.commentDate = this.dateTime;
+        if(val.commentTitle == null || val.commentTitle == ''){
+          this.$message({
+            message: '请输入标题',
+            type: 'warning'
+          });
+        }else if(val.commentDate == null || val.commentDate == ''){
+          this.$message({
+            message: '请选择时间',
+            type: 'warning'
+          });
+        }else if(val.commentExplain == null || val.commentExplain == ''){
+          this.$message({
+            message: '请输入说明',
+            type: 'warning'
+          });
+        }else if(val.commentPersonName == null || val.commentPersonName == ''){
+          this.$message({
+            message: '请输入建议人',
+            type: 'warning'
+          });
+        }else if(val.keyword == null || val.keyword == ''){
+          this.$message({
+            message: '请输入关键字',
+            type: 'warning'
+          });
+        }else{
+          this.isShowBox = false;
+          this.listData.push(val);
+        }
       },
       //取消
       cancleFn(val) {
         this.isShowBox = val;
+      },
+      //打开时间插件
+      openFn(){
+        this.$refs.picker.open();
+      },
+      //时间插件确认
+      handleConfirm(value) {
+        this.dateTime = formatDateMin(value,'yyyy-MM-dd hh:mm');
+        this.popData.options[1].val = formatDateMin(value,'yyyy-MM-dd hh:mm');
       },
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -163,7 +216,7 @@
     bottom: 0;
     right: 0.52rem;
     top: 0.7rem;
-    left: 3.5rem;
+    left: 1.5rem;
     .s-title {
       margin-right: 0.2rem;
       margin-top: 0.1rem;
@@ -174,16 +227,15 @@
       font-size: 0.23rem;
       ul {
         li {
-          border: 1px solid #006699;
-          border-bottom: none;
+          border: 1px solid #e6e4e4;
           padding: 0.1rem 0.2rem;
           line-height: 0.5rem;
           .name {
             margin-right: 0.3rem;
           }
-          &:last-child {
-            border-bottom: 1px solid #006699;
-          }
+          // &:last-child {
+          //   border-bottom: 1px solid #006699;
+          // }
         }
       }
     }

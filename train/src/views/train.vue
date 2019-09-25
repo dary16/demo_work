@@ -39,13 +39,11 @@
         v-on:changeFn="changeFn"
         v-on:doEdit="doEdit"
       ></v-list-item>
-      <div
-        class="uploadBottom"
-        v-if="!notUpload"
-      >
+      <div class="uploadBottom">
         <button
           class="normal-btn"
           @click="uploadDataFn"
+          v-show="notNum !== 0"
         >上传数据</button>
       </div>
     </div>
@@ -76,7 +74,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['userInfo', 'allData', 'nowIndex']),
+      ...mapState(['userInfo', 'userName', 'nowIndex']),
       //未上传数量
       notNum() {
         return this.infoList.filter(item => !item.upload).length;
@@ -89,25 +87,31 @@
       ...mapMutations(['_nowIndex', '_userInfo']),
       //数据上传
       uploadData() {
-        this.infoList = this.infoList.filter(item => {
-          return item.upload != true
-        });
-        this.chooseLoad = true;
-        this.notUpload = false;
-        // console.log(this.infoList);
+        // this.infoList = this.infoList.filter(item => {
+        //   return item.upload != true
+        // });
+        // this.chooseLoad = true;
+        // this.notUpload = false;
       },
       //上传选中的数据
       uploadDataFn() {
         //过滤isChecked属性值为true的数据
-        this.notUpload = true;
-        this.chooseLoad = false;
+        // this.notUpload = true;
+        // this.chooseLoad = false;
+        let notUploadData = this.infoList.filter(item => !item.upload);
+        // notUploadData.forEach(item => {
+        //   item.isChecked = true && item.upload !== true;
+        // });
+        this.infoList.splice(0, notUploadData.length, ...notUploadData);
+        this.newInfoList = JSON.parse(JSON.stringify(this.infoList));
         this.uploadList = this.newInfoList.filter(item => {
-          return item.isChecked == true && item.upload == false
+          return item.upload == false
         });
+        console.log(this.uploadList);
+
         //定时器模拟数据上传成功
         setTimeout(() => {
-          //待优化：取未上传的数据还是所有的数据，暂时取所有的数据，
-          //可以把未上传的和已上传的分开，最后存时再合并
+          //上传为上传数据
           let data = getLoc(this.userInfo.personID).trainListData || [];
           data.forEach(item => {
             this.uploadList.forEach(item2 => {
@@ -119,11 +123,10 @@
               }
             })
           });
-          console.log(data);//状态改后的数据
           setLoc(getLoc('userInfo').personID, { "trainListData": data });
           this.infoList = JSON.parse(JSON.stringify(data));
-        }, 3000)
-        console.log(this.uploadList, this.infoList, '要上传的数据');
+          this.message.success("上传成功！");
+        }, 1000)
       },
       //详情
       showInfo(v) {
@@ -160,8 +163,8 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       //获取数据
-      if(getLoc(this.userInfo.personID)) {
-        this.infoList = getLoc(this.userInfo.personID).trainListData;
+      if(getLoc(this.userName + '_y')) {
+        this.infoList = getLoc(this.userName + '_y').trainListData;
       } else {
         this.infoList = [];
       }

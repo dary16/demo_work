@@ -51,11 +51,6 @@ export default new Router({
                     component: () =>
                         import ("./views/test.vue")
                 }, {
-                    path: "/websocket",
-                    name: "websocket",
-                    component: () =>
-                        import ("./views/websocket.vue")
-                }, {
                     path: "/notTrain",
                     name: "notTrain",
                     component: () =>
@@ -107,6 +102,12 @@ export default new Router({
         {
             path: '*',
             redirect: '/404'
+        },
+        {
+            name: 'test',
+            path: '/test',
+            component: () =>
+                import ('./views/test.vue')
         }
     ]
 });

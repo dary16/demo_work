@@ -22,6 +22,7 @@
       v-on:save="savePeopleFn"
       v-on:cancle="cancelPeopleFn"
       :popTitle="popTitle"
+      :changeIndex="changeIndex"
     ></v-choose-people>
   </div>
 </template>
@@ -45,6 +46,7 @@
           'titleTotal': '新增',
           'options': [{
             'status': 1,
+            'check':true,
             'title': '数据项目名称',
             'placeholder': '请输入数据项目名称',
             'val': 'dataItemName'
@@ -56,21 +58,25 @@
           }, {
             'status': 1,
             'title': '数据项说明',
+            'check':true,
             'placeholder': '请输入数据项说明',
             'val': 'dataItemDesc'
           }, {
             'status': 1,
             'title': '数据项值',
+            'check':true,
             'placeholder': '请输入数据项值',
             'val': 'dataItemValue'
           }, {
             'status': 1,
             'title': '数据项标准值',
+            'check':true,
             'placeholder': '请输入数据项标准值',
             'val': 'dataItemMeasureValue'
           }, {
             'status': 2,
             'title': '数据项单位',
+            'check':true,
             'placeholder': '请选择数据单位',
             'val': 'dataItemUnit',
             'list': [
@@ -121,9 +127,33 @@
         this.isShowBox = true;
       },
       //保存
-      saveFn(val) {
-        this.isShowBox = false;
+      saveFn(val) {        
         console.log(val);
+        var re = /^[0-9]+.?[0-9]*/;//判断字符串是否为数字
+        for(var i=0;i<this.popData.options.length;i++){
+          var names = this.popData.options[i].val;
+          var checks = this.popData.options[i].check;
+          if(val[names] == undefined && checks){
+            this.$message({
+              message: this.popData.options[i].placeholder,
+              type: 'warning'
+            });
+            return false
+          }else if(!re.test(val.dataItemValue)){
+            this.$message({
+              message: "数据项值必须为数字",
+              type: 'warning'
+            });
+            return false
+          }else if(!re.test(val.dataItemMeasureValue)){
+            this.$message({
+              message: "数据项标准值必须为数字",
+              type: 'warning'
+            });
+            return false
+          }
+        }
+        this.isShowBox = false;        
         this.listData.push(val);
       },
       //取消
@@ -137,6 +167,13 @@
       },
       //选人弹窗 确定
       savePeopleFn(val) {
+        if(!val.length>0){;
+          this.$message({
+            message: '请至少选择一个参训航天员',
+            type: 'warning'
+          });
+          return false
+        }
         this.isShowPeople = false;
         if(this.tabIndex === 1) {
           this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainData;
@@ -174,7 +211,7 @@
       bottom: 0;
       right: 0.52rem;
       top: 0.7rem;
-      left: 3.5rem;
+      left: 1.5rem;
       .item {
         padding: 0.2rem 0.4rem;
         border: 1px solid #006699;

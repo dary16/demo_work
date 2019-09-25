@@ -119,6 +119,7 @@
       padding: 0.2rem 0.4rem;
       border: 1px solid #006699;
       margin-bottom: 0.2rem;
+      border-radius: 4px;
       dl {
         font-size: 0.26rem;
         dd {
@@ -132,6 +133,7 @@
             font-size: 0.4rem;
             position: absolute;
             right: 0.2rem;
+            color:#4c84ff;
           }
         }
         dd.icn {

@@ -24,4 +24,8 @@ export default {
     _tabIndex(state, tabIndex) {
         state.tabIndex = tabIndex;
     },
+    _userName(state, userName) {
+        setLoc('userName', userName);
+        state.userName = userName;
+    },
 }

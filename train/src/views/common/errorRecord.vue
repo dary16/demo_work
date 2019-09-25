@@ -20,7 +20,7 @@
             ref="picker"
             type="time"
             @confirm="handleConfirm"
-            v-model="errorData.time"
+            v-model="errorData.abnormalDate"
             hour-format="{value} 时"
             minute-format="{value} 分"
             :endDate="new Date()"
@@ -65,7 +65,8 @@
 </template>
 
 <script>
-
+  import { mapState } from 'vuex';
+  import { getLoc, setLoc } from '../../utils/common.js';
   export default {
     data() {
       //这里存放数据
@@ -78,11 +79,14 @@
           keyword: ''
         },
         year: '',
-        isClicked: false
+        isClicked: false,
+        usebor: false
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['tabIndex', 'nowIndex', 'userInfo', 'userName'])
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
@@ -92,7 +96,37 @@
         this.$router.go(-1);
       },
       saveFn() {
-        this.$router.push({ name: 'info', params: { addData: this.errorData, index: this.$route.params.index } });
+        if(!this.errorData.abnormalDate) {
+          this.message.warning("请选择异常时间");
+          return false;
+        }
+        if(!this.errorData.abnormalExplain) {
+          this.message.warning("请输入异常说明");
+          return false;
+        }
+        if(!this.errorData.abnormalObject) {
+          this.message.warning("请输入异常产生对象");
+          return false;
+        }
+
+        if(this.tabIndex === 1) {
+          let oldActionData = getLoc(this.userName + '_n').notActionList;
+          //获取未实施对应异常列表数据
+          let errorList = oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo;
+          errorList.push(this.errorData);
+          console.log(errorList, oldActionData);
+          console.log(getLoc(this.userInfo.username + '_n'));
+          setLoc(this.userName + '_n', { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
+
+          this.$router.go(-1);
+        } else if(this.tabIndex === 2) {
+          let trainData = getLoc(this.userName + '_y').trainListData;
+          //获取已实施对应异常列表数据
+          let trainList = trainData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo;
+          trainList.push(this.errorData);
+          setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(trainData)) });
+          this.$router.go(-1);
+        }
       },
       chooseTime() {
         this.$refs.picker.open();
@@ -102,13 +136,9 @@
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
-    created() {
-      console.log(this.$route.params.index);
-    },
+    created() { },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() { }, //生命周期 - 更新之后
     activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
   }
@@ -120,8 +150,7 @@
       .errorList {
         margin-bottom: 0.5rem;
         .errorItem {
-          border-left: 1px solid #006699;
-          border-right: 1px solid #006699;
+          border: 1px solid #e6e4e4;
           label {
             display: inline-block;
             width: 3rem;
@@ -134,6 +163,7 @@
             line-height: 0.5rem;
             width: 12rem;
             border: 1px solid #a09d9d;
+            border-radius: 2.8px;
             margin: 0.1rem auto;
           }
         }

@@ -12,7 +12,7 @@
           <input
             type="text"
             placeholder="用户名"
-            v-model.trim="login.userName"
+            v-model.trim="login.username"
           />
         </dd>
         <dd>
@@ -40,15 +40,17 @@
 <script>
   import {
     getLoc, setLoc
-  } from '../utils/common.js';
+  } from '@/utils/common.js';
   import { mapState, mapMutations, mapActions } from 'vuex';
   import { setTimeout } from 'timers';
+  import userData from '@/utils/user.js';
+  import notActionData from '@/utils/notActionData.js';
   export default {
     data() {
       //这里存放数据
       return {
         login: {
-          userName: "",
+          username: "",
           password: ""
         },
         initData: {},//初始化数据
@@ -57,18 +59,18 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['allData', 'userInfo', 'userData']),
+      ...mapState(['allData', 'userInfo', 'userData', 'userName']),
     },
     //监控data中的数据变化
     watch: {
     },
     //方法集合
     methods: {
-      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userData']),
+      ...mapMutations(['_userInfo', '_allData', '_weekPlanData', '_userData', '_userName']),
       ...mapActions(['_getInfo']),
       //登录确定
       loginBtn() {
-        if(!this.login.userName) {
+        if(!this.login.username) {
           this.message.warning("请输入账号！");
           return false;
         } else {
@@ -91,10 +93,11 @@
           }
         }
         // 获取用户信息，与登录信息进行匹配
-        const userArr = this.userData;
+        const userArr = this.userData.user;
+
         let loading;
         let result = userArr.filter((item, index) => {
-          if(item.userName == this.login.userName && item.password == this.login.password) {
+          if(item.username == this.login.username && item.password == this.login.password) {
             //loading加载
             loading = this.$loading({
               lock: true,
@@ -104,6 +107,14 @@
             });
             //保存当前登录人信息
             this._userInfo(item);
+            //保存登录人用户名，便于存储
+            this._userName(item.username);
+            if(!getLoc(this.userName + '_n')) {
+              setLoc(item.username + '_n', notActionData);
+            } else {
+              console.log(getLoc(this.userName + '_n'));
+            };
+
             return true;
           }
         });
@@ -124,47 +135,15 @@
       //获取初始化数据并保存到本地
       getInitData() {
 
-        this._getInfo({
-          method: 'get',
-          api: 'getLogin',
-          callback: res => {
-            let resData = { 'allData': res };
-            this.initData = res;
-            this._allData(resData);
-            console.log(this.allData.allData.user, 'allData');
-            this._userData(this.allData.allData.user);
-            this.initLocal();
-          }
-        })
-
-
-        // this.$http.get('../../all.json')
-        //   .then((res) => {
-        //     let resData = { 'allData': res };
-        //     this.initData = res;
-        //     this._allData(resData.allData.body);
-        //     console.log(resData.allData.body, 'allData');
-        //     this._userData(resData.allData.body.user);
-        //     this.initLocal();
-        //   }
-        //   )
-      },
-      initLocal() {
-        //周计划数据
-        if(getLoc('weekPlanData')) {
-          this._weekPlanData(getLoc('weekPlanData'));
-        } else {
-          this.getWeekPlanData();
-        }
+        // let resData = { 'allData': allDataArr };
+        // this.initData = allDataArr;
+        // this._allData(resData);
+        this._userData(userData);
 
       },
-      //初始化未实施数据
-      //   getNotActionData() {
-      //     this._notActionListData(this.initData.notActionList);
-      //   },
-      getWeekPlanData() {
-        this._weekPlanData(this.initData.weekPlan);
-      }
+      //   getWeekPlanData() {
+      //     this._weekPlanData(this.initData.weekPlan);
+      //   }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
@@ -176,19 +155,7 @@
         if(getLoc('userInfo')) {
           this.login = getLoc('userInfo');
         }
-      }, 1000)
-      //   this.getInitData();
-      //   //登录数据
-      //   if(getLoc('userInfo')) {
-      //     this.login = getLoc('userInfo');
-      //   }
-
-      //   this.$http.get('../../all.json')
-      //     .then(function(res) {
-      //       let resData = { 'allData': res };
-      //       this._allData(resData);
-      //     }
-      //     )
+      }, 1000);
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

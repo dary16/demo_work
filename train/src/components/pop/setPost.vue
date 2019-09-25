@@ -15,9 +15,9 @@
                 v-model="item.post"
                 @change="changeFn"
               >
-                <el-radio :label="'01'">01</el-radio>
-                <el-radio :label="'02'">02</el-radio>
-                <el-radio :label="'03'">03</el-radio>
+                <el-radio @click.native.prevent="clickitem('01',index)" :label="'01'">01</el-radio>
+                <el-radio @click.native.prevent="clickitem('02',index)" :label="'02'">02</el-radio>
+                <el-radio @click.native.prevent="clickitem('03',index)" :label="'03'">03</el-radio>
               </el-radio-group>
             </li>
           </ul>
@@ -58,6 +58,9 @@
       },
       changeFn(v) {
         console.log(v);
+      },
+      clickitem (e,index) {
+        e === this.newTags[index].post ? this.newTags[index].post = '' : this.newTags[index].post = e
       }
     },
     activated() {

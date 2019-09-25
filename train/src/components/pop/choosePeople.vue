@@ -25,12 +25,12 @@
         <div class="popBtn">
           <a
             href="javascript:;"
-            v-on:click="onSubmit"
-          >确定</a>
-          <a
-            href="javascript:;"
             v-on:click="onCancle"
           >取消</a>
+          <a
+            href="javascript:;"
+            v-on:click="onSubmit"
+          >确定</a>
         </div>
       </div>
     </div>
@@ -42,27 +42,37 @@
   export default {
     data() {
       return {
-        checkAll: [],//控制全选
+        checkAll: false,//控制全选
         checkPeoples: [],//所选人
         peoples: [],//后期需要动态计算
         isIndeterminate: true//设置 indeterminate 状态，只负责样式控制
       };
     },
-    props: ['popTitle'],
+    props: ['popTitle','changeIndex'],
     computed: {
       ...mapState(['userInfo', 'nowIndex', 'tabIndex'])
     },
     created() {
       if(this.tabIndex === 1) {
         let names = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
+        let checkedNames = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainData[this.changeIndex].joinAstronautNames;
+        
         names.forEach(name => {
           this.peoples.push(name.trainImplementAstronautName);
+          if(checkedNames.indexOf(name.trainImplementAstronautName)>=0){
+            this.checkPeoples.push(name.trainImplementAstronautName);
+          }
         });
       } else if(this.tabIndex === 2) {
         let names = getLoc(this.userInfo.personID).trainListData[this.nowIndex].joinAstronautNames;
+        let checkedNames = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainData[this.changeIndex].joinAstronautNames;
         names.forEach(name => {
           this.peoples.push(name.trainImplementAstronautName);
+          if(checkedNames.indexOf(name.trainImplementAstronautName)>=0){
+            this.checkPeoples.push(name.trainImplementAstronautName);
+          }
         });
+
       }
 
     },
@@ -79,7 +89,6 @@
         this.isIndeterminate = false;
       },
       handleCheckPeoplesChange(value) {
-        console.log(value);
         let checkedCount = value.length;
         this.checkAll = checkedCount === this.peoples.length;
         this.isIndeterminate = checkedCount > 0 && checkedCount < this.peoples.length;
@@ -103,16 +112,17 @@
   .popContent {
     position: fixed;
     background: #fff;
-    width: 7.5rem;
-    left: 50%;
-    margin-left: -3rem;
-    top: 2rem;
+    width: 4rem;
+    top: 0;
+    right: 0;
+    bottom: 0;
     z-index: 1999;
-    border-radius: 0.08rem;
+    border-radius: 0.08rem 0 0 0.08rem;
     overflow: hidden;
     h3 {
-      height: 0.4rem;
-      line-height: 0.4rem;
+      height: 0.6rem;
+      line-height: 0.6rem;
+      padding-left: 0.2rem;
       background: #2f4553;
       color: #fff;
       font-size: 0.2rem;
@@ -120,9 +130,19 @@
       font-weight: normal;
     }
     .content {
-      padding: 0.2rem 0.4rem;
       background: #cfd6f3;
-      .subContent {
+      position: absolute;
+      top: 0.6rem;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      .subContent {        
+        position: absolute;
+        top: 0.2rem;
+        bottom: 1rem;
+        left: 0.4rem;
+        right: 0.4rem;
+        overflow-y: auto;
         ul {
           li {
             padding-left: 0.05rem;
@@ -139,11 +159,27 @@
             }
           }
         }
+        .el-checkbox-group{
+          .el-checkbox{
+            display: block;
+            height: 0.48rem;
+            line-height: 0.48rem;
+            margin-right: 0;
+            .el-checkbox__input{
+              .el-checkbox__inner{
+                border-radius: 50%;
+              }
+            }
+          }
+        }
       }
       .popBtn {
         text-align: center;
         margin-top: 0.1rem;
         margin-bottom: 0.15rem;
+        position: absolute;
+        bottom: 0.2rem;
+        right: 0.4rem;
         a {
           display: inline-block;
           width: 1.2rem;

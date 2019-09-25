@@ -2,120 +2,38 @@
  * @Author: dairui 
  * @Date: 2019-08-19 11:18:38 
  * @Last Modified by: dairui
- * @Last Modified time: 2019-08-19 13:43:59
+ * @Last Modified time: 2019-09-23 14:09:38
  */
 
-<template>
-  <div class="mask">
-    <div>
-      <div class="popHeader">
-        <h3>实力统计</h3>
-        <i
-          class="el-icon-close"
-          v-on:click="closeFn"
-        ></i>
-      </div>
-      <div class="contentList">
-        <ul class="title">
-          <li class="width-num"></li>
-          <li>周一</li>
-          <li>周二</li>
-          <li>周三</li>
-          <li>周四</li>
-          <li>周五</li>
-          <li>周六</li>
-          <li>周日</li>
+  <template>
+  <el-table
+    :data="tableData"
+    style="width: 100%"
+  >
+    <el-table-column
+      prop="date"
+      label="日期"
+      width="180"
+    >
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180"
+    >
+    </el-table-column>
+    <el-table-column label="地址">
+      <template slot-scope="scope">
+        <ul>
+          <li v-for="item in datas">
+            <span>{{item.subjectUnitName}}</span>
+            <span>{{item.trainAreaName}}</span>
+            <span>{{item.chargeTeacherName}}</span>
+          </li>
         </ul>
-        <ul class="nums">
-          <li
-            v-for="item in num"
-            class="width-num"
-          >{{item}}</li>
-        </ul>
-        <div class="tableSelf">
-          <div
-            v-for="(item,index) in instanceCountArr"
-            class="clearfix rowSelf"
-          >
-            <div
-              class="colSelf"
-              v-bind:style="{lineHeight:defaultHeight*item.classSection.length+'px'}"
-            >
-              {{item.subjectUnitName}}
-            </div>
-            <div class="colSelf">
-              <dl class="sortCol">
-                <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.leaderNum}}</dt>
-                <dd>
-                  <ul>
-                    <li
-                      v-for="subItem in item.leaderList"
-                      v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.leaderList.length-1))/item.leaderList.length)+'px'}"
-                    >
-                      <span>{{subItem.user_rank}}</span>
-                      <span>{{subItem.user_num}}</span>
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>
-            <div class="colSelf">
-              <!-- personTable -->
-              <dl class="sortCol">
-                <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.soldierNum}}</dt>
-                <dd>
-                  <ul>
-                    <li
-                      v-for="subItem in item.soldierList"
-                      v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.soldierList.length-1))/item.soldierList.length)+'px'}"
-                    >
-                      <span>{{subItem.user_rank}}</span>
-                      <span>{{subItem.user_num}}</span>
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>
-            <div class="colSelf">
-              <dl class="sortCol">
-                <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.carNum}}</dt>
-                <dd>
-                  <ul>
-                    <li
-                      v-for="subItem in item.carList"
-                      v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.carList.length-1))/item.carList.length)+'px'}"
-                    >
-                      <span>{{subItem.carType}}</span>
-                      <span>{{subItem.count}}</span>
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>
-            <div
-              class="colSelf"
-              style="border-right:none;"
-            >
-              <dl class="sortCol">
-                <dt v-bind:style="{lineHeight:defaultHeight*item.maxLength+'px'}">{{item.materialNum}}</dt>
-                <dd>
-                  <ul>
-                    <li
-                      v-for="subItem in item.materialList"
-                      v-bind:style="{lineHeight:parseInt((defaultHeight*item.maxLength-(item.materialList.length-1))/item.materialList.length)+'px'}"
-                    >
-                      <span>{{subItem.equipType}}</span>
-                      <span>{{subItem.count}}</span>
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
@@ -123,11 +41,90 @@
   export default {
     data() {
       return {
-        instanceCountArr: [
-          { "classSection": ["节次1", "节次2"], "subjectUnitName": "科目单元名称", "trainAreaName": "第三教学楼", "chargeTeacherName": "张三" },
-          { "classSection": ["节次3"], "subjectUnitName": "体能训练", "trainAreaName": "第三教学楼", "chargeTeacherName": "张三" },
-          { "classSection": ["节次4", "节次5"], "subjectUnitName": "科目单元名称", "trainAreaName": "第三教学楼", "chargeTeacherName": "张三" }
-        ],
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }],
+        datas:
+          [
+            {
+              "subjectID": "0CDC37B008A94B71AC5D98FDC8743631",
+              "classSection": "1",
+              "subjectUnitName": "wang课目1-2-1",
+              "trainAreaName": "训练场地1",
+              "chargeTeacherName": "刘二，刘一",
+              "shift": "1"
+            },
+            {
+              "subjectID": "0CDC37B008A94B71AC5D98FDC8743631",
+              "classSection": "1,2",
+              "subjectUnitName": "wang课目1-2-1",
+              "trainAreaName": "训练场地1",
+              "chargeTeacherName": "刘二，刘一",
+              "shift": "1"
+            },
+            {
+              "subjectID": "0CDC37B008A94B71AC5D98FDC8743631",
+              "classSection": "1,2,3",
+              "subjectUnitName": "wang课目1-2-1",
+              "trainAreaName": "训练场地1",
+              "chargeTeacherName": "刘二，刘一",
+              "shift": "1"
+            },
+            {
+              "subjectID": "0CDC37B008A94B71AC5D98FDC8743631",
+              "classSection": "11,12",
+              "subjectUnitName": "wang课目1-2-1",
+              "trainAreaName": "训练场地1",
+              "chargeTeacherName": "刘二，刘一",
+              "shift": "1"
+            },
+            {
+              "subjectID": "0CDC37B008A94B71AC5D98FDC8743631",
+              "classSection": "2",
+              "subjectUnitName": "wang课目1-2-1",
+              "trainAreaName": "训练场地1",
+              "chargeTeacherName": "刘二，刘一",
+              "shift": "1"
+            },
+            {
+              "subjectID": "0CDC37B008A94B71AC5D98FDC8743631",
+              "classSection": "2",
+              "subjectUnitName": "wang课目1-2-1",
+              "trainAreaName": "训练场地1",
+              "chargeTeacherName": "刘二，刘一",
+              "shift": "1"
+            },
+            {
+              "subjectID": "0CDC37B008A94B71AC5D98FDC8743631",
+              "classSection": "2,3,4",
+              "subjectUnitName": "wang课目1-2-1",
+              "trainAreaName": "训练场地1",
+              "chargeTeacherName": "刘二，刘一",
+              "shift": "1"
+            },
+            {
+              "subjectID": "0CDC37B008A94B71AC5D98FDC8743631",
+              "classSection": "9,10",
+              "subjectUnitName": "wang课目1-2-1",
+              "trainAreaName": "训练场地1",
+              "chargeTeacherName": "刘二，刘一",
+              "shift": "1"
+            }
+          ],
         num: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         maxLength: 0,
         defaultHeight: 30

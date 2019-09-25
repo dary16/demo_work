@@ -1,4 +1,5 @@
-var ws = require('ws').Server;
+var ws = require('ws');
+console.log(ws, 'ws');
 
 var server = new ws({
     host: "127.0.0.1",

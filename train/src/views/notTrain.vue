@@ -1,7 +1,7 @@
 <template>
   <div class="xl-list clearfix">
     <v-header :titleData="title"></v-header>
-    <div class="xl-header">
+    <!-- <div class="xl-header">
       <div class="xl-right">
         <button
           class="normal-btn-border-lg fr btn-dowmload"
@@ -11,7 +11,7 @@
           数据下载</button>
         <span class="fr">{{nowTime}}</span>
       </div>
-    </div>
+    </div> -->
     <v-list-item
       :infoList="infoList"
       v-on:doAction="doAction"
@@ -23,8 +23,10 @@
 <script>
   import {
     getLoc, setLoc
-  } from '../utils/common.js';
+  } from '@/utils/common.js';
   import { mapMutations, mapState, mapActions } from 'vuex';
+  import userData from '@/utils/user.js';
+  import notActionData from '@/utils/notActionData.js';
   export default {
     data() {
       //这里存放数据
@@ -36,7 +38,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['allData', 'nowIndex', 'userInfo'])
+      ...mapState(['userName', 'nowIndex', 'userInfo'])
     },
     //监控data中的数据变化
     watch: {
@@ -52,30 +54,16 @@
       ...mapActions(['_getInfo']),
       doAction(index) {
         this._nowIndex(index);
-        // this.$router.push({ name: 'info', params: { trainList: this.infoList[index].trainList, index: index } });
         this.$router.push('./info');
       },
       //数据下载
       downloadData() {
         //后期要改，直接取未实施数据
         this.nowTime = this.util.formatDate(new Date().getTime(), 3);
-        // this.$http.get('../../all.json')
-        //   .then((res) => {
-        //     console.log(res.body.notActionList);
-        //     setLoc(getLoc('userInfo').userID, { "notActionData": res.body.notActionList, "loadTime": this.nowTime });
-        //     this.infoList = res.body.notActionList;
-        //   }
-        //   )
-        this._getInfo({
-          method: 'get',
-          api: 'getLogin',
-          callback: res => {
-            console.log(res, res);
-            //保存下载时间到localstorage
-            setLoc(getLoc('userInfo').userID, { "notActionData": res.notActionList, "loadTime": this.nowTime });
-            this.infoList = res.notActionList;
-          }
-        })
+        // console.log(allDataArr);
+        setLoc(getLoc('userInfo').userID, { "notActionData": allDataArr.body.notActionList, "loadTime": this.nowTime });
+        this.infoList = allDataArr.body.notActionList;
+
       },
       showInfo(index) {
         this._nowIndex(index);
@@ -84,15 +72,16 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      console.log(getLoc(this.userInfo.userID));
-      if(getLoc(this.userInfo.userID) === null) {
-        this.infoList = [];
-        this.nowTime = '';
-      } else {
-        this.infoList = getLoc(this.userInfo.userID).notActionData;
-        this.nowTime = getLoc(this.userInfo.userID).loadTime;
-        console.log(this.infoList, this.nowTime);
-      };
+      let notList = getLoc(this.userName + '_n');
+      this.infoList = notList.notActionList;
+      //   if(getLoc(this.userInfo.userID) === null) {
+      //     this.infoList = [];
+      //     this.nowTime = '';
+      //   } else {
+      //     this.infoList = getLoc(this.userInfo.userID).notActionData;
+      //     this.nowTime = getLoc(this.userInfo.userID).loadTime;
+      //     console.log(this.infoList, this.nowTime);
+      //   };
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },

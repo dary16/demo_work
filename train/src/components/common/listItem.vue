@@ -3,12 +3,9 @@
     <div
       class="xl-item"
       v-for="(item,index) in infoList"
-      :key="item.subjectID"
+      :key="item.arrangeSubjectResultID"
     >
-      <div
-        class="content-header clearfix"
-        @click="showInfo(index)"
-      >
+      <div class="content-header clearfix">
         <ul class="header-wrap">
           <li class="right">
             <i class="header-icon el-icon-caret-right"></i>
@@ -42,20 +39,18 @@
             <!-- <i class="el-icon-s-flag"></i> -->
             <img class="flag" src="../../assets/flag.png"/>
           训练修改</button>
-            <div class="more">
+            <div
+              class="more"
+              @click="showInfo(index)"
+            >
               <i class="el-icon-arrow-right"></i>
             </div>
-            <span class="fr">
-              <span v-if="item.upload && item.trainOrNot">已上传</span>
-              <span v-if="chooseLoad">
-                <!-- <el-checkbox :label="item.chargeTeacherID"></el-checkbox> -->
-                <input
-                  type="checkbox"
-                  name="checkBoxs"
-                  v-model="item.isChecked"
-                  @change="changeFn(item,index)"
-                >
-              </span>
+            <span
+              class="fr iconSize"
+              v-show="!item.upload && item.trainOrNot"
+            >
+              <!-- <span v-if="item.upload && item.trainOrNot">*</span> -->
+              <i class="el-icon-upload2"></i>
             </span>
       </div>
       <div class="content-info">
@@ -154,7 +149,7 @@
   .xl-content {
     position: fixed;
     top: 1.7rem;
-    bottom: 0rem;
+    bottom: 1rem;
     left: 1.9rem;
     right: 0.74rem;
     overflow-y: auto;
@@ -171,7 +166,7 @@
           line-height: 0.6rem;
           font-size: 0.22rem;
           margin-left: 0.2rem;
-          width: 84%;
+          width: 82%;
           display: flex;
           li {
             float: left;
@@ -190,8 +185,13 @@
         .more {
           width: 1rem;
           font-size: 0.3rem;
-          padding: 0 0.4rem;
+          padding: 0 0.2rem;
           height: 0.6rem;
+          line-height: 0.6rem;
+          text-align: right;
+        }
+        .iconSize {
+          font-size: 0.3rem;
           line-height: 0.6rem;
         }
         .fr {
@@ -203,12 +203,13 @@
           }
         }
         button {
-          margin-right: 0.2rem;
+          margin-right: 0.5rem;
           height: 0.6rem;
         }
       }
       .flag {
         width: 0.2rem;
+        margin-right: 0.1rem;
       }
       .content-info {
         padding: 0.1rem;
