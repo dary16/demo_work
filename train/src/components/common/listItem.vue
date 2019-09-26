@@ -82,20 +82,14 @@
     data() {
       //这里存放数据
       return {
-        newData: []//暂时不用
+        newData: []
       };
     },
-    props: ['infoList', 'chooseLoad'],
+    props: ['infoList'],
     //监听属性 类似于data概念
     computed: {},
     //监控data中的数据变化
-    watch: {
-      infoList: {
-        handler(newValue, oldValue) {
-          console.log(newValue, oldValue, 'watch66');
-        }
-      }
-    },
+    watch: {},
     //方法集合
     methods: {
       doAction(val) {
@@ -106,18 +100,6 @@
       },
       showInfo(val) {
         this.$emit("showInfo", val);
-      },
-      changeFn(v, i) {
-        //改变选中状态
-        let changeV = JSON.parse(JSON.stringify(v));
-        changeV.isChecked = v.isChecked;
-        //根据选中状态改变数据
-        for(let i = 0; i < this.infoList.length; i++) {
-          if(this.infoList[i].chargeTeacherID === changeV.chargeTeacherID) {
-            this.infoList[i] = changeV;
-          }
-          this.$emit('changeFn', this.infoList);
-        }
       },
       //数据类型转换
       changType() {

@@ -17,9 +17,30 @@
             v-for="item in listData"
             :key="item.trainImplementCommentID"
           >
-            <p>{{item.commentExplain}}</p>
-            <span class="name">{{item.commentPersonName}}</span>
-            <span class="time">{{item.commentDate}}</span>
+            <dd>
+              <label>标题:</label>
+              <span>{{item.commentTitle}}</span>
+            </dd>
+            <dd>
+              <label>时间:</label>
+              <span>{{item.commentDate}}</span>
+            </dd>
+            <dd>
+              <label>说明:</label>
+              <span>{{item.commentExplain}}</span>
+            </dd>
+            <dd>
+              <label>建议人:</label>
+              <span>{{item.commentPersonName}}</span>
+            </dd>
+            <dd>
+              <label>关键字:</label>
+              <span>{{item.keyword}}</span>
+            </dd>
+            <!-- <p>时间:{{item.commentDate}}</p>
+            <p>说明:{{item.commentExplain}}</p>
+            <p>建议人:{{item.commentPersonName}}</p>
+            <p>关键字:{{item.keyword}}</p> -->
           </li>
         </ul>
       </div>
@@ -72,7 +93,7 @@
             'status': 3,
             'title': '时间',
             'placeholder': '请选择时间',
-            'val': formatDateMin(new Date(),'yyyy-MM-dd hh:mm')
+            'val': this.dateTime
           }, {
             'status': 1,
             'title': '说明',
@@ -94,31 +115,7 @@
     },
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex', 'userInfo', 'tabIndex']),
-    },
-    //监控data中的数据变化
-    watch: {
-      listData: {
-        handler(newValue, oldValue) {
-          if(this.tabIndex === 1) {
-            let oldActionData = getLoc(this.userInfo.userID).notActionData;
-            let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData.length;
-            //数组的替换
-            oldActionData[this.nowIndex].commentData.splice(0, arrLen, ...newValue);
-            //更新本地数据存储
-            setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
-          } else if(this.tabIndex === 2) {
-            let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-            let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].commentData.length;
-            //数组的替换
-            oldTrainData[this.nowIndex].commentData.splice(0, arrLen, ...newValue);
-            //更新本地数据存储
-            setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
-          }
-
-        },
-        deep: true
-      }
+      ...mapState(['nowIndex', 'userInfo', 'tabIndex', 'userName']),
     },
     //方法集合
     methods: {
@@ -131,34 +128,39 @@
       //保存
       saveFn(val) {
         val.commentDate = this.dateTime;
-        if(val.commentTitle == null || val.commentTitle == ''){
-          this.$message({
-            message: '请输入标题',
-            type: 'warning'
-          });
-        }else if(val.commentDate == null || val.commentDate == ''){
-          this.$message({
-            message: '请选择时间',
-            type: 'warning'
-          });
-        }else if(val.commentExplain == null || val.commentExplain == ''){
-          this.$message({
-            message: '请输入说明',
-            type: 'warning'
-          });
-        }else if(val.commentPersonName == null || val.commentPersonName == ''){
-          this.$message({
-            message: '请输入建议人',
-            type: 'warning'
-          });
-        }else if(val.keyword == null || val.keyword == ''){
-          this.$message({
-            message: '请输入关键字',
-            type: 'warning'
-          });
+        if(!val.commentTitle){
+          this.message.warning("请输入标题！");
+          return false;
+        }else if(!val.commentDate){
+          this.message.warning("请选择时间！");
+          return false;
+        }else if(!val.commentExplain){
+          this.message.warning("请输入说明！");
+          return false;
+        }else if(!val.commentPersonName){
+          this.message.warning("请输入建议人！");
+          return false;
+        }else if(!val.keyword){
+          this.message.warning("请输入关键字！");
+          return false;
         }else{
           this.isShowBox = false;
           this.listData.push(val);
+          if(this.tabIndex === 1) {
+            let oldActionData = getLoc(this.userName+"_n").notActionList;
+            let arrLen = getLoc(this.userName+"_n").notActionList[this.nowIndex].commentData.length;
+            //数组的替换
+            oldActionData[this.nowIndex].commentData.push(val);
+            //更新本地数据存储
+            setLoc(this.userName+"_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
+          } else if(this.tabIndex === 2) {
+            let oldTrainData = getLoc(this.userName+"_y").trainListData;
+            let arrLen = getLoc(this.userName+"_y").trainListData[this.nowIndex].commentData.length;
+            //数组的替换
+            oldTrainData[this.nowIndex].commentData.push(val);
+            //更新本地数据存储
+            setLoc(this.userName+"_y", { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          }
         }
       },
       //取消
@@ -178,26 +180,29 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       if(this.tabIndex === 1) {
-        let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        // console.log(getLoc(this.userName+"_n").notActionList[this.nowIndex].commentData);
+        // let oldActionData = getLoc(this.userInfo.userID).notActionData;
+        let oldActionData = getLoc(this.userName+"_n").notActionList;
         if(this.$route.params.addData) {
-          this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
+          this.listData = getLoc(this.userName+"_n").notActionList[this.nowIndex].commentData;
           this.listData.push(this.$route.params.addData);
           oldActionData[this.nowIndex].commentData.push(this.$route.params.addData);
           //更新本地缓存
-          setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
+          setLoc(this.userName+"_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)),});
         } else {
-          this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
+          // this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
+          this.listData = getLoc(this.userName+"_n").notActionList[this.nowIndex].commentData;
         }
       } else if(this.tabIndex === 2) {
-        let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+        let oldTrainData = getLoc(this.userName+"_y").trainListData;
         if(this.$route.params.addData) {
-          this.listData = getLoc(this.userInfo.personID).trainListData[this.nowIndex].commentData;
+          this.listData = getLoc(this.userName+"_y").trainListData[this.nowIndex].commentData;
           this.listData.push(this.$route.params.addData);
           oldTrainData[this.nowIndex].commentData.push(this.$route.params.addData);
           //更新本地缓存
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          setLoc(this.userName+"_y", { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         } else {
-          this.listData = getLoc(this.userInfo.personID).trainListData[this.nowIndex].commentData;
+          this.listData = getLoc(this.userName+"_y").trainListData[this.nowIndex].commentData;
         }
       }
 
@@ -228,11 +233,20 @@
       ul {
         li {
           border: 1px solid #e6e4e4;
+          border-radius: 4px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
           padding: 0.1rem 0.2rem;
           line-height: 0.5rem;
+          label {
+            width: 3rem;
+            display: inline-block;
+          }
           .name {
             margin-right: 0.3rem;
           }
+          // p {
+          //   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+          // }
           // &:last-child {
           //   border-bottom: 1px solid #006699;
           // }

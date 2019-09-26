@@ -13,7 +13,7 @@
   import { mapState } from 'vuex';
   import {
     getLoc
-  } from '../../utils/common.js';
+  } from '@/utils/common.js';
   export default {
     data() {
       //这里存放数据

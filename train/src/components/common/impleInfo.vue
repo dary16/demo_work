@@ -101,17 +101,31 @@
     <v-pop-box
       v-if="isShowBox"
       :popData="popData"
+      :abnormalDate="abnormalDate"
       v-on:save="savePopFn"
       v-on:cancle="cancleFn"
+      v-on:chooseTime="chooseTime"
     >
     </v-pop-box>
+    <mt-datetime-picker
+      ref="picker"
+      type="datetime"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      hour-format="{value} 时"
+      minute-format="{value} 分"
+      @confirm="handleConfirm"
+      :endDate="new Date()"
+    >
+    </mt-datetime-picker>
   </div>
 </template>
 
 <script>
   import {
-    getLoc, setLoc
-  } from '../../utils/common.js';
+    getLoc, setLoc, formatDateMin
+  } from '@/utils/common.js';
   import { mapMutations, mapState } from 'vuex';
 
   export default {
@@ -120,12 +134,8 @@
       return {
         infoChildData: {},//存储父组件传来的infoData
         faultIndex: 0,
-        time: {
-          index: '',
-          type: ''
-        },
-        nowTime: '',
-        show: 0,
+        nowTime: '', //记录当前时间
+        abnormalDate: '',
         firstName: [],
         helpName: [],
         show: 0,
@@ -163,17 +173,17 @@
     },
     //监控data中的数据变化
     watch: {
-      // infoData: {
-      //   handler(newValue, oldValue) {
-      //     this.infoChildData = JSON.parse(JSON.stringify(newValue));
-      //   },
-      //   deep: true
-      // }
+      infoData: {
+        handler(newValue, oldValue) {
+          this.infoChildData = JSON.parse(JSON.stringify(newValue));
+        },
+        deep: true
+      }
     },
     methods: {
       ...mapMutations(['_allData']),
       tagFn(i) {
-        //判断是否有签到字段，有有改变，没有就添加
+        //判断是否有签到字段，有就改变，没有就添加
         if(this.infoChildData.tags[i].hasOwnProperty('isSignIn')) {
           this.infoChildData.tags[i].isSignIn = !this.infoChildData.tags[i].isSignIn;
         } else {
@@ -200,10 +210,6 @@
           setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         }
 
-      },
-      //设置时间
-      setTime(index) {
-        // let time = this.util.formatDate(new Date().getTime(), 3);
       },
       //返回
       back() {
@@ -267,10 +273,6 @@
           //更新本地数据存储
           setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         }
-      },
-      cancelFn() {
-        this.time.index = '';
-        this.time.type = '';
       },
       doneFn() {
         if(this.tabIndex === 1) {
@@ -352,7 +354,7 @@
           let oldActionData = getLoc(this.userName + '_n').notActionList;
           //获取未实施对应异常列表数据
           oldActionData[this.nowIndex].trainImpleData.trainList[this.faultIndex].faultInfo.push(val);
-          console.log(getLoc(this.userInfo.username + '_n'));
+
           setLoc(this.userName + '_n', { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
           //更新数据
           this.infoChildData.trainList = getLoc(this.userInfo.username + '_n').notActionList[this.nowIndex].trainImpleData.trainList;
@@ -368,6 +370,13 @@
       cancleFn(val) {
         this.isShowBox = val;
       },
+      chooseTime() {
+        this.$refs.picker.open();
+      },
+      handleConfirm(value) {
+        this.abnormalDate = formatDateMin(value);
+        // this.popData.options[0].val = formatDateMin(value);
+      }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
@@ -459,7 +468,7 @@
             display: flex;
             padding: 0.26rem 0 0.24rem 0;
             .select-wrap {
-              margin: 0 0.5rem;
+              margin: 0 0.1rem;
             }
             .p-left {
               flex: 1;
@@ -563,11 +572,11 @@
   }
 </style>
 <style>
-  .select-wrap .el-input--mini .el-input__inner {
-    height: 0.36rem !important;
-    line-height: 0.36rem !important;
-    font-size: 0.18rem !important;
-  }
+  /* .select-wrap .el-input--mini .el-input__inner {
+                  height: 0.36rem !important;
+                  line-height: 0.36rem !important;
+                  font-size: 0.18rem !important;
+                } */
   .select-wrap .el-select-dropdown__list {
     padding: 0 !important;
   }

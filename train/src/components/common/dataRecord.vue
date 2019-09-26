@@ -49,6 +49,7 @@
 
 <script>
   import { mapState } from 'vuex';
+import { getLoc } from '../../utils/common';
   export default {
     data() {
       //这里存放数据
@@ -63,7 +64,7 @@
     props: ['listData'],
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex'])
+      ...mapState(['nowIndex','userName'])
     },
     //监控data中的数据变化
     watch: {
@@ -96,7 +97,7 @@
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
-      this.listChildData = JSON.parse(JSON.stringify(this.listData));
+      this.listChildData = JSON.parse(JSON.stringify(this.listData));;
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {
@@ -117,7 +118,9 @@
     overflow-y: auto;
     .item {
       padding: 0.2rem 0.4rem;
-      border: 1px solid #006699;
+      border: 1px solid #e6e4e4;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
       margin-bottom: 0.2rem;
       border-radius: 4px;
       dl {

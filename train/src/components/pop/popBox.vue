@@ -61,25 +61,32 @@
                   maxlength="20"
                   size="mini"
                   :placeholder="item.placeholder"
-                  v-model="popReq[item.val]"
+                  v-model="time"
                   @focus="chooseTime"
                 >
-
                 </el-input>
+              </li>
+              <li v-if="item.status == 4">
+                <span><i v-if="item.check">*</i>{{item.title}}：</span>
+                <el-select
+                  multiple
+                  collapse-tags
+                  class="popBox"
+                  v-model="popReq[item.val]"
+                  v-bind:placeholder="item.placeholder"
+                  size="mini"
+                >
+                  <el-option
+                    v-for="itemSel in item.list"
+                    :key="itemSel.value"
+                    :label="itemSel.label"
+                    :value="itemSel.value"
+                  ></el-option>
+                </el-select>
               </li>
             </ul>
           </div>
-          <mt-datetime-picker
-            ref="picker"
-            type="datetime"
-            year-format="{value} 年"
-            month-format="{value} 月"
-            date-format="{value} 日"
-            @confirm="handleConfirm"
-            v-model="test"
-            :endDate="new Date()"
-          >
-          </mt-datetime-picker>
+
           <div class="popBtn">
             <a
               href="javascript:;"
@@ -97,18 +104,22 @@
   </transition>
 </template>
 <script>
-  import Vue from "vue";
-
-  import { formatDate, formatDateMin } from '../../utils/common';
   export default {
     data() {
       return {
         popReq: {},//弹窗的数据
-        test: ''
+        time: ''
       };
     },
-    props: ['popData', 'formData'],
-    created() {
+    props: ['popData', 'abnormalDate'],
+    created() { },
+    watch: {
+      abnormalDate: {
+        handler(newValue, oldValue) {
+          this.popReq.abnormalDate = newValue;
+          this.time = newValue;
+        }
+      }
     },
     methods: {
       onSubmit() {
@@ -121,11 +132,7 @@
         this.$emit('getBtnFn', val);
       },
       chooseTime() {
-        this.$refs.picker.open();
-      },
-      handleConfirm(value) {
-        this.popReq.abnormalDate = formatDateMin(value);
-        this.test = formatDateMin(value);
+        this.$emit('chooseTime');
       }
     },
   };

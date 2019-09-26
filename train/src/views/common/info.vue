@@ -8,6 +8,7 @@
         v-on:suggestion="suggestion"
         v-on:back="back"
         v-on:doneFn="doneFn"
+        v-on:updateFn="updateFn"
       ></v-imple-info>
     </keep-alive>
     <keep-alive>
@@ -109,7 +110,19 @@
       //完成
       doneFn() {
         this.$router.go(-1);
-      }
+      },
+      //更新数据
+      updateFn() {
+        if(this.tabIndex === 1) {
+          this.infoData.tags = getLoc(this.userName + '_n').notActionList[this.nowIndex].joinAstronautNames;
+          console.log(this.infoData.tags);
+          this.infoData.trainList = getLoc(this.userName + '_n').notActionList[this.nowIndex].trainImpleData.trainList;
+        } else if(this.tabIndex === 2) {
+          this.infoData.tags = getLoc(this.userName + '_y').trainListData.joinAstronautNames;
+          this.infoData.trainList = getLoc(this.userName + '_y').trainListData.trainImpleData.trainList;
+        }
+
+      },
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {

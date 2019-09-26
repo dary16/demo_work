@@ -38,7 +38,7 @@
 </template>
 <script>
   import { mapState } from 'vuex';
-  import { getLoc } from '../../utils/common.js';
+  import { getLoc, setLoc } from '../../utils/common.js';
   export default {
     data() {
       return {
@@ -50,13 +50,12 @@
     },
     props: ['popTitle','changeIndex'],
     computed: {
-      ...mapState(['userInfo', 'nowIndex', 'tabIndex'])
+      ...mapState(['userInfo', 'nowIndex', 'tabIndex', 'userName'])
     },
     created() {
       if(this.tabIndex === 1) {
-        let names = getLoc(this.userInfo.userID).notActionData[this.nowIndex].joinAstronautNames;
-        let checkedNames = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainData[this.changeIndex].joinAstronautNames;
-        
+        let names = getLoc(this.userName+"_n").notActionList[this.nowIndex].joinAstronautNames;
+        let checkedNames = getLoc(this.userName+"_n").notActionList[this.nowIndex].trainData[this.changeIndex].joinAstronautNames;
         names.forEach(name => {
           this.peoples.push(name.trainImplementAstronautName);
           if(checkedNames.indexOf(name.trainImplementAstronautName)>=0){
@@ -64,8 +63,8 @@
           }
         });
       } else if(this.tabIndex === 2) {
-        let names = getLoc(this.userInfo.personID).trainListData[this.nowIndex].joinAstronautNames;
-        let checkedNames = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainData[this.changeIndex].joinAstronautNames;
+        let names = getLoc(this.userName+"_y").trainListData[this.nowIndex].joinAstronautNames;
+        let checkedNames = getLoc(this.userName+"_y").trainListData[this.nowIndex].trainData[this.changeIndex].joinAstronautNames;
         names.forEach(name => {
           this.peoples.push(name.trainImplementAstronautName);
           if(checkedNames.indexOf(name.trainImplementAstronautName)>=0){
@@ -83,12 +82,15 @@
       onCancle() {
         this.$emit('cancle', false);
       },
+      //全选
       handleCheckAllChange(val) {
         var peopleOptions = this.peoples;
         this.checkPeoples = val ? peopleOptions : [];
         this.isIndeterminate = false;
       },
       handleCheckPeoplesChange(value) {
+        // alert(value);
+        //setLoc(this.userName+"_n",getLoc(this.userName+"_y").trainListData[this.nowIndex].joinAstronautNames);
         let checkedCount = value.length;
         this.checkAll = checkedCount === this.peoples.length;
         this.isIndeterminate = checkedCount > 0 && checkedCount < this.peoples.length;
