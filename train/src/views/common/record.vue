@@ -14,6 +14,7 @@
     <v-pop-box
       v-if="isShowBox"
       :popData="popData"
+      :names="names"
       v-on:save="saveFn"
       v-on:cancle="cancleFn"
     ></v-pop-box>
@@ -41,12 +42,13 @@
         isShowPeople: false,
         popTitle: "选择参训航天员",
         listData: [],
+        names: [],//航天员名称
         changeIndex: '-1',
         popData: {
           'titleTotal': '新增',
           'options': [{
             'status': 1,
-            'check':true,
+            'check': true,
             'title': '数据项目名称',
             'placeholder': '请输入数据项目名称',
             'val': 'dataItemName'
@@ -59,25 +61,25 @@
           }, {
             'status': 1,
             'title': '数据项说明',
-            'check':true,
+            'check': true,
             'placeholder': '请输入数据项说明',
             'val': 'dataItemDesc'
           }, {
             'status': 1,
             'title': '数据项值',
-            'check':true,
+            'check': true,
             'placeholder': '请输入数据项值',
             'val': 'dataItemValue'
           }, {
             'status': 1,
             'title': '数据项标准值',
-            'check':true,
+            'check': true,
             'placeholder': '请输入数据项标准值',
             'val': 'dataItemMeasureValue'
           }, {
             'status': 2,
             'title': '数据项单位',
-            'check':true,
+            'check': true,
             'placeholder': '请选择数据单位',
             'val': 'dataItemUnit',
             'list': [
@@ -97,92 +99,74 @@
       ...mapState(['nowIndex', 'userInfo', 'tabIndex', 'userName']),
     },
     //监控data中的数据变化
-    // watch: {
-    //   listData: {
-    //     handler(newValue, oldValue) {
-    //       if(this.tabIndex === 1) {
-    //         let oldActionData = getLoc(this.userInfo.userID).notActionData;
-    //         let arrLen = getLoc(this.userInfo.userID).notActionData[this.nowIndex].trainData.length;
-    //         //数组的替换
-    //         oldActionData[this.nowIndex].trainData.splice(0, arrLen, ...newValue);
-    //         //更新本地数据存储
-    //         setLoc(getLoc('userInfo').userID, { "notActionData": JSON.parse(JSON.stringify(oldActionData)), "loadTime": getLoc(this.userInfo.userID).loadTime });
-    //       } else if(this.tabIndex === 2) {
-    //         let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-    //         let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainData.length;
-    //         //数组的替换
-    //         oldTrainData[this.nowIndex].trainData.splice(0, arrLen, ...newValue);
-    //         //更新本地数据存储
-    //         setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
-    //       }
-    //     },
-    //     deep: true
-    //   }
-    // },
+    watch: {
+      listData: {
+        handler(newValue, oldValue) {
+          if(this.tabIndex === 1) {
+            let oldActionData = getLoc(this.userName + "_n").notActionList;
+            let arrLen = oldActionData[this.nowIndex].trainData.length;
+            //数组的替换
+            oldActionData[this.nowIndex].trainData.splice(0, arrLen, ...newValue);
+            //更新本地数据存储
+            setLoc(this.userName + "_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
+          } else if(this.tabIndex === 2) {
+            let oldTrainData = getLoc(this.userInfo.personID).trainListData;
+            let arrLen = oldTrainData[this.nowIndex].trainData.length;
+            oldTrainData[this.nowIndex].trainData.splice(0, arrLen, ...newValue);
+            setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          }
+        },
+        deep: true
+      }
+    },
     //方法集合
     methods: {
       back() {
         this.$router.go(-1);
       },
-      addRole() {
+      addRole(v) {
         this.isShowBox = true;
-        let names = getLoc(this.userName+"_n").notActionList[this.nowIndex].joinAstronautNames;
-        if(this.popData.options[1].list<=0){
-          names.forEach(name => {
-              this.popData.options[1].list.push({value:name.trainImplementAstronautName,label:name.trainImplementAstronautName});
-          });
+        if(v === 2) {
+          //新添加
+          this.names = getLoc(this.userName + "_n").notActionList[this.nowIndex].joinAstronautNames;
         }
-        // if(this.popData.options[1].list.length<=0){
-        //   names.forEach(name => {
-        //     this.popData.options[1].list.push({value:name.trainImplementAstronautName,label:name.trainImplementAstronautName});
-        //   });
-        // }else{
-        //   alert(names.length);
-        //   names.forEach(name => {
-        //     this.popData.options[1].list.splice(0,3,{value:name.trainImplementAstronautName,label:name.trainImplementAstronautName});
-        //   });
-        // }
       },
-      openPeopleFn() {
-
-      },
-
       //保存
-      saveFn(val) {        
-        console.log("$$$$$"+val);
+      saveFn(val) {
         var re = /^[0-9]+.?[0-9]*/;//判断字符串是否为数字
-        for(var i=0;i<this.popData.options.length;i++){
+        for(var i = 0; i < this.popData.options.length; i++) {
           var names = this.popData.options[i].val;
           var checks = this.popData.options[i].check;
-          if(val[names] == undefined && checks){
+          if(val[names] == undefined && checks) {
             this.message.warning(this.popData.options[i].placeholder);
             return false
           }
         }
-        if(!re.test(val.dataItemValue)){
+        if(!re.test(val.dataItemValue)) {
           this.message.warning("数据项值必须为数字！");
           return false
-        }else if(!re.test(val.dataItemMeasureValue)){
+        } else if(!re.test(val.dataItemMeasureValue)) {
           this.message.warning("数据项标准值必须为数字！");
           return false
         }
-        this.isShowBox = false;        
+        this.isShowBox = false;
+        console.log(this.listData, 'listdata');
+        val.joinAstronautNames = val.joinAstronautNames.toString();
         this.listData.push(val);
 
         if(this.tabIndex === 1) {
-          let oldActionData = getLoc(this.userName+"_n").notActionList;
-          let arrLen = getLoc(this.userName+"_n").notActionList[this.nowIndex].trainData.length;
+          let oldActionData = getLoc(this.userName + "_n").notActionList;
+          let arrLen = getLoc(this.userName + "_n").notActionList[this.nowIndex].trainData.length;
           //数组的替换
           oldActionData[this.nowIndex].trainData.push(val);
           //更新本地数据存储
-          setLoc(this.userName+"_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
+          setLoc(this.userName + "_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
         } else if(this.tabIndex === 2) {
           let oldTrainData = getLoc(this.userInfo.personID).trainListData;
-          let arrLen = getLoc(this.userInfo.personID).trainListData[this.nowIndex].trainData.length;
           //数组的替换
           oldTrainData[this.nowIndex].trainData.push(val);
           //更新本地数据存储
-          setLoc(getLoc('userInfo').personID, { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          setLoc(this.userName + '_y', { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         }
       },
       //取消
@@ -196,7 +180,7 @@
       },
       //选人弹窗 确定
       savePeopleFn(val) {
-        if(!val.length>0){;
+        if(!val.length > 0) {          ;
           this.$message({
             message: '请至少选择一个参训航天员',
             type: 'warning'
@@ -204,13 +188,6 @@
           return false
         }
         this.isShowPeople = false;
-        if(this.tabIndex === 1) {
-          this.listData = getLoc(this.userName+"_n").notActionList[this.nowIndex].trainData;
-          this.listData[this.changeIndex].joinAstronautNames = val.toString();
-        } else if(this.tabIndex === 2) {
-          this.listData = getLoc(this.userName+"_y").trainListData[this.nowIndex].trainData;
-          this.listData[this.changeIndex].joinAstronautNames = val.toString();
-        }
       },
       //选人弹窗 取消
       cancelPeopleFn(val) {
@@ -220,9 +197,9 @@
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
       if(this.tabIndex === 1) {
-        this.listData = getLoc(this.userName+"_n").notActionList[this.nowIndex].trainData;
+        this.listData = getLoc(this.userName + "_n").notActionList[this.nowIndex].trainData;
       } else if(this.tabIndex === 2) {
-        this.listData = getLoc(this.userName+"_y").trainListData[this.nowIndex].trainData;
+        this.listData = getLoc(this.userName + "_y").trainListData[this.nowIndex].trainData;
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）

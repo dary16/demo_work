@@ -48,10 +48,11 @@
     <v-pop-box
       v-if="isShowBox"
       :popData="popData"
+      :commentDate="commentDate"
       :dateTime='dateTime'
       v-on:save="saveFn"
       v-on:cancle="cancleFn"
-      v-on:open="openFn"
+      v-on:chooseTime="chooseTime"
     ></v-pop-box>
     <mt-datetime-picker
       ref="picker"
@@ -70,8 +71,8 @@
 
 <script>
   import {
-    getLoc, setLoc ,formatDateMin
-  } from '../../utils/common.js';
+    getLoc, setLoc, formatDateMin
+  } from '@/utils/common.js';
   import { mapState } from 'vuex';
   export default {
     data() {
@@ -81,6 +82,7 @@
         dateval: '',
         listData: [],
         isShowBox: false,
+        commentDate: '',
         dateTime: '',
         popData: {
           'titleTotal': '新增',
@@ -93,7 +95,7 @@
             'status': 3,
             'title': '时间',
             'placeholder': '请选择时间',
-            'val': this.dateTime
+            'val': 'commentDate'
           }, {
             'status': 1,
             'title': '说明',
@@ -127,40 +129,42 @@
       },
       //保存
       saveFn(val) {
-        val.commentDate = this.dateTime;
-        if(!val.commentTitle){
+        if(!val.commentTitle) {
           this.message.warning("请输入标题！");
           return false;
-        }else if(!val.commentDate){
+        }
+        if(!val.commentDate) {
           this.message.warning("请选择时间！");
           return false;
-        }else if(!val.commentExplain){
+        }
+        if(!val.commentExplain) {
           this.message.warning("请输入说明！");
           return false;
-        }else if(!val.commentPersonName){
+        }
+        if(!val.commentPersonName) {
           this.message.warning("请输入建议人！");
           return false;
-        }else if(!val.keyword){
+        }
+        if(!val.keyword) {
           this.message.warning("请输入关键字！");
           return false;
-        }else{
-          this.isShowBox = false;
-          this.listData.push(val);
-          if(this.tabIndex === 1) {
-            let oldActionData = getLoc(this.userName+"_n").notActionList;
-            let arrLen = getLoc(this.userName+"_n").notActionList[this.nowIndex].commentData.length;
-            //数组的替换
-            oldActionData[this.nowIndex].commentData.push(val);
-            //更新本地数据存储
-            setLoc(this.userName+"_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
-          } else if(this.tabIndex === 2) {
-            let oldTrainData = getLoc(this.userName+"_y").trainListData;
-            let arrLen = getLoc(this.userName+"_y").trainListData[this.nowIndex].commentData.length;
-            //数组的替换
-            oldTrainData[this.nowIndex].commentData.push(val);
-            //更新本地数据存储
-            setLoc(this.userName+"_y", { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
-          }
+        }
+        this.isShowBox = false;
+        this.listData.push(val);
+        if(this.tabIndex === 1) {
+          let oldActionData = getLoc(this.userName + "_n").notActionList;
+          let arrLen = oldActionData[this.nowIndex].commentData.length;
+          //数组的替换
+          oldActionData[this.nowIndex].commentData.push(val);
+          //更新本地数据存储
+          setLoc(this.userName + "_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
+        } else if(this.tabIndex === 2) {
+          let oldTrainData = getLoc(this.userName + "_y").trainListData;
+          let arrLen = oldTrainData[this.nowIndex].commentData.length;
+          //数组的替换
+          oldTrainData[this.nowIndex].commentData.push(val);
+          //更新本地数据存储
+          setLoc(this.userName + "_y", { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         }
       },
       //取消
@@ -168,13 +172,12 @@
         this.isShowBox = val;
       },
       //打开时间插件
-      openFn(){
+      chooseTime() {
         this.$refs.picker.open();
       },
       //时间插件确认
       handleConfirm(value) {
-        this.dateTime = formatDateMin(value,'yyyy-MM-dd hh:mm');
-        this.popData.options[1].val = formatDateMin(value,'yyyy-MM-dd hh:mm');
+        this.commentDate = formatDateMin(value);
       },
     },
     //生命周期 - 创建完成（可以访问当前this实例）
@@ -182,27 +185,27 @@
       if(this.tabIndex === 1) {
         // console.log(getLoc(this.userName+"_n").notActionList[this.nowIndex].commentData);
         // let oldActionData = getLoc(this.userInfo.userID).notActionData;
-        let oldActionData = getLoc(this.userName+"_n").notActionList;
+        let oldActionData = getLoc(this.userName + "_n").notActionList;
         if(this.$route.params.addData) {
-          this.listData = getLoc(this.userName+"_n").notActionList[this.nowIndex].commentData;
+          this.listData = getLoc(this.userName + "_n").notActionList[this.nowIndex].commentData;
           this.listData.push(this.$route.params.addData);
           oldActionData[this.nowIndex].commentData.push(this.$route.params.addData);
           //更新本地缓存
-          setLoc(this.userName+"_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)),});
+          setLoc(this.userName + "_n", { "notActionList": JSON.parse(JSON.stringify(oldActionData)), });
         } else {
           // this.listData = getLoc(this.userInfo.userID).notActionData[this.nowIndex].commentData;
-          this.listData = getLoc(this.userName+"_n").notActionList[this.nowIndex].commentData;
+          this.listData = getLoc(this.userName + "_n").notActionList[this.nowIndex].commentData;
         }
       } else if(this.tabIndex === 2) {
-        let oldTrainData = getLoc(this.userName+"_y").trainListData;
+        let oldTrainData = getLoc(this.userName + "_y").trainListData;
         if(this.$route.params.addData) {
-          this.listData = getLoc(this.userName+"_y").trainListData[this.nowIndex].commentData;
+          this.listData = getLoc(this.userName + "_y").trainListData[this.nowIndex].commentData;
           this.listData.push(this.$route.params.addData);
           oldTrainData[this.nowIndex].commentData.push(this.$route.params.addData);
           //更新本地缓存
-          setLoc(this.userName+"_y", { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          setLoc(this.userName + "_y", { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
         } else {
-          this.listData = getLoc(this.userName+"_y").trainListData[this.nowIndex].commentData;
+          this.listData = getLoc(this.userName + "_y").trainListData[this.nowIndex].commentData;
         }
       }
 
@@ -234,7 +237,7 @@
         li {
           border: 1px solid #e6e4e4;
           border-radius: 4px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
           padding: 0.1rem 0.2rem;
           line-height: 0.5rem;
           label {

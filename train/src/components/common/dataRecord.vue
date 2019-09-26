@@ -49,7 +49,7 @@
 
 <script>
   import { mapState } from 'vuex';
-import { getLoc } from '../../utils/common';
+  import { getLoc } from '../../utils/common';
   export default {
     data() {
       //这里存放数据
@@ -58,13 +58,13 @@ import { getLoc } from '../../utils/common';
         popTitle: "选择参训航天员",
         listChildData: [],//从父组件传过来的页面初始化值
         chooseIndex: '-1',//选择航天员时的index
-        flag: 0//判断是选人还是新添加
+        flag: 0//判断是选人还是新添加 选人值为1 新添加值为2
       };
     },
     props: ['listData'],
     //监听属性 类似于data概念
     computed: {
-      ...mapState(['nowIndex','userName'])
+      ...mapState(['nowIndex', 'userName'])
     },
     //监控data中的数据变化
     watch: {
@@ -74,6 +74,7 @@ import { getLoc } from '../../utils/common';
           if(this.flag == 1) {
             this.listChildData[this.chooseIndex].joinAstronautNames = JSON.parse(JSON.stringify(newValue[this.chooseIndex].joinAstronautNames));
           } else {
+            console.log('看我多了，额');
             this.listChildData.splice(0, this.listChildData.length, ...newValue);
             // this.listChildData.push(newValue);
           }
@@ -85,8 +86,8 @@ import { getLoc } from '../../utils/common';
     //方法集合
     methods: {
       addRole() {
-        this.$emit('addRole');
         this.flag = 2;
+        this.$emit('addRole', this.flag);
       },
       //选人
       choosePerson(i) {
@@ -97,12 +98,11 @@ import { getLoc } from '../../utils/common';
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
+      console.log(this.listData);
       this.listChildData = JSON.parse(JSON.stringify(this.listData));;
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-
-    },
+    mounted() { },
     updated() {
       console.log('update', this.listChildData, this.listData);
 
@@ -120,7 +120,7 @@ import { getLoc } from '../../utils/common';
       padding: 0.2rem 0.4rem;
       border: 1px solid #e6e4e4;
       border-radius: 4px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
       margin-bottom: 0.2rem;
       border-radius: 4px;
       dl {
@@ -136,7 +136,7 @@ import { getLoc } from '../../utils/common';
             font-size: 0.4rem;
             position: absolute;
             right: 0.2rem;
-            color:#4c84ff;
+            color: #4c84ff;
           }
         }
         dd.icn {

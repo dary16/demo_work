@@ -70,17 +70,16 @@
                 <span><i v-if="item.check">*</i>{{item.title}}：</span>
                 <el-select
                   multiple
-                  collapse-tags
                   class="popBox"
                   v-model="popReq[item.val]"
                   v-bind:placeholder="item.placeholder"
                   size="mini"
                 >
                   <el-option
-                    v-for="itemSel in item.list"
-                    :key="itemSel.value"
-                    :label="itemSel.label"
-                    :value="itemSel.value"
+                    v-for="itemSel in names"
+                    :key="itemSel.trainImplementAstronautID"
+                    :label="itemSel.trainImplementAstronautName"
+                    :value="itemSel.trainImplementAstronautName"
                   ></el-option>
                 </el-select>
               </li>
@@ -111,12 +110,18 @@
         time: ''
       };
     },
-    props: ['popData', 'abnormalDate'],
+    props: ['popData', 'abnormalDate', 'commentDate', 'names'],
     created() { },
     watch: {
       abnormalDate: {
         handler(newValue, oldValue) {
           this.popReq.abnormalDate = newValue;
+          this.time = newValue;
+        }
+      },
+      commentDate: {
+        handler(newValue, oldValue) {
+          this.popReq.commentDate = newValue;
           this.time = newValue;
         }
       }
@@ -176,7 +181,6 @@
       .subContent {
         ul {
           li {
-            height: 0.7rem;
             padding-left: 0.08rem;
             color: #2f4553;
             margin-bottom: 0.05rem;
