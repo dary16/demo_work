@@ -57,6 +57,7 @@
     <mt-datetime-picker
       ref="picker"
       type="datetime"
+      v-model="dateVal"
       @confirm="handleConfirm"
       year-format="{value} 年"
       month-format="{value} 月"
@@ -82,6 +83,7 @@
         dateval: '',
         listData: [],
         isShowBox: false,
+        dateVal: '',
         commentDate: '',
         dateTime: '',
         popData: {
@@ -174,6 +176,7 @@
       //打开时间插件
       chooseTime() {
         this.$refs.picker.open();
+        this.dateVal = new Date();
       },
       //时间插件确认
       handleConfirm(value) {

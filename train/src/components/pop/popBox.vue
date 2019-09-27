@@ -192,6 +192,11 @@
               line-height: 0.45rem;
               width: 1.9rem;
               text-align: right;
+              //   display: inline-block;
+              //   height: 100%;
+              //   min-width: 100px;
+              //   text-align: justify;
+              //   text-align-last: justify;
               i {
                 font-style: normal;
                 padding-right: 2px;

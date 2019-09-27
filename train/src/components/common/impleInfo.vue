@@ -110,6 +110,7 @@
     <mt-datetime-picker
       ref="picker"
       type="datetime"
+      v-model="dateVal"
       year-format="{value} 年"
       month-format="{value} 月"
       date-format="{value} 日"
@@ -138,6 +139,7 @@
         abnormalDate: '',
         firstName: [],
         helpName: [],
+        dateVal: '',
         show: 0,
         isShowBox: false,
         popData: {
@@ -372,6 +374,7 @@
       },
       chooseTime() {
         this.$refs.picker.open();
+        this.dateVal = new Date();
       },
       handleConfirm(value) {
         this.abnormalDate = formatDateMin(value);
@@ -573,10 +576,10 @@
 </style>
 <style>
   /* .select-wrap .el-input--mini .el-input__inner {
-                  height: 0.36rem !important;
-                  line-height: 0.36rem !important;
-                  font-size: 0.18rem !important;
-                } */
+                    height: 0.36rem !important;
+                    line-height: 0.36rem !important;
+                    font-size: 0.18rem !important;
+                  } */
   .select-wrap .el-select-dropdown__list {
     padding: 0 !important;
   }
