@@ -4,7 +4,7 @@
     <div class="tag-wrap">
       <el-tag
         class="peopleTag active"
-        size="mini"
+        size="small"
         v-for="(item,index) in tags"
         :key="item.trainImplementAstronautID"
       >{{item.trainImplementAstronautName}}

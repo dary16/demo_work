@@ -3,7 +3,7 @@
     <div class="content-header clearfix">
       <ul class="header-wrap">
         <li class="right">
-          <i class="header-icon el-icon-caret-right"></i>
+          <i class="iconfont iconuntitled3"></i>
         </li>
         <li class="time">
           <span class="value">{{infoList.classDate}}</span>
@@ -22,12 +22,8 @@
     <div class="content-info">
       <ul class="info-list">
         <li>
-          <span class="name">科目名称：</span>
+          <span class="name">训练单元：</span>
           <span class="value">{{infoList.subjectUnitName}}</span>
-        </li>
-        <li>
-          <span class="name">着装要求：</span>
-          <span class="value">{{infoList.dressCode}}</span>
         </li>
         <li>
           <span class="name">授课学时：</span>
@@ -48,6 +44,10 @@
         <li class="target">
           <span class="name">教学难点：</span>
           <div class="more-content">{{infoList.teachDifficultPoint}}</div>
+        </li>
+        <li class="target">
+          <span class="name">着装要求：</span>
+          <span class="value">{{infoList.dressCode}}</span>
         </li>
       </ul>
     </div>
@@ -131,18 +131,18 @@
       .header-wrap {
         height: 0.6rem;
         line-height: 0.6rem;
-        font-size: 0.22rem;
+        font-size: 0.25rem;
         margin-left: 0.2rem;
-        width: 84%;
+        width: 100%;
         display: flex;
         li {
           float: left;
           margin-right: 0.3rem;
           &.time {
-            width: 4rem;
+            width: 30%;
           }
           &.other {
-            width: 2rem;
+            width: 23%;
           }
           &:first-child {
             margin-right: 0.1rem;
@@ -182,11 +182,11 @@
         width: 100%;
         padding-bottom: 0.1rem;
         li {
-          width: 33%;
+          width: 50%;
           text-align: left;
           float: left;
           line-height: 0.5rem;
-          font-size: 0.2rem;
+          font-size: 0.24rem;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
@@ -197,6 +197,7 @@
           }
           .value {
             display: inline-block;
+            padding: 0 0.2rem;
             // width: 100%;
             // overflow: hidden;
             // text-emphasis: none;
@@ -216,6 +217,7 @@
           width: 92%;
           display: inline-block;
           white-space: normal;
+          padding: 0 0.2rem;
         }
       }
     }

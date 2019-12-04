@@ -4,7 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=0.1,user-scalable=no"> -->
+    <!--<meta name="viewport" content="width=device-width,initial-scale=3,user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=3,minimum-scale=0.5"> -->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>train</title>
 </head>
@@ -16,5 +19,100 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
 </body>
-
+<!-- 读取本地数据 -->
+<script>
+    document.addEventListener( "plusready", onPlusReady, false );
+    // 扩展API加载完毕，现在可以正常调用扩展API
+    function onPlusReady() {
+        plus.io.requestFileSystem( plus.io.PUBLIC_DOCUMENTS, fs => {
+          //创建目录
+          //  /storage/emulated/legacy/Android/data/gds.xlgl.xlss/data/base
+          fs.root.getDirectory( "storage", {create:true,exclusive:false},  storage => {
+            storage.getDirectory("emulated", {create:true,exclusive:false},  emulated => {
+              emulated.getDirectory("0", {create:true,exclusive:false},  zero => {
+                zero.getDirectory("train", {create:true,exclusive:false}, train => { });
+                zero.getDirectory("trainZip", {create:true,exclusive:false},  zipTrain => {
+                  var zipTrainReader = zipTrain.createReader();
+                  zipTrainReader.readEntries(  trainZipEntries => {
+                    if(!trainZipEntries.length<1){
+                      var b = 0;
+                      for(var j=0; j < trainZipEntries.length; j++ ) {
+                        if(j+1 == trainZipEntries.length){
+                          zipTrain.getFile(trainZipEntries[j].name,{create:false,exclusive:false}, trainzipfileEntry => {
+                            trainzipfileEntry.file( trainzipfile => {
+                              plus.zip.decompress("/storage/emulated/0/trainZip/"+trainzipfile.name,"/storage/emulated/0/train/",
+                                success => {
+                                  trainzipfileEntry.remove();
+                                  alert("数据解压完成，重启应用");
+                                  plus.runtime.restart();
+                                },
+                                error => {
+                                  alert("解压 失败!");
+                                  plus.runtime.quit();
+                              });
+                            });
+                          },error=>{
+                            alert("打开文件失败");
+                          });
+                        }else{
+                          zipTrain.getFile(trainZipEntries[j].name,{create:false,exclusive:false}, trainzipfileEntry => {
+                            trainzipfileEntry.file( trainzipfile => {
+                              plus.zip.decompress("/storage/emulated/0/trainZip/"+trainzipfile.name,"/storage/emulated/0/train/",
+                                success => {
+                                  trainzipfileEntry.remove();
+                                },
+                                error => {
+                                  alert("解压 失败!");
+                                  plus.runtime.quit();
+                              });
+                            });
+                          },error=>{
+                            alert("打开文件失败");
+                          });
+                        }
+                      }
+                    }else{
+                      zero.getDirectory("train", {create:true,exclusive:false}, train => {
+                        train.getDirectory("update", {create:true,exclusive:false}, update => {});
+                        train.getDirectory("data", {create:true,exclusive:false}, data => {
+                          data.getDirectory("base", {create:true,exclusive:false},  dir => {
+                            //获取当前目录
+                            var directoryReader = dir.createReader();
+                            //读取当前目录下的所有文件和文件夹
+                            directoryReader.readEntries(  entries => {
+                              if(!entries.length>0){
+                                alert("请拷贝数据压缩包至指定目录下！");
+                                plus.runtime.quit();
+                              }
+                              for(var i=0; i < entries.length; i++ ) {
+                                //判断base文件夹中文件是否包含user,base,version,weekPlan文件
+                                if(entries[i].name == "base.json"? true: entries[i].name == "user.json"? true:entries[i].name == "version.json"? true:entries[i].name == "weekPlan.json"? true:false){
+                                  //从指定目录下获取文件
+                                  dir.getFile(entries[i].name,{create:false}, fileEntry => {
+                                    fileEntry.file( file => {
+                                      var fileReader = new plus.io.FileReader();
+                                      fileReader.readAsText(file, 'utf-8');
+                                      fileReader.onloadend = evt => {
+                                        localStorage.setItem(file.name.substr(0,file.name.length-5),evt.target.result);
+                                      }
+                                    });
+                                  });
+                                }else{
+                                  alert("base 文件夹下包含非指定文件！");
+                                  plus.runtime.quit();
+                                }
+                              }
+                            });
+                          });
+                        });
+                      });
+                    }
+                  });
+                });
+              });
+            });
+          });
+        });
+    }
+</script>
 </html>

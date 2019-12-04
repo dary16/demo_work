@@ -7,6 +7,10 @@
  * @userData 用户数据
  * @tabIndex 存储已实施或未实施
  * @userName 当前登录人
+ * @timer 计时时间
+ * @timeFlag 计时器方法标识，用于结束计时器使用
+ * @timeIndex 正在计时的数组下标，用于结束计时存储对应数据使用
+ * @isTimingNow 是否正在计时，用于控制单个内容计时
  */
 import {
     getLoc
@@ -19,4 +23,10 @@ export default {
     userData: getLoc('userData') || [],
     tabIndex: 1,
     userName: getLoc('userName') || {},
+    timer: '',
+    timeFlag: 0,
+    timeIndex: 0,
+    isTimingNow: false,
+    unfinishedTime: -1,
+    unfinishedTimeIndex: -1,
 }

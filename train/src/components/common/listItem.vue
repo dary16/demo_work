@@ -2,82 +2,64 @@
   <div class="xl-content">
     <div
       class="xl-item"
-      v-for="(item,index) in infoList"
+      v-for="(item, index) in infoList"
       :key="item.arrangeSubjectResultID"
     >
-      <div class="content-header clearfix">
-        <ul class="header-wrap">
-          <li class="right">
-            <i class="header-icon el-icon-caret-right"></i>
-          </li>
-          <li class="time">
-            <span class="value">{{item.classDate}}</span>
-          </li>
-          <li class="other">
-            <span class="value">{{item.classSection}}</span>
-          </li>
-          <li class="other">
-            <span class="value">{{item.chargeTeacherName}}</span>
-          </li>
-          <li class="other">
-            <span class="value">{{item.trainAreaName}}</span>
-          </li>
-        </ul>
-        <button
-          class="normal-no-border fr"
-          @click="doAction(index)"
-          v-if="!item.trainOrNot"
-        >
-          <!-- <i class="el-icon-s-flag"></i> -->
-          <img class="flag" src="../../assets/flag.png"/>
-          训练实施</button>
-          <button
-            class="normal-no-border fr"
-            @click="doEdit(index)"
-            v-else
-          >
-            <!-- <i class="el-icon-s-flag"></i> -->
-            <img class="flag" src="../../assets/flag.png"/>
-          训练修改</button>
-            <div
-              class="more"
-              @click="showInfo(index)"
-            >
-              <i class="el-icon-arrow-right"></i>
-            </div>
-            <span
-              class="fr iconSize"
-              v-show="!item.upload && item.trainOrNot"
-            >
-              <!-- <span v-if="item.upload && item.trainOrNot">*</span> -->
-              <i class="el-icon-upload2"></i>
-            </span>
+      <div
+        class="left-icon"
+        @click="showInfo(index)"
+      >
+        <img v-if="item.trainWay == '理论授课'" src="../../assets/lilun.png" />
+        <img v-else src="../../assets/caozuo.png" />
       </div>
-      <div class="content-info">
-        <ul class="info-list">
-          <li>
-            <span class="name">科目名称：</span>
-            <span class="value">{{item.subjectUnitName}}</span>
-          </li>
-          <li>
-            <span class="name">着装要求：</span>
-            <span class="value">{{item.dressCode}}</span>
-          </li>
-          <li>
-            <span class="name">授课学时：</span>
-            <span class="value">{{item.subjectUnitClassHour}}</span>
-          </li>
-          <li class="target">
-            <span class="name">教学目标：</span>
-            <div class="more-content">{{item.teachObjective}}</div>
-          </li>
-        </ul>
+        <div
+          class="center"
+          @click="showInfo(index)"
+        >
+          <i v-show="tabIndex === 1 && unfinishedTime === 1 && unfinishedTimeIndex === index" class="header-icon iconfont iconjishi"></i>
+          <i v-show="tabIndex === 2 && unfinishedTime === 2 && unfinishedTimeIndex === index" class="header-icon iconfont iconjishi"></i>
+          <ul class="top">
+            <li style="width:4rem;">{{ item.subjectUnitName }}</li>
+            <li>{{ item.classDate }}</li>
+            <li>{{ item.classSection }}</li>
+            <li>{{ item.trainAreaName }}</li>
+          </ul>
+          <ul class="info">
+            <li>教员：{{ item.chargeTeacherName }}</li>
+            <li>课程单元：{{ item.subjectUnitName }}</li>
+            <li>授课学时：{{ item.subjectUnitClassHour }}</li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="right-btn">
+          <button
+            class="normal-no-border fr fs-24"
+            v-if="!item.trainOrNot"
+            @click="doAction(index)"
+          >
+            <img class="flag" src="../../assets/xlss.png" />
+          训练实施
+        </button>
+            <button
+              class="normal-no-border fr"
+              v-else
+              v-show="!item.upload && item.trainOrNot"
+              @click="doEdit(index)"
+            >
+              <img class="flag" src="../../assets/xlss.png" />
+          训练修改
+        </button>
+        </div>
+        <span
+          class="watchIcon"
+          @click="showInfo(index)"
+        ><i class="el-icon-arrow-right"></i></span>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
+  import { mapMutations, mapState } from 'vuex';
   export default {
     data() {
       //这里存放数据
@@ -85,9 +67,11 @@
         newData: []
       };
     },
-    props: ['infoList'],
+    props: ['infoList','unfinishedTime','unfinishedTimeIndex'],
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      ...mapState(['tabIndex']),
+    },
     //监控data中的数据变化
     watch: {},
     //方法集合
@@ -130,113 +114,79 @@
   @import "../../style/global.less";
   .xl-content {
     position: fixed;
-    top: 1.7rem;
+    top: 1rem;
     bottom: 1rem;
-    left: 1.9rem;
-    right: 0.74rem;
+    left: 1.2rem;
+    right: 0;
     overflow-y: auto;
     .xl-item {
-      border: 1px solid @c-border;
+      padding: 0 0.5rem 0 0.5rem;
       background: #fff;
-      .content-header {
-        width: 100%;
-        padding: 0.05rem 0.1rem;
+      margin: 0 0 2% 0;
+      position: relative;
+      clear: both;
+      .left-icon {
+        position: absolute;
+        top: 50%;
+        left: 0.5rem;
+        transform: translateY(-50%);
+        img {
+          width: 0.6rem;
+        }
+      }
+      .center {
+        position: relative;
+        margin: 0 0 0 0.8rem;
+        padding: 0.2rem 0 0.2rem;
         border-bottom: 1px solid @c-border;
-        display: flex;
-        .header-wrap {
-          height: 0.6rem;
-          line-height: 0.6rem;
-          font-size: 0.22rem;
-          margin-left: 0.2rem;
-          width: 82%;
-          display: flex;
+        .iconjishi {
+          font-size: 0.4rem;
+          color: #f00;
+          position: absolute;
+          top: 0.05rem;
+          right: 0;
+        }
+        .top {
           li {
             float: left;
-            margin-right: 0.3rem;
-            &.time {
-              width: 4rem;
-            }
-            &.other {
-              width: 2rem;
-            }
-            &:first-child {
-              margin-right: 0.1rem;
-            }
+            font-size: 0.26rem;
+            padding-right: 0.8rem;
+            line-height: 0.52rem;
           }
         }
-        .more {
-          width: 1rem;
-          font-size: 0.3rem;
-          padding: 0 0.2rem;
-          height: 0.6rem;
-          line-height: 0.6rem;
-          text-align: right;
-        }
-        .iconSize {
-          font-size: 0.3rem;
-          line-height: 0.6rem;
-        }
-        .fr {
-          span {
-            height: 0.5rem;
-            line-height: 0.5rem;
-            font-size: 0.24rem;
-            padding-right: 0.2rem;
-          }
-        }
-        button {
-          margin-right: 0.5rem;
-          height: 0.6rem;
-        }
-      }
-      .flag {
-        width: 0.2rem;
-        margin-right: 0.1rem;
-      }
-      .content-info {
-        padding: 0.1rem;
-        display: flex;
-        .info-list {
-          margin-left: 0.2rem;
-          width: 100%;
-          padding-bottom: 0.1rem;
+        .info {
+          clear: both;
           li {
-            width: 33%;
-            text-align: left;
             float: left;
-            line-height: 0.5rem;
             font-size: 0.2rem;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            .name {
-              width: 1rem;
-              display: inline-block;
-              color: #808383;
-            }
-            .value {
-              display: inline-block;
-              // width: 100%;
-              // overflow: hidden;
-              // text-emphasis: none;
-              // white-space: nowrap;
-            }
-            &:last-child {
-              width: 100%;
-              .name {
-                float: left;
-              }
-            }
-            &.target {
-              line-height: 0.4rem;
-            }
-          }
-          .more-content {
-            width: 85%;
-            display: inline-block;
-            white-space: normal;
+            color: #9a9a9a;
+            padding-right: 0.44rem;
+            line-height: 0.44rem;
           }
         }
+      }
+      .right-btn {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        button {
+          border: 1px solid @c-border;
+          border-radius: 0.3rem;
+          padding: 0 0.3rem;
+          background-color: #f5f7fa;
+          .flag {
+            width: 0.2rem;
+            height: 0.2rem;
+          }
+        }
+      }
+      .watchIcon {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.3rem;
       }
     }
   }

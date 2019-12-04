@@ -40,7 +40,7 @@
 <style lang='less' scoped>
   @import "../../style/global.less";
   .item {
-    font-size: 0.2rem;
+    font-size: 0.26rem;
     color: #17233b;
     height: 0.6rem;
     line-height: 0.6rem;
@@ -48,14 +48,14 @@
     padding-left: 0.2rem;
     .line {
       width: 0.07rem;
-      height: 0.25rem;
+      height: 0.26rem;
       float: left;
       background: url("../../assets/line.png");
       background-size: 100% 100%;
-      margin: 0.15rem 0.16rem 0.15rem 0;
+      margin: 0.18rem 0.16rem 0.15rem 0;
     }
     .title {
-      font-size: 0.2rem;
+      font-size: 0.26rem;
       display: inline-block;
     }
   }

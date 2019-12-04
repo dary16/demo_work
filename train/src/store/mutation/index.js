@@ -28,4 +28,22 @@ export default {
         setLoc('userName', userName);
         state.userName = userName;
     },
+    _timer(state, timer) {
+        state.timer = timer;
+    },
+    _timeFlag(state, timeFlag) {
+        state.timeFlag = timeFlag;
+    },
+    _timeIndex( state,timeIndex){
+        state.timeIndex = timeIndex;
+    },
+    _isTimingNow( state,isTimingNow){
+        state.isTimingNow = isTimingNow;
+    },
+    _unfinishedTime( state,unfinishedTime){
+        state.unfinishedTime = unfinishedTime;
+    },
+    _unfinishedTimeIndex( state,unfinishedTimeIndex){
+        state.unfinishedTimeIndex = unfinishedTimeIndex;
+    },
 }

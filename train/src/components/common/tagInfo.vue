@@ -1,16 +1,17 @@
 <template>
   <div class="item-info">
     <div class="tags-wrap">
-      <div class="arrived">{{title}}</div>
+      <div class="arrived">{{ title }}</div>
       <div class="tags">
         <el-tag
-          :class="{'active':item.isSignIn}"
+          :class="{ active: item.dateTime }"
           class="peopleTag"
           size="mini"
-          v-for="(item,index) in tags"
+          v-for="(item, index) in tags"
           :key="item.trainImplementAstronautID"
-        >{{item.trainImplementAstronautName}}
-          <span v-if="item.post !== ''">({{item.post}})</span>
+        >{{ item.trainImplementAstronautName }}
+          <span v-if="item.post === '' || item.post === 'undefined'"></span>
+          <span v-else>(0{{ item.post }})</span>
         </el-tag>
       </div>
     </div>
@@ -18,13 +19,13 @@
       <div class="p-left">
         <h3>主教员</h3>
         <div class="select-wrap">
-          <button class="btn-set-time">{{chargeTeacherName}}</button>
+          <span>{{ chargeTeacherName }}</span>
         </div>
       </div>
       <div class="p-right">
         <h3>辅助教员</h3>
         <div class="select-wrap">
-          <button class="btn-set-time">{{auxiliaryLecturerName}}</button>
+          <span>{{ auxiliaryLecturerName }}</span>
         </div>
       </div>
     </div>
@@ -35,9 +36,7 @@
   export default {
     data() {
       //这里存放数据
-      return {
-
-      };
+      return {};
     },
     props: ['tags', 'title', 'chargeTeacherName', 'auxiliaryLecturerName'],
     //监听属性 类似于data概念
@@ -51,10 +50,10 @@
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() { },
     updated() { }, //生命周期 - 更新之后
-    activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
-  }
+    activated() { } //如果页面有keep-alive缓存功能，这个函数会触发
+  };
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
   @import "../../style/global.less";
   .item-info {
     //   padding: 0.05rem 0.35rem 0rem 0.35rem;
@@ -67,7 +66,7 @@
       border-right: 1px solid @c-border;
       padding: 0.26rem 0 0.24rem 0.2rem;
       .arrived {
-        font-size: 0.2rem;
+        font-size: 0.24rem;
         font-weight: bold;
         height: 0.4rem;
         line-height: 0.4rem;
@@ -77,7 +76,7 @@
         margin: 0.06rem 0.36rem 0.06rem 0;
       }
       .tags {
-        height: 0.62rem;
+        // height: 0.62rem;
         line-height: 0.62rem;
         padding-left: 0.2rem;
         float: left;
@@ -106,6 +105,15 @@
       width: 4.9rem;
       display: flex;
       padding: 0.26rem 0 0.24rem 0;
+      span {
+        margin-right: 0.1rem;
+        background: none;
+        border: 1px solid #eaedf4;
+        color: #4c4f56;
+        height: 0.36rem;
+        line-height: 0.36rem;
+        font-size: 0.25rem;
+      }
       .select-wrap {
         margin: 0.1rem 0.2rem 0 0.2rem;
         text-align: center;
@@ -115,7 +123,7 @@
         h3 {
           height: 0.4rem;
           line-height: 0.4rem;
-          font-size: 0.2rem;
+          font-size: 0.24rem;
           text-align: center;
         }
       }
@@ -124,7 +132,7 @@
         h3 {
           height: 0.4rem;
           line-height: 0.4rem;
-          font-size: 0.2rem;
+          font-size: 0.24rem;
           text-align: center;
         }
       }

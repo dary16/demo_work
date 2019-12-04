@@ -86,7 +86,7 @@
         width: 1.77rem;
         border-left: 1px solid @c-border;
         span {
-          font-size: 0.18rem;
+          font-size: 0.2rem;
           font-weight: bold;
         }
         .message {
@@ -106,7 +106,7 @@
         &:nth-of-type(2) {
           width: 2.5rem;
           span {
-            font-size: 0.18rem;
+            font-size: 0.2rem;
             font-weight: bold;
           }
         }

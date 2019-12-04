@@ -2,11 +2,15 @@ import tab from "./tab.vue";
 import searchHeader from "./header/searchHeader.vue";
 import infoHeader from "./header/InfoHeader.vue";
 import popBox from "./pop/popBox.vue";
+//意见建议数据项记录组件
+import formPop from "./pop/formPop.vue";
 //没有返回的header
 import header from "./header/header.vue";
 import listTitle from "./header/listTitle.vue";
 //选人
 import choosePeople from "./pop/choosePeople.vue";
+//选航天员
+import chooseAstronaut from "./pop/chooseAstronaut.vue";
 //设置岗位
 import setPost from "./pop/setPost.vue";
 //详情
@@ -15,10 +19,10 @@ import listInfo from "./common/listInfo.vue";
 import listItem from "./common/listItem.vue";
 //训练实施信息
 import impleInfo from "./common/impleInfo.vue";
-//训练实施信息(已实施)
-import impleInfoEdit from "./common/impleInfoEdit.vue";
 //数据项记录
 import dataRecord from "./common/dataRecord.vue";
+//筛选周计划
+import filterWeekPlan from "./common/filterWeekPlan.vue";
 //已实训详情
 import listInfoItem from "./common/listInfoItem.vue";
 //人员签到
@@ -37,15 +41,17 @@ export default {
     searchHeader,
     infoHeader,
     popBox,
+    formPop,
     header,
     listTitle,
     choosePeople,
+    chooseAstronaut,
     setPost,
     listInfo,
     listItem,
     impleInfo,
-    impleInfoEdit,
     dataRecord,
+    filterWeekPlan,
     listInfoItem,
     tags,
     trainInfoContent,

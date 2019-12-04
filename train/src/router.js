@@ -39,7 +39,7 @@ export default new Router({
                     path: "/weekPlan",
                     name: "weekPlan",
                     component: () =>
-                        import ("./views/weekPlan.vue")
+                        import ("./views/weekPlan2.vue")
                 }, {
                     path: "/exit",
                     name: "exit",
@@ -74,10 +74,28 @@ export default new Router({
                         import ("./views/common/suggestion.vue")
                 },
                 {
+                    path: '/suggestionEdit',
+                    name: "suggestionEdit",
+                    component: () =>
+                        import ("./views/common/suggestionEdit.vue")
+                },
+                {
+                    path: '/suggestionView',
+                    name: "suggestionView",
+                    component: () =>
+                        import ("./views/common/suggestionView.vue")
+                },
+                {
                     path: '/record',
                     name: "record",
                     component: () =>
                         import ("./views/common/record.vue")
+                },
+                {
+                    path: '/recordView',
+                    name: "recordView",
+                    component: () =>
+                        import ("./views/common/recordView.vue")
                 },
                 {
                     path: '/errorRecord/:index',
@@ -102,12 +120,6 @@ export default new Router({
         {
             path: '*',
             redirect: '/404'
-        },
-        {
-            name: 'test',
-            path: '/test',
-            component: () =>
-                import ('./views/test.vue')
         }
     ]
 });

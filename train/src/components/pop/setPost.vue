@@ -2,70 +2,99 @@
   <div class="popCover">
     <div class="mask"></div>
     <div class="popContent">
-      <h3 class="popTitle">{{popTitle}}</h3>
-      <div class="content">
+      <div class="popTitle">
+        <h3>{{ popTitle }}</h3>
+        <a href="javascript:;" v-on:click="onCancle">取消</a>
+      </div>
+      <div class="content setPost">
         <div class="subContent clearfix">
           <ul>
             <li
-              v-for="(item,index) in newTags"
+              v-for="(item, i) in newTags"
               :key="item.trainImplementAstronautID"
             >
-              <span>{{item.trainImplementAstronautName}}</span>
+              <span>{{ item.trainImplementAstronautName }}</span>
               <el-radio-group
-                v-model="item.post"
+                size="small"
+                v-model="item.label"
                 @change="changeFn"
               >
-                <el-radio @click.native.prevent="clickitem('01',index)" :label="'01'">01</el-radio>
-                <el-radio @click.native.prevent="clickitem('02',index)" :label="'02'">02</el-radio>
-                <el-radio @click.native.prevent="clickitem('03',index)" :label="'03'">03</el-radio>
+                <el-radio
+                  :label="item.label"
+                  border
+                  v-for="item in radioData"
+                  :key="item.value"
+                  >{{ item.label }}</el-radio
+                >
               </el-radio-group>
+              <el-time-picker
+                v-model="item.dateTime"
+                :picker-options="{
+                  selectableRange: '06:30:00 - 22:30:00'
+                }"
+                format="HH:mm"
+                placeholder="选择时间"
+                :clearable="false"
+                @change="changeTime"
+                @focus="focus(i)"
+                :editable="false"
+              >
+              </el-time-picker>
             </li>
           </ul>
-
         </div>
         <div class="popBtn">
-          <a
-            href="javascript:;"
-            v-on:click="onSubmit"
-          >确定</a>
-          <a
-            href="javascript:;"
-            v-on:click="onCancle"
-          >取消</a>
+          <a href="javascript:;" v-on:click="onSubmit">确定</a>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+  import { getLoc } from '@/utils/common.js';
   export default {
     data() {
       return {
-        newTags: []//存储从父组件传过来的值
+        newTags: [], //存储从父组件传过来的值
+        timeIndex: -1, //记录签到时间索引
+        radioData: [] //记录岗位的值
       };
     },
     props: ['tags', 'popTitle'],
     created() {
+      this.radioData = getLoc('base').trainPostList;
       this.newTags = JSON.parse(JSON.stringify(this.tags));
     },
     watch: {},
     methods: {
       onSubmit() {
+        for (let i = 0; i < this.newTags.length; i++) {
+          for (let j = 0; j < this.radioData.length; j++) {
+            if (this.newTags[i].label == this.radioData[j].label) {
+              this.newTags[i].post = this.radioData[j].value
+            }
+          }
+        }
         this.$emit('save', this.newTags);
       },
       onCancle() {
         this.$emit('cancle', false);
       },
       changeFn(v) {
-        console.log(v);
       },
-      clickitem (e,index) {
-        e === this.newTags[index].post ? this.newTags[index].post = '' : this.newTags[index].post = e
+      //签到时间点击确定触发
+      changeTime(obj) {
+        //格式转换
+        let timeLess = this.util.formatDate(obj.getTime());
+        this.newTags[this.timeIndex].dateTime = timeLess;
+      },
+      focus(v) {
+        this.timeIndex = v;
       }
     },
     activated() {
       this.newTags = JSON.parse(JSON.stringify(this.tags));
-    }, //如果页面有keep-alive缓存功能，这个函数会触发
+    } //如果页面有keep-alive缓存功能，这个函数会触发
   };
 </script>
 <style lang="less" scoped>
@@ -82,28 +111,40 @@
     z-index: 1998;
   }
   .popContent {
-    position: fixed;
+    position: absolute;
     background: #fff;
-    width: 7.5rem;
-    left: 50%;
-    margin-left: -3rem;
-    top: 2rem;
+    left: 42%;
+    top: 50%;
+    transform: translateX(-42%) translateY(-50%);
+    -webkit-transform: translateX(-42%) translateY(-50%);
     z-index: 1999;
-    border-radius: 0.08rem;
-    overflow: hidden;
-    h3 {
-      height: 0.4rem;
-      line-height: 0.4rem;
-      background: #2f4553;
-      color: #fff;
-      font-size: 0.2rem;
-      text-indent: 0.02rem;
-      font-weight: normal;
+    .popTitle {
+      position: relative;
+      h3 {
+        height: 0.6rem;
+        line-height: 0.6rem;
+        background: #fff;
+        color: #090909;
+        text-indent: 0.02rem;
+        font-weight: normal;
+        text-align: center;
+        font-size: 0.26rem;
+      }
+      a {
+        position: absolute;
+        right: 0.15rem;
+        top: 0.15rem;
+        font-size: 0.22rem;
+        color: #348aff;
+      }
     }
     .content {
       padding: 0.2rem 0.4rem;
-      background: #cfd6f3;
+      background: #f5f6fa;
       .subContent {
+        max-height: 5rem;
+        padding: 0.4rem 0.3rem 0;
+        overflow: auto;
         ul {
           li {
             padding-left: 0.05rem;
@@ -113,9 +154,9 @@
             span {
               float: left;
               font-size: 0.23rem;
-              height: 0.45rem;
-              line-height: 0.45rem;
-              width: 1.8rem;
+              height: 0.55rem;
+              line-height: 0.55rem;
+              width: 1rem;
               text-align: left;
             }
           }
@@ -123,24 +164,19 @@
       }
       .popBtn {
         text-align: center;
-        margin-top: 0.1rem;
-        margin-bottom: 0.15rem;
+        margin: 0.2rem 0;
         a {
           display: inline-block;
-          width: 1.2rem;
-          height: 0.38rem;
-          line-height: 0.38rem;
-          background: #2f4553;
+          width: 2.2rem;
+          height: 0.45rem;
+          line-height: 0.45rem;
+          background: #3388ff;
           color: #fff;
           text-align: center;
-          border-radius: 0.05rem;
-          box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.3);
+          font-size: 0.24rem;
         }
         a:hover {
           text-decoration: none;
-        }
-        a:nth-child(1) {
-          margin-right: 0.8rem;
         }
       }
     }
@@ -161,11 +197,14 @@
     height: 0.22rem;
     line-height: 0.28rem;
   }
-  .el-date-editor.el-input,
-  .el-date-editor.el-input__inner {
-    width: 4rem;
+  .setPost .el-date-editor.el-input,
+  .setPost .el-date-editor.el-input__inner {
     vertical-align: top;
     border-radius: 0.05rem;
+    width: 2rem !important;
+  }
+  .setPost .el-radio {
+    margin-right: 0 !important;
   }
   .el-input--mini .el-input__inner {
     height: 0.22rem !important;
@@ -176,9 +215,14 @@
   input[type="file"] {
     display: none !important;
   }
-  .popCover {
+  .setPost {
     .el-input__inner {
-      font-size: 0.23rem !important;
+      font-size: 0.2rem !important;
+      height: 26px !important;
+      line-height: 26px !important;
+    }
+    .el-input__icon {
+      line-height: 26px !important;
     }
   }
 </style>

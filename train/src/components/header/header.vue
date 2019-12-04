@@ -48,13 +48,13 @@
     position: relative;
     height: 0.7rem;
     line-height: 0.7rem;
-    font-size: 0.28rem;
+    font-size: 0.36rem;
     border-bottom: 1px solid #e9ecf4;
     background: #fff;
     margin-left: 0.05rem;
     .el-icon-arrow-left {
       position: absolute;
-      left: 0.3rem;
+      left: 0.7rem;
       top: 0.2rem;
     }
     h3 {
@@ -70,8 +70,7 @@
         width: 1.77rem;
         border-left: 1px solid @c-border;
         span {
-          font-size: 0.18rem;
-          font-weight: bold;
+          font-size: 0.26rem;
         }
         .message {
           width: 0.88rem;
@@ -90,12 +89,12 @@
         &:nth-of-type(2) {
           width: 2.5rem;
           span {
-            font-size: 0.18rem;
+            font-size: 0.2rem;
             font-weight: bold;
           }
         }
         &:nth-of-type(3) {
-          padding-left: 0.18rem;
+          padding-left: 0.2rem;
           img {
             width: 0.24rem;
           }

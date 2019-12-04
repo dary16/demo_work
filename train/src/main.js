@@ -10,11 +10,13 @@ import ElementUI from "element-ui";
 import axios from "axios";
 import * as util from "./utils/common.js";
 import 'mint-ui/lib/style.css';
+import './assets/iconfont/iconfont.css';
 //测试数据
 // import testData from '../public/all.json';
 import {
     DatetimePicker
 } from 'mint-ui';
+import { Toast } from 'mint-ui';
 import Calendar from 'vue-mobile-calendar';
 
 Vue.use(Calendar);
@@ -28,6 +30,8 @@ Vue.prototype.oMsgBox = ElementUI.MessageBox;
 Vue.prototype.popBox = ElementUI.Popover;
 Vue.prototype.loading = ElementUI.loading;
 Vue.prototype.util = util;
+Vue.prototype.toast = Toast;
+
 
 Vue.prototype.$http = axios;
 // 日期时间选择器

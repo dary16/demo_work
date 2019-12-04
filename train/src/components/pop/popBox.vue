@@ -1,9 +1,15 @@
 <template>
-  <transition name="el-zoom-in-top">
     <div class="popCover">
       <div class="mask"></div>
       <div class="popContent">
-        <h3 class="popTitle">{{popData.titleTotal}}</h3>
+        <div class="popTitle">
+          <h3>{{popData.titleTotal}}</h3>
+          <a
+            href="javascript:;"
+            v-on:click="onCancle"
+          >取消</a>
+        </div>
+
         <div class="content">
           <div class="subContent clearfix">
             <ul
@@ -18,8 +24,11 @@
                 <el-input
                   v-model.trim="popReq[item.val]"
                   size="mini"
+                  resize="none"
                   v-bind:placeholder="item.placeholder"
-                  maxlength="20"
+                  rows=2
+                  :type="item.isTextarea"
+                  :maxlength="item.maxLength"
                   :disabled="item.disabled"
                   :suffix-icon="item.star"
                 >
@@ -55,10 +64,9 @@
                 v-if="item.status == 3"
                 class="popBox"
               >
-                <span>{{item.title}}：</span>
+                <span><i v-if="item.check">*</i>{{item.title}}：</span>
                 <el-input
                   readonly
-                  maxlength="20"
                   size="mini"
                   :placeholder="item.placeholder"
                   v-model="time"
@@ -69,19 +77,60 @@
               <li v-if="item.status == 4">
                 <span><i v-if="item.check">*</i>{{item.title}}：</span>
                 <el-select
-                  multiple
                   class="popBox"
                   v-model="popReq[item.val]"
                   v-bind:placeholder="item.placeholder"
                   size="mini"
                 >
                   <el-option
-                    v-for="itemSel in names"
-                    :key="itemSel.trainImplementAstronautID"
-                    :label="itemSel.trainImplementAstronautName"
-                    :value="itemSel.trainImplementAstronautName"
+                    v-for="itemSel in abnormalList"
+                    :key="itemSel.value"
+                    :label="itemSel.label"
+                    :value="itemSel.value"
                   ></el-option>
                 </el-select>
+              </li>
+              <li
+                v-if="item.status == 5"
+                class="popBox"
+              >
+                <span><i v-if="item.check">*</i>{{item.title}}：</span>
+                <el-input
+                  readonly
+                  size="mini"
+                  :placeholder="item.placeholder"
+                  v-model="startDate"
+                  @focus="chooseStartDate"
+                >
+                </el-input>
+              </li>
+              <li
+                v-if="item.status == 6"
+                class="popBox"
+              >
+                <span><i v-if="item.check">*</i>{{item.title}}：</span>
+                <el-input
+                  readonly
+                  size="mini"
+                  :placeholder="item.placeholder"
+                  v-model="timing"
+                  @focus="chooseTiming"
+                >
+                </el-input>
+              </li>
+              <li
+                v-if="item.status == 7"
+                class="popBox"
+              >
+                <span><i v-if="item.check">*</i>{{item.title}}：</span>
+                <el-input
+                  readonly
+                  size="mini"
+                  :placeholder="item.placeholder"
+                  v-model="endDate"
+                  @focus="chooseEndDate"
+                >
+                </el-input>
               </li>
             </ul>
           </div>
@@ -91,26 +140,24 @@
               href="javascript:;"
               v-on:click="onSubmit"
             >确定</a>
-            <a
-              href="javascript:;"
-              v-on:click="onCancle"
-            >取消</a>
           </div>
         </div>
       </div>
 
     </div>
-  </transition>
 </template>
 <script>
   export default {
     data() {
       return {
         popReq: {},//弹窗的数据
-        time: ''
+        time: '',
+        startDate: this.trainContentStartDate,
+        timing:this.trainContentTiming,
+        endDate:this.trainContentEndDate,
       };
     },
-    props: ['popData', 'abnormalDate', 'commentDate', 'names'],
+    props: ['popData', 'abnormalDate', 'commentDate', 'abnormalList','trainContentStartDate','trainContentTiming','trainContentEndDate'],
     created() { },
     watch: {
       abnormalDate: {
@@ -119,25 +166,62 @@
           this.time = newValue;
         }
       },
+      //意见建议选择时间数据
       commentDate: {
         handler(newValue, oldValue) {
           this.popReq.commentDate = newValue;
           this.time = newValue;
+        }
+      },
+      //开始时间
+      trainContentStartDate:{
+        handler(newValue, oldValue) {
+          this.popReq.trainContentStartDate = newValue;
+          this.startDate = newValue;
+        }
+      },
+      //计时时间
+      trainContentTiming:{
+        handler(newValue, oldValue) {
+          this.popReq.trainContentTiming = newValue;
+          this.timing = newValue;
+        }
+      },
+      //结束时间
+      trainContentEndDate:{
+        handler(newValue, oldValue) {
+          this.popReq.trainContentEndDate = newValue;
+          this.endDate = newValue;
         }
       }
     },
     methods: {
       onSubmit() {
         this.$emit('save', this.popReq);
+        if(this.popReq.abnormalType != undefined && this.popReq.abnormalDate != undefined && this.popReq.abnormalObject != undefined && this.popReq.abnormalExplain != undefined){
+          this.popReq = {};
+          this.time = '';
+        }
       },
       onCancle() {
         this.$emit('cancle', false);
+        this.popReq = {};
+        this.time = '';
       },
       btnsFn(val) {
         this.$emit('getBtnFn', val);
       },
       chooseTime() {
         this.$emit('chooseTime');
+      },
+      chooseStartDate() {
+        this.$emit('chooseStartDate');
+      },
+      chooseTiming() {
+        this.$emit('chooseTiming');
+      },
+      chooseEndDate() {
+        this.$emit('chooseEndDate');
       }
     },
   };
@@ -158,45 +242,50 @@
   .popContent {
     position: fixed;
     background: #fff;
-    width: 6rem;
     left: 50%;
     margin-left: -3rem;
-    top: 2rem;
+    top: 1rem;
     z-index: 1999;
     border-radius: 0.08rem;
     overflow: hidden;
-    h3 {
-      height: 0.6rem;
-      line-height: 0.4rem;
-      background: #2f4553;
-      text-align: center;
-      color: #fff;
-      font-size: 0.3rem;
-      text-indent: 0.02rem;
-      font-weight: 600;
+    .popTitle {
+      position: relative;
+      h3 {
+        height: 0.6rem;
+        line-height: 0.6rem;
+        background: #fff;
+        color: #090909;
+        text-indent: 0.02rem;
+        font-weight: normal;
+        text-align: center;
+        font-size: 0.26rem;
+      }
+      a {
+        position: absolute;
+        right: 0.3rem;
+        top: 0.15rem;
+        font-size: 0.22rem;
+        color: #348aff;
+      }
     }
     .content {
-      padding: 0.05rem 0;
-      background: #cfd6f3;
+      padding: 0.2rem 0.3rem;
+      background: #f5f6fa;
       .subContent {
+        padding: 0;
         ul {
           li {
             padding-left: 0.08rem;
-            color: #2f4553;
-            margin-bottom: 0.05rem;
-            overflow: hidden;
+            color: #090909;
+            margin-bottom: 0.25rem;
+            // overflow: hidden;
             span {
               float: left;
               font-size: 0.23rem;
-              height: 0.45rem;
+              // height: 0.45rem;
               line-height: 0.45rem;
               width: 1.9rem;
               text-align: right;
-              //   display: inline-block;
-              //   height: 100%;
-              //   min-width: 100px;
-              //   text-align: justify;
-              //   text-align-last: justify;
               i {
                 font-style: normal;
                 padding-right: 2px;
@@ -209,25 +298,25 @@
       }
       .popBtn {
         text-align: center;
-        margin-top: 0.1rem;
-        margin-bottom: 0.15rem;
+        margin-bottom: 0.1rem;
         a {
           display: inline-block;
-          width: 1.2rem;
-          height: 0.38rem;
-          line-height: 0.38rem;
-          background: #2f4553;
+          width: 2.2rem;
+          height: 0.45rem;
+          line-height: 0.45rem;
+          background: #3388ff;
           color: #fff;
           text-align: center;
-          border-radius: 0.05rem;
-          box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.3);
+          font-size: 0.24rem;
+          //   border-radius: 0.05rem;
+          //   box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.3);
         }
         a:hover {
           text-decoration: none;
         }
-        a:nth-child(1) {
-          margin-right: 0.8rem;
-        }
+      }
+      .el-select {
+          width: 3.8rem;
       }
     }
   }
@@ -244,7 +333,7 @@
     width: 3.8rem;
     background: #fff;
     border-radius: 0.05rem;
-    height: 0.22rem;
+    height: 0.4rem;
     line-height: 0.28rem;
   }
   .el-date-editor.el-input,
@@ -265,6 +354,39 @@
   .popCover {
     .el-input__inner {
       font-size: 0.23rem !important;
+    }
+    .el-textarea{
+      .el-textarea__inner{
+        border: none;
+      }
+    }
+    .el-textarea{
+      .el-textarea__inner{
+        border: none;
+        font-size: 0.23rem !important;
+      }
+    }
+    .el-select--mini{
+      position: relative;
+      right: 0.1rem;
+      width: 3.8rem;
+      margin: 0 0 0 0.1rem !important;
+    }
+  }
+  .subContent {
+    .el-select--mini {
+      height: 18px;
+      .el-select__tags {
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+        margin: 1px 1px 2px 1px;
+      }
+    }
+  }
+  .popBox{
+    .el-textarea{
+      height: auto !important;
     }
   }
 </style>

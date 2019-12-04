@@ -2,7 +2,7 @@ window.onload = function() {
     var _root = document.documentElement,
         resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize',
         resizeCallback = function() {
-            _root.style.fontSize = parseInt(_root.clientWidth / 19.2) + 'px';
+            _root.style.fontSize = parseInt(_root.clientWidth / 17) + 'px';
             document.body && (document.body.style.fontSize = 0.16 + 'rem');
         };
 
@@ -31,7 +31,7 @@ export function formatDate(time, type) {
         's+': data.getSeconds() //秒
     };
 
-    format = type == 1 ? 'hh:mm:ss' : type == 2 ? 'yyyy-MM-dd' : type == 3 ? 'yyyy-MM-dd hh:mm:ss' : type == 4 ? 'yyyy-MM' : type == 5 ? 'MM' : type == 6 ? 'yyyy' : type == 7 ? 'hh:mm' : type == 8 ? 'yyyyMMdd' : 'yyyy-MM-dd hh:mm';
+    format = type == 1 ? 'hh:mm:ss' : type == 2 ? 'yyyy-MM-dd' : type == 3 ? 'yyyy-MM-dd hh:mm:ss' : type == 4 ? 'yyyy-MM' : type == 5 ? 'MM' : type == 6 ? 'yyyy' : type == 7 ? 'hh:mm' : type == 8 ? 'yyyyMMdd' : type == 9 ? 'yyyyMMddhhmmss' : 'yyyy-MM-dd hh:mm';
 
     if (/(y+)/.test(format)) {
         format = format.replace(RegExp.$1, (data.getFullYear() + '').substr(4 - RegExp.$1.length));

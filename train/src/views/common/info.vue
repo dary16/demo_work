@@ -9,6 +9,8 @@
         v-on:back="back"
         v-on:doneFn="doneFn"
         v-on:updateFn="updateFn"
+        v-on:updateTiming="updateTiming"
+        v-on:updateComplete="updateComplete"
       ></v-imple-info>
     </keep-alive>
     <keep-alive>
@@ -43,6 +45,8 @@
           helpTeachList: [],
           chargeTeacherName: '',
           auxiliaryLecturerName: '',
+          trainWay: '',//判断是理论课还是操作训练
+          title: '',
         },
         isShowSet: false,
         popTitle: "设置岗位",
@@ -54,7 +58,18 @@
       ...mapState(['nowIndex', 'userName', 'userInfo', 'tabIndex'])
     },
     //监控data中的数据变化
-    watch: {},
+    watch: {
+      isShowSet:{
+        handler(newValue, oldValue){
+          if(!newValue){
+            plus.key.removeEventListener("backbutton",onPlusReady);
+            plus.key.addEventListener("backbutton",onBack => {
+              this.$router.go(-1);
+            });
+          }
+        }
+      }
+    },
     //方法集合
     methods: {
       ...mapMutations(['_allData']),
@@ -80,6 +95,10 @@
       //设置岗位
       setPostFn() {
         this.isShowSet = true;
+        plus.key.removeEventListener("backbutton",onPlusReady);
+        plus.key.addEventListener("backbutton",onBack => {
+          this.isShowSet = false;
+        });
       },
       //保存
       saveFn(v) {
@@ -93,13 +112,13 @@
           this.infoData.trainList = getLoc(this.userName + '_n').notActionList[this.nowIndex].trainImpleData.trainList;
           this.isShowSet = false;
         } else if(this.tabIndex === 2) {
-          let oldTrainData = getLoc(this.userInfo.username + '_y').trainListData;
+          let oldTrainData = getLoc(this.userName + '_y').trainListData;
           let arrLen = oldTrainData[this.nowIndex].joinAstronautNames.length;
           //数组的替换
           oldTrainData[this.nowIndex].joinAstronautNames.splice(0, arrLen, ...v);
-          setLoc(getLoc(this.userInfo.username + '_y'), { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
+          setLoc((this.userName + '_y'), { "trainListData": JSON.parse(JSON.stringify(oldTrainData)) });
           this.infoData.tags = v;
-          this.infoData.trainList = getLoc(this.userInfo.username + '_y').trainListData[this.nowIndex].trainImpleData.trainList;
+          this.infoData.trainList = getLoc(this.userName + '_y').trainListData[this.nowIndex].trainImpleData.trainList;
           this.isShowSet = false;
         }
 
@@ -115,20 +134,30 @@
       updateFn() {
         if(this.tabIndex === 1) {
           this.infoData.tags = getLoc(this.userName + '_n').notActionList[this.nowIndex].joinAstronautNames;
-          console.log(this.infoData.tags);
           this.infoData.trainList = getLoc(this.userName + '_n').notActionList[this.nowIndex].trainImpleData.trainList;
         } else if(this.tabIndex === 2) {
-          this.infoData.tags = getLoc(this.userName + '_y').trainListData.joinAstronautNames;
-          this.infoData.trainList = getLoc(this.userName + '_y').trainListData.trainImpleData.trainList;
+          this.infoData.tags = getLoc(this.userName + '_y').trainListData[this.nowIndex].joinAstronautNames;
+          this.infoData.trainList = getLoc(this.userName + '_y').trainListData[this.nowIndex].trainImpleData.trainList;
         }
 
       },
+      updateTiming(Timing) {
+        this.infoData = Timing;
+      },
+      updateComplete(complete){
+        this.infoData = complete;
+      }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
+      //移除原有物理返回按键事件
+      plus.key.removeEventListener("backbutton",onPlusReady);
+      //添加新监听，绑定物理返回按键事件
+      plus.key.addEventListener("backbutton",onBack => {
+        this.back();
+      });
       let notList = getLoc(this.userName + '_n');
       let list = getLoc(this.userName + '_y')
-
       //判断是已实施还是未实施
       if(this.tabIndex === 1) {
         let oldActionData = notList.notActionList[this.nowIndex];
@@ -138,6 +167,8 @@
         this.infoData.helpTeachList = oldActionData.helpTeachList;
         this.infoData.chargeTeacherName = oldActionData.chargeTeacherName;
         this.infoData.auxiliaryLecturerName = oldActionData.auxiliaryLecturerName;
+        this.infoData.trainWay = oldActionData.trainWay;
+        this.infoData.title = '训练实施';
       } else if(this.tabIndex === 2) {
         //已实施
         let trainData = list.trainListData[this.nowIndex];
@@ -147,6 +178,8 @@
         this.infoData.helpTeachList = trainData.helpTeachList;
         this.infoData.chargeTeacherName = trainData.chargeTeacherName;
         this.infoData.auxiliaryLecturerName = trainData.auxiliaryLecturerName;
+        this.infoData.trainWay = trainData.trainWay;
+        this.infoData.title = '训练修改';
       }
     },
     //生命周期 - 挂载完成（可以访问DOM元素）

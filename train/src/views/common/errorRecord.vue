@@ -115,7 +115,7 @@
           let errorList = oldActionData[this.nowIndex].trainImpleData.trainList[this.$route.params.index].faultInfo;
           errorList.push(this.errorData);
           console.log(errorList, oldActionData);
-          console.log(getLoc(this.userInfo.username + '_n'));
+          console.log(getLoc(this.userName + '_n'));
           setLoc(this.userName + '_n', { "notActionList": JSON.parse(JSON.stringify(oldActionData)) });
 
           this.$router.go(-1);
@@ -133,6 +133,7 @@
       },
       handleConfirm(value) {
         this.errorData.abnormalDate = value;
+        console.log(value, this.errorData.abnormalDate);
       }
     },
     //生命周期 - 创建完成（可以访问当前this实例）

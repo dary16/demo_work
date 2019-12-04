@@ -16,7 +16,7 @@
             <span class="value">{{infoList.chargeTeacherName}}</span>
           </li>
           <li>
-            <span class="name">科目名称：</span>
+            <span class="name">训练单元：</span>
             <span class="value">{{infoList.subjectUnitName}}</span>
           </li>
           <li>

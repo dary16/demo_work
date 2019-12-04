@@ -10,10 +10,12 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "element-ui": "^2.10.1",
+    "js-sha256": "^0.9.0",
     "less": "^2.7.3",
     "less-loader": "^5.0.0",
     "mint-ui": "^2.2.13",
     "vue": "^2.6.10",
+    "vue-awesome-mui": "^1.7.3",
     "vue-mobile-calendar": "^3.2.0",
     "vue-router": "^3.0.7",
     "vuex": "^3.1.1"

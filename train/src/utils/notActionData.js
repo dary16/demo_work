@@ -1,1480 +1,368 @@
 let notActionData = {
-	"notActionList":[
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"C6454F4AA2E14D248C0F55E852AD7D4A",
-			"classDate":"2019-09-24",
-			"subjectUnitName":"wang课目1-2-3",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-3",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次1",
-			"classSectionStartDate":"2019-09-24 08:00",
-			"classSectionEndDate":"2019-09-24 08:50",
-			"trainPrepareID":"0DA3F31CA4BC4978A354B0AD72B86959",
-			"arrangeSubjectResultID":"12B7D942CDAD479698684F631F01997A",
-			"teachObjective":"教学目标",
-			"teachRequire":"教学要求",
-			"teachKeyPoint":"教学重点",
-			"teachDifficultPoint":"教学难点",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-					"trainImplementAstronautName":"李三九"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"A5646255106842ECBE9E52B10A503762",
-			"trainMaterialName":"wang-训练器材3",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[
-					{
-						"trainContentID":"8AF104EE4206454FAD50C5DF830DB256",
-						"trainPrepareID":"0DA3F31CA4BC4978A354B0AD72B86959",
-						"trainContentName":"测试训练内容-01",
-						"trainClassHour":"2",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间段",
-						"isRetrain":"否",
-						"sortNO":"1",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"1AB943C42E9446FDB089162D3EE015ED",
-						"trainPrepareID":"0DA3F31CA4BC4978A354B0AD72B86959",
-						"trainContentName":"测试训练内容-02",
-						"trainClassHour":"6",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间点",
-						"isRetrain":"否",
-						"sortNO":"2",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"B6E179B56674429E888330D9A488FEBB",
-						"trainPrepareID":"0DA3F31CA4BC4978A354B0AD72B86959",
-						"trainContentName":"测试训练内容-03",
-						"trainClassHour":"3",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间段",
-						"isRetrain":"否",
-						"sortNO":"3",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"91C4635C430B4C2FBC66500978867263",
-						"trainPrepareID":"0DA3F31CA4BC4978A354B0AD72B86959",
-						"trainContentName":"测试训练内容-04",
-						"trainClassHour":"2",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间点",
-						"isRetrain":"否",
-						"sortNO":"4",
-						"faultInfo":[]
-					}
-				]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"C6454F4AA2E14D248C0F55E852AD7D4A",
-			"classDate":"2019-09-24",
-			"subjectUnitName":"wang课目1-2-3",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-3",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次2",
-			"classSectionStartDate":"2019-09-24 09:00",
-			"classSectionEndDate":"2019-09-24 09:50",
-			"trainPrepareID":"6E42DDF769E5452ABFF4DCF2B2928F4B",
-			"arrangeSubjectResultID":"33BD4F5E7CB34401840E65514FBBE267",
-			"teachObjective":"教学目标",
-			"teachRequire":"教学要求",
-			"teachKeyPoint":"教学重点",
-			"teachDifficultPoint":"教学难点",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"E7C8A4F2E65E43149874AF879767D0A8",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"E7C8A4F2E65E43149874AF879767D0A8",
-					"trainImplementAstronautName":"李三五"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"A5646255106842ECBE9E52B10A503762",
-			"trainMaterialName":"wang-训练器材3",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[
-					{
-						"trainContentID":"28E736B7F77043EB9A116F45FBE3EB31",
-						"trainPrepareID":"6E42DDF769E5452ABFF4DCF2B2928F4B",
-						"trainContentName":"测试训练内容1",
-						"trainClassHour":"3",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间点",
-						"isRetrain":"否",
-						"sortNO":"1",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"21BB43537A3048AEB9CD2F96DE33E11C",
-						"trainPrepareID":"6E42DDF769E5452ABFF4DCF2B2928F4B",
-						"trainContentName":"测试训练内容2",
-						"trainClassHour":"10",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间段",
-						"isRetrain":"否",
-						"sortNO":"2",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"D9F08803791549B5BDD54E1FB32109DB",
-						"trainPrepareID":"6E42DDF769E5452ABFF4DCF2B2928F4B",
-						"trainContentName":"测试训练内容3",
-						"trainClassHour":"3",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间点",
-						"isRetrain":"否",
-						"sortNO":"3",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"49AE70947801424FB7C6C136F8B33C63",
-						"trainPrepareID":"6E42DDF769E5452ABFF4DCF2B2928F4B",
-						"trainContentName":"测试训练内容4",
-						"trainClassHour":"15",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间段",
-						"isRetrain":"否",
-						"sortNO":"4",
-						"faultInfo":[]
-					}
-				]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"C6454F4AA2E14D248C0F55E852AD7D4A",
-			"classDate":"2019-09-24",
-			"subjectUnitName":"wang课目1-2-3",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-3",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次3",
-			"classSectionStartDate":"2019-09-24 10:00",
-			"classSectionEndDate":"2019-09-24 10:50",
-			"trainPrepareID":"E490E393FE2B47F396134138F4F22A70",
-			"arrangeSubjectResultID":"A216AC2E2F0B4D06A9C59A59FB3BD1B6",
-			"teachObjective":"教学目标",
-			"teachRequire":"教学要求",
-			"teachKeyPoint":"教学重点",
-			"teachDifficultPoint":"教学难点",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"866367A2A85F4B618FBDAFF8FF1F56BD",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"866367A2A85F4B618FBDAFF8FF1F56BD",
-					"trainImplementAstronautName":"李三一"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"A5646255106842ECBE9E52B10A503762",
-			"trainMaterialName":"wang-训练器材3",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[
-					{
-						"trainContentID":"6481A3EA2BEB4FD7AE44BD1C1D9ED4E5",
-						"trainPrepareID":"E490E393FE2B47F396134138F4F22A70",
-						"trainContentName":"测试训练内容1",
-						"trainClassHour":"2",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间点",
-						"isRetrain":"否",
-						"sortNO":"1",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"395256BEEA064A69A885655F14AE5CC0",
-						"trainPrepareID":"E490E393FE2B47F396134138F4F22A70",
-						"trainContentName":"测试训练内容2",
-						"trainClassHour":"10",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间段",
-						"isRetrain":"否",
-						"sortNO":"2",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"01F9BA9F6FDF464D964005EC623C9D4E",
-						"trainPrepareID":"E490E393FE2B47F396134138F4F22A70",
-						"trainContentName":"测试训练内容3",
-						"trainClassHour":"10",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间段",
-						"isRetrain":"否",
-						"sortNO":"3",
-						"faultInfo":[]
-					}
-				]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"C6454F4AA2E14D248C0F55E852AD7D4A",
-			"classDate":"2019-09-24",
-			"subjectUnitName":"wang课目1-2-3",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-3",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次4",
-			"classSectionStartDate":"2019-09-24 11:00",
-			"classSectionEndDate":"2019-09-24 11:50",
-			"trainPrepareID":"A1E4D6FE7FFE419EA6315B64F8B7AACC",
-			"arrangeSubjectResultID":"5842E494AC23474B83E6E8EBE8558E61",
-			"teachObjective":"教学目标",
-			"teachRequire":"教学要求",
-			"teachKeyPoint":"教学重点",
-			"teachDifficultPoint":"教学难点",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"FE6E5EB5DF8140FCAE7E67DAAECFB295",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"FE6E5EB5DF8140FCAE7E67DAAECFB295",
-					"trainImplementAstronautName":"李三二"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"A5646255106842ECBE9E52B10A503762",
-			"trainMaterialName":"wang-训练器材3",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[
-					{
-						"trainContentID":"254DA22228BC46A1B00EEC5BA782315F",
-						"trainPrepareID":"A1E4D6FE7FFE419EA6315B64F8B7AACC",
-						"trainContentName":"测试训练内容1",
-						"trainClassHour":"2",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间段",
-						"isRetrain":"否",
-						"sortNO":"1",
-						"faultInfo":[]
-					},
-					{
-						"trainContentID":"AA65BD3592944D65B9B7174F59965448",
-						"trainPrepareID":"A1E4D6FE7FFE419EA6315B64F8B7AACC",
-						"trainContentName":"测试训练内容2",
-						"trainClassHour":"3",
-						"trainContentStartDate":"",
-						"trainContentEndDate":"",
-						"trainContentDesc":"",
-						"keyword":"",
-						"timeWay":"时间点",
-						"isRetrain":"否",
-						"sortNO":"2",
-						"faultInfo":[]
-					}
-				]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"F3FA07B1AC4A47F0BCD72ECA6A4D4BEC",
-			"classDate":"2019-09-25",
-			"subjectUnitName":"wang课目1-2-8",
-			"subjectUnitClassHour":"1",
-			"groupWay":"分组",
-			"groupPersonNumber":"3",
-			"dressCode":"着装要求-8",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次2",
-			"classSectionStartDate":"2019-09-25 09:00",
-			"classSectionEndDate":"2019-09-25 09:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"BB549F46654A4C408332EAFDB75C112D",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"9BF46B37595B45A688A766BAA7456828,5FF7FE5FB95F4B988D67BB29833C97D9",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"9BF46B37595B45A688A766BAA7456828",
-					"trainImplementAstronautName":"李四二"
-				},
-				{
-					"trainImplementAstronautID":"5FF7FE5FB95F4B988D67BB29833C97D9",
-					"trainImplementAstronautName":"李四三"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"D78232D65FF948AE96D8A1AF63B6A352",
-			"trainAreaName":"wang-训练场地4",
-			"trainMaterialID":"0EAE456DC0164E73962DC5058903A1F5,9A1113457DC54C12BB9994759A056445",
-			"trainMaterialName":"wang-训练器材1,wang-训练器材11",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"6698B8ABB98E42718FBEA1D3CBFE8D30",
-			"classDate":"2019-09-25",
-			"subjectUnitName":"wang课目1-2-6",
-			"subjectUnitClassHour":"1",
-			"groupWay":"分组",
-			"groupPersonNumber":"2",
-			"dressCode":"着装要求-6",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次3",
-			"classSectionStartDate":"2019-09-25 10:00",
-			"classSectionEndDate":"2019-09-25 10:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"E479A921E1944DFEB29579ECE81D05BF",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6DAAFFA1007B46D0AD806CFF24B5BDD8,6F0D64AD45E44270BA287A17EB42353B",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-					"trainImplementAstronautName":"李三九"
-				},
-				{
-					"trainImplementAstronautID":"6F0D64AD45E44270BA287A17EB42353B",
-					"trainImplementAstronautName":"李四一"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"BDE6F8CB38AC4D9BB2E5FD2135763F0C",
-			"trainAreaName":"wang-训练场地3",
-			"trainMaterialID":"ED62AC51CAE84A26B6EA83D4138B01DF",
-			"trainMaterialName":"wang-训练器材5",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"6698B8ABB98E42718FBEA1D3CBFE8D30",
-			"classDate":"2019-09-25",
-			"subjectUnitName":"wang课目1-2-6",
-			"subjectUnitClassHour":"1",
-			"groupWay":"分组",
-			"groupPersonNumber":"2",
-			"dressCode":"着装要求-6",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次4",
-			"classSectionStartDate":"2019-09-25 11:00",
-			"classSectionEndDate":"2019-09-25 11:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"D9E2328C1165487DB5BC0CB955E2E319",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"9BF46B37595B45A688A766BAA7456828,5FF7FE5FB95F4B988D67BB29833C97D9",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"9BF46B37595B45A688A766BAA7456828",
-					"trainImplementAstronautName":"李四二"
-				},
-				{
-					"trainImplementAstronautID":"5FF7FE5FB95F4B988D67BB29833C97D9",
-					"trainImplementAstronautName":"李四三"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"BDE6F8CB38AC4D9BB2E5FD2135763F0C",
-			"trainAreaName":"wang-训练场地3",
-			"trainMaterialID":"ED62AC51CAE84A26B6EA83D4138B01DF",
-			"trainMaterialName":"wang-训练器材5",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"008D0D5528564BB49DB9F4F4534756CD",
-			"classDate":"2019-09-26",
-			"subjectUnitName":"wang课目1-2-7",
-			"subjectUnitClassHour":"1",
-			"groupWay":"分组",
-			"groupPersonNumber":"2",
-			"dressCode":"着装要求-7",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次1",
-			"classSectionStartDate":"2019-09-26 08:00",
-			"classSectionEndDate":"2019-09-26 08:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"E93CC23CD7904BAB968E35324CF8C226",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6DAAFFA1007B46D0AD806CFF24B5BDD8,9BF46B37595B45A688A766BAA7456828",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-					"trainImplementAstronautName":"李三九"
-				},
-				{
-					"trainImplementAstronautID":"9BF46B37595B45A688A766BAA7456828",
-					"trainImplementAstronautName":"李四二"
-				}
-			],
-			"trainWay":"理论授课",
-			"trainAreaID":"D78232D65FF948AE96D8A1AF63B6A352",
-			"trainAreaName":"wang-训练场地4",
-			"trainMaterialID":"0EAE456DC0164E73962DC5058903A1F5",
-			"trainMaterialName":"wang-训练器材1",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"8AE92BB3494B491C854D4FD383E39373",
-			"classDate":"2019-09-26",
-			"subjectUnitName":"wang课目1-2-9",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-9",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次2",
-			"classSectionStartDate":"2019-09-26 09:00",
-			"classSectionEndDate":"2019-09-26 09:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"E208F3BA887E4965BF62D7C798B978C8",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6F0D64AD45E44270BA287A17EB42353B",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6F0D64AD45E44270BA287A17EB42353B",
-					"trainImplementAstronautName":"李四一"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"054C4F7ECD054BB28E469E66A47BEED8",
-			"trainAreaName":"wang-训练场地5",
-			"trainMaterialID":"D4ED51262A4B4B0DB891C7DB02448987",
-			"trainMaterialName":"wang-训练器材4",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"69B018B8A1164F19AA3D1087D2A5109C",
-			"classDate":"2019-09-27",
-			"subjectUnitName":"wang课目1-2-10",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-10",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次3",
-			"classSectionStartDate":"2019-09-27 10:00",
-			"classSectionEndDate":"2019-09-27 10:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"44DAE6D2F0A247E2B1F2A92B06ADB6BC",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"9BF46B37595B45A688A766BAA7456828",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"9BF46B37595B45A688A766BAA7456828",
-					"trainImplementAstronautName":"李四二"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"090A8A25F02040C6AD244BBD6B019E02",
-			"trainAreaName":"wang-训练场地1",
-			"trainMaterialID":"ED62AC51CAE84A26B6EA83D4138B01DF",
-			"trainMaterialName":"wang-训练器材5",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"8622C01F41BB4EE7A71EDF8397915C4B",
-			"classDate":"2019-09-30",
-			"subjectUnitName":"wang课目1-2-4",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-4",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次1",
-			"classSectionStartDate":"2019-09-30 08:00",
-			"classSectionEndDate":"2019-09-30 08:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"F0651923D8B24E518B0A7CCD93355251",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-					"trainImplementAstronautName":"李三九"
-				}
-			],
-			"trainWay":"理论授课",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"D4ED51262A4B4B0DB891C7DB02448987",
-			"trainMaterialName":"wang-训练器材4",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"8622C01F41BB4EE7A71EDF8397915C4B",
-			"classDate":"2019-09-30",
-			"subjectUnitName":"wang课目1-2-4",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-4",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次2",
-			"classSectionStartDate":"2019-09-30 09:00",
-			"classSectionEndDate":"2019-09-30 09:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"2E77ECDAA7F7490DBC1C936BDE4FE33F",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6F0D64AD45E44270BA287A17EB42353B",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6F0D64AD45E44270BA287A17EB42353B",
-					"trainImplementAstronautName":"李四一"
-				}
-			],
-			"trainWay":"理论授课",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"D4ED51262A4B4B0DB891C7DB02448987",
-			"trainMaterialName":"wang-训练器材4",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"8622C01F41BB4EE7A71EDF8397915C4B",
-			"classDate":"2019-09-30",
-			"subjectUnitName":"wang课目1-2-4",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-4",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次3",
-			"classSectionStartDate":"2019-09-30 10:00",
-			"classSectionEndDate":"2019-09-30 10:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"B906E66070424546BE460839276478DC",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"9BF46B37595B45A688A766BAA7456828",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"9BF46B37595B45A688A766BAA7456828",
-					"trainImplementAstronautName":"李四二"
-				}
-			],
-			"trainWay":"理论授课",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"D4ED51262A4B4B0DB891C7DB02448987",
-			"trainMaterialName":"wang-训练器材4",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"8622C01F41BB4EE7A71EDF8397915C4B",
-			"classDate":"2019-10-01",
-			"subjectUnitName":"wang课目1-2-4",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-4",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次1",
-			"classSectionStartDate":"2019-10-01 08:00",
-			"classSectionEndDate":"2019-10-01 08:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"057C48684D544E5F982FD53B3B5E0AD8",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-					"trainImplementAstronautName":"李三九"
-				}
-			],
-			"trainWay":"理论授课",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"D4ED51262A4B4B0DB891C7DB02448987",
-			"trainMaterialName":"wang-训练器材4",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"B5A27305D3004EF7AA8295128E200ED9",
-			"classDate":"2019-10-02",
-			"subjectUnitName":"wang课目1-2-5",
-			"subjectUnitClassHour":"1",
-			"groupWay":"集体",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-5",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次1",
-			"classSectionStartDate":"2019-10-02 08:00",
-			"classSectionEndDate":"2019-10-02 08:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"F42E1CACA3DF46AD8CA0EC84364FEA6B",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6DAAFFA1007B46D0AD806CFF24B5BDD8,E7C8A4F2E65E43149874AF879767D0A8,866367A2A85F4B618FBDAFF8FF1F56BD,FE6E5EB5DF8140FCAE7E67DAAECFB295,2447CCF5B1F442C99B37D8B78E217397,6F0D64AD45E44270BA287A17EB42353B,AFB89EAAB93A471FB57833EBE1376FED,5FF7FE5FB95F4B988D67BB29833C97D9,9BF46B37595B45A688A766BAA7456828,DDCDAF2D1A8F4F2390F13A4DEF543F29,7E7BCA195E864027A59053C72EFA9AD0",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-					"trainImplementAstronautName":"李三九"
-				},
-				{
-					"trainImplementAstronautID":"E7C8A4F2E65E43149874AF879767D0A8",
-					"trainImplementAstronautName":"李三五"
-				},
-				{
-					"trainImplementAstronautID":"866367A2A85F4B618FBDAFF8FF1F56BD",
-					"trainImplementAstronautName":"李三一"
-				},
-				{
-					"trainImplementAstronautID":"FE6E5EB5DF8140FCAE7E67DAAECFB295",
-					"trainImplementAstronautName":"李三二"
-				},
-				{
-					"trainImplementAstronautID":"2447CCF5B1F442C99B37D8B78E217397",
-					"trainImplementAstronautName":"李三六"
-				},
-				{
-					"trainImplementAstronautID":"6F0D64AD45E44270BA287A17EB42353B",
-					"trainImplementAstronautName":"李四一"
-				},
-				{
-					"trainImplementAstronautID":"AFB89EAAB93A471FB57833EBE1376FED",
-					"trainImplementAstronautName":"李三四"
-				},
-				{
-					"trainImplementAstronautID":"5FF7FE5FB95F4B988D67BB29833C97D9",
-					"trainImplementAstronautName":"李四三"
-				},
-				{
-					"trainImplementAstronautID":"9BF46B37595B45A688A766BAA7456828",
-					"trainImplementAstronautName":"李四二"
-				},
-				{
-					"trainImplementAstronautID":"DDCDAF2D1A8F4F2390F13A4DEF543F29",
-					"trainImplementAstronautName":"李四四"
-				},
-				{
-					"trainImplementAstronautID":"7E7BCA195E864027A59053C72EFA9AD0",
-					"trainImplementAstronautName":"李四五"
-				}
-			],
-			"trainWay":"理论授课",
-			"trainAreaID":"BDE6F8CB38AC4D9BB2E5FD2135763F0C",
-			"trainAreaName":"wang-训练场地3",
-			"trainMaterialID":"0EAE456DC0164E73962DC5058903A1F5",
-			"trainMaterialName":"wang-训练器材1",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"52ECB8F6BBF144EB8D225CEB5B12E1F9",
-			"classDate":"2019-10-02",
-			"subjectUnitName":"wang课目1-2-2",
-			"subjectUnitClassHour":"1",
-			"groupWay":"集体",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-2",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次2",
-			"classSectionStartDate":"2019-10-02 09:00",
-			"classSectionEndDate":"2019-10-02 09:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"91857221CE0F4D5A8D85A42362015230",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"2447CCF5B1F442C99B37D8B78E217397,E7C8A4F2E65E43149874AF879767D0A8",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"2447CCF5B1F442C99B37D8B78E217397",
-					"trainImplementAstronautName":"李三六"
-				},
-				{
-					"trainImplementAstronautID":"E7C8A4F2E65E43149874AF879767D0A8",
-					"trainImplementAstronautName":"李三五"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"F2B68BC015D14D2F8BB00E75FBA95601",
-			"trainAreaName":"训练场地1",
-			"trainMaterialID":"EEEF78627D734BF8B95A5E91AA498809",
-			"trainMaterialName":"wang-训练器材13",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"6698B8ABB98E42718FBEA1D3CBFE8D30",
-			"classDate":"2019-10-03",
-			"subjectUnitName":"wang课目1-2-6",
-			"subjectUnitClassHour":"1",
-			"groupWay":"分组",
-			"groupPersonNumber":"2",
-			"dressCode":"着装要求-6",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次1",
-			"classSectionStartDate":"2019-10-03 08:00",
-			"classSectionEndDate":"2019-10-03 08:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"6A12E5699A334D0F9D151A9CD030DC65",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"866367A2A85F4B618FBDAFF8FF1F56BD,FE6E5EB5DF8140FCAE7E67DAAECFB295",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"866367A2A85F4B618FBDAFF8FF1F56BD",
-					"trainImplementAstronautName":"李三一"
-				},
-				{
-					"trainImplementAstronautID":"FE6E5EB5DF8140FCAE7E67DAAECFB295",
-					"trainImplementAstronautName":"李三二"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"BDE6F8CB38AC4D9BB2E5FD2135763F0C",
-			"trainAreaName":"wang-训练场地3",
-			"trainMaterialID":"ED62AC51CAE84A26B6EA83D4138B01DF",
-			"trainMaterialName":"wang-训练器材5",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"6698B8ABB98E42718FBEA1D3CBFE8D30",
-			"classDate":"2019-10-03",
-			"subjectUnitName":"wang课目1-2-6",
-			"subjectUnitClassHour":"1",
-			"groupWay":"分组",
-			"groupPersonNumber":"2",
-			"dressCode":"着装要求-6",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次2",
-			"classSectionStartDate":"2019-10-03 09:00",
-			"classSectionEndDate":"2019-10-03 09:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"994466E93E5F40E8AEEC5DC79AEA084D",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6DAAFFA1007B46D0AD806CFF24B5BDD8,E7C8A4F2E65E43149874AF879767D0A8",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6DAAFFA1007B46D0AD806CFF24B5BDD8",
-					"trainImplementAstronautName":"李三九"
-				},
-				{
-					"trainImplementAstronautID":"E7C8A4F2E65E43149874AF879767D0A8",
-					"trainImplementAstronautName":"李三五"
-				}
-			],
-			"trainWay":"操作训练",
-			"trainAreaID":"BDE6F8CB38AC4D9BB2E5FD2135763F0C",
-			"trainAreaName":"wang-训练场地3",
-			"trainMaterialID":"ED62AC51CAE84A26B6EA83D4138B01DF",
-			"trainMaterialName":"wang-训练器材5",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"8622C01F41BB4EE7A71EDF8397915C4B",
-			"classDate":"2019-10-03",
-			"subjectUnitName":"wang课目1-2-4",
-			"subjectUnitClassHour":"1",
-			"groupWay":"单人",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-4",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次3,节次4",
-			"classSectionStartDate":"2019-10-03 10:00",
-			"classSectionEndDate":"2019-10-03 11:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"5F9F4F31D0674333B3D9A2C348D23E39",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"6F0D64AD45E44270BA287A17EB42353B",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"6F0D64AD45E44270BA287A17EB42353B",
-					"trainImplementAstronautName":"李四一"
-				}
-			],
-			"trainWay":"理论授课",
-			"trainAreaID":"61EE67BD18244F6F9D632CBEBF82E788",
-			"trainAreaName":"wang-训练场地2",
-			"trainMaterialID":"D4ED51262A4B4B0DB891C7DB02448987",
-			"trainMaterialName":"wang-训练器材4",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		},
-		{
-			"subjectID":"0CDC37B008A94B71AC5D98FDC8743631",
-			"subjectUnitID":"B5A27305D3004EF7AA8295128E200ED9",
-			"classDate":"2019-10-04",
-			"subjectUnitName":"wang课目1-2-5",
-			"subjectUnitClassHour":"1",
-			"groupWay":"集体",
-			"groupPersonNumber":"",
-			"dressCode":"着装要求-5",
-			"subjectUnitType":"任务计划",
-			"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4,164F4B3C86FB4111B14799D39986A282",
-			"chargeTeacherName":"李三,刘一",
-			"classSection":"节次3,节次4",
-			"classSectionStartDate":"2019-10-04 10:00",
-			"classSectionEndDate":"2019-10-04 11:50",
-			"trainPrepareID":"",
-			"arrangeSubjectResultID":"771ACA2EDF6C4C00847FC6D8E2D71D17",
-			"teachObjective":"",
-			"teachRequire":"",
-			"teachKeyPoint":"",
-			"teachDifficultPoint":"",
-			"auxiliaryLecturerID":"BBCA7A97B57C4996B9C48F338BA107D4,FA9815C6359347AFB343CA4DE92116DF",
-			"auxiliaryLecturerName":"刘二,刘一",
-			"teachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"164F4B3C86FB4111B14799D39986A282",
-					"chargeTeacherName":"李三"
-				}
-			],
-			"helpTeachList":[
-				{
-					"chargeTeacherID":"BBCA7A97B57C4996B9C48F338BA107D4",
-					"chargeTeacherName":"刘一"
-				},
-				{
-					"chargeTeacherID":"FA9815C6359347AFB343CA4DE92116DF",
-					"chargeTeacherName":"刘二"
-				}
-			],
-			"joinAstronautIDs":"5FF7FE5FB95F4B988D67BB29833C97D9",
-			"joinAstronautNames":[
-				{
-					"trainImplementAstronautID":"5FF7FE5FB95F4B988D67BB29833C97D9",
-					"trainImplementAstronautName":"李四三"
-				}
-			],
-			"trainWay":"理论授课",
-			"trainAreaID":"BDE6F8CB38AC4D9BB2E5FD2135763F0C",
-			"trainAreaName":"wang-训练场地3",
-			"trainMaterialID":"0EAE456DC0164E73962DC5058903A1F5,9A1113457DC54C12BB9994759A056445",
-			"trainMaterialName":"wang-训练器材1,wang-训练器材11",
-			"commentData":[],
-			"trainData":[],
-			"trainImpleData":{
-				"trainList":[]
-			}
-		}
-	]
+    "notActionList": [{
+            "subjectID": "AAFB63E91109439F924C85D75E125D28",
+            "subjectUnitID": "2E42434BA5564817B80FBAB8F8432F07",
+            "classDate": "2019-11-19",
+            "subjectUnitName": "2测试课目104单元6",
+            "subjectUnitClassHour": "2",
+            "groupWay": "分组",
+            "groupPersonNumber": "3",
+            "dressCode": "着装要求6",
+            "subjectUnitType": "任务计划",
+            "chargeTeacherID": "22735FEC5A1049E99E000F2D72158F5E",
+            "chargeTeacherName": "曹尔一",
+            "classSection": "节次1-2",
+            "classSectionStartDate": "2019-11-19 08:00",
+            "classSectionEndDate": "2019-11-19 09:50",
+            "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+            "arrangeSubjectResultID": "73BB361A187242C0BEA880D76297B980",
+            "teachObjective": "教学目标111",
+            "teachRequire": "教学要求教学要求教学要求教学要求教学要求222",
+            "teachKeyPoint": "教学重点教学重点33",
+            "teachDifficultPoint": "教学难点教学难点教学难点教学难点4",
+            "auxiliaryLecturerID": "A93372BDF11F489EA68B1CFBC9A33368,8AC2719C1BB145F08716539CC50DF156",
+            "auxiliaryLecturerName": "云尔一，云尔二",
+            "teachList": [{
+                "chargeTeacherID": "22735FEC5A1049E99E000F2D72158F5E",
+                "chargeTeacherName": "曹尔一"
+            }],
+            "helpTeachList": [{
+                    "chargeTeacherID": "A93372BDF11F489EA68B1CFBC9A33368",
+                    "chargeTeacherName": "云尔一"
+                },
+                {
+                    "chargeTeacherID": "8AC2719C1BB145F08716539CC50DF156",
+                    "chargeTeacherName": "云尔二"
+                }
+            ],
+            "joinAstronautIDs": "FF31070E59F445F5AB19D810F0468FF7,329980117109481298F921CF7EA991A4,66DEBF314DD343379571FD99859A60C0",
+            "joinAstronautNames": [{
+                    "trainImplementAstronautID": "FF31070E59F445F5AB19D810F0468FF7",
+                    "trainImplementAstronautName": "孙航四",
+                    "isSignIn": false,
+                    "post": ""
+                },
+                {
+                    "trainImplementAstronautID": "329980117109481298F921CF7EA991A4",
+                    "trainImplementAstronautName": "孙航五",
+                    "isSignIn": false,
+                    "post": ""
+                },
+                {
+                    "trainImplementAstronautID": "66DEBF314DD343379571FD99859A60C0",
+                    "trainImplementAstronautName": "孙航六",
+                    "isSignIn": false,
+                    "post": ""
+                },
+                {
+                    "trainImplementAstronautID": "6D5867514B4C4485A06007828E5E3CE2",
+                    "trainImplementAstronautName": "孙航七",
+                    "isSignIn": false,
+                    "post": ""
+                },
+                {
+                    "trainImplementAstronautID": "07171AECAB4C40DDB1B376DEA6683DAD",
+                    "trainImplementAstronautName": "孙航八",
+                    "isSignIn": false,
+                    "post": ""
+                }
+            ],
+            "trainWay": "理论授课",
+            "trainAreaID": "512A579298C14333B0FF2E8FD14657F1",
+            "trainAreaName": "训练场地XX",
+            "trainMaterialID": "408B306669E54157BAA83EA7E3D921D4",
+            "trainMaterialName": "训练10器材",
+            "commentData": [],
+            "trainData": [],
+            "trainImpleData": {
+                "trainList": [{
+                        "trainContentID": "73CB9F6C57B84E5C8F2DC4F28F05F231",
+                        "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+                        "trainContentName": "2测试课目104单元6  训练内容名称1",
+                        "trainClassHour": "10",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述1",
+                        "keyword": "测",
+                        "isRetrain": "否",
+                        "sortNO": "1",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "0F0D6DEE3EF64F048B6DEC8CBA3026DA",
+                        "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+                        "trainContentName": "2测试课目104单元6  训练内容名称1",
+                        "trainClassHour": "10",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述1",
+                        "keyword": "测",
+                        "timeWay": "时间点",
+                        "isRetrain": "否",
+                        "sortNO": "2",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "5352EF257450405AAD17CA317E72FFA2",
+                        "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+                        "trainContentName": "2测试课目104单元6  训练内容名称2",
+                        "trainClassHour": "12",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述2",
+                        "keyword": "清",
+                        "timeWay": "时间点",
+                        "isRetrain": "否",
+                        "sortNO": "3",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "27FF566397124C129A980889583C4AE4",
+                        "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+                        "trainContentName": "2测试课目104单元6  训练内容名称2",
+                        "trainClassHour": "12",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述2",
+                        "keyword": "清",
+                        "timeWay": "时间点",
+                        "isRetrain": "否",
+                        "sortNO": "4",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "1CFB99E1D847413B9DC665E1BB571F37",
+                        "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+                        "trainContentName": "2测试课目104单元6  训练内容名称3",
+                        "trainClassHour": "15",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述3",
+                        "keyword": "",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
+                        "sortNO": "5",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "776B159028144465965982E2B0FF2870",
+                        "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+                        "trainContentName": "2测试课目104单元6  训练内容名称3",
+                        "trainClassHour": "15",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述3",
+                        "keyword": "",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
+                        "sortNO": "6",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "2243CF0CEA0C41BFAB09105B6FF81974",
+                        "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+                        "trainContentName": "2测试课目104单元6  训练内容名称4",
+                        "trainClassHour": "10",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述4",
+                        "keyword": "",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
+                        "sortNO": "7",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "C879CF95865D4B6EA689B47A762D27C1",
+                        "trainPrepareID": "EF5EB6CB73784821940BCADCAEB5836B",
+                        "trainContentName": "2测试课目104单元6  训练内容名称4",
+                        "trainClassHour": "10",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述4",
+                        "keyword": "",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
+                        "sortNO": "8",
+                        "faultInfo": []
+                    }
+                ]
+            }
+        },
+        {
+            "subjectID": "AAFB63E91109439F924C85D75E125D28",
+            "subjectUnitID": "2E42434BA5564817B80FBAB8F8432F07",
+            "classDate": "2019-11-21",
+            "subjectUnitName": "2测试课目104单元6",
+            "subjectUnitClassHour": "2",
+            "groupWay": "分组",
+            "groupPersonNumber": "3",
+            "dressCode": "着装要求6",
+            "subjectUnitType": "任务计划",
+            "chargeTeacherID": "22735FEC5A1049E99E000F2D72158F5E",
+            "chargeTeacherName": "曹尔一",
+            "classSection": "节次1-2",
+            "classSectionStartDate": "2019-11-21 08:00",
+            "classSectionEndDate": "2019-11-21 09:50",
+            "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+            "arrangeSubjectResultID": "F198E01708704994A00329DB8B665A66",
+            "teachObjective": "教学目标111",
+            "teachRequire": "教学要求教学要求教学要求教学要求教学要求222",
+            "teachKeyPoint": "教学重点教学重点33",
+            "teachDifficultPoint": "教学难点教学难点教学难点教学难点4",
+            "auxiliaryLecturerID": "A93372BDF11F489EA68B1CFBC9A33368,8AC2719C1BB145F08716539CC50DF156",
+            "auxiliaryLecturerName": "云尔一，云尔二",
+            "teachList": [{
+                "chargeTeacherID": "22735FEC5A1049E99E000F2D72158F5E",
+                "chargeTeacherName": "曹尔一"
+            }],
+            "helpTeachList": [{
+                    "chargeTeacherID": "A93372BDF11F489EA68B1CFBC9A33368",
+                    "chargeTeacherName": "云尔一"
+                },
+                {
+                    "chargeTeacherID": "8AC2719C1BB145F08716539CC50DF156",
+                    "chargeTeacherName": "云尔二"
+                }
+            ],
+            "joinAstronautIDs": "6D5867514B4C4485A06007828E5E3CE2,07171AECAB4C40DDB1B376DEA6683DAD",
+            "joinAstronautNames": [{
+                    "trainImplementAstronautID": "6D5867514B4C4485A06007828E5E3CE2",
+                    "trainImplementAstronautName": "孙航七",
+                    "isSignIn": false,
+                    "post": ""
+                },
+                {
+                    "trainImplementAstronautID": "07171AECAB4C40DDB1B376DEA6683DAD",
+                    "trainImplementAstronautName": "孙航八",
+                    "isSignIn": false,
+                    "post": ""
+                }
+            ],
+            "trainWay": "操作训练",
+            "trainAreaID": "512A579298C14333B0FF2E8FD14657F1",
+            "trainAreaName": "训练场地XX",
+            "trainMaterialID": "38353982A41641B090BE440407212440",
+            "trainMaterialName": "训练34器材",
+            "commentData": [],
+            "trainData": [],
+            "trainImpleData": {
+                "trainList": [{
+                        "trainContentID": "2598F590D3C84BDEBFD77502EC0260F7",
+                        "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+                        "trainContentName": "2测试课目104单元6  训练内容名称1",
+                        "trainClassHour": "10",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述1",
+                        "keyword": "测",
+                        "timeWay": "时间点",
+                        "isRetrain": "否",
+                        "sortNO": "1",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "968FC47FBB424CB29A56EBAA7C9008D0",
+                        "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+                        "trainContentName": "2测试课目104单元6  训练内容名称2",
+                        "trainClassHour": "10",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述2",
+                        "keyword": "测",
+                        "timeWay": "时间点",
+                        "isRetrain": "否",
+                        "sortNO": "2",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "3AF08C6F99A9466BBD4185BD3E7AC5E7",
+                        "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+                        "trainContentName": "2测试课目104单元6  训练内容名称3",
+                        "trainClassHour": "12",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述3",
+                        "keyword": "清",
+                        "timeWay": "时间点",
+                        "isRetrain": "否",
+                        "sortNO": "3",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "6D0048C247C34993B16F0C79FDB02B12",
+                        "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+                        "trainContentName": "2测试课目104单元6  训练内容名称4",
+                        "trainClassHour": "12",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述4",
+                        "keyword": "清",
+                        "timeWay": "时间点",
+                        "isRetrain": "否",
+                        "sortNO": "4",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "3DE1D4E0ED914BDFB939B3124D73996F",
+                        "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+                        "trainContentName": "2测试课目104单元6  训练内容名称5",
+                        "trainClassHour": "15",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述5",
+                        "keyword": "",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
+                        "sortNO": "5",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "AE8841D227924333AEC8254B8C39AC83",
+                        "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+                        "trainContentName": "2测试课目104单元6  训练内容名称6",
+                        "trainClassHour": "15",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述6",
+                        "keyword": "",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
+                        "sortNO": "6",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "A3ABA86BA1FD4F8887C3A0ED9D6A417A",
+                        "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+                        "trainContentName": "2测试课目104单元6  训练内容名称7",
+                        "trainClassHour": "10",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述7",
+                        "keyword": "",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
+                        "sortNO": "7",
+                        "faultInfo": []
+                    },
+                    {
+                        "trainContentID": "B4C1B99868EF48ED8CB6289250274E2C",
+                        "trainPrepareID": "B65023CF45AB42D294D8B888A2321441",
+                        "trainContentName": "2测试课目104单元6  训练内容名称8",
+                        "trainClassHour": "10",
+                        "trainContentStartDate": "",
+                        "trainContentEndDate": "",
+                        "trainContentDesc": "2测试课目104单元6  训练内容描述8",
+                        "keyword": "",
+                        "timeWay": "时间段",
+                        "isRetrain": "是",
+                        "sortNO": "8",
+                        "faultInfo": []
+                    }
+                ]
+            }
+        }
+    ]
 }
 
 export default notActionData;
